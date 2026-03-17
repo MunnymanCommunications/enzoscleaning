@@ -51,6 +51,7 @@ const navItems = [
       { label: "Restoration", path: "/detergents/restoration-detergents/" },
     ],
   },
+  { label: "Industries We Serve", path: "/industries-we-serve/" },
   { label: "Touchless Drive Thru", path: "/touchless-drive-thru/" },
   { label: "About", path: "/about-us/" },
 ];

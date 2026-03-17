@@ -71,6 +71,17 @@ export default function Services() {
         </div>
       </section>
 
+      {/* Industries callout */}
+      <section className="py-16">
+        <div className="container text-center">
+          <h2 className="text-3xl font-bold md:text-4xl">See How We Help Your Industry</h2>
+          <p className="mt-3 text-muted-foreground max-w-2xl mx-auto">From municipalities to medical facilities, we provide specialized cleaning solutions for every sector.</p>
+          <Link to="/industries-we-serve/" className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary px-8 py-3 font-bold text-primary-foreground hover:bg-secondary transition-colors">
+            Explore Industries We Serve →
+          </Link>
+        </div>
+      </section>
+
       <CTASection title="Let Us Help You Find the Right Solution" description="Contact our team today to discuss your cleaning needs." />
     </>
   );
