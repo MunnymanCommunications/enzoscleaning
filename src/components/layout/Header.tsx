@@ -36,6 +36,7 @@ const navItems = [
       { label: "Disinfectants & Sanitizers", path: "/disinfecting/our-disinfectants-sanitizers/" },
       { label: "Sprayers", path: "/disinfecting/our-disinfectant-sprayers/" },
       { label: "Vapore Dry Vapor", path: "/disinfecting/vapore-dry-vapor-disinfecting/" },
+      { label: "Best Practices", path: "/disinfecting/disinfecting-best-practices/" },
     ],
   },
   {
@@ -50,7 +51,7 @@ const navItems = [
     ],
   },
   { label: "Touchless Drive Thru", path: "/touchless-drive-thru/" },
-  { label: "About", path: "/about/" },
+  { label: "About", path: "/about-us/" },
 ];
 
 export default function Header() {
