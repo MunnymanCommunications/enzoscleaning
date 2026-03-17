@@ -84,6 +84,7 @@ import EquipmentProducts from "./pages/EquipmentProducts";
 import FAQ from "./pages/FAQ";
 import Promotions from "./pages/Promotions";
 import Shop from "./pages/Shop";
+import Trident from "./pages/Trident";
 
 const queryClient = new QueryClient();
 
@@ -140,6 +141,7 @@ const App = () => (
             <Route path="/detergents/construction-equipment-cleaning/" element={<ConstructionDetergents />} />
             <Route path="/detergents/restoration-detergents/" element={<RestorationDetergents />} />
             <Route path="/detergents/specialty-cleaning-products/" element={<SpecialtyCleaningProducts />} />
+            <Route path="/detergents/trident/" element={<Trident />} />
             <Route path="/disinfecting/" element={<Disinfecting />} />
             <Route path="/disinfecting/our-disinfectants-sanitizers/" element={<DisinfectantsSanitizers />} />
             <Route path="/disinfecting/our-disinfectant-sprayers/" element={<DisinfectantSprayers />} />
