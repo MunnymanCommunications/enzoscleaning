@@ -1,0 +1,37 @@
+import PageHero from "@/components/shared/PageHero";
+import CTASection from "@/components/shared/CTASection";
+import AnimatedSection from "@/components/shared/AnimatedSection";
+
+const faqs = [
+  { q: "What types of pressure washers do you carry?", a: "We carry both hot water and cold water pressure washers from Hotsy and Mi-T-M. Options include electric, gasoline, diesel and natural gas powered models." },
+  { q: "Do you offer service and repair?", a: "Yes! Our factory-trained technicians service all major brands of pressure washers. We offer both on-site and in-shop repairs plus scheduled maintenance programs." },
+  { q: "Can you help design a wash bay?", a: "Absolutely. Our team provides free consultations and custom wash bay design services — from equipment selection to layout and installation." },
+  { q: "What detergents do you recommend?", a: "It depends on your application. We carry degreasers, truck wash detergents, construction cleaners, salt neutralizers and specialty products. Contact us for a recommendation." },
+  { q: "Do you serve my area?", a: "We serve customers across Ohio, the Northeast and Midwest. Contact us to confirm service availability in your area." },
+  { q: "What is The Neutralizer?", a: "The Neutralizer is our proprietary undercarriage salt neutralizing system designed to fight corrosion from road salt and brine. It's a drive-over system that works with your existing pressure washer." },
+  { q: "Do you offer financing?", a: "We can discuss financing options for equipment purchases. Contact our sales team for details." },
+  { q: "How do I schedule a consultation?", a: "Call us at 419-502-0007 or fill out our contact form. Consultations are always free." },
+];
+
+export default function FAQ() {
+  return (
+    <>
+      <PageHero title="Frequently Asked Questions" subtitle="Answers to common questions about our products and services." />
+      <section className="section-padding">
+        <div className="container max-w-3xl">
+          <div className="space-y-4">
+            {faqs.map((faq, i) => (
+              <AnimatedSection key={i} delay={i * 0.06}>
+                <div className="bg-card rounded-xl border border-border p-6">
+                  <h3 className="font-heading font-bold">{faq.q}</h3>
+                  <p className="text-sm text-muted-foreground mt-2">{faq.a}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+      <CTASection title="Still Have Questions?" description="Contact Enzo's and our team will be happy to help." />
+    </>
+  );
+}
