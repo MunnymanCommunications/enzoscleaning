@@ -22,6 +22,7 @@ import HotsyPressureWashers from "./pages/HotsyPressureWashers";
 import PlaceholderPage from "@/components/shared/PlaceholderPage";
 import ReferralLanding from "./pages/ReferralLanding";
 import ReferralForm from "./pages/ReferralForm";
+import TheNeutralizer from "./pages/TheNeutralizer";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
