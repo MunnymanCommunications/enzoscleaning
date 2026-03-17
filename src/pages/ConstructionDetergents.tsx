@@ -7,7 +7,8 @@ const products = [
   { name: "EZ Melt", bullets: ["Tar & Asphalt remover", "Quickly removes cold tar sealer, asphalt sealer, asphalt and roofing tar", "Use on tools, equipment and vehicles", "Solvent based, Non-foaming"] },
   { name: "C-Tar Melt", bullets: ["Tar & Asphalt remover", "Water soluble, easily rinseable & non-hazardous", "Safe for wood, metal and masonry", "Aids in separation of tar residue from rinse water"] },
   { name: "EZ Slideout", bullets: ["Water-soluble", "Produces rich foam under pressure", "Designed for application to truck beds prior to asphalt load", "Visual coating with minimal moisture"] },
-  { name: "EZ Punch-Out", bullets: ["Concrete Remover", "Dissolves and removes concrete from trucks and vehicles", "Safe, low pH organic salt", "DOT classified as non-regulated material"] },
+  { name: "Asphalt", bullets: ["Purpose-built asphalt cleaning solution", "Removes asphalt buildup from equipment and tools", "Safe for use on metal surfaces", "Effective on fresh and cured asphalt deposits"] },
+  { name: "EZ Asphalt Remover G", bullets: ["Green-formula asphalt remover", "Biodegradable and environmentally friendly", "Dissolves asphalt, tar and bitumen from equipment", "Safe for painted surfaces and metal"] },
   { name: "Chisel", bullets: ["Sugar acid concrete cleaner", "Diluted 4:1", "Softens concrete even when cured", "Will not etch windows", "Does not fade paint"] },
 ];
 

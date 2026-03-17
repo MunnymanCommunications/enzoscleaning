@@ -5,8 +5,8 @@ import DetergentList from "@/components/shared/DetergentList";
 
 const products = [
   { name: "D-Salt", bullets: ["Salt Neutralizer & Brine Remover", "Diluted 20:1", "Non-acid", "Dissolves all ice melt residue", "Apply to undercarriage and outside of vehicle", "May be used on carpet"] },
-  { name: "EZ Fleet", bullets: ["Brushless – Degreaser, Cleaner, Multi-Purpose Wash", "Diluted 20:1", "Faster cleaning performance", "Highly economical"] },
-  { name: "Brigade", bullets: ["Premium high-pressure detergent", "Safe on paint, glass, vinyl, wheels", "Excellent at removing bugs", "Pleasant tropical fruit fragrance", "Non-acid and biodegradable"] },
+  { name: "EZ Stay Wet", bullets: ["Extended dwell brushless truck wash", "Clings to surfaces longer for deeper cleaning", "Ideal for heavy road film and diesel soot", "Works in hot or cold water"] },
+  { name: "Squadrant", bullets: ["Multi-purpose fleet wash detergent", "Effective on painted surfaces and polished aluminum", "Versatile application — low or high pressure", "Leaves a streak-free, spot-free finish"] },
   { name: "EZ Brite SS", bullets: ["Stainless Steel and Aluminum cleaner", "Dilutes 8:1", "Brings shine back to stainless steel body", "Removes rust stains without scrubbing"] },
   { name: "EZ Platinum", bullets: ["Designed to clean aluminum livestock trailers without scrubbing", "Removes black streaks and dirt leaving new silver-like shine"] },
   { name: "Sizzle", bullets: ["Brushless truck wash", "Dilutes 20:1", "Apply with high or low pressure or foaming arch", "A favorite of Enzo's customers – our biggest seller"] },
