@@ -27,7 +27,7 @@ export default function Footer() {
                 { label: "Cleaning Equipment", path: "/cleaning-equipment/" },
                 { label: "Detergents", path: "/detergents/" },
                 { label: "Touchless Drive Thru", path: "/touchless-drive-thru/" },
-                { label: "About", path: "/about/" },
+                { label: "About", path: "/about-us/" },
                 { label: "Contact Us", path: "/contact-us/" },
               ].map((l) => (
                 <li key={l.path}>
