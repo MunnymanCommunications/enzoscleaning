@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,80 +6,81 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 210 11% 15%;
+    --background: 220 14% 98%;
+    --foreground: 220 20% 10%;
 
     --card: 0 0% 100%;
-    --card-foreground: 210 11% 15%;
+    --card-foreground: 220 20% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 210 11% 15%;
+    --popover-foreground: 220 20% 10%;
 
-    --primary: 207 90% 35%;
+    --primary: 213 94% 40%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 207 90% 25%;
+    --secondary: 213 94% 28%;
     --secondary-foreground: 0 0% 100%;
 
-    --muted: 210 20% 96%;
-    --muted-foreground: 210 11% 40%;
+    --muted: 220 14% 95%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 145 63% 42%;
+    --accent: 152 60% 42%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 207 90% 35%;
+    --border: 220 14% 90%;
+    --input: 220 14% 90%;
+    --ring: 213 94% 40%;
 
-    --radius: 0.5rem;
+    --radius: 0.75rem;
 
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 207 90% 35%;
+    --sidebar-primary: 213 94% 40%;
     --sidebar-primary-foreground: 0 0% 98%;
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 207 90% 35%;
+    --sidebar-ring: 213 94% 40%;
 
-    --enzo-blue: 207 90% 35%;
-    --enzo-dark-blue: 207 90% 20%;
-    --enzo-green: 145 63% 42%;
-    --enzo-light-gray: 210 20% 96%;
-    --enzo-dark: 210 11% 15%;
+    --enzo-blue: 213 94% 40%;
+    --enzo-dark-blue: 213 94% 18%;
+    --enzo-green: 152 60% 42%;
+    --enzo-light-gray: 220 14% 96%;
+    --enzo-dark: 220 20% 10%;
+    --enzo-warm: 35 90% 55%;
   }
 
   .dark {
-    --background: 210 11% 15%;
+    --background: 220 20% 8%;
     --foreground: 0 0% 98%;
-    --card: 210 11% 20%;
+    --card: 220 20% 12%;
     --card-foreground: 0 0% 98%;
-    --popover: 210 11% 20%;
+    --popover: 220 20% 12%;
     --popover-foreground: 0 0% 98%;
-    --primary: 207 90% 50%;
+    --primary: 213 94% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 207 90% 35%;
+    --secondary: 213 94% 40%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 210 11% 25%;
-    --muted-foreground: 210 20% 70%;
-    --accent: 145 63% 42%;
+    --muted: 220 20% 18%;
+    --muted-foreground: 220 14% 65%;
+    --accent: 152 60% 42%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 210 11% 25%;
-    --input: 210 11% 25%;
-    --ring: 207 90% 50%;
-    --sidebar-background: 210 11% 12%;
+    --border: 220 20% 20%;
+    --input: 220 20% 20%;
+    --ring: 213 94% 55%;
+    --sidebar-background: 220 20% 6%;
     --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 207 90% 50%;
+    --sidebar-primary: 213 94% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 11% 18%;
+    --sidebar-accent: 220 20% 14%;
     --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 210 11% 25%;
-    --sidebar-ring: 207 90% 50%;
+    --sidebar-border: 220 20% 20%;
+    --sidebar-ring: 213 94% 55%;
   }
 }
 
@@ -88,9 +89,21 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans antialiased;
   }
   h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
+    @apply font-heading tracking-tight;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20;
+  }
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent;
+  }
+  .section-padding {
+    @apply py-20 md:py-28;
   }
 }
