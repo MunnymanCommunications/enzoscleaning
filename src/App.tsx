@@ -68,7 +68,7 @@ const App = () => (
 
             {/* Under Carriage & Wash Bay */}
             <Route path="/cleaning-equipment/under-carriage-sprayers/" element={<PlaceholderPage title="Under Carriage Sprayers" subtitle="Effective and efficient cleaning equipment for underneath your vehicles." />} />
-            <Route path="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" element={<PlaceholderPage title="The Neutralizer" subtitle="Enzo's original undercarriage wash system – stop the corrosive effects of road salt and brine." />} />
+            <Route path="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" element={<TheNeutralizer />} />
             <Route path="/cleaning-equipment/wash-bay-design/" element={<PlaceholderPage title="Wash Bay Design" subtitle="Efficient, effective and SAFE wash bay solutions for your fleet." />} />
             <Route path="/cleaning-equipment/wash-bay-design/tower-brushes/" element={<PlaceholderPage title="Tower Brushes" subtitle="Full height cleaning for buses, tractor trailers and motorcoaches." />} />
 
