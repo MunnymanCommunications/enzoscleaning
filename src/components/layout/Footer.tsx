@@ -7,6 +7,7 @@ const quickLinks = [
   { label: "Detergents", path: "/detergents/" },
   { label: "Disinfecting", path: "/disinfecting/" },
   { label: "Touchless Drive Thru", path: "/touchless-drive-thru/" },
+  { label: "Industries We Serve", path: "/industries-we-serve/" },
   { label: "The Neutralizer", path: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" },
   { label: "About Us", path: "/about-us/" },
   { label: "Contact Us", path: "/contact-us/" },

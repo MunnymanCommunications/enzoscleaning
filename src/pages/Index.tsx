@@ -54,6 +54,9 @@ export default function Index() {
             <Link to="/services/" className="rounded-full border-2 border-primary-foreground/30 px-8 py-4 text-base font-bold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
               Our Services
             </Link>
+            <Link to="/industries-we-serve/" className="rounded-full border-2 border-primary-foreground/30 px-8 py-4 text-base font-bold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
+              Industries We Serve
+            </Link>
           </motion.div>
         </div>
       </section>
