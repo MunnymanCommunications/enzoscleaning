@@ -19,11 +19,27 @@ import Disinfecting from "./pages/Disinfecting";
 import About from "./pages/About";
 import ContactUs from "./pages/ContactUs";
 import HotsyPressureWashers from "./pages/HotsyPressureWashers";
-import PlaceholderPage from "@/components/shared/PlaceholderPage";
 import ReferralLanding from "./pages/ReferralLanding";
 import ReferralForm from "./pages/ReferralForm";
 import TheNeutralizer from "./pages/TheNeutralizer";
 import NotFound from "./pages/NotFound";
+import PlaceholderPage from "@/components/shared/PlaceholderPage";
+
+// New full-content pages
+import HotsyElectricPumpFuelOilHeat from "./pages/HotsyElectricPumpFuelOilHeat";
+import HotsyGasolinePumpFuelOilHeat from "./pages/HotsyGasolinePumpFuelOilHeat";
+import HotsyNaturalGasHotWater from "./pages/HotsyNaturalGasHotWater";
+import HotsyElectricColdWater from "./pages/HotsyElectricColdWater";
+import HotsyGasolineColdWater from "./pages/HotsyGasolineColdWater";
+import HotsyDieselHotWater from "./pages/HotsyDieselHotWater";
+import MiTM from "./pages/MiTM";
+import TouchlessDriveThru from "./pages/TouchlessDriveThru";
+import WashBayDesign from "./pages/WashBayDesign";
+import PressureWasherAccessories from "./pages/PressureWasherAccessories";
+import FloorCleaning from "./pages/FloorCleaning";
+import WastewaterTreatment from "./pages/WastewaterTreatment";
+import DisinfectantsSanitizers from "./pages/DisinfectantsSanitizers";
+import IndustriesWeServe from "./pages/IndustriesWeServe";
 
 const queryClient = new QueryClient();
 
@@ -49,31 +65,31 @@ const App = () => (
 
             {/* Hotsy */}
             <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/" element={<HotsyPressureWashers />} />
-            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-electric-pump-fuel-oil-heat/" element={<PlaceholderPage title="Hotsy Electric Pump, Fuel Oil Heat" subtitle="Versatile cleaning machines for a variety of applications." />} />
-            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-gasoline-pump-fuel-oil-heat/" element={<PlaceholderPage title="Hotsy 1200 Series Hot Water" subtitle="Gas-powered, fuel oil heated for outdoor and heavy soil cleaning." />} />
-            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/natural-gas-hot-water/" element={<PlaceholderPage title="Hotsy Natural Gas Hot Water" subtitle="Great for wash bays with simple connection and powerful cleaning." />} />
-            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/electric-cold-water/" element={<PlaceholderPage title="Hotsy Electric Cold Water" subtitle="Plug and play convenience with Hotsy electric cold water pressure washers." />} />
-            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/gasoline-cold-water/" element={<PlaceholderPage title="Hotsy Gasoline Cold Water" subtitle="Portability for cleaning on the go with gas-powered cold water machines." />} />
-            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/diesel-cold-water/" element={<PlaceholderPage title="Hotsy Diesel Hot Water" subtitle="Perfect for mobile cleaning needs with powerful diesel-powered performance." />} />
+            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-electric-pump-fuel-oil-heat/" element={<HotsyElectricPumpFuelOilHeat />} />
+            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-gasoline-pump-fuel-oil-heat/" element={<HotsyGasolinePumpFuelOilHeat />} />
+            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/natural-gas-hot-water/" element={<HotsyNaturalGasHotWater />} />
+            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/electric-cold-water/" element={<HotsyElectricColdWater />} />
+            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/gasoline-cold-water/" element={<HotsyGasolineColdWater />} />
+            <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/diesel-cold-water/" element={<HotsyDieselHotWater />} />
 
             {/* Mi-T-M */}
-            <Route path="/cleaning-equipment/mi-t-m/" element={<PlaceholderPage title="Mi-T-M Pressure Washers" subtitle="Experience the power, performance and reliability of Mi-T-M." />} />
-            <Route path="/cleaning-equipment/mi-t-m/electric-hot-water/" element={<PlaceholderPage title="Mi-T-M Electric Hot Water" />} />
-            <Route path="/cleaning-equipment/mi-t-m/natural-gas-hot-water/" element={<PlaceholderPage title="Mi-T-M Natural Gas Hot Water" />} />
-            <Route path="/cleaning-equipment/mi-t-m/gasoline-hot-water-portable/" element={<PlaceholderPage title="Mi-T-M Gasoline Hot Water Portable" />} />
-            <Route path="/cleaning-equipment/mi-t-m/gasoline-hot-water-skid/" element={<PlaceholderPage title="Mi-T-M Gasoline Hot Water Skid" />} />
-            <Route path="/cleaning-equipment/mi-t-m/electric-cold-water/" element={<PlaceholderPage title="Mi-T-M Electric Cold Water" />} />
-            <Route path="/cleaning-equipment/mi-t-m/air-compressor-gas/" element={<PlaceholderPage title="Mi-T-M Gas Air Compressors" />} />
-            <Route path="/cleaning-equipment/mi-t-m/air-compressor-electric/" element={<PlaceholderPage title="Mi-T-M Electric Air Compressors" />} />
+            <Route path="/cleaning-equipment/mi-t-m/" element={<MiTM />} />
+            <Route path="/cleaning-equipment/mi-t-m/electric-hot-water/" element={<PlaceholderPage title="Mi-T-M Electric Hot Water" subtitle="Powerful electric hot water pressure washers from Mi-T-M." />} />
+            <Route path="/cleaning-equipment/mi-t-m/natural-gas-hot-water/" element={<PlaceholderPage title="Mi-T-M Natural Gas Hot Water" subtitle="Natural gas powered hot water cleaning from Mi-T-M." />} />
+            <Route path="/cleaning-equipment/mi-t-m/gasoline-hot-water-portable/" element={<PlaceholderPage title="Mi-T-M Gasoline Hot Water Portable" subtitle="Portable gas-powered hot water cleaning solutions." />} />
+            <Route path="/cleaning-equipment/mi-t-m/gasoline-hot-water-skid/" element={<PlaceholderPage title="Mi-T-M Gasoline Hot Water Skid" subtitle="Skid-mounted gas hot water machines for heavy-duty cleaning." />} />
+            <Route path="/cleaning-equipment/mi-t-m/electric-cold-water/" element={<PlaceholderPage title="Mi-T-M Electric Cold Water" subtitle="Electric cold water pressure washers from Mi-T-M." />} />
+            <Route path="/cleaning-equipment/mi-t-m/air-compressor-gas/" element={<PlaceholderPage title="Mi-T-M Gas Air Compressors" subtitle="Gas-powered air compressors for industrial applications." />} />
+            <Route path="/cleaning-equipment/mi-t-m/air-compressor-electric/" element={<PlaceholderPage title="Mi-T-M Electric Air Compressors" subtitle="Electric air compressors for shop and facility use." />} />
 
             {/* Under Carriage & Wash Bay */}
             <Route path="/cleaning-equipment/under-carriage-sprayers/" element={<PlaceholderPage title="Under Carriage Sprayers" subtitle="Effective and efficient cleaning equipment for underneath your vehicles." />} />
             <Route path="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" element={<TheNeutralizer />} />
-            <Route path="/cleaning-equipment/wash-bay-design/" element={<PlaceholderPage title="Wash Bay Design" subtitle="Efficient, effective and SAFE wash bay solutions for your fleet." />} />
+            <Route path="/cleaning-equipment/wash-bay-design/" element={<WashBayDesign />} />
             <Route path="/cleaning-equipment/wash-bay-design/tower-brushes/" element={<PlaceholderPage title="Tower Brushes" subtitle="Full height cleaning for buses, tractor trailers and motorcoaches." />} />
 
             {/* Accessories */}
-            <Route path="/cleaning-equipment/pressure-washers-accessories/" element={<PlaceholderPage title="Pressure Washer Accessories" subtitle="The right accessories and supplies for the most effective clean." />} />
+            <Route path="/cleaning-equipment/pressure-washers-accessories/" element={<PressureWasherAccessories />} />
             <Route path="/cleaning-equipment/pressure-washers-accessories/surface-cleaners/" element={<PlaceholderPage title="Surface Cleaners" subtitle="Blast away dirt from walkways, shop floors and other surfaces." />} />
             <Route path="/cleaning-equipment/pressure-washers-accessories/trigger-guns-spray-guns/" element={<PlaceholderPage title="Trigger Guns & Spray Guns" subtitle="Full range of trigger guns and spray guns for powerful performance." />} />
             <Route path="/cleaning-equipment/pressure-washers-accessories/nozzles/" element={<PlaceholderPage title="Nozzles" subtitle="Properly sized nozzles are critical to proper pressure washer operation." />} />
@@ -82,11 +98,11 @@ const App = () => (
             <Route path="/cleaning-equipment/pressure-washers-accessories/scaltrol/" element={<PlaceholderPage title="Scaltrol" subtitle="Descaling filters designed for hot water pressure washers." />} />
 
             {/* Floor Cleaning */}
-            <Route path="/cleaning-equipment/floor-cleaning/" element={<PlaceholderPage title="Floor Cleaning" subtitle="Trusted brands in floor cleaning – Kärcher and Minuteman." />} />
-            <Route path="/cleaning-equipment/floor-cleaning/floor-sweepers/" element={<PlaceholderPage title="Floor Sweepers" />} />
-            <Route path="/cleaning-equipment/floor-cleaning/floor-scrubbers/" element={<PlaceholderPage title="Floor Scrubbers" />} />
-            <Route path="/cleaning-equipment/floor-cleaning/minuteman-floor-cleaners/" element={<PlaceholderPage title="Minuteman Floor Cleaners" />} />
-            <Route path="/cleaning-equipment/floor-cleaning/karcher-floor-cleaners/" element={<PlaceholderPage title="Kärcher Floor Cleaners" />} />
+            <Route path="/cleaning-equipment/floor-cleaning/" element={<FloorCleaning />} />
+            <Route path="/cleaning-equipment/floor-cleaning/floor-sweepers/" element={<PlaceholderPage title="Floor Sweepers" subtitle="Walk-behind and ride-on sweepers for every facility." />} />
+            <Route path="/cleaning-equipment/floor-cleaning/floor-scrubbers/" element={<PlaceholderPage title="Floor Scrubbers" subtitle="Deep-clean hard floors with powerful scrubbing machines." />} />
+            <Route path="/cleaning-equipment/floor-cleaning/minuteman-floor-cleaners/" element={<PlaceholderPage title="Minuteman Floor Cleaners" subtitle="Reliable Minuteman floor cleaning equipment." />} />
+            <Route path="/cleaning-equipment/floor-cleaning/karcher-floor-cleaners/" element={<PlaceholderPage title="Kärcher Floor Cleaners" subtitle="Industry-leading Kärcher floor cleaning machines." />} />
 
             {/* Detergents */}
             <Route path="/detergents/" element={<Detergents />} />
@@ -98,45 +114,45 @@ const App = () => (
 
             {/* Disinfecting */}
             <Route path="/disinfecting/" element={<Disinfecting />} />
-            <Route path="/disinfecting/our-disinfectants-sanitizers/" element={<PlaceholderPage title="Disinfectants & Sanitizers" subtitle="High-powered disinfectant and sanitizing solutions." />} />
+            <Route path="/disinfecting/our-disinfectants-sanitizers/" element={<DisinfectantsSanitizers />} />
             <Route path="/disinfecting/our-disinfectant-sprayers/" element={<PlaceholderPage title="Disinfectant Sprayers" subtitle="Efficient sprayers for faster application and more coverage." />} />
             <Route path="/disinfecting/vapore-dry-vapor-disinfecting/" element={<PlaceholderPage title="Vapore Dry Vapor Disinfecting" subtitle="Clean, sanitize, and disinfect any surface with hot vapor." />} />
-            <Route path="/disinfecting/disinfecting-best-practices/" element={<PlaceholderPage title="Disinfecting Best Practices" />} />
+            <Route path="/disinfecting/disinfecting-best-practices/" element={<PlaceholderPage title="Disinfecting Best Practices" subtitle="Guidelines and recommendations for effective disinfection." />} />
 
             {/* Touchless Drive Thru */}
-            <Route path="/touchless-drive-thru/" element={<PlaceholderPage title="Automatic Drive-Through Wash System" subtitle="Completely automatic, unparalleled clean for your fleet." />} />
+            <Route path="/touchless-drive-thru/" element={<TouchlessDriveThru />} />
 
             {/* Industry Pages */}
-            <Route path="/industries-we-serve/" element={<PlaceholderPage title="Industries We Serve" subtitle="Serving customers across the Northeast and Midwest." />} />
+            <Route path="/industries-we-serve/" element={<IndustriesWeServe />} />
             <Route path="/construction-cleaning-equipment/" element={<PlaceholderPage title="Construction Cleaning Equipment" subtitle="Keep your equipment CLEAN and operating at peak efficiency." />} />
             <Route path="/agriculture-cleaning-equipment/" element={<PlaceholderPage title="Agriculture Cleaning Equipment" subtitle="Protect your machinery from corrosive fertilizers and the elements." />} />
             <Route path="/transportation-and-fleet-management/" element={<PlaceholderPage title="Transportation & Fleet Management" subtitle="No one knows transportation equipment like Enzo's." />} />
             <Route path="/manufacturing/" element={<PlaceholderPage title="Manufacturing" subtitle="Keep production lines working safely and efficiently." />} />
-            <Route path="/farming-equipment-cleaning/" element={<PlaceholderPage title="Farming Equipment Cleaning" />} />
-            <Route path="/solutions-for-road-construction-excavating/" element={<PlaceholderPage title="Solutions for Road Construction & Excavating" />} />
+            <Route path="/farming-equipment-cleaning/" element={<PlaceholderPage title="Farming Equipment Cleaning" subtitle="Protect your farming investment with proper cleaning." />} />
+            <Route path="/solutions-for-road-construction-excavating/" element={<PlaceholderPage title="Solutions for Road Construction & Excavating" subtitle="Heavy-duty cleaning for road construction and excavation equipment." />} />
             <Route path="/protect-your-fleet-from-corrosion-downtime/" element={<PlaceholderPage title="Protect Your Fleet from Corrosion & Downtime" subtitle="Targeted chemistries and undercarriage systems that stop salt-related damage." />} />
-            <Route path="/keep-plants-pavers-moving-remove-asphalt-not-time/" element={<PlaceholderPage title="Keep Plants & Pavers Moving" />} />
+            <Route path="/keep-plants-pavers-moving-remove-asphalt-not-time/" element={<PlaceholderPage title="Keep Plants & Pavers Moving" subtitle="Remove asphalt buildup without removing uptime." />} />
 
             {/* Healthcare */}
-            <Route path="/hospital-clinical-hygiene-overview-protocols/" element={<PlaceholderPage title="Hospital & Clinical Hygiene" />} />
-            <Route path="/our-hand-hygiene-systems/" element={<PlaceholderPage title="Hand Hygiene Systems" />} />
-            <Route path="/implementation-in-hospitals/" element={<PlaceholderPage title="Implementation in Hospitals" />} />
-            <Route path="/training-compliance-support/" element={<PlaceholderPage title="Training & Compliance Support" />} />
+            <Route path="/hospital-clinical-hygiene-overview-protocols/" element={<PlaceholderPage title="Hospital & Clinical Hygiene" subtitle="Comprehensive hygiene protocols for healthcare environments." />} />
+            <Route path="/our-hand-hygiene-systems/" element={<PlaceholderPage title="Hand Hygiene Systems" subtitle="Advanced hand hygiene dispensing and monitoring systems." />} />
+            <Route path="/implementation-in-hospitals/" element={<PlaceholderPage title="Implementation in Hospitals" subtitle="Seamless implementation of cleaning and hygiene protocols." />} />
+            <Route path="/training-compliance-support/" element={<PlaceholderPage title="Training & Compliance Support" subtitle="Training programs and compliance tracking for healthcare teams." />} />
 
             {/* Wastewater & Special */}
-            <Route path="/wastewater-treatment-solutions/" element={<PlaceholderPage title="Wastewater Treatment Solutions" subtitle="Modular solutions from oil/water separators to biological treatment." />} />
+            <Route path="/wastewater-treatment-solutions/" element={<WastewaterTreatment />} />
             <Route path="/heaters/" element={<PlaceholderPage title="Val 6 Heaters" subtitle="Warm up any work space and keep working no matter the season." />} />
-            <Route path="/single-dual-axle-trailer/" element={<PlaceholderPage title="Single & Dual Axle Trailers" />} />
-            <Route path="/electric-hot-water/" element={<PlaceholderPage title="Electric Hot Water" />} />
-            <Route path="/residential-consumer-coldwater/" element={<PlaceholderPage title="Residential Consumer Cold Water" />} />
-            <Route path="/citymaster-1650-650multifunction-sweeper/" element={<PlaceholderPage title="Citymaster 1650/650 Multifunction Sweeper" />} />
-            <Route path="/citymaster/" element={<PlaceholderPage title="Citymaster" />} />
+            <Route path="/single-dual-axle-trailer/" element={<PlaceholderPage title="Single & Dual Axle Trailers" subtitle="Mobile cleaning rigs on single and dual axle platforms." />} />
+            <Route path="/electric-hot-water/" element={<PlaceholderPage title="Electric Hot Water" subtitle="Electric-powered hot water pressure washers for indoor use." />} />
+            <Route path="/residential-consumer-coldwater/" element={<PlaceholderPage title="Residential Consumer Cold Water" subtitle="Home-grade cold water pressure washers for residential use." />} />
+            <Route path="/citymaster-1650-650multifunction-sweeper/" element={<PlaceholderPage title="Citymaster 1650/650 Multifunction Sweeper" subtitle="Municipal-grade multifunction sweeping equipment." />} />
+            <Route path="/citymaster/" element={<PlaceholderPage title="Citymaster" subtitle="Professional-grade sweeping solutions for municipalities." />} />
             <Route path="/equipment-products/" element={<PlaceholderPage title="Equipment & Products" subtitle="Pressure washers, air compressors, degreasers and accessories." />} />
-            <Route path="/faq/" element={<PlaceholderPage title="Frequently Asked Questions" />} />
+            <Route path="/faq/" element={<PlaceholderPage title="Frequently Asked Questions" subtitle="Answers to common questions about our products and services." />} />
             <Route path="/ota/" element={<PlaceholderPage title="OTA" />} />
-            <Route path="/promotions/" element={<PlaceholderPage title="Promotions" />} />
-            <Route path="/shop/" element={<PlaceholderPage title="Shop" />} />
-            <Route path="/shop-now/" element={<PlaceholderPage title="Shop Now" />} />
+            <Route path="/promotions/" element={<PlaceholderPage title="Promotions" subtitle="Current deals and promotions on cleaning equipment." />} />
+            <Route path="/shop/" element={<PlaceholderPage title="Shop" subtitle="Browse our full catalog of cleaning equipment and supplies." />} />
+            <Route path="/shop-now/" element={<PlaceholderPage title="Shop Now" subtitle="Browse our full catalog of cleaning equipment and supplies." />} />
 
             {/* About & Contact */}
             <Route path="/about-us/" element={<About />} />
