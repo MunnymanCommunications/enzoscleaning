@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { CheckCircle, Wrench, Settings, ArrowRight, Play } from "lucide-react";
+import { CheckCircle, Wrench, Settings, ArrowRight } from "lucide-react";
 import CTASection from "@/components/shared/CTASection";
+import HeroCarousel from "@/components/home/HeroCarousel";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import ProductCard from "@/components/shared/ProductCard";
 
