@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import { CheckCircle, Wrench, Settings, ArrowRight } from "lucide-react";
 import CTASection from "@/components/shared/CTASection";
 import HeroCarousel from "@/components/home/HeroCarousel";
