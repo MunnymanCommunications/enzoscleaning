@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { CheckCircle, Wrench, Settings, ArrowRight, Play } from "lucide-react";
+import { CheckCircle, Wrench, Settings, ArrowRight } from "lucide-react";
 import CTASection from "@/components/shared/CTASection";
+import HeroCarousel from "@/components/home/HeroCarousel";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import ProductCard from "@/components/shared/ProductCard";
 
@@ -28,38 +29,7 @@ export default function Index() {
   return (
     <>
       {/* Hero */}
-      <section className="relative flex min-h-[600px] items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url(/uploads/2020/09/header-bg.jpg)" }} />
-        <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-primary/80 to-secondary/90" />
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-1/2 -right-1/4 h-[800px] w-[800px] rounded-full bg-accent/10 blur-3xl" />
-          <div className="absolute -bottom-1/4 -left-1/4 h-[500px] w-[500px] rounded-full bg-primary/20 blur-3xl" />
-        </div>
-        <div className="relative z-10 container text-center py-24">
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}>
-            <span className="inline-block rounded-full bg-primary-foreground/10 border border-primary-foreground/20 px-4 py-1.5 text-sm font-medium text-primary-foreground mb-6">
-              Ohio & Michigan's Cleaning Equipment Experts
-            </span>
-            <h1 className="text-4xl font-black text-primary-foreground md:text-6xl lg:text-7xl leading-tight tracking-tight">
-              Are You Frustrated With<br className="hidden md:block" /> Your Pressure Washer?
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-lg text-primary-foreground/80">
-              Sales, service & installation of wash bay equipment, pressure washers, and cleaning solutions.
-            </p>
-          </motion.div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.3 }} className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link to="/contact-us/" className="rounded-full bg-card px-8 py-4 text-base font-bold text-primary shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2">
-              Let's Talk <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link to="/services/" className="rounded-full border-2 border-primary-foreground/30 px-8 py-4 text-base font-bold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
-              Our Services
-            </Link>
-            <Link to="/industries-we-serve/" className="rounded-full border-2 border-primary-foreground/30 px-8 py-4 text-base font-bold text-primary-foreground hover:bg-primary-foreground/10 transition-colors">
-              Industries We Serve
-            </Link>
-          </motion.div>
-        </div>
-      </section>
+      <HeroCarousel />
 
       {/* Intro */}
       <section className="section-padding">
