@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign } from "lucide-react";
+import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign, Download } from "lucide-react";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 
 const features = [
@@ -79,6 +79,13 @@ export default function TheNeutralizer() {
                 >
                   Get a Free Quote <ArrowRight className="h-5 w-5" />
                 </Link>
+                <a
+                  href="/downloads/neutralizer-flyer.jpg"
+                  download="Neutralizer-Salt-Plow-Flyer.jpg"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/10 text-primary-foreground font-bold rounded-full text-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all"
+                >
+                  <Download className="h-5 w-5" /> Download Flyer
+                </a>
                 <a
                   href="tel:4195020007"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/10 text-primary-foreground font-bold rounded-full text-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all"

@@ -24,6 +24,7 @@ const navItems = [
       { label: "Wash Bay Design", path: "/cleaning-equipment/wash-bay-design/" },
       { label: "Accessories", path: "/cleaning-equipment/pressure-washers-accessories/" },
       { label: "Floor Cleaning", path: "/cleaning-equipment/floor-cleaning/" },
+      { label: "Citymaster", path: "/citymaster-1650-650multifunction-sweeper/" },
     ],
   },
   {
