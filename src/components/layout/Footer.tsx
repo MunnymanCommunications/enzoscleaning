@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Clock } from "lucide-react";
+import enzosLogo from "@/assets/enzos-logo.png";
 
 const quickLinks = [
   { label: "Services", path: "/services/" },
@@ -19,7 +20,7 @@ export default function Footer() {
       <div className="container py-16">
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-4">
           <div>
-            <img src="https://enzoscleaning.com/wp-content/uploads/2020/08/Enzos-logo-white.png" alt="Enzo's Cleaning Solutions" className="h-14 w-auto mb-4" />
+            <img src={enzosLogo} alt="Enzo's Cleaning Solutions" className="h-14 w-auto mb-4" />
             <p className="text-secondary-foreground/70 text-sm leading-relaxed">Specializing in sales, service, and installation of wash bay equipment, pressure washers, detergents and cleaning equipment.</p>
           </div>
           <div>
