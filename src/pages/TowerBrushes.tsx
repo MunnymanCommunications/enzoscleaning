@@ -3,10 +3,10 @@ import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 
 const applications = [
-  { title: "Truck & Trailer", pdf: "https://enzoscleaning.com/wp-content/uploads/2020/09/awash_Truck-and-Trailer.pdf", videoId: "whZxkkDVXQg" },
-  { title: "School Bus", pdf: "https://enzoscleaning.com/wp-content/uploads/2020/09/awash_School-Bus.pdf", videoId: null },
-  { title: "Transit Bus", pdf: "https://enzoscleaning.com/wp-content/uploads/2020/09/awash_Transit.pdf", videoId: null },
-  { title: "Motorcoach", pdf: "https://enzoscleaning.com/wp-content/uploads/2020/09/awash_Motorcoach.pdf", videoId: null },
+  { title: "Truck & Trailer", pdf: "/uploads/2020/09/awash_Truck-and-Trailer.pdf", videoId: "whZxkkDVXQg" },
+  { title: "School Bus", pdf: "/uploads/2020/09/awash_School-Bus.pdf", videoId: null },
+  { title: "Transit Bus", pdf: "/uploads/2020/09/awash_Transit.pdf", videoId: null },
+  { title: "Motorcoach", pdf: "/uploads/2020/09/awash_Motorcoach.pdf", videoId: null },
 ];
 
 export default function TowerBrushes() {
@@ -15,7 +15,7 @@ export default function TowerBrushes() {
       <PageHero
         title="Tower Brushes"
         subtitle="Full height cleaning for buses, tractor trailers and motorcoaches."
-        bgImage="https://enzoscleaning.com/wp-content/uploads/2020/09/static1.squarespace.jpg"
+        bgImage="/uploads/2020/09/static1.squarespace.jpg"
       />
       <section className="section-padding">
         <div className="container max-w-4xl">

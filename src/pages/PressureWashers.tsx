@@ -5,8 +5,8 @@ import AnimatedSection from "@/components/shared/AnimatedSection";
 import ProductCard from "@/components/shared/ProductCard";
 
 const categories = [
-  { title: "Hotsy Pressure Washers", image: "https://enzoscleaning.com/wp-content/uploads/2020/09/Consultation.jpg", link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/", description: "Dozens of hot- and cold-water pressure washers backed by the industry's best warranty." },
-  { title: "Mi-T-M Pressure Washers", image: "https://enzoscleaning.com/wp-content/uploads/2020/09/Service-Repair.jpg", link: "/cleaning-equipment/mi-t-m/", description: "Wide variety of cold and hot-water models powered by electricity or natural gas." },
+  { title: "Hotsy Pressure Washers", image: "/uploads/2020/09/Consultation.jpg", link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/", description: "Dozens of hot- and cold-water pressure washers backed by the industry's best warranty." },
+  { title: "Mi-T-M Pressure Washers", image: "/uploads/2020/09/Service-Repair.jpg", link: "/cleaning-equipment/mi-t-m/", description: "Wide variety of cold and hot-water models powered by electricity or natural gas." },
 ];
 
 export default function PressureWashers() {

@@ -9,28 +9,28 @@ const equipmentCategories = [
       { label: "Hotsy Pressure Washers", path: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/" },
       { label: "MI-T-M Pressure Washers", path: "/cleaning-equipment/mi-t-m/" },
     ],
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/pressure-washers.jpg",
+    image: "/uploads/2020/10/pressure-washers.jpg",
   },
   {
     title: "Accessories",
     subcategories: [
       { label: "Pressure Washer Accessories", path: "/cleaning-equipment/pressure-washers-accessories/" },
     ],
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Accessories.jpg",
+    image: "/uploads/2020/10/Accessories.jpg",
   },
   {
     title: "Under Carriage",
     subcategories: [
       { label: "Under Carriage Sprayers", path: "/cleaning-equipment/under-carriage-sprayers/" },
     ],
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Untitled-1.jpg",
+    image: "/uploads/2020/10/Untitled-1.jpg",
   },
   {
     title: "Floor Cleaning",
     subcategories: [
       { label: "Floor Cleaners", path: "/cleaning-equipment/floor-cleaning/" },
     ],
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/floor-cleaning.jpg",
+    image: "/uploads/2020/10/floor-cleaning.jpg",
   },
 ];
 

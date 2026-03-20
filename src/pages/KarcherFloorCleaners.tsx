@@ -10,7 +10,7 @@ export default function KarcherFloorCleaners() {
         <div className="container">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2020/11/download-1.png" alt="Kärcher Logo" className="h-14 object-contain" loading="lazy" />
+              <img src="/uploads/2020/11/download-1.png" alt="Kärcher Logo" className="h-14 object-contain" loading="lazy" />
             </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed max-w-3xl mx-auto">
               Kärcher is the world's leading provider of cleaning technology. Their commercial floor cleaning equipment — from compact scrubbers to large ride-on sweepers — delivers exceptional cleaning performance with German engineering quality. Find Kärcher floor cleaners at Enzo's.

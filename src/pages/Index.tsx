@@ -6,16 +6,16 @@ import AnimatedSection from "@/components/shared/AnimatedSection";
 import ProductCard from "@/components/shared/ProductCard";
 
 const serviceCards = [
-  { title: "Free Consultations", description: "Let us visit your operation and provide insights and solutions to make your work easier.", image: "https://enzoscleaning.com/wp-content/uploads/2021/01/Enzos-Free-Consultations.jpg", link: "/services/free-consultations/" },
-  { title: "Service & Repair", description: "At your location or ours, the Enzo's team handles pressure washer and other cleaning system repairs.", image: "https://enzoscleaning.com/wp-content/uploads/2021/01/Enzos-Service-and-Repair.jpg", link: "/services/pressure-washer-service-repair/" },
-  { title: "Preventive Maintenance", description: "The best way to handle repairs? Prevent them. Let us help handle your maintenance and upkeep.", image: "https://enzoscleaning.com/wp-content/uploads/2021/01/Enzos-Preventive-Maintenance.jpg", link: "/services/scheduled-maintenance/" },
+  { title: "Free Consultations", description: "Let us visit your operation and provide insights and solutions to make your work easier.", image: "/uploads/2021/01/Enzos-Free-Consultations.jpg", link: "/services/free-consultations/" },
+  { title: "Service & Repair", description: "At your location or ours, the Enzo's team handles pressure washer and other cleaning system repairs.", image: "/uploads/2021/01/Enzos-Service-and-Repair.jpg", link: "/services/pressure-washer-service-repair/" },
+  { title: "Preventive Maintenance", description: "The best way to handle repairs? Prevent them. Let us help handle your maintenance and upkeep.", image: "/uploads/2021/01/Enzos-Preventive-Maintenance.jpg", link: "/services/scheduled-maintenance/" },
 ];
 
 const productCards = [
-  { title: "Hotsy Equipment", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Electric-Pump-Fuel-Oil-Heat-2.jpg", link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/" },
-  { title: "Mi-T-M Equipment", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/natural-gas-hot-water-2-1.jpg", link: "/cleaning-equipment/mi-t-m/" },
-  { title: "Detergents & Disinfectants", image: "https://enzoscleaning.com/wp-content/uploads/2020/09/vog.jpg", link: "/detergents/" },
-  { title: "The Neutralizer", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/neutralizer.jpg", link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" },
+  { title: "Hotsy Equipment", image: "/uploads/2020/10/Electric-Pump-Fuel-Oil-Heat-2.jpg", link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/" },
+  { title: "Mi-T-M Equipment", image: "/uploads/2020/10/natural-gas-hot-water-2-1.jpg", link: "/cleaning-equipment/mi-t-m/" },
+  { title: "Detergents & Disinfectants", image: "/uploads/2020/09/vog.jpg", link: "/detergents/" },
+  { title: "The Neutralizer", image: "/uploads/2020/10/neutralizer.jpg", link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" },
 ];
 
 const cleanPlanSteps = [
@@ -29,7 +29,7 @@ export default function Index() {
     <>
       {/* Hero */}
       <section className="relative flex min-h-[600px] items-center justify-center overflow-hidden">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url(https://enzoscleaning.com/wp-content/uploads/2020/09/header-bg.jpg)" }} />
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: "url(/uploads/2020/09/header-bg.jpg)" }} />
         <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-primary/80 to-secondary/90" />
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-1/2 -right-1/4 h-[800px] w-[800px] rounded-full bg-accent/10 blur-3xl" />

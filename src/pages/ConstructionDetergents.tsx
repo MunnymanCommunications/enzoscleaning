@@ -15,7 +15,7 @@ const products = [
 export default function ConstructionDetergents() {
   return (
     <>
-      <PageHero title="Construction Equipment Cleaning" subtitle="Keep your construction equipment clean and running at peak efficiency." bgImage="https://enzoscleaning.com/wp-content/uploads/2020/09/DSC_0184.jpg" />
+      <PageHero title="Construction Equipment Cleaning" subtitle="Keep your construction equipment clean and running at peak efficiency." bgImage="/uploads/2020/09/DSC_0184.jpg" />
       <section className="section-padding">
         <div className="container">
           <AnimatedSection>

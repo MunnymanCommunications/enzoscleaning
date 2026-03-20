@@ -15,9 +15,9 @@ const detergents = [
 ];
 
 const equipment = [
-  { title: "Portable Undercarriage Unit", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Untitled-4.jpg", link: "/cleaning-equipment/wash-bay-design/" },
-  { title: "The Neutralizer", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Untitled-1.jpg", link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" },
-  { title: "Tower Brushes", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Untitled-2.jpg", link: "/cleaning-equipment/wash-bay-design/tower-brushes/" },
+  { title: "Portable Undercarriage Unit", image: "/uploads/2020/10/Untitled-4.jpg", link: "/cleaning-equipment/wash-bay-design/" },
+  { title: "The Neutralizer", image: "/uploads/2020/10/Untitled-1.jpg", link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" },
+  { title: "Tower Brushes", image: "/uploads/2020/10/Untitled-2.jpg", link: "/cleaning-equipment/wash-bay-design/tower-brushes/" },
 ];
 
 export default function TransportationFleetManagement() {

@@ -7,19 +7,19 @@ const equipment = [
   {
     title: "The Neutralizer – Fleet Preservation",
     desc: "Made by Enzo's, The Neutralizer undercarriage cleaning system's purpose is to help fight corrosion due to road salt and brine.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Untitled-1.jpg",
+    image: "/uploads/2020/10/Untitled-1.jpg",
     link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/",
   },
   {
     title: "Portable Undercarriage Unit",
     desc: "In addition to The Neutralizer, Enzo's offers several models of under carriage sprayers for your wash bay.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Untitled-4.jpg",
+    image: "/uploads/2020/10/Untitled-4.jpg",
     link: "/cleaning-equipment/under-carriage-sprayers/",
   },
   {
     title: "Tower Brushes",
     desc: "Tower brush cleaning systems are an excellent way to quickly and completely clean buses, trailers and other tall vehicles.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Untitled-2.jpg",
+    image: "/uploads/2020/10/Untitled-2.jpg",
     link: "/cleaning-equipment/wash-bay-design/tower-brushes/",
   },
 ];

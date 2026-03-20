@@ -8,19 +8,19 @@ const models = [
     model: "HEG Series – Belt Driven",
     partNumber: "#HEG-2004-0E2G",
     discharge: "4.2 GPM at 2,000 PSI",
-    image: "https://enzoscleaning.com/wp-content/uploads/2024/10/HEG-Series-Stationary-Natural-Gas-Pressure-Washer.png",
+    image: "/uploads/2024/10/HEG-Series-Stationary-Natural-Gas-Pressure-Washer.png",
     dimensions: { length: '56.5"', width: '29"', height: '49.75"', weight: "844 lbs" },
     description: "Ranging from 1800 up to 3000 PSI, the HEG Series is capable of effortlessly cleaning caked on dirt and build-up off vehicles and equipment.",
-    specSheet: "https://enzoscleaning.com/wp-content/uploads/2024/10/HEG-Series-Stationary-Natural-Gas-LP-Belt-Drive_Enzos.pdf",
+    specSheet: "/uploads/2024/10/HEG-Series-Stationary-Natural-Gas-LP-Belt-Drive_Enzos.pdf",
   },
   {
     model: "HEG High Volume Wash Series",
     partNumber: "#HEG-3008-1E3G",
     discharge: "7.8 GPM at 2,400 PSI",
-    image: "https://enzoscleaning.com/wp-content/uploads/2024/10/HEG-HV-Series-Natural-Gas-Pressure-Washer.png",
+    image: "/uploads/2024/10/HEG-HV-Series-Natural-Gas-Pressure-Washer.png",
     dimensions: { length: '70"', width: '34.75"', height: '54.5"', weight: "1,207 lbs" },
     description: "The HEG High Volume series can handle jobs that require maximum cleaning power. This series has a unique coil design that keeps the unit temperature steady.",
-    specSheet: "https://enzoscleaning.com/wp-content/uploads/2024/10/HEG-HV-Series-Stationary-Natural-Gas-LP-Belt-Drive_Enzos.pdf",
+    specSheet: "/uploads/2024/10/HEG-HV-Series-Stationary-Natural-Gas-LP-Belt-Drive_Enzos.pdf",
   },
 ];
 
@@ -32,7 +32,7 @@ export default function MiTMNaturalGasHotWater() {
         <div className="container">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2024/09/Mi-T-M-Logo.png" alt="Mi-T-M Logo" className="h-14" />
+              <img src="/uploads/2024/09/Mi-T-M-Logo.png" alt="Mi-T-M Logo" className="h-14" />
             </div>
           </AnimatedSection>
           <div className="space-y-8">

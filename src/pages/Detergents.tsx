@@ -16,7 +16,7 @@ export default function Detergents() {
       <PageHero
         title="Detergents"
         subtitle="For everything you need clean, Enzo's offers a detergent cleaning solution to get the job done."
-        bgImage="https://enzoscleaning.com/wp-content/uploads/2020/11/hotsy_0003_Layer-0.jpg"
+        bgImage="/uploads/2020/11/hotsy_0003_Layer-0.jpg"
       />
       <section className="py-16">
         <div className="container">

@@ -6,25 +6,25 @@ const serviceCards = [
   {
     title: "Free Consultations",
     description: "Get a consultation with our team to help find the right solution for your operation.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/11/Enzo-Still-10.jpg",
+    image: "/uploads/2020/11/Enzo-Still-10.jpg",
     link: "/services/free-consultations/",
   },
   {
     title: "Service & Repair",
     description: "Get your equipment back working correctly with our trained service and repair technicians.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/09/Service-Repair.jpg",
+    image: "/uploads/2020/09/Service-Repair.jpg",
     link: "/services/pressure-washer-service-repair/",
   },
   {
     title: "Scheduled Maintenance",
     description: "Downtime is preventable with proper upkeep and maintenance. Let us show you how.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/11/Enzo-Still-13.jpg",
+    image: "/uploads/2020/11/Enzo-Still-13.jpg",
     link: "/services/scheduled-maintenance/",
   },
   {
     title: "Wash Bay Design",
     description: "Create the perfect space for cleaning your vehicles with Enzo's wash bay design services.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/11/Enzo-Still-8.jpg",
+    image: "/uploads/2020/11/Enzo-Still-8.jpg",
     link: "/cleaning-equipment/wash-bay-design/",
   },
 ];

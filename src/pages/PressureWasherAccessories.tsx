@@ -7,19 +7,19 @@ const accessories = [
   {
     title: "Trigger Guns & Spray Guns",
     desc: "Enzo's stocks a full range of trigger guns and spray guns to help deliver the powerful performance you need to get things clean.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2021/02/Pressure-Washer-Trigger-Guns-and-Spray-Guns.png",
+    image: "/uploads/2021/02/Pressure-Washer-Trigger-Guns-and-Spray-Guns.png",
     link: "/cleaning-equipment/pressure-washers-accessories/trigger-guns-spray-guns/",
   },
   {
     title: "Nozzles",
     desc: "Properly sized nozzles are critical to proper pressure washer operation. We offer a wide variety for cold-water and hot-water pressure washers.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2021/02/Pressure-Washer-Quick-Change-Nozzles.jpg",
+    image: "/uploads/2021/02/Pressure-Washer-Quick-Change-Nozzles.jpg",
     link: "/cleaning-equipment/pressure-washers-accessories/nozzles/",
   },
   {
     title: "Surface Cleaners",
     desc: "Keep your working surfaces, warehouse floors, sidewalks and other spaces clean and clear. Designed to make quick work of dirt, grime and gum.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2021/02/Surface-Cleaner.jpg",
+    image: "/uploads/2021/02/Surface-Cleaner.jpg",
     link: "/cleaning-equipment/pressure-washers-accessories/surface-cleaners/",
   },
   {
@@ -45,7 +45,7 @@ export default function PressureWasherAccessories() {
       <PageHero
         title="Pressure Washer Accessories"
         subtitle="The right accessories and supplies for the most effective, efficient clean from your pressure washer."
-        bgImage="https://enzoscleaning.com/wp-content/uploads/2021/02/Pressure-Washer-Accessories.jpg"
+        bgImage="/uploads/2021/02/Pressure-Washer-Accessories.jpg"
       />
 
       <section className="section-padding">

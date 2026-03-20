@@ -13,7 +13,7 @@ export default function HotsyGasolineColdWater() {
         <div className="container max-w-4xl">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2024/09/hotsy-logo.png" alt="Hotsy Logo" className="h-14" />
+              <img src="/uploads/2024/09/hotsy-logo.png" alt="Hotsy Logo" className="h-14" />
             </div>
             <p className="text-lg text-muted-foreground leading-relaxed text-center">
               Enjoy portability for your cleaning needs on the go with a gas-powered cold water Hotsy pressure washer. Perfect for road jobs or use in a mobile cleaning vehicle. No electrical outlet needed — just fuel up and go. Get your next pressure washer at Enzo's.
