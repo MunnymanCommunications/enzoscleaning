@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, MapPin, Clock } from "lucide-react";
+import enzosLogo from "@/assets/enzos-logo.png";
 
 const quickLinks = [
   { label: "Services", path: "/services/" },
