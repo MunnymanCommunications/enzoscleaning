@@ -10,7 +10,7 @@ export default function MiTMElectricHotWater() {
         <div className="container">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2024/09/Mi-T-M-Logo.png" alt="Mi-T-M Logo" className="h-14" />
+              <img src="/uploads/2024/09/Mi-T-M-Logo.png" alt="Mi-T-M Logo" className="h-14" />
             </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed max-w-3xl mx-auto">
               Mi-T-M electric hot water pressure washers offer the same power and performance as traditional fuel units, but offer portability and utility for enclosed and outdoor cleaning jobs. Ideal for wash bays, food processing, and any indoor operation requiring hot water cleaning power without exhaust fumes.

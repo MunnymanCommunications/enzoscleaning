@@ -10,7 +10,7 @@ export default function MiTMAirCompressorGas() {
         <div className="container">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2024/09/Mi-T-M-Logo.png" alt="Mi-T-M Logo" className="h-14" />
+              <img src="/uploads/2024/09/Mi-T-M-Logo.png" alt="Mi-T-M Logo" className="h-14" />
             </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed max-w-3xl mx-auto">
               Mi-T-M's line of gasoline-powered air compressors deliver reliable compressed air wherever you need it — no electrical outlet required. Built for construction sites, farms, and mobile applications with the same rugged quality you expect from Mi-T-M.

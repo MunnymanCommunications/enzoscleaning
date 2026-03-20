@@ -12,10 +12,10 @@ const pillars = [
 ];
 
 const washOptions = [
-  { title: "High Touch / Touchless Designs", desc: "Choose the wash configuration that matches your fleet's needs and sensitivity.", image: "https://enzoscleaning.com/wp-content/uploads/2022/10/New-Project-2.jpg" },
-  { title: "Reverse Osmosis System", desc: "Spot-free rinse and finish every time with advanced water purification.", image: "https://enzoscleaning.com/wp-content/uploads/2022/08/New-Project-1.png" },
-  { title: "Wireless Remotes", desc: "Operate your wash system from any location with convenient wireless controls.", image: "https://enzoscleaning.com/wp-content/uploads/2022/08/New-Project.png" },
-  { title: "Undercarriage Wash Unit", desc: "Integrated undercarriage cleaning to fight salt and corrosion damage.", image: "https://enzoscleaning.com/wp-content/uploads/2022/10/New-Project.jpg" },
+  { title: "High Touch / Touchless Designs", desc: "Choose the wash configuration that matches your fleet's needs and sensitivity.", image: "/uploads/2022/10/New-Project-2.jpg" },
+  { title: "Reverse Osmosis System", desc: "Spot-free rinse and finish every time with advanced water purification.", image: "/uploads/2022/08/New-Project-1.png" },
+  { title: "Wireless Remotes", desc: "Operate your wash system from any location with convenient wireless controls.", image: "/uploads/2022/08/New-Project.png" },
+  { title: "Undercarriage Wash Unit", desc: "Integrated undercarriage cleaning to fight salt and corrosion damage.", image: "/uploads/2022/10/New-Project.jpg" },
 ];
 
 const processSteps = [

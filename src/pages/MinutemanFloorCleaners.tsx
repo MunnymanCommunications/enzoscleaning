@@ -10,7 +10,7 @@ export default function MinutemanFloorCleaners() {
         <div className="container">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2020/11/minuteman-logoLarge.png" alt="Minuteman Logo" className="h-14 object-contain" loading="lazy" />
+              <img src="/uploads/2020/11/minuteman-logoLarge.png" alt="Minuteman Logo" className="h-14 object-contain" loading="lazy" />
             </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed max-w-3xl mx-auto">
               Minuteman International has been manufacturing commercial cleaning equipment since 1951. Their floor scrubbers, sweepers, and burnishers are designed for reliability, ease of use, and consistent performance. Find Minuteman floor cleaning solutions at Enzo's.

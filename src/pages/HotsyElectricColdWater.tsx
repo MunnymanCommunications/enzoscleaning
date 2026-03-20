@@ -13,7 +13,7 @@ export default function HotsyElectricColdWater() {
         <div className="container max-w-4xl">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2024/09/hotsy-logo.png" alt="Hotsy Logo" className="h-14" />
+              <img src="/uploads/2024/09/hotsy-logo.png" alt="Hotsy Logo" className="h-14" />
             </div>
             <p className="text-lg text-muted-foreground leading-relaxed text-center">
               Plug and play – or clean – with the convenience of an electric cold water Hotsy pressure washer. Perfect for indoor cleaning operations where hot water isn't necessary but commercial-grade power is required. Contact Enzo's today for help finding the right machine for your needs.

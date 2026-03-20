@@ -8,37 +8,37 @@ const models = [
     model: "1475N",
     partNumber: "#1.109-953.0",
     discharge: "5 GPM at 3,000 PSI",
-    image: "https://enzoscleaning.com/wp-content/uploads/2024/09/Natural-gas-pressure-washer-image.png",
+    image: "/uploads/2024/09/Natural-gas-pressure-washer-image.png",
     dimensions: { length: '47.5"', width: '21"', height: '51"', weight: "740 lbs" },
     description: "Hot water, high pressure, electric powered washer capable of operating on fresh water with appropriate safety controls. ETL/UL/CSA certified to UL1776 standard. Built in ISO-9001 registered factory. Perfect for wash bays with simple natural gas connection.",
-    specSheet: "https://enzoscleaning.com/wp-content/uploads/2024/09/1475N-Nat-gas-Spec-Sheet.pdf",
+    specSheet: "/uploads/2024/09/1475N-Nat-gas-Spec-Sheet.pdf",
   },
   {
     model: "1473N",
     partNumber: "#1.109-713.0",
     discharge: "5 GPM at 3,000 PSI",
-    image: "https://enzoscleaning.com/wp-content/uploads/2024/09/Natural-gas-pressure-washer-image.png",
+    image: "/uploads/2024/09/Natural-gas-pressure-washer-image.png",
     dimensions: { length: '47.5"', width: '21"', height: '51"', weight: "677 lbs" },
     description: "Hot water, high pressure, electric powered washer. ETL/UL/CSA certified to UL1776 safety standard. Built in ISO-9001 registered factory. Ideal for wash bays and facilities with natural gas hookups.",
-    specSheet: "https://enzoscleaning.com/wp-content/uploads/2024/09/1473N-Nat-gas-Bid-Spec-Sheet.pdf",
+    specSheet: "/uploads/2024/09/1473N-Nat-gas-Bid-Spec-Sheet.pdf",
   },
   {
     model: "1452N",
     partNumber: "#1.109-703.0",
     discharge: "4 GPM at 3,000 PSI",
-    image: "https://enzoscleaning.com/wp-content/uploads/2024/09/Natural-gas-pressure-washer-image.png",
+    image: "/uploads/2024/09/Natural-gas-pressure-washer-image.png",
     dimensions: { length: '47.5"', width: '21"', height: '51"', weight: "625 lbs" },
     description: "Hot water, high pressure, electric powered portable washer. ETL/UL/CGA/CSA certified conforming to UL standard 1776 for pressure washers. Built in ISO-9001 2008 registered factory.",
-    specSheet: "https://enzoscleaning.com/wp-content/uploads/2024/09/1452N-Nat-gas-Spec-Sheet.pdf",
+    specSheet: "/uploads/2024/09/1452N-Nat-gas-Spec-Sheet.pdf",
   },
   {
     model: "943N",
     partNumber: "#1.109-696.0",
     discharge: "4 GPM at 2,000 PSI",
-    image: "https://enzoscleaning.com/wp-content/uploads/2024/09/Natural-gas-pressure-washer-image.png",
+    image: "/uploads/2024/09/Natural-gas-pressure-washer-image.png",
     dimensions: { length: '47.5"', width: '21"', height: '51"', weight: "685 lbs" },
     description: "Hot water, high pressure, electric powered washer. ETL/UL/CGA/CSA certified to UL1776 safety standard. Built in ISO-9001 2008 registered factory. Great entry-level natural gas option.",
-    specSheet: "https://enzoscleaning.com/wp-content/uploads/2024/09/943N-Nat-gas-Spec-Sheet.pdf",
+    specSheet: "/uploads/2024/09/943N-Nat-gas-Spec-Sheet.pdf",
   },
 ];
 
@@ -53,7 +53,7 @@ export default function HotsyNaturalGasHotWater() {
         <div className="container">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2024/09/hotsy-logo.png" alt="Hotsy Logo" className="h-14" />
+              <img src="/uploads/2024/09/hotsy-logo.png" alt="Hotsy Logo" className="h-14" />
             </div>
           </AnimatedSection>
           <div className="space-y-8">

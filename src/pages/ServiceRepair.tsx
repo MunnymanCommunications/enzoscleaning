@@ -5,7 +5,7 @@ import AnimatedSection from "@/components/shared/AnimatedSection";
 export default function ServiceRepair() {
   return (
     <>
-      <PageHero title="Service & Repair" subtitle="Get your equipment back working correctly with our trained service and repair technicians." bgImage="https://enzoscleaning.com/wp-content/uploads/2021/01/pressure-washer-service-and-repair.jpg" />
+      <PageHero title="Service & Repair" subtitle="Get your equipment back working correctly with our trained service and repair technicians." bgImage="/uploads/2021/01/pressure-washer-service-and-repair.jpg" />
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>

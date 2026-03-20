@@ -4,13 +4,13 @@ import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 
 const categories = [
-  { title: "Electric Hot Water", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/electric-hot-water-1.jpg", link: "/cleaning-equipment/mi-t-m/electric-hot-water/" },
-  { title: "Natural Gas Hot Water", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/natural-gas-hot-water-2-1.jpg", link: "/cleaning-equipment/mi-t-m/natural-gas-hot-water/" },
-  { title: "Gasoline Hot Water Portable", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/gasoline-hot-water-portable-3.jpg", link: "/cleaning-equipment/mi-t-m/gasoline-hot-water-portable/" },
-  { title: "Gasoline Hot Water Skid", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/gasoline-hot-water-skid-4.jpg", link: "/cleaning-equipment/mi-t-m/gasoline-hot-water-skid/" },
-  { title: "Electric Cold Water", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/electric-cold-water-8.jpg", link: "/cleaning-equipment/mi-t-m/electric-cold-water/" },
-  { title: "Gas Air Compressors", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/air-compresso-rgas-6.jpg", link: "/cleaning-equipment/mi-t-m/air-compressor-gas/" },
-  { title: "Electric Air Compressors", image: "https://enzoscleaning.com/wp-content/uploads/2020/10/air-compressor-electric-7.jpg", link: "/cleaning-equipment/mi-t-m/air-compressor-electric/" },
+  { title: "Electric Hot Water", image: "/uploads/2020/10/electric-hot-water-1.jpg", link: "/cleaning-equipment/mi-t-m/electric-hot-water/" },
+  { title: "Natural Gas Hot Water", image: "/uploads/2020/10/natural-gas-hot-water-2-1.jpg", link: "/cleaning-equipment/mi-t-m/natural-gas-hot-water/" },
+  { title: "Gasoline Hot Water Portable", image: "/uploads/2020/10/gasoline-hot-water-portable-3.jpg", link: "/cleaning-equipment/mi-t-m/gasoline-hot-water-portable/" },
+  { title: "Gasoline Hot Water Skid", image: "/uploads/2020/10/gasoline-hot-water-skid-4.jpg", link: "/cleaning-equipment/mi-t-m/gasoline-hot-water-skid/" },
+  { title: "Electric Cold Water", image: "/uploads/2020/10/electric-cold-water-8.jpg", link: "/cleaning-equipment/mi-t-m/electric-cold-water/" },
+  { title: "Gas Air Compressors", image: "/uploads/2020/10/air-compresso-rgas-6.jpg", link: "/cleaning-equipment/mi-t-m/air-compressor-gas/" },
+  { title: "Electric Air Compressors", image: "/uploads/2020/10/air-compressor-electric-7.jpg", link: "/cleaning-equipment/mi-t-m/air-compressor-electric/" },
 ];
 
 export default function MiTM() {

@@ -6,19 +6,19 @@ const products = [
   {
     title: "Disinfectants & Sanitizers",
     description: "High-efficiency solutions to get rid of germs, bacteria, molds & more.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/09/images.jpg",
+    image: "/uploads/2020/09/images.jpg",
     link: "/disinfecting/our-disinfectants-sanitizers/",
   },
   {
     title: "Sprayers",
     description: "Apply cleaning solutions quickly and easily with a sprayer solution.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/09/download-1.jpg",
+    image: "/uploads/2020/09/download-1.jpg",
     link: "/disinfecting/our-disinfectant-sprayers/",
   },
   {
     title: "Vapore Cleaners",
     description: "Dry vapor cleaning systems that blast away germs with high heat.",
-    image: "https://enzoscleaning.com/wp-content/uploads/2020/10/Preventive_sm.jpg",
+    image: "/uploads/2020/10/Preventive_sm.jpg",
     link: "/disinfecting/vapore-dry-vapor-disinfecting/",
   },
 ];

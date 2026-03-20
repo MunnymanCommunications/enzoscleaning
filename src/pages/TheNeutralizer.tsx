@@ -51,7 +51,7 @@ export default function TheNeutralizer() {
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-secondary via-primary to-secondary" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--accent)/0.15),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[url('https://enzoscleaning.com/wp-content/uploads/2021/02/Undercarriage-wash-system.jpg')] bg-cover bg-center opacity-15" />
+        <div className="absolute inset-0 bg-[url('/uploads/2021/02/Undercarriage-wash-system.jpg')] bg-cover bg-center opacity-15" />
 
         <div className="container relative z-10 py-20">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
@@ -103,7 +103,7 @@ export default function TheNeutralizer() {
             >
               <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-primary-foreground/10">
                 <img
-                  src="https://enzoscleaning.com/wp-content/uploads/2020/10/neutralizer.jpg"
+                  src="/uploads/2020/10/neutralizer.jpg"
                   alt="The Neutralizer undercarriage wash system"
                   className="w-full object-cover"
                 />
@@ -153,7 +153,7 @@ export default function TheNeutralizer() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <img
-                  src="https://enzoscleaning.com/wp-content/uploads/2021/02/The-Neutralizer-Pressure-Washer.jpg"
+                  src="/uploads/2021/02/The-Neutralizer-Pressure-Washer.jpg"
                   alt="The Neutralizer pressure washer system"
                   className="w-full object-cover"
                 />
@@ -305,7 +305,7 @@ export default function TheNeutralizer() {
               <div className="relative">
                 <div className="rounded-2xl overflow-hidden shadow-xl">
                   <img
-                    src="https://enzoscleaning.com/wp-content/uploads/2021/02/Undercarriage-wash-system.jpg"
+                    src="/uploads/2021/02/Undercarriage-wash-system.jpg"
                     alt="Neutralizer undercarriage wash system in action"
                     className="w-full object-cover"
                   />

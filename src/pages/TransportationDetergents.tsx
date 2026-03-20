@@ -16,7 +16,7 @@ const products = [
 export default function TransportationDetergents() {
   return (
     <>
-      <PageHero title="Transportation / Truck & Bus Wash" subtitle="Keep your fleet looking clean with powerful detergent solutions." bgImage="https://enzoscleaning.com/wp-content/uploads/2020/09/136c6030-0d5c-4f51-86ad-93842523d1c6.jpg" />
+      <PageHero title="Transportation / Truck & Bus Wash" subtitle="Keep your fleet looking clean with powerful detergent solutions." bgImage="/uploads/2020/09/136c6030-0d5c-4f51-86ad-93842523d1c6.jpg" />
       <section className="section-padding">
         <div className="container">
           <AnimatedSection>

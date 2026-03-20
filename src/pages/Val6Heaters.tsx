@@ -10,7 +10,7 @@ export default function Val6Heaters() {
         <div className="container max-w-4xl">
           <AnimatedSection>
             <div className="flex justify-center mb-8">
-              <img src="https://enzoscleaning.com/wp-content/uploads/2020/11/Outlook-5ehznszt.png" alt="VAL6 Logo" className="h-14 object-contain" loading="lazy" />
+              <img src="/uploads/2020/11/Outlook-5ehznszt.png" alt="VAL6 Logo" className="h-14 object-contain" loading="lazy" />
             </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed">
               Don't let cold weather slow you down. With heating systems from VAL6, you can warm up any work space and keep working no matter the season. Find the portable heating equipment you need at Enzo's today. VAL6 infrared heaters provide instant, efficient heat for shops, wash bays, garages and outdoor work areas.

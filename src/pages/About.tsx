@@ -2,10 +2,10 @@ import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 
 const team = [
-  { name: "Tim & Maureen Esposito", role: "President & Director of Operations", image: "https://enzoscleaning.com/wp-content/uploads/2020/11/30.jpg" },
-  { name: "Michael Taylor", role: "Sales & Technical Consultant", image: "https://enzoscleaning.com/wp-content/uploads/2020/11/Enzosjpg.jpg" },
-  { name: "Ray Reece", role: "Service Manager", image: "https://enzoscleaning.com/wp-content/uploads/2020/11/19_1.jpg" },
-  { name: "Rogan", role: "Enzo's Mascot (Guard Dog)", image: "https://enzoscleaning.com/wp-content/uploads/2020/11/mascot.jpg" },
+  { name: "Tim & Maureen Esposito", role: "President & Director of Operations", image: "/uploads/2020/11/30.jpg" },
+  { name: "Michael Taylor", role: "Sales & Technical Consultant", image: "/uploads/2020/11/Enzosjpg.jpg" },
+  { name: "Ray Reece", role: "Service Manager", image: "/uploads/2020/11/19_1.jpg" },
+  { name: "Rogan", role: "Enzo's Mascot (Guard Dog)", image: "/uploads/2020/11/mascot.jpg" },
 ];
 
 const values = [
@@ -65,7 +65,7 @@ export default function About() {
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {values.map((v) => (
               <div key={v} className="flex items-start gap-3 rounded-lg border bg-card p-6 shadow-sm">
-                <img src="https://enzoscleaning.com/wp-content/uploads/2020/09/Check_Icon.jpg" alt="" className="h-8 w-8 flex-shrink-0" />
+                <img src="/uploads/2020/09/Check_Icon.jpg" alt="" className="h-8 w-8 flex-shrink-0" />
                 <p className="font-semibold">{v}</p>
               </div>
             ))}

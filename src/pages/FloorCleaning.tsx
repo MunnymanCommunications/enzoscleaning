@@ -6,12 +6,12 @@ import AnimatedSection from "@/components/shared/AnimatedSection";
 const brands = [
   {
     title: "Kärcher Floor Cleaners",
-    logo: "https://enzoscleaning.com/wp-content/uploads/2020/11/download-1.png",
+    logo: "/uploads/2020/11/download-1.png",
     link: "/cleaning-equipment/floor-cleaning/karcher-floor-cleaners/",
   },
   {
     title: "Minuteman Floor Cleaners",
-    logo: "https://enzoscleaning.com/wp-content/uploads/2020/11/minuteman-logoLarge.png",
+    logo: "/uploads/2020/11/minuteman-logoLarge.png",
     link: "/cleaning-equipment/floor-cleaning/minuteman-floor-cleaners/",
   },
 ];
