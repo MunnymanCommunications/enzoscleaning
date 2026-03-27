@@ -14,7 +14,7 @@ const slides = [
     ctaLink: "/contact-us/",
   },
   {
-    image: "/uploads/2020/10/neutralizer.jpg",
+    image: "/uploads/2020/10/neutralizer-drive-over.jpg",
     headline: "Stop Salt Corrosion Before It Costs You Millions",
     subtitle: "The Neutralizer eliminates road salt residue that destroys undercarriages — saving fleets $8,000–$15,000 per vehicle in rust damage.",
     ctaText: "See The Neutralizer",
@@ -49,7 +49,7 @@ const slides = [
     ctaLink: "/industries-we-serve/",
   },
   {
-    image: "/uploads/2020/11/Enzo-Still-8.jpg",
+    image: "/uploads/2020/11/SchoolBus-v2.jpg",
     headline: "Keep Your School Bus Fleet Clean & Corrosion-Free",
     subtitle: "Protect your district's investment. Our salt neutralization systems keep buses safe, clean, and road-ready year after year.",
     ctaText: "Solutions For Schools",
@@ -98,7 +98,7 @@ const slides = [
     ctaLink: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/",
   },
   {
-    image: "/uploads/2021/04/Diesel-Hot-Water-Pressure-Washer.jpg",
+    image: "/uploads/2021/04/871ss-Diesel-Pressure-Washer.png",
     headline: "Diesel Hot Water Power — Built For The Toughest Jobs",
     subtitle: "Portable, powerful, and built to last. Diesel hot water units go where you need them and clean what others can't.",
     ctaText: "Shop Diesel Units",
@@ -112,7 +112,7 @@ const slides = [
     ctaLink: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/natural-gas-hot-water/",
   },
   {
-    image: "/uploads/2021/04/Electric-Cold-Water-Power-Washer.jpg",
+    image: "/uploads/2021/04/1700-electric-cold-water.jpg",
     headline: "Electric Cold Water Systems For Indoor Facilities",
     subtitle: "No fumes, no exhaust. Clean quietly and efficiently inside warehouses, food plants, and manufacturing floors.",
     ctaText: "Electric Cold Water",
@@ -161,11 +161,32 @@ const slides = [
     ctaLink: "/detergents/",
   },
   {
-    image: "/uploads/2020/09/vog.jpg",
+    image: "/uploads/2020/09/vital-oxide-products.jpg",
     headline: "EPA-Compliant Cleaning Solutions For Every Industry",
     subtitle: "Biodegradable, effective, and safe for your team. Cleaning chemistry that works as hard as you do.",
     ctaText: "View Solutions",
     ctaLink: "/detergents/",
+  },
+  {
+    image: "/uploads/2020/11/vapore-dry-vapor.jpg",
+    headline: "Dry Vapor Cleaning — Certified To Destroy Pathogens",
+    subtitle: "Temperatures up to 347°F with no dry time. Ecological dry vapor systems eliminate bacteria, viruses, and mold on contact.",
+    ctaText: "Explore Vapore Systems",
+    ctaLink: "/cleaning-equipment/vapore-dry-vapor/",
+  },
+  {
+    image: "/uploads/2020/11/custom-trailers.jpg",
+    headline: "Custom Pressure Washer Trailers — Take The Power Anywhere",
+    subtitle: "Mobile hot water cleaning rigs built to your specs. Perfect for fleet washing, construction sites, and remote locations.",
+    ctaText: "View Trailer Options",
+    ctaLink: "/cleaning-equipment/pressure-washer-accessories/single-dual-axle-trailer/",
+  },
+  {
+    image: "/uploads/2020/11/wash-bay-facility.jpg",
+    headline: "Wash Bay Installation & Upgrades For Any Fleet",
+    subtitle: "From design to installation, we build wash bays that handle school buses, fire trucks, and heavy equipment — built to last decades.",
+    ctaText: "Wash Bay Design",
+    ctaLink: "/cleaning-equipment/wash-bay-design/",
   },
   {
     image: "/uploads/2020/10/Untitled-1.jpg",
