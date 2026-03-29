@@ -51,7 +51,13 @@ const navItems = [
       { label: "Degreasers", path: "/detergents/degreasers/" },
       { label: "Specialty", path: "/detergents/specialty-cleaning-products/" },
       { label: "Restoration", path: "/detergents/restoration-detergents/" },
-      { label: "Trident", path: "/detergents/trident/" },
+    ],
+  },
+  {
+    label: "Hardscaping",
+    path: "/hardscaping/trident/",
+    children: [
+      { label: "Trident Products", path: "/hardscaping/trident/" },
     ],
   },
   { label: "Industries We Serve", path: "/industries-we-serve/" },
