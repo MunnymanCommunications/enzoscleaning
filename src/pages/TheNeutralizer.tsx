@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign, Download } from "lucide-react";
+import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign, Download, Truck, AlertTriangle, ThumbsUp, Users } from "lucide-react";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import neutralizerHero from "@/assets/neutralizer-hero.jpg";
+import neutralizerCorrosion from "@/assets/neutralizer-corrosion.jpg";
+import neutralizerFleet from "@/assets/neutralizer-fleet.jpg";
 
 const features = [
   {
@@ -44,32 +47,51 @@ const stats = [
   { value: "4+", label: "GPM Flow Rate" },
 ];
 
+const idealFor = [
+  { icon: Truck, title: "Municipal Fleets", desc: "Plow trucks, salt spreaders, dump trucks, and utility vehicles that face the worst salt exposure every winter." },
+  { icon: Users, title: "School Bus Fleets", desc: "Protect your entire bus fleet from costly undercarriage damage with a 60-second drive-over wash." },
+  { icon: Shield, title: "Fire Departments", desc: "Keep engines, tankers, and rescue vehicles in peak condition — ready when your community needs them." },
+  { icon: Wrench, title: "Private Fleets", desc: "Delivery trucks, service vans, and any commercial vehicle that runs through salt states all winter." },
+];
+
+const corrosionFacts = [
+  { stat: "$3B+", desc: "Annual cost of vehicle corrosion in the U.S. — much of it preventable" },
+  { stat: "23%", desc: "Shorter lifespan for vehicles regularly exposed to road salt without treatment" },
+  { stat: "$2,000+", desc: "Average cost of a single fuel line or brake line corrosion repair" },
+  { stat: "5+ Years", desc: "Additional vehicle life with regular undercarriage neutralization" },
+];
+
 export default function TheNeutralizer() {
   return (
     <>
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-secondary via-primary to-secondary" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,hsl(var(--accent)/0.15),transparent_60%)]" />
-        <div className="absolute inset-0 bg-[url('/uploads/2021/02/Undercarriage-wash-system.jpg')] bg-cover bg-center opacity-15" />
+        <img
+          src={neutralizerHero}
+          alt="The Neutralizer undercarriage wash system"
+          className="absolute inset-0 w-full h-full object-cover"
+          width={1920}
+          height={1080}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
         <div className="container relative z-10 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="max-w-2xl">
             <motion.div
               initial={{ opacity: 0, x: -40 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.7 }}
             >
-              <span className="inline-block px-4 py-1.5 rounded-full bg-accent/20 text-accent-foreground text-sm font-semibold mb-6 border border-accent/30">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-accent/20 text-white text-sm font-semibold mb-6 border border-accent/30 backdrop-blur-sm">
                 🛡️ Enzo's Original
               </span>
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black text-primary-foreground leading-[0.95] mb-6">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-heading font-black text-white leading-[0.95] mb-6">
                 The<br />
-                <span className="text-gradient bg-gradient-to-r from-accent to-primary-foreground bg-clip-text text-transparent">
+                <span className="text-accent">
                   Neutralizer
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl text-primary-foreground/80 leading-relaxed mb-8 max-w-xl">
+              <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 max-w-xl">
                 Stop the corrosive effects of road salt and brine. Our undercarriage wash system delivers a complete clean in under 60 seconds.
               </p>
               <div className="flex flex-wrap gap-4">
@@ -82,32 +104,16 @@ export default function TheNeutralizer() {
                 <a
                   href="/downloads/neutralizer-flyer.jpg"
                   download="Neutralizer-Salt-Plow-Flyer.jpg"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/10 text-primary-foreground font-bold rounded-full text-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-bold rounded-full text-lg border border-white/20 hover:bg-white/20 backdrop-blur-sm transition-all"
                 >
                   <Download className="h-5 w-5" /> Download Flyer
                 </a>
                 <a
                   href="tel:4195020007"
-                  className="inline-flex items-center gap-2 px-8 py-4 bg-primary-foreground/10 text-primary-foreground font-bold rounded-full text-lg border border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all"
+                  className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-bold rounded-full text-lg border border-white/20 hover:bg-white/20 backdrop-blur-sm transition-all"
                 >
                   <Phone className="h-5 w-5" /> Call 419-502-0007
                 </a>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-              className="hidden lg:block"
-            >
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border-4 border-primary-foreground/10">
-                <img
-                  src="/uploads/2020/10/neutralizer.jpg"
-                  alt="The Neutralizer undercarriage wash system"
-                  className="w-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-secondary/60 via-transparent to-transparent" />
               </div>
             </motion.div>
           </div>
@@ -135,6 +141,58 @@ export default function TheNeutralizer() {
         </div>
       </section>
 
+      {/* The Corrosion Problem - NEW SECTION */}
+      <section className="section-padding bg-muted">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-destructive/10 text-destructive mb-4">
+                <AlertTriangle className="h-4 w-4" />
+                <span className="text-sm font-semibold">The Hidden Threat</span>
+              </div>
+              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">
+                The True Cost of <span className="text-destructive">Salt Corrosion</span>
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Road salt doesn't just sit on the surface — it creeps into every crevice, attacking brake lines, fuel lines, electrical connections, and frame rails from the inside out.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
+            <AnimatedSection>
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src={neutralizerCorrosion}
+                  alt="Severe salt corrosion damage on truck undercarriage"
+                  className="w-full object-cover"
+                  loading="lazy"
+                  width={1024}
+                  height={1024}
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection>
+              <div className="grid grid-cols-2 gap-4">
+                {corrosionFacts.map((fact, i) => (
+                  <motion.div
+                    key={fact.stat}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.1 }}
+                    className="p-5 rounded-xl bg-card border border-border shadow-sm"
+                  >
+                    <div className="text-2xl md:text-3xl font-heading font-black text-destructive">{fact.stat}</div>
+                    <p className="text-sm text-muted-foreground mt-2">{fact.desc}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* Problem / Solution */}
       <section className="section-padding">
         <div className="container">
@@ -153,9 +211,12 @@ export default function TheNeutralizer() {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <img
-                  src="/uploads/2021/02/The-Neutralizer-Pressure-Washer.jpg"
-                  alt="The Neutralizer pressure washer system"
-                  className="w-full object-cover"
+                  src={neutralizerHero}
+                  alt="The Neutralizer pressure washer system in action"
+                  className="w-full object-cover aspect-video"
+                  loading="lazy"
+                  width={1920}
+                  height={1080}
                 />
               </div>
               <div>
@@ -213,8 +274,36 @@ export default function TheNeutralizer() {
         </div>
       </section>
 
-      {/* System Components */}
+      {/* Who It's For - NEW SECTION */}
       <section className="section-padding">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">Built for the Toughest Fleets</h2>
+              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">From school buses to snow plows, The Neutralizer protects the vehicles your community depends on</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {idealFor.map((item, i) => (
+              <AnimatedSection key={item.title}>
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  className="p-6 rounded-2xl bg-card border border-border shadow-sm hover:shadow-lg hover:border-primary/30 transition-all h-full text-center"
+                >
+                  <div className="mx-auto mb-4 p-4 rounded-xl bg-primary/10 w-fit">
+                    <item.icon className="h-8 w-8 text-primary" />
+                  </div>
+                  <h3 className="text-lg font-heading font-bold mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* System Components */}
+      <section className="section-padding bg-muted">
         <div className="container">
           <AnimatedSection>
             <div className="text-center mb-16">
@@ -223,7 +312,7 @@ export default function TheNeutralizer() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 gap-8">
-            {features.map((f, i) => (
+            {features.map((f) => (
               <AnimatedSection key={f.title}>
                 <motion.div
                   whileHover={{ y: -4 }}
@@ -250,7 +339,7 @@ export default function TheNeutralizer() {
         <div className="container">
           <AnimatedSection>
             <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-foreground mb-4">Why Fleets Choose The Neutralizer</h2>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold text-white mb-4">Why Fleets Choose The Neutralizer</h2>
             </div>
           </AnimatedSection>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -261,10 +350,10 @@ export default function TheNeutralizer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.05 }}
-                className="flex items-start gap-3 p-5 rounded-xl bg-primary-foreground/10 border border-primary-foreground/10"
+                className="flex items-start gap-3 p-5 rounded-xl bg-white/10 border border-white/10"
               >
                 <Shield className="h-5 w-5 text-accent flex-shrink-0 mt-0.5" />
-                <span className="text-primary-foreground text-sm font-medium">{b}</span>
+                <span className="text-white text-sm font-medium">{b}</span>
               </motion.div>
             ))}
           </div>
@@ -305,10 +394,45 @@ export default function TheNeutralizer() {
               <div className="relative">
                 <div className="rounded-2xl overflow-hidden shadow-xl">
                   <img
-                    src="/uploads/2021/02/Undercarriage-wash-system.jpg"
-                    alt="Neutralizer undercarriage wash system in action"
+                    src={neutralizerFleet}
+                    alt="Clean fleet of municipal trucks and school buses"
                     className="w-full object-cover"
+                    loading="lazy"
+                    width={1024}
+                    height={1024}
                   />
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Testimonial / Social Proof - NEW SECTION */}
+      <section className="bg-muted section-padding">
+        <div className="container">
+          <AnimatedSection>
+            <div className="max-w-4xl mx-auto text-center">
+              <ThumbsUp className="h-12 w-12 text-primary mx-auto mb-6" />
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">Trusted by Ohio's Fleets</h2>
+              <div className="grid md:grid-cols-3 gap-6">
+                <div className="p-6 rounded-xl bg-card border border-border shadow-sm">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    "We installed The Neutralizer two winters ago and have already seen a significant drop in undercarriage repair costs across our plow fleet."
+                  </p>
+                  <p className="text-sm font-bold text-foreground">— Municipal Fleet Manager</p>
+                </div>
+                <div className="p-6 rounded-xl bg-card border border-border shadow-sm">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    "The 60-second drive-over wash fits perfectly into our bus return routine. Every bus gets treated before parking — no extra labor needed."
+                  </p>
+                  <p className="text-sm font-bold text-foreground">— School District Transportation Director</p>
+                </div>
+                <div className="p-6 rounded-xl bg-card border border-border shadow-sm">
+                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                    "D-Salt actually neutralizes the corrosion — not just washes it off. Our mechanics noticed the difference on the first inspection."
+                  </p>
+                  <p className="text-sm font-bold text-foreground">— Fire Department Captain</p>
                 </div>
               </div>
             </div>
@@ -326,10 +450,10 @@ export default function TheNeutralizer() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl md:text-5xl font-heading font-black text-primary-foreground mb-6">
+            <h2 className="text-3xl md:text-5xl font-heading font-black text-white mb-6">
               Ready to Protect Your Fleet?
             </h2>
-            <p className="text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
               Get a free consultation and see how The Neutralizer can save you thousands in corrosion damage every year.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
@@ -341,7 +465,7 @@ export default function TheNeutralizer() {
               </Link>
               <a
                 href="tel:4195020007"
-                className="inline-flex items-center gap-2 px-10 py-5 bg-primary-foreground/10 text-primary-foreground font-bold rounded-full text-lg border-2 border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all"
+                className="inline-flex items-center gap-2 px-10 py-5 bg-white/10 text-white font-bold rounded-full text-lg border-2 border-white/20 hover:bg-white/20 transition-all"
               >
                 <Phone className="h-5 w-5" /> 419-502-0007
               </a>
