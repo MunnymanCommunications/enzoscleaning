@@ -84,7 +84,7 @@ export default function Header() {
   }, []);
 
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${scrolled ? "shadow-lg" : "shadow-sm"}`}>
+    <header className={`sticky top-0 z-50 transition-all duration-500 ${scrolled ? "shadow-lg" : "shadow-sm"}`}>
       {/* Top utility bar */}
       <div className="bg-secondary">
         <div className="container flex items-center justify-between py-1.5 text-secondary-foreground">
@@ -103,8 +103,8 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Main header: logo + CTA on mobile, full nav bar on desktop */}
-      <div className="bg-card border-b border-border">
+      {/* Main header — glass effect when scrolled */}
+      <div className={`border-b border-border transition-all duration-500 ${scrolled ? "glass-strong" : "bg-card"}`}>
         <div className="container flex items-center justify-between py-2 gap-4">
           <Link to="/" className="flex-shrink-0">
             <img
@@ -118,7 +118,7 @@ export default function Header() {
           <div className="hidden lg:flex items-center gap-3">
             <Link
               to="/contact-us/"
-              className="rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground hover:bg-primary/90 transition-colors flex items-center gap-2 active:scale-[0.97]"
+              className="rounded-full bg-gradient-to-r from-primary to-accent px-5 py-2 text-sm font-bold text-primary-foreground hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 active:scale-[0.97]"
             >
               Contact Us <Mail className="h-4 w-4" />
             </Link>
@@ -136,7 +136,7 @@ export default function Header() {
       </div>
 
       {/* Desktop navigation bar */}
-      <nav className="hidden lg:block bg-primary">
+      <nav className="hidden lg:block bg-gradient-to-r from-primary via-primary to-secondary">
         <div className="container">
           <ul className="flex items-stretch">
             {navItems.map((item) => (
@@ -148,7 +148,7 @@ export default function Header() {
               >
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-1 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors ${
+                  className={`flex items-center gap-1 px-4 py-3 text-sm font-medium whitespace-nowrap transition-all duration-300 ${
                     location.pathname.startsWith(item.path)
                       ? "bg-primary-foreground/15 text-primary-foreground"
                       : "text-primary-foreground/85 hover:bg-primary-foreground/10 hover:text-primary-foreground"
@@ -156,18 +156,18 @@ export default function Header() {
                 >
                   {item.label}
                   {item.children && (
-                    <ChevronDown className={`h-3 w-3 transition-transform duration-200 ${openDropdown === item.label ? "rotate-180" : ""}`} />
+                    <ChevronDown className={`h-3 w-3 transition-transform duration-300 ${openDropdown === item.label ? "rotate-180" : ""}`} />
                   )}
                 </Link>
 
                 <AnimatePresence>
                   {item.children && openDropdown === item.label && (
                     <motion.div
-                      initial={{ opacity: 0, y: 4 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 4 }}
-                      transition={{ duration: 0.15, ease: [0.16, 1, 0.3, 1] }}
-                      className="absolute left-0 top-full z-50 min-w-[240px] rounded-b-lg border border-t-0 border-border bg-card py-1 shadow-xl"
+                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                      transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                      className="absolute left-0 top-full z-50 min-w-[240px] rounded-b-xl glass-strong py-1 shadow-2xl"
                       onMouseEnter={() => setOpenDropdown(item.label)}
                       onMouseLeave={() => setOpenDropdown(null)}
                     >
@@ -175,7 +175,7 @@ export default function Header() {
                         <Link
                           key={child.path}
                           to={child.path}
-                          className="block px-4 py-2.5 text-sm text-card-foreground hover:bg-muted hover:text-primary transition-colors"
+                          className="block px-4 py-2.5 text-sm text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
                         >
                           {child.label}
                         </Link>
@@ -196,8 +196,8 @@ export default function Header() {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="lg:hidden border-t border-border bg-card overflow-hidden"
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="lg:hidden border-t border-border glass-strong overflow-hidden"
           >
             <div className="pb-4 max-h-[70vh] overflow-y-auto">
               {navItems.map((item) => (
@@ -205,7 +205,7 @@ export default function Header() {
                   <div className="flex items-center">
                     <Link
                       to={item.path}
-                      className="flex-1 block px-6 py-3 text-sm font-semibold text-foreground hover:bg-muted hover:text-primary transition-colors"
+                      className="flex-1 block px-6 py-3 text-sm font-semibold text-foreground hover:bg-primary/10 hover:text-primary transition-colors"
                       onClick={() => !item.children && setMobileOpen(false)}
                     >
                       {item.label}
@@ -215,7 +215,7 @@ export default function Header() {
                         onClick={() => setMobileExpandedItem(mobileExpandedItem === item.label ? null : item.label)}
                         className="px-4 py-3 text-muted-foreground hover:text-primary"
                       >
-                        <ChevronDown className={`h-4 w-4 transition-transform ${mobileExpandedItem === item.label ? "rotate-180" : ""}`} />
+                        <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${mobileExpandedItem === item.label ? "rotate-180" : ""}`} />
                       </button>
                     )}
                   </div>
@@ -225,7 +225,7 @@ export default function Header() {
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.2 }}
+                        transition={{ duration: 0.25, ease: [0.22, 1, 0.36, 1] }}
                         className="overflow-hidden"
                       >
                         <div className="pl-8 border-l-2 border-primary/20 ml-6">
@@ -247,7 +247,7 @@ export default function Header() {
               ))}
               <Link
                 to="/contact-us/"
-                className="mx-6 mt-4 block rounded-full bg-primary px-5 py-3 text-center text-sm font-bold text-primary-foreground"
+                className="mx-6 mt-4 block rounded-full bg-gradient-to-r from-primary to-accent px-5 py-3 text-center text-sm font-bold text-primary-foreground"
                 onClick={() => setMobileOpen(false)}
               >
                 Contact Us

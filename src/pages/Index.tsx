@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import { CheckCircle, Wrench, Settings, ArrowRight } from "lucide-react";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { CheckCircle, Wrench, Settings, ArrowRight, Sparkles } from "lucide-react";
+import { useRef } from "react";
 import CTASection from "@/components/shared/CTASection";
 import HeroCarousel from "@/components/home/HeroCarousel";
 import AnimatedSection from "@/components/shared/AnimatedSection";
@@ -25,30 +26,50 @@ const cleanPlanSteps = [
   { num: 3, title: "Safe", description: "Scheduled Maintenance Plan customized to your situation with operator and safety training to ensure proper system usage." },
 ];
 
+function ParallaxOrb({ className, speed = 0.3 }: { className: string; speed?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, speed * -200]);
+
+  return (
+    <motion.div ref={ref} style={{ y }} className={className} />
+  );
+}
+
 export default function Index() {
   return (
     <>
       {/* Hero */}
       <HeroCarousel />
 
-      {/* Intro */}
-      <section className="section-padding">
-        <div className="container text-center">
-          <AnimatedSection>
-            <h2 className="text-3xl font-bold md:text-4xl lg:text-5xl">We Consistently <span className="text-gradient">KNOW Clean</span></h2>
+      {/* Intro with mesh gradient background */}
+      <section className="relative section-padding overflow-hidden">
+        {/* Mesh gradient background */}
+        <div className="absolute inset-0 mesh-gradient" />
+        <ParallaxOrb className="absolute -top-32 -right-32 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" speed={0.2} />
+        <ParallaxOrb className="absolute -bottom-20 -left-20 h-[300px] w-[300px] rounded-full bg-accent/8 blur-3xl" speed={0.4} />
+
+        <div className="relative container text-center">
+          <AnimatedSection variant="blurIn">
+            <div className="inline-flex items-center gap-2 glass rounded-full px-5 py-2 mb-6">
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-muted-foreground">Ohio & Michigan's Trusted Cleaning Partner</span>
+            </div>
+            <h2 className="text-3xl font-bold md:text-4xl lg:text-5xl">We Consistently <span className="text-gradient-shine">KNOW Clean</span></h2>
             <p className="mx-auto mt-6 max-w-3xl text-muted-foreground text-lg leading-relaxed">
-              <strong>Enzo's Cleaning Solutions</strong> specializes in sales, service, and installation of wash bay equipment, pressure washers, undercarriage washers, detergents and cleaning equipment. Let our team help you find the cleaning equipment, supplies and service you need to <strong className="text-foreground">clean more efficiently, effectively and safely</strong> every day.
+              <strong className="text-foreground">Enzo's Cleaning Solutions</strong> specializes in sales, service, and installation of wash bay equipment, pressure washers, undercarriage washers, detergents and cleaning equipment. Let our team help you find the cleaning equipment, supplies and service you need to <strong className="text-foreground">clean more efficiently, effectively and safely</strong> every day.
             </p>
           </AnimatedSection>
+
           <div className="mt-14 grid gap-8 md:grid-cols-3">
             {[
               { icon: CheckCircle, label: "Cleaning Equipment", desc: "Full range of pressure washers & systems", link: "/cleaning-equipment/" },
               { icon: Wrench, label: "Repair & Maintenance", desc: "Keep your equipment running strong", link: "/services/pressure-washer-service-repair/" },
               { icon: Settings, label: "Detergents & Disinfectants", desc: "Purpose-made cleaning solutions", link: "/disinfecting/" },
             ].map((item, i) => (
-              <AnimatedSection key={item.label} delay={i * 0.1}>
-                <Link to={item.link} className="group flex flex-col items-center gap-4 rounded-2xl border border-border bg-card p-8 hover:border-primary/30 hover:shadow-xl transition-all duration-300">
-                  <div className="rounded-2xl bg-primary/10 p-4 group-hover:bg-primary/20 transition-colors">
+              <AnimatedSection key={item.label} delay={i * 0.12} variant="scaleIn">
+                <Link to={item.link} className="group flex flex-col items-center gap-4 rounded-2xl glass p-8 hover:shadow-xl hover:scale-[1.03] transition-all duration-500">
+                  <div className="rounded-2xl bg-gradient-to-br from-primary/15 to-accent/10 p-4 group-hover:from-primary/25 group-hover:to-accent/20 transition-all duration-500 group-hover:scale-110">
                     <item.icon className="h-8 w-8 text-primary" />
                   </div>
                   <h3 className="font-heading text-lg font-bold">{item.label}</h3>
@@ -60,10 +81,13 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Services */}
-      <section className="bg-muted section-padding">
-        <div className="container">
-          <AnimatedSection>
+      {/* Services with glass cards */}
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-muted via-background to-muted" />
+        <ParallaxOrb className="absolute top-20 right-10 h-[250px] w-[250px] rounded-full bg-primary/6 blur-3xl" speed={0.3} />
+
+        <div className="relative container">
+          <AnimatedSection variant="blurIn">
             <h2 className="text-center text-3xl font-bold md:text-4xl">Your Services</h2>
             <p className="text-center text-muted-foreground mt-3 max-w-2xl mx-auto">From consultations to repairs to preventive maintenance, we keep your cleaning systems running.</p>
           </AnimatedSection>
@@ -72,18 +96,21 @@ export default function Index() {
               <ProductCard key={card.title} {...card} index={i} />
             ))}
           </div>
-          <div className="mt-10 text-center">
-            <Link to="/services/" className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
-              All Services <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <AnimatedSection delay={0.3}>
+            <div className="mt-10 text-center">
+              <Link to="/services/" className="group inline-flex items-center gap-2 glass rounded-full px-6 py-3 text-primary font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300">
+                All Services <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Products */}
-      <section className="section-padding">
-        <div className="container">
-          <AnimatedSection>
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 mesh-gradient" />
+        <div className="relative container">
+          <AnimatedSection variant="blurIn">
             <h2 className="text-center text-3xl font-bold md:text-4xl">Our Products</h2>
           </AnimatedSection>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -94,47 +121,57 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Video */}
-      <section className="bg-muted section-padding">
-        <div className="container max-w-5xl">
-          <AnimatedSection>
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-video">
-                <iframe src="https://www.youtube.com/embed/ejZBvIK-Bm8" title="Enzo's Cleaning Solutions | Wash Bay Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="h-full w-full" loading="lazy" />
+      {/* Video with glass frame */}
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted to-background" />
+        <div className="relative container max-w-5xl">
+          <AnimatedSection variant="scaleIn">
+            <div className="rounded-3xl glass p-2 shadow-2xl">
+              <div className="rounded-2xl overflow-hidden">
+                <div className="aspect-video">
+                  <iframe src="https://www.youtube.com/embed/ejZBvIK-Bm8" title="Enzo's Cleaning Solutions | Wash Bay Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="h-full w-full" loading="lazy" />
+                </div>
               </div>
             </div>
           </AnimatedSection>
-          <AnimatedSection delay={0.2}>
+          <AnimatedSection delay={0.2} variant="fadeUp">
             <div className="mt-10 text-center">
               <h3 className="text-2xl font-bold">Custom Wash Bay Solutions</h3>
               <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
                 Enzo's has helped design and install wash bay solutions for clients from Maine to Alabama – and everywhere in between. Our uniquely designed under carriage cleaning system, The Neutralizer, helps make maintaining your fleet easy.
               </p>
-              <Link to="/cleaning-equipment/wash-bay-design/" className="mt-6 inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
-                Explore Wash Bay Design <ArrowRight className="h-4 w-4" />
+              <Link to="/cleaning-equipment/wash-bay-design/" className="group mt-6 inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
+                Explore Wash Bay Design <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Third Video */}
-      <section className="section-padding">
-        <div className="container max-w-5xl">
-          <AnimatedSection>
-            <div className="rounded-2xl overflow-hidden shadow-2xl">
-              <div className="aspect-video">
-                <iframe src="https://www.youtube.com/embed/UfXQLlBvvng" title="Enzo's Cleaning Solutions" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="h-full w-full" loading="lazy" />
+      {/* Second Video */}
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 mesh-gradient" />
+        <div className="relative container max-w-5xl">
+          <AnimatedSection variant="scaleIn">
+            <div className="rounded-3xl glass p-2 shadow-2xl">
+              <div className="rounded-2xl overflow-hidden">
+                <div className="aspect-video">
+                  <iframe src="https://www.youtube.com/embed/UfXQLlBvvng" title="Enzo's Cleaning Solutions" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="h-full w-full" loading="lazy" />
+                </div>
               </div>
             </div>
           </AnimatedSection>
         </div>
       </section>
 
-      {/* CLEAN Plan */}
-      <section className="bg-muted section-padding">
-        <div className="container">
-          <AnimatedSection>
+      {/* CLEAN Plan with glass numbered cards */}
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-muted via-background to-muted" />
+        <ParallaxOrb className="absolute bottom-0 right-0 h-[350px] w-[350px] rounded-full bg-accent/8 blur-3xl" speed={0.25} />
+        <ParallaxOrb className="absolute top-10 left-10 h-[200px] w-[200px] rounded-full bg-primary/6 blur-3xl" speed={0.35} />
+
+        <div className="relative container">
+          <AnimatedSection variant="blurIn">
             <h2 className="text-center text-3xl font-bold md:text-4xl">Our CLEAN Accountability Plan</h2>
             <p className="mx-auto mt-4 max-w-3xl text-center text-muted-foreground">
               Our CLEAN Accountability Plan keeps your system working more efficiently, effectively and safely each time you pull the trigger.
@@ -142,9 +179,9 @@ export default function Index() {
           </AnimatedSection>
           <div className="mt-12 grid gap-8 md:grid-cols-3">
             {cleanPlanSteps.map((step, i) => (
-              <AnimatedSection key={step.num} delay={i * 0.1}>
-                <div className="rounded-2xl border border-border bg-card p-8 text-center shadow-sm hover:shadow-lg transition-all duration-300 h-full">
-                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-2xl font-bold text-primary-foreground">
+              <AnimatedSection key={step.num} delay={i * 0.12} variant="scaleIn">
+                <div className="group rounded-2xl glass p-8 text-center hover:shadow-xl hover:scale-[1.03] transition-all duration-500 h-full">
+                  <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent text-2xl font-bold text-primary-foreground shadow-lg group-hover:shadow-xl group-hover:scale-110 transition-all duration-500">
                     {step.num}
                   </div>
                   <h3 className="mt-5 font-heading text-xl font-bold">{step.title}</h3>
@@ -153,11 +190,13 @@ export default function Index() {
               </AnimatedSection>
             ))}
           </div>
-          <div className="mt-10 text-center">
-            <Link to="/services/scheduled-maintenance/" className="inline-flex items-center gap-2 rounded-full bg-primary px-8 py-4 font-bold text-primary-foreground shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
-              Request Your Plan <ArrowRight className="h-4 w-4" />
-            </Link>
-          </div>
+          <AnimatedSection delay={0.4}>
+            <div className="mt-10 text-center">
+              <Link to="/services/scheduled-maintenance/" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 font-bold text-primary-foreground shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 glow-primary">
+                Request Your Plan <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
