@@ -239,13 +239,15 @@ export default function HeroCarousel() {
         <div className="flex h-full">
           {slides.map((slide, i) => (
             <div key={i} className="relative flex-[0_0_100%] min-w-0 min-h-[600px] md:min-h-[700px]">
-              {/* Background image */}
+              {/* Background image with parallax feel */}
               <div
-                className="absolute inset-0 bg-cover bg-center"
+                className="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-[2000ms]"
                 style={{ backgroundImage: `url(${slide.image})` }}
               />
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/85 via-secondary/70 to-primary/75" />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-secondary/70 to-primary/60" />
+              {/* Glass noise texture */}
+              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,_hsl(var(--accent)/0.08)_0%,_transparent_60%)]" />
 
               {/* Content */}
               <div className="relative z-10 flex items-center justify-center h-full min-h-[600px] md:min-h-[700px]">
@@ -254,31 +256,41 @@ export default function HeroCarousel() {
                     {selectedIndex === i && (
                       <motion.div
                         key={`slide-text-${i}`}
-                        initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                        initial={{ opacity: 0, y: 30, filter: "blur(8px)" }}
                         animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                        exit={{ opacity: 0, y: -12, filter: "blur(4px)" }}
-                        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+                        exit={{ opacity: 0, y: -20, filter: "blur(8px)" }}
+                        transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
                       >
                         <h1 className="text-3xl font-black text-primary-foreground md:text-5xl lg:text-6xl leading-tight tracking-tight max-w-4xl mx-auto" style={{ lineHeight: 1.1 }}>
                           {slide.headline}
                         </h1>
-                        <p className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-primary-foreground/80 leading-relaxed">
+                        <motion.p
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.2, duration: 0.5 }}
+                          className="mx-auto mt-5 max-w-2xl text-base md:text-lg text-primary-foreground/80 leading-relaxed"
+                        >
                           {slide.subtitle}
-                        </p>
-                        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+                        </motion.p>
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.35, duration: 0.5 }}
+                          className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4"
+                        >
                           <Link
                             to={slide.ctaLink}
-                            className="rounded-full bg-card px-8 py-4 text-base font-bold text-primary shadow-xl hover:shadow-2xl active:scale-[0.97] transition-all duration-300 flex items-center gap-2"
+                            className="group/btn rounded-full glass-strong px-8 py-4 text-base font-bold text-primary shadow-xl hover:shadow-2xl active:scale-[0.97] transition-all duration-300 flex items-center gap-2"
                           >
-                            {slide.ctaText} <ArrowRight className="h-4 w-4" />
+                            {slide.ctaText} <ArrowRight className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
                           </Link>
                           <Link
                             to="/contact-us/"
-                            className="rounded-full border-2 border-primary-foreground/30 px-8 py-4 text-base font-bold text-primary-foreground hover:bg-primary-foreground/10 active:scale-[0.97] transition-all duration-200"
+                            className="rounded-full border-2 border-primary-foreground/30 backdrop-blur-md px-8 py-4 text-base font-bold text-primary-foreground hover:bg-primary-foreground/10 active:scale-[0.97] transition-all duration-200"
                           >
                             Contact Us
                           </Link>
-                        </div>
+                        </motion.div>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -289,32 +301,32 @@ export default function HeroCarousel() {
         </div>
       </div>
 
-      {/* Prev / Next arrows — visible on hover */}
+      {/* Glass prev / next arrows */}
       <button
         onClick={scrollPrev}
-        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-card/20 backdrop-blur-sm p-3 text-primary-foreground opacity-0 group-hover:opacity-100 hover:bg-card/40 active:scale-95 transition-all duration-300"
+        className="absolute left-4 top-1/2 -translate-y-1/2 z-20 rounded-full glass-dark p-3 text-primary-foreground opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all duration-300"
         aria-label="Previous slide"
       >
         <ChevronLeft className="h-5 w-5" />
       </button>
       <button
         onClick={scrollNext}
-        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 rounded-full bg-card/20 backdrop-blur-sm p-3 text-primary-foreground opacity-0 group-hover:opacity-100 hover:bg-card/40 active:scale-95 transition-all duration-300"
+        className="absolute right-4 top-1/2 -translate-y-1/2 z-20 rounded-full glass-dark p-3 text-primary-foreground opacity-0 group-hover:opacity-100 hover:scale-110 active:scale-95 transition-all duration-300"
         aria-label="Next slide"
       >
         <ChevronRight className="h-5 w-5" />
       </button>
 
-      {/* Dot indicators */}
-      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
+      {/* Glass dot indicators */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex gap-2 glass-dark rounded-full px-4 py-2.5">
         {slides.map((_, i) => (
           <button
             key={i}
             onClick={() => scrollTo(i)}
-            className={`h-2 rounded-full transition-all duration-300 ${
+            className={`rounded-full transition-all duration-500 ${
               selectedIndex === i
-                ? "w-8 bg-primary-foreground"
-                : "w-2 bg-primary-foreground/40 hover:bg-primary-foreground/60"
+                ? "w-8 h-2.5 bg-primary-foreground shadow-[0_0_8px_hsl(var(--primary-foreground)/0.5)]"
+                : "w-2.5 h-2.5 bg-primary-foreground/40 hover:bg-primary-foreground/60"
             }`}
             aria-label={`Go to slide ${i + 1}`}
           />
