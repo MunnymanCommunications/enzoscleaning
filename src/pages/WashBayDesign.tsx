@@ -24,6 +24,13 @@ const equipment = [
   },
 ];
 
+const washOptions = [
+  { title: "High Touch / Touchless Designs", desc: "Choose the wash configuration that matches your fleet's needs and sensitivity.", image: "/uploads/2022/10/New-Project-2.jpg" },
+  { title: "Reverse Osmosis System", desc: "Spot-free rinse and finish every time with advanced water purification.", image: "/uploads/2022/08/New-Project-1.png" },
+  { title: "Wireless Remotes", desc: "Operate your wash system from any location with convenient wireless controls.", image: "/uploads/2022/08/New-Project.png" },
+  { title: "Undercarriage Wash Unit", desc: "Integrated undercarriage cleaning to fight salt and corrosion damage.", image: "/uploads/2022/10/New-Project.jpg" },
+];
+
 export default function WashBayDesign() {
   return (
     <>
@@ -42,7 +49,31 @@ export default function WashBayDesign() {
         </div>
       </section>
 
-      {/* Video */}
+      {/* Wash Bay Demo Video */}
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted to-background" />
+        <div className="relative container max-w-5xl">
+          <AnimatedSection variant="scaleIn">
+            <div className="rounded-3xl glass p-2 shadow-2xl">
+              <div className="rounded-2xl overflow-hidden">
+                <div className="aspect-video">
+                  <iframe src="https://www.youtube.com/embed/ejZBvIK-Bm8" title="Enzo's Cleaning Solutions | Wash Bay Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="h-full w-full" loading="lazy" />
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.2} variant="fadeUp">
+            <div className="mt-10 text-center">
+              <h3 className="text-2xl font-bold">Custom Wash Bay Solutions</h3>
+              <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+                Enzo's has helped design and install wash bay solutions for clients from Maine to Alabama – and everywhere in between. Our uniquely designed under carriage cleaning system, The Neutralizer, helps make maintaining your fleet easy.
+              </p>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Fire Station Video */}
       <section className="py-12 bg-muted/30">
         <div className="container">
           <AnimatedSection>
@@ -60,6 +91,31 @@ export default function WashBayDesign() {
         </div>
       </section>
 
+      {/* Customization Options — duplicated from Touchless Drive Thru */}
+      <section className="section-padding">
+        <div className="container">
+          <AnimatedSection>
+            <h2 className="text-center text-2xl font-bold font-heading mb-2">Fully Customized to Meet Your Fleet's Cleaning Needs</h2>
+            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-10">Every wash bay system is built to your specifications with the features you need.</p>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {washOptions.map((opt, i) => (
+              <AnimatedSection key={opt.title} delay={i * 0.08}>
+                <div className="glass rounded-xl overflow-hidden h-full hover:shadow-xl hover:scale-[1.03] transition-all duration-500">
+                  <div className="aspect-[4/3] overflow-hidden">
+                    <img src={opt.image} alt={opt.title} className="w-full h-full object-cover" loading="lazy" />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-heading font-bold text-sm">{opt.title}</h3>
+                    <p className="text-xs text-muted-foreground mt-1">{opt.desc}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Equipment */}
       <section className="section-padding">
         <div className="container">
@@ -69,9 +125,9 @@ export default function WashBayDesign() {
           <div className="grid md:grid-cols-3 gap-8">
             {equipment.map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.1}>
-                <Link to={item.link} className="group block bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-shadow h-full">
+                <Link to={item.link} className="group block glass rounded-xl overflow-hidden hover:shadow-xl hover:scale-[1.02] transition-all duration-500 h-full">
                   <div className="aspect-[4/3] overflow-hidden">
-                    <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                    <img src={item.image} alt={item.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" />
                   </div>
                   <div className="p-5">
                     <h3 className="font-heading font-bold">{item.title}</h3>
