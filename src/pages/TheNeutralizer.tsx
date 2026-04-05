@@ -49,7 +49,7 @@ const stats = [
 
 const idealFor = [
   { icon: Truck, title: "Municipal Fleets", desc: "Plow trucks, salt spreaders, dump trucks, and utility vehicles that face the worst salt exposure every winter." },
-  { icon: Users, title: "School Bus Fleets", desc: "Protect your entire bus fleet from costly undercarriage damage with a 60-second drive-over wash." },
+  { icon: Users, title: "School Bus Fleets", desc: "Protect your entire bus fleet from costly undercarriage damage with a quick drive-over wash." },
   { icon: Shield, title: "Fire Departments", desc: "Keep engines, tankers, and rescue vehicles in peak condition — ready when your community needs them." },
   { icon: Wrench, title: "Private Fleets", desc: "Delivery trucks, service vans, and any commercial vehicle that runs through salt states all winter." },
 ];
