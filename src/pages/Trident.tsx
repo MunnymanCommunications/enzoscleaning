@@ -3,7 +3,7 @@ import { useState } from "react";
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
-import { Shield, Droplets, Sparkles, Layers, ChevronDown, ChevronUp, Star, CheckCircle2, ArrowRight, Wrench } from "lucide-react";
+import { Shield, Droplets, Sparkles, Layers, ChevronDown, ChevronUp, Star, CheckCircle2, ArrowRight, Wrench, GraduationCap, Truck } from "lucide-react";
 
 /* ──────────────────────── PRODUCT DATA ──────────────────────── */
 

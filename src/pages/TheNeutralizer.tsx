@@ -379,7 +379,7 @@ export default function TheNeutralizer() {
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-start gap-3">
                     <Timer className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Under 60 seconds per vehicle — no downtime impact</span>
+                    <span>Under five minutes per vehicle — minimal downtime impact</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <DollarSign className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
