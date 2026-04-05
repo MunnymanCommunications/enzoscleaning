@@ -104,6 +104,7 @@ const App = () => (
             <Route path="/services/free-consultations/" element={<FreeConsultations />} />
             <Route path="/services/pressure-washer-service-repair/" element={<ServiceRepair />} />
             <Route path="/services/scheduled-maintenance/" element={<ScheduledMaintenance />} />
+            <Route path="/services/preventative-maintenance/" element={<PreventativeMaintenance />} />
             <Route path="/cleaning-equipment/" element={<CleaningEquipment />} />
             <Route path="/cleaning-equipment/pressure-washers/" element={<PressureWashers />} />
             <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/" element={<HotsyPressureWashers />} />
