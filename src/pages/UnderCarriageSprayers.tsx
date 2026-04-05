@@ -17,9 +17,9 @@ export default function UnderCarriageSprayers() {
           <div className="mt-10 grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <AnimatedSection delay={0.1}>
               <div className="bg-card rounded-xl border border-border overflow-hidden">
-                <img src="/uploads/2020/11/80.618_HURpz-520-002.jpg" alt="Mosmatic Hurricane" className="w-full aspect-square object-contain p-4" loading="lazy" />
+                <img src="/uploads/2020/11/80.618_HURpz-520-002.jpg" alt="Push Under Carriage Deluxe 1" className="w-full aspect-square object-contain p-4" loading="lazy" />
                 <div className="p-4 text-center">
-                  <h3 className="font-heading font-bold">Mosmatic Hurricane</h3>
+                  <h3 className="font-heading font-bold">Push Under Carriage Deluxe 1</h3>
                 </div>
               </div>
             </AnimatedSection>
