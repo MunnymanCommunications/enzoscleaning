@@ -1,7 +1,15 @@
 import { Phone, MapPin, Clock } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
 import PageHero from "@/components/shared/PageHero";
 
 export default function ContactUs() {
+  const [searchParams] = useSearchParams();
+  const productContext = searchParams.get("product") || "";
+  const categoryContext = searchParams.get("category") || "";
+  const prefilledType = searchParams.get("type") || "Service";
+
+  const contextLabel = productContext || categoryContext || "";
+
   return (
     <>
       <PageHero title="Get in Touch" />
@@ -46,7 +54,14 @@ export default function ContactUs() {
 
             {/* Contact Form */}
             <div>
-              <h2 className="text-2xl font-bold">Contact Us!</h2>
+              <h2 className="text-2xl font-bold">
+                {productContext ? `Get a Quote: ${productContext}` : "Contact Us!"}
+              </h2>
+              {contextLabel && (
+                <p className="mt-2 text-sm text-muted-foreground">
+                  You're inquiring about: <strong className="text-foreground">{contextLabel}</strong>
+                </p>
+              )}
               <form className="mt-6 space-y-4" onSubmit={(e) => { e.preventDefault(); alert("Form submitted! We will connect this to email later."); }}>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Name</label>
@@ -66,12 +81,20 @@ export default function ContactUs() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Request Type</label>
-                  <select className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                  <select defaultValue={prefilledType} className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                     <option>Service</option>
+                    <option>Get a Quote</option>
                     <option>Unit</option>
                     <option>Chemicals</option>
+                    <option>Training</option>
                   </select>
                 </div>
+                {contextLabel && (
+                  <div>
+                    <label className="block text-sm font-semibold mb-1">Product / Category Interest</label>
+                    <input type="text" readOnly value={contextLabel} className="w-full rounded-md border border-input bg-muted px-3 py-2 text-sm text-muted-foreground" />
+                  </div>
+                )}
                 <div>
                   <label className="block text-sm font-semibold mb-1">Additional Info</label>
                   <textarea rows={4} className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
