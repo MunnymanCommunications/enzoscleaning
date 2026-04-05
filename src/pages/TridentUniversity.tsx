@@ -45,7 +45,8 @@ export default function TridentUniversity() {
               <MapPin className="h-6 w-6 text-accent" />
               <div>
                 <p className="text-sm font-medium text-primary-foreground/70">Location</p>
-                <p className="text-xl font-bold">Nicholas Munn's Shop — Open House & Training Event</p>
+                <p className="text-xl font-bold">Enzo's Shop — Sandusky, Ohio</p>
+                <p className="text-sm text-primary-foreground/70">Open House & Training Event</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
