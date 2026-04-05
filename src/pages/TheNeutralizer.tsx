@@ -33,7 +33,7 @@ const benefits = [
   "Stops corrosive effects of road salt & brine",
   "Extends vehicle lifespan by years",
   "Reduces costly undercarriage repairs",
-  "Complete wash in under 60 seconds per vehicle",
+  "Complete wash in under five minutes per vehicle",
   "Works with your existing pressure washer",
   "4-chemical switching without disconnecting",
   "Designed & built by Enzo's — proven in the field",
