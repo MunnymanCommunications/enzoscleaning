@@ -144,6 +144,7 @@ const App = () => (
             <Route path="/detergents/restoration-detergents/" element={<RestorationDetergents />} />
             <Route path="/detergents/specialty-cleaning-products/" element={<SpecialtyCleaningProducts />} />
             <Route path="/hardscaping/trident/" element={<Trident />} />
+            <Route path="/hardscaping/trident/university/" element={<TridentUniversity />} />
             <Route path="/disinfecting/" element={<Disinfecting />} />
             <Route path="/disinfecting/our-disinfectants-sanitizers/" element={<DisinfectantsSanitizers />} />
             <Route path="/disinfecting/our-disinfectant-sprayers/" element={<DisinfectantSprayers />} />
