@@ -91,9 +91,9 @@ export default function TheNeutralizer() {
                   Neutralizer
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 max-w-xl">
-                Stop the corrosive effects of road salt and brine. Our undercarriage wash system delivers a complete clean in under 60 seconds.
-              </p>
+                <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 max-w-xl">
+                  Stop the corrosive effects of road salt and brine. Our undercarriage wash system delivers a complete clean in under five minutes per vehicle.
+                </p>
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/contact-us/"
