@@ -375,6 +375,29 @@ export default function Trident() {
         subtitle="Professional-grade sealers, cleaners, strippers, polymeric sand and application tools — trusted by contractors across Ohio."
       />
 
+      {/* Trident University CTA Banner */}
+      <section className="bg-gradient-to-r from-primary to-secondary py-6">
+        <div className="container">
+          <AnimatedSection variant="fadeIn">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-primary-foreground">
+              <div className="flex items-center gap-3">
+                <GraduationCap className="h-8 w-8 text-accent" />
+                <div>
+                  <h3 className="font-heading font-bold text-lg">Trident University — Contractor Certification</h3>
+                  <p className="text-sm text-primary-foreground/80">Training is required for warranty coverage. Next session: May 7, 2025</p>
+                </div>
+              </div>
+              <Link
+                to="/hardscaping/trident/university/"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-full hover:scale-105 transition-all whitespace-nowrap"
+              >
+                Learn More & Register <ArrowRight className="h-4 w-4" />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Intro + trust signals */}
       <section className="section-padding">
         <div className="container">
@@ -438,6 +461,54 @@ export default function Trident() {
         </div>
       </section>
 
+      {/* Rigs & Equipment Section */}
+      <section className="section-padding bg-muted">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">
+                Need a Rig? We Build Those Too.
+              </h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Mobile pressure washing contractors, landscapers and hardscape professionals often need more than just products — they need a complete rig to get the job done. A "rig" can be a trailer-mounted system or a truck-mounted system, and Enzo's can help you build exactly what you need.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {[
+              { icon: Truck, title: "Trailer-Mounted Systems", desc: "Complete trailer rigs with pressure washers, water tanks, hose reels and chemical systems — ready to tow to any job site." },
+              { icon: Wrench, title: "Truck-Mounted Systems", desc: "Skid-mounted units designed for pickup beds and flatbeds. All the power of a trailer rig with a smaller footprint." },
+              { icon: Shield, title: "Rig Service & Parts", desc: "Hose reels, wands, high-pressure hoses, fittings, accessories and replacement parts. Plus full rig service and repairs." },
+            ].map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.1}>
+                <div className="p-6 rounded-2xl bg-card border border-border shadow-sm h-full">
+                  <div className="p-3 rounded-xl bg-primary/10 w-fit mb-4">
+                    <item.icon className="h-7 w-7 text-primary" />
+                  </div>
+                  <h3 className="font-heading font-bold text-lg mb-2">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{item.desc}</p>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
+
+          <AnimatedSection>
+            <div className="rounded-2xl border border-primary/20 bg-primary/5 p-8">
+              <h3 className="font-heading font-bold text-xl mb-3">From Training to the Job Site</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                Completing Trident University doesn't just certify you on products — it opens the door to a full partnership with Enzo's. Once you're trained and working with Trident products, we can help with rig builds, upgrades, service, replacement parts, and ongoing support. Everything you need to run a professional hardscape sealing and cleaning operation.
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {["Rigs", "Trailer Systems", "Truck Mounts", "Hose Reels", "Wands", "High-Pressure Hoses", "Accessories", "Parts & Service"].map((item) => (
+                  <span key={item} className="rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-muted-foreground">{item}</span>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Why contractors choose Trident */}
       <section className="section-padding bg-muted/30">
         <div className="container">
@@ -453,7 +524,7 @@ export default function Trident() {
               { title: "Local Inventory & Support", desc: "No waiting for shipments. Enzo's keeps Trident products in stock so you can pick up what you need and get back to the job site." },
               { title: "Complete System Approach", desc: "From surface prep with Wipe Out to sealing with Hurricane CAT 5 to locking joints with PolySweep — Trident covers the entire workflow." },
               { title: "Color Matching", desc: "Multiple sand colors and sealer finish options ensure every installation looks exactly the way your client expects." },
-              { title: "Technical Training", desc: "Enzo's provides product guidance and application training so your crew gets the best results from every Trident product." },
+              { title: "Certification & Training", desc: "Enzo's hosts Trident University — complete training and certification so your crew is warranty-approved and field-ready." },
             ].map((item, i) => (
               <AnimatedSection key={item.title} delay={i * 0.08} variant="fadeUp">
                 <div className="glass rounded-xl p-6 h-full">
