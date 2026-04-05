@@ -10,11 +10,8 @@ export default function UnderCarriageSprayers() {
       <section className="section-padding">
         <div className="container">
           <AnimatedSection>
-            <div className="flex justify-center mb-8">
-              <img src="/uploads/2020/11/download-2.png" alt="Mosmatic Logo" className="h-14" />
-            </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed max-w-3xl mx-auto">
-              Enzo's and Mosmatic provide effective and efficient cleaning equipment for various operations to allow for an easier clean underneath your vehicles. The undercarriage unit is also a main part for our Neutralizer System.
+              Enzo's Push Under Spray Cleaners provide effective and efficient undercarriage cleaning for fleets and vehicles of all sizes. These units neutralize salt and corrosion damage, extending the life of your equipment. The undercarriage sprayer is also a key component of our complete wash bay systems.
             </p>
           </AnimatedSection>
           <div className="mt-10 grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
