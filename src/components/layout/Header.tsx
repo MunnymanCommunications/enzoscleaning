@@ -12,6 +12,7 @@ const navItems = [
       { label: "Free Consultations", path: "/services/free-consultations/" },
       { label: "Service & Repair", path: "/services/pressure-washer-service-repair/" },
       { label: "Scheduled Maintenance", path: "/services/scheduled-maintenance/" },
+      { label: "Preventative Maintenance", path: "/services/preventative-maintenance/" },
     ],
   },
   {

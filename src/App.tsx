@@ -85,6 +85,8 @@ import FAQ from "./pages/FAQ";
 import Promotions from "./pages/Promotions";
 import Shop from "./pages/Shop";
 import Trident from "./pages/Trident";
+import TridentUniversity from "./pages/TridentUniversity";
+import PreventativeMaintenance from "./pages/PreventativeMaintenance";
 
 const queryClient = new QueryClient();
 
@@ -102,6 +104,7 @@ const App = () => (
             <Route path="/services/free-consultations/" element={<FreeConsultations />} />
             <Route path="/services/pressure-washer-service-repair/" element={<ServiceRepair />} />
             <Route path="/services/scheduled-maintenance/" element={<ScheduledMaintenance />} />
+            <Route path="/services/preventative-maintenance/" element={<PreventativeMaintenance />} />
             <Route path="/cleaning-equipment/" element={<CleaningEquipment />} />
             <Route path="/cleaning-equipment/pressure-washers/" element={<PressureWashers />} />
             <Route path="/cleaning-equipment/pressure-washers/hotsy-pressure-washers/" element={<HotsyPressureWashers />} />
@@ -142,6 +145,7 @@ const App = () => (
             <Route path="/detergents/restoration-detergents/" element={<RestorationDetergents />} />
             <Route path="/detergents/specialty-cleaning-products/" element={<SpecialtyCleaningProducts />} />
             <Route path="/hardscaping/trident/" element={<Trident />} />
+            <Route path="/hardscaping/trident/university/" element={<TridentUniversity />} />
             <Route path="/disinfecting/" element={<Disinfecting />} />
             <Route path="/disinfecting/our-disinfectants-sanitizers/" element={<DisinfectantsSanitizers />} />
             <Route path="/disinfecting/our-disinfectant-sprayers/" element={<DisinfectantSprayers />} />

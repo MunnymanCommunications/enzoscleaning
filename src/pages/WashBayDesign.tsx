@@ -1,27 +1,39 @@
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
+import { Shield, Droplets, Wifi, ArrowRight, CheckCircle2, Wrench } from "lucide-react";
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 
 const equipment = [
   {
-    title: "The Neutralizer – Fleet Preservation",
-    desc: "Made by Enzo's, The Neutralizer undercarriage cleaning system's purpose is to help fight corrosion due to road salt and brine.",
+    title: "Push Under Carriage Deluxe — Fleet Preservation",
+    desc: "Enzo's Push Under Carriage Deluxe systems fight corrosion from road salt and brine, extending your fleet's lifespan by years.",
     image: "/uploads/2020/10/Untitled-1.jpg",
     link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/",
   },
   {
-    title: "Portable Undercarriage Unit",
-    desc: "In addition to The Neutralizer, Enzo's offers several models of under carriage sprayers for your wash bay.",
+    title: "Portable Undercarriage Units",
+    desc: "Flexible, portable undercarriage sprayer units for wash bays of any size.",
     image: "/uploads/2020/10/Untitled-4.jpg",
     link: "/cleaning-equipment/under-carriage-sprayers/",
   },
   {
     title: "Tower Brushes",
-    desc: "Tower brush cleaning systems are an excellent way to quickly and completely clean buses, trailers and other tall vehicles.",
+    desc: "Tower brush cleaning systems quickly and completely clean buses, trailers, and other tall vehicles.",
     image: "/uploads/2020/10/Untitled-2.jpg",
     link: "/cleaning-equipment/wash-bay-design/tower-brushes/",
   },
+];
+
+const washBayFeatures = [
+  { icon: Droplets, title: "Undercarriage Washer", desc: "Drive-over undercarriage cleaning to neutralize salt and prevent corrosion damage." },
+  { icon: Shield, title: "The Neutralizer", desc: "Enzo's original undercarriage wash system — stop corrosion before it starts.", link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" },
+  { icon: Wrench, title: "Tower Brushes", desc: "Tall-vehicle cleaning systems for buses, trailers, and large fleet vehicles." },
+  { title: "Reverse Osmosis System", desc: "Spot-free rinse and finish every time with advanced water purification." },
+  { title: "Wireless Remotes", desc: "Operate your wash system from anywhere with convenient wireless controls." },
+  { title: "Festoon Systems", desc: "Overhead hose management keeps hoses off the floor — safer, cleaner, more efficient operation." },
+  { title: "High-Pressure Hoses", desc: "Industrial-grade hoses routed and managed for safety and maximum service life." },
 ];
 
 const washOptions = [
@@ -39,13 +51,62 @@ export default function WashBayDesign() {
         subtitle="Efficient, effective and SAFE wash bay solutions for your fleet. Let the experts at Enzo's help."
       />
 
+      {/* Core Goals */}
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
-            <p className="text-lg text-muted-foreground leading-relaxed">
-              You want your wash bay to be efficient, effective and SAFE when washing your fleet. We offer a full range of equipment, accessories and design services to help you create the perfect wash bay that handles your every need, including our own undercarriage washer – <Link to="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" className="text-primary hover:underline font-semibold">The Neutralizer</Link> – to tackle fleet preservation and extend the life of your investment.
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Designed for Performance & Safety</h2>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto">
+                Every wash bay we design focuses on three priorities: <strong className="text-foreground">efficiency</strong>, <strong className="text-foreground">effectiveness</strong>, and <strong className="text-foreground">safety</strong>. We offer a full range of equipment, accessories and design services to create the perfect wash bay — including our own undercarriage washer, <Link to="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" className="text-primary hover:underline font-semibold">The Neutralizer</Link>, to protect your investment.
+              </p>
+            </div>
+          </AnimatedSection>
+
+          {/* Three pillars */}
+          <div className="grid md:grid-cols-3 gap-6 mb-12">
+            {[
+              { title: "Efficiency", desc: "Streamlined layouts and automated systems that clean faster with less labor and water waste." },
+              { title: "Effectiveness", desc: "The right equipment combination to handle every vehicle type — from sedans to semis." },
+              { title: "Safety", desc: "Non-slip surfaces, managed hose routing, festoon systems, and proper drainage to protect your team." },
+            ].map((item, i) => (
+              <AnimatedSection key={item.title} delay={i * 0.1}>
+                <motion.div whileHover={{ y: -4 }} className="p-6 rounded-2xl bg-card border border-border shadow-sm text-center h-full hover:shadow-lg transition-all">
+                  <h3 className="font-heading font-bold text-lg mb-2 text-primary">{item.title}</h3>
+                  <p className="text-sm text-muted-foreground">{item.desc}</p>
+                </motion.div>
+              </AnimatedSection>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Equipment & Features List */}
+      <section className="section-padding bg-muted">
+        <div className="container">
+          <AnimatedSection>
+            <h2 className="text-center text-3xl md:text-4xl font-heading font-bold mb-4">Wash Bay Equipment & Features</h2>
+            <p className="text-center text-muted-foreground max-w-2xl mx-auto mb-12">
+              Every wash bay is customized with the components your operation needs. Here's what we work with:
             </p>
           </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {washBayFeatures.map((feat, i) => (
+              <AnimatedSection key={feat.title} delay={i * 0.06}>
+                <div className="flex items-start gap-3 p-5 rounded-xl bg-card border border-border h-full">
+                  <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
+                  <div>
+                    {feat.link ? (
+                      <Link to={feat.link} className="font-heading font-bold text-sm text-primary hover:underline">{feat.title}</Link>
+                    ) : (
+                      <h3 className="font-heading font-bold text-sm">{feat.title}</h3>
+                    )}
+                    <p className="text-xs text-muted-foreground mt-1">{feat.desc}</p>
+                  </div>
+                </div>
+              </AnimatedSection>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -66,7 +127,7 @@ export default function WashBayDesign() {
             <div className="mt-10 text-center">
               <h3 className="text-2xl font-bold">Custom Wash Bay Solutions</h3>
               <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-                Enzo's has helped design and install wash bay solutions for clients from Maine to Alabama – and everywhere in between. Our uniquely designed under carriage cleaning system, The Neutralizer, helps make maintaining your fleet easy.
+                Enzo's has helped design and install wash bay solutions for clients from Maine to Alabama — and everywhere in between. Our uniquely designed undercarriage cleaning systems help make maintaining your fleet easy and cost-effective.
               </p>
             </div>
           </AnimatedSection>
@@ -91,7 +152,7 @@ export default function WashBayDesign() {
         </div>
       </section>
 
-      {/* Customization Options — duplicated from Touchless Drive Thru */}
+      {/* Customization Options */}
       <section className="section-padding">
         <div className="container">
           <AnimatedSection>
@@ -116,11 +177,11 @@ export default function WashBayDesign() {
         </div>
       </section>
 
-      {/* Equipment */}
-      <section className="section-padding">
+      {/* Product Equipment Cards */}
+      <section className="section-padding bg-muted">
         <div className="container">
           <AnimatedSection>
-            <h2 className="text-center text-2xl font-bold font-heading mb-10">Wash Bay Equipment & Accessories</h2>
+            <h2 className="text-center text-2xl font-bold font-heading mb-10">Featured Wash Bay Equipment</h2>
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-8">
             {equipment.map((item, i) => (
@@ -132,6 +193,9 @@ export default function WashBayDesign() {
                   <div className="p-5">
                     <h3 className="font-heading font-bold">{item.title}</h3>
                     <p className="text-sm text-muted-foreground mt-2">{item.desc}</p>
+                    <span className="inline-flex items-center gap-1 text-sm font-semibold text-primary mt-3">
+                      Learn More <ArrowRight className="h-4 w-4" />
+                    </span>
                   </div>
                 </Link>
               </AnimatedSection>

@@ -33,7 +33,7 @@ const benefits = [
   "Stops corrosive effects of road salt & brine",
   "Extends vehicle lifespan by years",
   "Reduces costly undercarriage repairs",
-  "Complete wash in under 60 seconds per vehicle",
+  "Complete wash in under five minutes per vehicle",
   "Works with your existing pressure washer",
   "4-chemical switching without disconnecting",
   "Designed & built by Enzo's — proven in the field",
@@ -41,7 +41,7 @@ const benefits = [
 ];
 
 const stats = [
-  { value: "60s", label: "Per Vehicle Wash" },
+  { value: "<5 min", label: "Per Vehicle Wash" },
   { value: "4", label: "Chemical Channels" },
   { value: "2,000+", label: "PSI Minimum" },
   { value: "4+", label: "GPM Flow Rate" },
@@ -49,7 +49,7 @@ const stats = [
 
 const idealFor = [
   { icon: Truck, title: "Municipal Fleets", desc: "Plow trucks, salt spreaders, dump trucks, and utility vehicles that face the worst salt exposure every winter." },
-  { icon: Users, title: "School Bus Fleets", desc: "Protect your entire bus fleet from costly undercarriage damage with a 60-second drive-over wash." },
+  { icon: Users, title: "School Bus Fleets", desc: "Protect your entire bus fleet from costly undercarriage damage with a quick drive-over wash." },
   { icon: Shield, title: "Fire Departments", desc: "Keep engines, tankers, and rescue vehicles in peak condition — ready when your community needs them." },
   { icon: Wrench, title: "Private Fleets", desc: "Delivery trucks, service vans, and any commercial vehicle that runs through salt states all winter." },
 ];
@@ -91,9 +91,9 @@ export default function TheNeutralizer() {
                   Neutralizer
                 </span>
               </h1>
-              <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 max-w-xl">
-                Stop the corrosive effects of road salt and brine. Our undercarriage wash system delivers a complete clean in under 60 seconds.
-              </p>
+                <p className="text-xl md:text-2xl text-white/90 leading-relaxed mb-8 max-w-xl">
+                  Stop the corrosive effects of road salt and brine. Our undercarriage wash system delivers a complete clean in under five minutes per vehicle.
+                </p>
               <div className="flex flex-wrap gap-4">
                 <Link
                   to="/contact-us/"
@@ -379,7 +379,7 @@ export default function TheNeutralizer() {
                 <ul className="space-y-3 mb-8">
                   <li className="flex items-start gap-3">
                     <Timer className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
-                    <span>Under 60 seconds per vehicle — no downtime impact</span>
+                    <span>Under five minutes per vehicle — minimal downtime impact</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <DollarSign className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
