@@ -85,6 +85,8 @@ import FAQ from "./pages/FAQ";
 import Promotions from "./pages/Promotions";
 import Shop from "./pages/Shop";
 import Trident from "./pages/Trident";
+import TridentUniversity from "./pages/TridentUniversity";
+import PreventativeMaintenance from "./pages/PreventativeMaintenance";
 
 const queryClient = new QueryClient();
 
