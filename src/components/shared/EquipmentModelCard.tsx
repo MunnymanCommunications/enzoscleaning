@@ -15,6 +15,8 @@ interface EquipmentModelCardProps {
 export default function EquipmentModelCard({
   model, partNumber, discharge, image, dimensions, description, specSheet, index = 0
 }: EquipmentModelCardProps) {
+  const quoteUrl = `/contact-us/?product=${encodeURIComponent(model)}${partNumber ? `&category=${encodeURIComponent(partNumber)}` : ''}`;
+
   return (
     <AnimatedSection delay={index * 0.1}>
       <div className="bg-card rounded-xl border border-border overflow-hidden shadow-sm hover:shadow-md transition-shadow">
@@ -49,7 +51,7 @@ export default function EquipmentModelCard({
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed">{description}</p>
             
             <div className="mt-4 flex gap-3">
-              <Link to="/contact-us/" className="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
+              <Link to={quoteUrl} className="inline-flex items-center px-4 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium hover:bg-primary/90 transition-colors">
                 Get a Quote
               </Link>
               {specSheet && (
