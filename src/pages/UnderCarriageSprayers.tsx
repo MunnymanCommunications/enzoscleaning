@@ -25,9 +25,9 @@ export default function UnderCarriageSprayers() {
             </AnimatedSection>
             <AnimatedSection delay={0.2}>
               <Link to="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" className="group block bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="/uploads/2020/11/80.617_HURp-520-7889-US.jpg" alt="Hurricane Undercarriage" className="w-full aspect-square object-contain p-4" loading="lazy" />
+                <img src="/uploads/2020/11/80.617_HURp-520-7889-US.jpg" alt="Push Under Carriage Deluxe 2" className="w-full aspect-square object-contain p-4" loading="lazy" />
                 <div className="p-4 text-center">
-                  <h3 className="font-heading font-bold">The Neutralizer System</h3>
+                  <h3 className="font-heading font-bold">Push Under Carriage Deluxe 2</h3>
                   <p className="text-sm text-primary mt-1">Learn More →</p>
                 </div>
               </Link>
