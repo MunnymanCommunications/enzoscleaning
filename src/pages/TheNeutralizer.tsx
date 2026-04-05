@@ -41,7 +41,7 @@ const benefits = [
 ];
 
 const stats = [
-  { value: "60s", label: "Per Vehicle Wash" },
+  { value: "<5 min", label: "Per Vehicle Wash" },
   { value: "4", label: "Chemical Channels" },
   { value: "2,000+", label: "PSI Minimum" },
   { value: "4+", label: "GPM Flow Rate" },
