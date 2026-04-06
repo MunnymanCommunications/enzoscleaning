@@ -121,6 +121,64 @@ export default function Index() {
         </div>
       </section>
 
+      {/* Salt Neutralizer & Rinse Demo Videos */}
+      <section className="relative section-padding overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted to-background" />
+        <ParallaxOrb className="absolute top-10 left-20 h-[300px] w-[300px] rounded-full bg-primary/5 blur-3xl" speed={0.3} />
+        <div className="relative container">
+          <AnimatedSection variant="blurIn">
+            <h2 className="text-center text-3xl font-bold md:text-4xl">See Our Systems in Action</h2>
+            <p className="text-center text-muted-foreground mt-3 max-w-2xl mx-auto">Watch how Enzo's undercarriage wash and salt neutralization systems protect your fleet from costly corrosion damage.</p>
+          </AnimatedSection>
+          <div className="mt-12 grid gap-8 md:grid-cols-2">
+            <AnimatedSection delay={0.1} variant="scaleIn">
+              <div className="rounded-3xl glass p-2 shadow-2xl">
+                <div className="rounded-2xl overflow-hidden">
+                  <video
+                    src="/uploads/videos/apply-salt-neutralizer.mov"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full aspect-video object-cover"
+                    title="Salt neutralizer application on fleet vehicle undercarriage"
+                  />
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <h3 className="text-xl font-bold">Salt Neutralizer Application</h3>
+                <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">Our D-Salt neutralizing solution bonds to metal surfaces, stopping corrosion before it starts — saving you thousands in fleet repairs.</p>
+                <Link to="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" className="group mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-6 py-3 font-bold text-primary-foreground shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                  Explore The Neutralizer <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2} variant="scaleIn">
+              <div className="rounded-3xl glass p-2 shadow-2xl">
+                <div className="rounded-2xl overflow-hidden">
+                  <video
+                    src="/uploads/videos/rinse-wash.mov"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full aspect-video object-cover"
+                    title="Wash bay rinse system cleaning fleet vehicle"
+                  />
+                </div>
+              </div>
+              <div className="mt-6 text-center">
+                <h3 className="text-xl font-bold">Custom Wash Bay Rinse System</h3>
+                <p className="mt-2 text-sm text-muted-foreground max-w-md mx-auto">Fully automated rinse cycles designed for your facility — maximize uptime and keep your fleet spotless with minimal labor.</p>
+                <Link to="/cleaning-equipment/wash-bay-design/" className="group mt-4 inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-6 py-3 font-bold text-primary-foreground shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                  Explore Wash Bay Design <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* Video with glass frame */}
       <section className="relative section-padding overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted to-background" />
