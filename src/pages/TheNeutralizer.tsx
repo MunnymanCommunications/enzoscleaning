@@ -5,7 +5,7 @@ import AnimatedSection from "@/components/shared/AnimatedSection";
 import InteractiveSchematic from "@/components/shared/InteractiveSchematic";
 
 const neutralizerHero = "/uploads/neutralizer-hero-wash.jpg";
-const neutralizerCorrosion = "/uploads/rusty-undercarriage-corrosion.jpg";
+const neutralizerCorrosion = "/uploads/neutralizer-drive-over.jpg";
 const neutralizerFleet = "/uploads/undercarriage-wash-system.jpg";
 
 const features = [
