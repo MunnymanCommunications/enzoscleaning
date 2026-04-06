@@ -4,6 +4,7 @@ import { Shield, Droplets, Wifi, ArrowRight, CheckCircle2, Wrench } from "lucide
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import InteractiveSchematic from "@/components/shared/InteractiveSchematic";
 
 const equipment = [
   {
