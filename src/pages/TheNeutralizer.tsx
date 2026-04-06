@@ -70,7 +70,7 @@ export default function TheNeutralizer() {
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <img
           src={neutralizerHero}
-          alt="The Neutralizer undercarriage wash system"
+          alt="The Neutralizer undercarriage wash system spraying underneath a truck to neutralize road salt and prevent corrosion"
           className="absolute inset-0 w-full h-full object-cover"
           width={1920}
           height={1080}
