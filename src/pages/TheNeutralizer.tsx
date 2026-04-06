@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign, Download, Truck, AlertTriangle, ThumbsUp, Users } from "lucide-react";
+import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign, Download, Truck, AlertTriangle, Users, Play } from "lucide-react";
 import AnimatedSection from "@/components/shared/AnimatedSection";
-
+import InteractiveSchematic from "@/components/shared/InteractiveSchematic";
 
 const neutralizerHero = "/uploads/neutralizer-hero-wash.jpg";
-const neutralizerCorrosion = "/uploads/neutralizer-drive-over.jpg";
+const neutralizerCorrosion = "/uploads/rusty-undercarriage-corrosion.jpg";
 const neutralizerFleet = "/uploads/undercarriage-wash-system.jpg";
 
 const features = [
@@ -114,7 +114,7 @@ export default function TheNeutralizer() {
                   href="tel:4195020007"
                   className="inline-flex items-center gap-2 px-8 py-4 bg-white/10 text-white font-bold rounded-full text-lg border border-white/20 hover:bg-white/20 backdrop-blur-sm transition-all"
                 >
-                  <Phone className="h-5 w-5" /> Call 419-502-0007
+                  <Phone className="h-5 w-5" /> 419-502-0007
                 </a>
               </div>
             </motion.div>
@@ -143,7 +143,36 @@ export default function TheNeutralizer() {
         </div>
       </section>
 
-      {/* The Corrosion Problem - NEW SECTION */}
+      {/* See It In Action - Main Video - Moved Near Top */}
+      <section className="section-padding bg-background">
+        <div className="container max-w-5xl">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-4">See It in Action</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Watch The Neutralizer deliver a complete undercarriage wash — protecting vehicles from salt corrosion in under five minutes.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection variant="scaleIn">
+            <div className="rounded-3xl glass p-2 shadow-2xl">
+              <div className="rounded-2xl overflow-hidden">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/ejZBvIK-Bm8?autoplay=1&mute=1&loop=1&playlist=ejZBvIK-Bm8"
+                    title="The Neutralizer Wash Bay System Demo — Enzo's Cleaning Solutions"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* The Corrosion Problem */}
       <section className="section-padding bg-muted">
         <div className="container">
           <AnimatedSection>
@@ -166,11 +195,11 @@ export default function TheNeutralizer() {
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <img
                   src={neutralizerCorrosion}
-                  alt="Severe salt corrosion damage on truck undercarriage"
+                  alt="Severely corroded vehicle undercarriage showing rust damage from road salt on brake lines and frame rails"
                   className="w-full object-cover"
                   loading="lazy"
                   width={1024}
-                  height={1024}
+                  height={768}
                 />
               </div>
             </AnimatedSection>
@@ -214,7 +243,7 @@ export default function TheNeutralizer() {
               <div className="rounded-2xl overflow-hidden shadow-xl">
                 <img
                   src={neutralizerHero}
-                  alt="The Neutralizer pressure washer system in action"
+                  alt="The Neutralizer pressure washer system in action cleaning a truck undercarriage"
                   className="w-full object-cover aspect-video"
                   loading="lazy"
                   width={1920}
@@ -242,42 +271,8 @@ export default function TheNeutralizer() {
         </div>
       </section>
 
-      {/* Video Section */}
-      <section className="bg-muted section-padding">
-        <div className="container">
-          <AnimatedSection>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">See It in Action</h2>
-              <p className="text-muted-foreground text-lg">Watch The Neutralizer deliver a complete undercarriage wash at Westfield Fire & Rescue</p>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-6">
-              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video bg-secondary/10">
-                <iframe
-                  src="https://www.youtube.com/embed/4ocg_o1HB9E"
-                  title="The Neutralizer - Bus Garage Demo"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
-              <div className="relative rounded-2xl overflow-hidden shadow-xl aspect-video bg-secondary/10">
-                <iframe
-                  src="https://www.youtube.com/embed/ejZBvIK-Bm8"
-                  title="Wash Bay Demo"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                  className="absolute inset-0 w-full h-full"
-                />
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Who It's For - NEW SECTION */}
-      <section className="section-padding">
+      {/* Who It's For */}
+      <section className="section-padding bg-muted/50">
         <div className="container">
           <AnimatedSection>
             <div className="text-center mb-16">
@@ -286,7 +281,7 @@ export default function TheNeutralizer() {
             </div>
           </AnimatedSection>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {idealFor.map((item, i) => (
+            {idealFor.map((item) => (
               <AnimatedSection key={item.title}>
                 <motion.div
                   whileHover={{ y: -4 }}
@@ -362,6 +357,37 @@ export default function TheNeutralizer() {
         </div>
       </section>
 
+      {/* Educational Deep Dive Video */}
+      <section className="section-padding bg-background">
+        <div className="container max-w-4xl">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-4">
+                📚 For Serious Buyers
+              </span>
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Ready to Invest in Your Fleet's Future?</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                If you're seriously evaluating undercarriage protection for your fleet, this in-depth walkthrough covers everything you need to know — from system specs to real-world ROI. It's longer because the decision deserves it.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection variant="scaleIn">
+            <div className="rounded-2xl overflow-hidden shadow-xl">
+              <div className="aspect-video">
+                <iframe
+                  src="https://www.youtube.com/embed/UfXQLlBvvng"
+                  title="The Neutralizer In-Depth System Walkthrough — Enzo's Cleaning Solutions"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  className="w-full h-full"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* ROI Section */}
       <section className="section-padding">
         <div className="container">
@@ -397,7 +423,7 @@ export default function TheNeutralizer() {
                 <div className="rounded-2xl overflow-hidden shadow-xl">
                   <img
                     src={neutralizerFleet}
-                    alt="Clean fleet of municipal trucks and school buses"
+                    alt="Enzo's undercarriage wash system installed in a fleet wash bay"
                     className="w-full object-cover"
                     loading="lazy"
                     width={1024}
@@ -410,32 +436,102 @@ export default function TheNeutralizer() {
         </div>
       </section>
 
-      {/* Testimonial / Social Proof - NEW SECTION */}
-      <section className="bg-muted section-padding">
+      {/* Video Showcase Section */}
+      <section className="section-padding bg-muted">
         <div className="container">
           <AnimatedSection>
-            <div className="max-w-4xl mx-auto text-center">
-              <ThumbsUp className="h-12 w-12 text-primary mx-auto mb-6" />
-              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-8">Trusted by Ohio's Fleets</h2>
-              <div className="grid md:grid-cols-3 gap-6">
-                <div className="p-6 rounded-xl bg-card border border-border shadow-sm">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    "We installed The Neutralizer two winters ago and have already seen a significant drop in undercarriage repair costs across our plow fleet."
-                  </p>
-                  <p className="text-sm font-bold text-foreground">— Municipal Fleet Manager</p>
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-4">Real Installations. Real Results.</h2>
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">See how fleets across the country are using The Neutralizer and Enzo's wash bay systems to protect their investments.</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-3 gap-8">
+            <AnimatedSection>
+              <div className="rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/EFv5gxKsMSo"
+                    title="Enzo's Wash Bay Installation — Complete System Tour"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
                 </div>
-                <div className="p-6 rounded-xl bg-card border border-border shadow-sm">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    "The 60-second drive-over wash fits perfectly into our bus return routine. Every bus gets treated before parking — no extra labor needed."
-                  </p>
-                  <p className="text-sm font-bold text-foreground">— School District Transportation Director</p>
+                <div className="p-4">
+                  <h3 className="font-heading font-bold text-sm">Complete System Tour</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Walk through a full Enzo's wash bay installation — from undercarriage sprayers to the rinse arch.</p>
                 </div>
-                <div className="p-6 rounded-xl bg-card border border-border shadow-sm">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                    "D-Salt actually neutralizes the corrosion — not just washes it off. Our mechanics noticed the difference on the first inspection."
-                  </p>
-                  <p className="text-sm font-bold text-foreground">— Fire Department Captain</p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div className="rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/fKTmdAAZicY"
+                    title="Fire Station Wash Bay Installation by Enzo's Cleaning Solutions"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
                 </div>
+                <div className="p-4">
+                  <h3 className="font-heading font-bold text-sm">Fire Station Wash Bay</h3>
+                  <p className="text-xs text-muted-foreground mt-1">See how this fire department keeps their engines and rescue vehicles protected year-round.</p>
+                </div>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/DV_4V7yt7us"
+                    title="Municipal Fleet Wash System — Salt Neutralization Demo"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-heading font-bold text-sm">Municipal Fleet Demo</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Watch a full municipal fleet wash cycle — from salt neutralization to final rinse.</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      {/* Interactive Schematic */}
+      <section className="section-padding bg-background">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-4xl font-heading font-bold mb-2">Explore the Complete Wash Bay System</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">Hover over each component to learn how Enzo's Automatic Drive-Through Wash System protects your fleet from salt corrosion and keeps vehicles spotless.</p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
+            <InteractiveSchematic />
+          </AnimatedSection>
+          <AnimatedSection delay={0.2}>
+            <div className="mt-10 text-center">
+              <p className="text-muted-foreground mb-4">Want to see how this all comes together in a full wash bay?</p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <Link
+                  to="/cleaning-equipment/wash-bay-design/"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-all"
+                >
+                  Explore Wash Bay Design <ArrowRight className="h-4 w-4" />
+                </Link>
+                <Link
+                  to="/touchless-drive-thru/"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-card border border-border rounded-full font-bold hover:shadow-lg transition-all"
+                >
+                  Automatic Drive-Through Systems <ArrowRight className="h-4 w-4" />
+                </Link>
               </div>
             </div>
           </AnimatedSection>
