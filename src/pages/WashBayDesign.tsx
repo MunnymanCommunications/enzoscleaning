@@ -10,13 +10,13 @@ const equipment = [
   {
     title: "Push Under Carriage Deluxe — Fleet Preservation",
     desc: "Enzo's Push Under Carriage Deluxe systems fight corrosion from road salt and brine, extending your fleet's lifespan by years.",
-    image: "/uploads/2020/10/Untitled-1.jpg",
+    image: "/uploads/neutralizer-hero-wash.jpg",
     link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/",
   },
   {
     title: "Portable Undercarriage Units",
     desc: "Flexible, portable undercarriage sprayer units for wash bays of any size.",
-    image: "/uploads/2020/10/Untitled-4.jpg",
+    image: "/uploads/neutralizer-drive-over.jpg",
     link: "/cleaning-equipment/under-carriage-sprayers/",
   },
   {
@@ -41,7 +41,7 @@ const washOptions = [
   { title: "High Touch / Touchless Designs", desc: "Choose the wash configuration that matches your fleet's needs and sensitivity.", image: "/uploads/2022/10/New-Project-2.jpg" },
   { title: "Reverse Osmosis System", desc: "Spot-free rinse and finish every time with advanced water purification.", image: "/uploads/2022/08/New-Project-1.png" },
   { title: "Wireless Remotes", desc: "Operate your wash system from any location with convenient wireless controls.", image: "/uploads/2022/08/New-Project.png" },
-  { title: "Undercarriage Wash Unit", desc: "Integrated undercarriage cleaning to fight salt and corrosion damage.", image: "/uploads/2022/10/New-Project.jpg" },
+  { title: "Undercarriage Wash Unit", desc: "Integrated undercarriage cleaning to fight salt and corrosion damage.", image: "/uploads/neutralizer-hero-wash.jpg" },
 ];
 
 export default function WashBayDesign() {
@@ -111,7 +111,7 @@ export default function WashBayDesign() {
         </div>
       </section>
 
-      {/* Wash Bay Demo Video */}
+      {/* Main Demo Video */}
       <section className="relative section-padding overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-background via-muted to-background" />
         <div className="relative container max-w-5xl">
@@ -135,21 +135,50 @@ export default function WashBayDesign() {
         </div>
       </section>
 
-      {/* Fire Station Video */}
-      <section className="py-12 bg-muted/30">
+      {/* Additional Videos */}
+      <section className="section-padding bg-muted/30">
         <div className="container">
           <AnimatedSection>
-            <h2 className="text-center text-2xl font-bold font-heading mb-6">See Our Wash Bay Solutions in Action</h2>
-            <div className="max-w-3xl mx-auto aspect-video rounded-xl overflow-hidden shadow-lg">
-              <iframe
-                src="https://www.youtube.com/embed/fKTmdAAZicY"
-                title="Fire Station Wash Bay"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
+            <h2 className="text-center text-2xl font-bold font-heading mb-8">See Our Wash Bay Solutions in Action</h2>
           </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <AnimatedSection>
+              <div className="rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/fKTmdAAZicY"
+                    title="Fire Station Wash Bay Installation by Enzo's"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-heading font-bold text-sm">Fire Station Wash Bay</h3>
+                  <p className="text-xs text-muted-foreground mt-1">Keeping fire apparatus clean, protected, and ready for service year-round.</p>
+                </div>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div className="rounded-2xl overflow-hidden shadow-lg bg-card border border-border">
+                <div className="aspect-video">
+                  <iframe
+                    src="https://www.youtube.com/embed/DV_4V7yt7us"
+                    title="Municipal Fleet Salt Neutralization Wash System"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="w-full h-full"
+                    loading="lazy"
+                  />
+                </div>
+                <div className="p-4">
+                  <h3 className="font-heading font-bold text-sm">Municipal Fleet Wash</h3>
+                  <p className="text-xs text-muted-foreground mt-1">See how municipalities protect plow trucks and utility vehicles from salt corrosion.</p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
         </div>
       </section>
 
@@ -217,6 +246,37 @@ export default function WashBayDesign() {
               </AnimatedSection>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Neutralizer Cross-Link */}
+      <section className="section-padding bg-background">
+        <div className="container max-w-4xl">
+          <AnimatedSection>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="/uploads/neutralizer-hero-wash.jpg"
+                  alt="The Neutralizer undercarriage wash system in a fleet wash bay"
+                  className="w-full h-full object-cover aspect-video"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-3">🛡️ Featured Product</span>
+                <h2 className="text-2xl font-heading font-bold mb-4">The Neutralizer — The Heart of Every Wash Bay</h2>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Every wash bay is better with The Neutralizer. Enzo's original undercarriage wash system chemically neutralizes salt and brine on contact — not just rinsing, but actually stopping corrosion before it starts.
+                </p>
+                <Link
+                  to="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-all"
+                >
+                  Explore The Neutralizer <ArrowRight className="h-4 w-4" />
+                </Link>
+              </div>
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 
