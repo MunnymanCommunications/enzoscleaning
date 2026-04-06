@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign, Download, Truck, AlertTriangle, ThumbsUp, Users } from "lucide-react";
 import AnimatedSection from "@/components/shared/AnimatedSection";
-import neutralizerHero from "@/assets/neutralizer-hero.jpg";
-import neutralizerCorrosion from "@/assets/neutralizer-corrosion.jpg";
-import neutralizerFleet from "@/assets/neutralizer-fleet.jpg";
+
+
+const neutralizerHero = "/uploads/neutralizer-hero-wash.jpg";
+const neutralizerCorrosion = "/uploads/neutralizer-drive-over.jpg";
+const neutralizerFleet = "/uploads/undercarriage-wash-system.jpg";
 
 const features = [
   {
@@ -68,7 +70,7 @@ export default function TheNeutralizer() {
       <section className="relative min-h-[85vh] flex items-center overflow-hidden">
         <img
           src={neutralizerHero}
-          alt="The Neutralizer undercarriage wash system"
+          alt="The Neutralizer undercarriage wash system spraying underneath a truck to neutralize road salt and prevent corrosion"
           className="absolute inset-0 w-full h-full object-cover"
           width={1920}
           height={1080}

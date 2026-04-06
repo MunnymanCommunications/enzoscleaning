@@ -4,6 +4,7 @@ import { Shield, Droplets, Wifi, ArrowRight, CheckCircle2, Wrench } from "lucide
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import InteractiveSchematic from "@/components/shared/InteractiveSchematic";
 
 const equipment = [
   {
@@ -148,6 +149,21 @@ export default function WashBayDesign() {
                 className="w-full h-full"
               />
             </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Interactive Schematic */}
+      <section className="section-padding bg-background">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-4xl font-heading font-bold mb-2">Explore the Complete System</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">Hover over each component to learn how Enzo's Automatic Drive-Through Wash System protects your fleet from salt corrosion and keeps vehicles spotless.</p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
+            <InteractiveSchematic />
           </AnimatedSection>
         </div>
       </section>
