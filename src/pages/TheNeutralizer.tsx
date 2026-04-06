@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { Shield, Droplets, Gauge, Wrench, Phone, ArrowRight, CheckCircle2, Zap, Timer, DollarSign, Download, Truck, AlertTriangle, ThumbsUp, Users } from "lucide-react";
 import AnimatedSection from "@/components/shared/AnimatedSection";
-import { Helmet } from "react-helmet-async";
+
 
 const neutralizerHero = "/uploads/neutralizer-hero-wash.jpg";
 const neutralizerCorrosion = "/uploads/neutralizer-drive-over.jpg";
