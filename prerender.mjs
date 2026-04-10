@@ -100,6 +100,7 @@ const ALL_ROUTES = [
   "/shop-now/",
   "/about-us/",
   "/contact-us/",
+  "/claude-test/",
   "/hulabowl-ohiobrett/",
   "/hulabowl-ohiobrett/ohiobrettform",
 ];

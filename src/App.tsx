@@ -87,6 +87,7 @@ import Shop from "./pages/Shop";
 import Trident from "./pages/Trident";
 import TridentUniversity from "./pages/TridentUniversity";
 import PreventativeMaintenance from "./pages/PreventativeMaintenance";
+import ClaudeTest from "./pages/ClaudeTest";
 
 const queryClient = new QueryClient();
 
@@ -180,6 +181,7 @@ const App = () => (
             <Route path="/shop-now/" element={<Shop />} />
             <Route path="/about-us/" element={<About />} />
             <Route path="/contact-us/" element={<ContactUs />} />
+            <Route path="/claude-test/" element={<ClaudeTest />} />
             <Route path="/hulabowl-ohiobrett/" element={<ReferralLanding partner="ohiobrett" />} />
             <Route path="/hulabowl-ohiobrett/ohiobrettform" element={<ReferralForm partner="ohiobrett" />} />
             <Route path="*" element={<NotFound />} />
