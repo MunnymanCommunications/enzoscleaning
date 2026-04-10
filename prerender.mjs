@@ -13,10 +13,57 @@ import { build } from "vite";
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { SEO_METADATA } from "./seo-metadata.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const DIST_DIR = path.resolve(__dirname, "dist");
 const SSR_DIR = path.resolve(__dirname, "dist-ssr");
+
+/** Escape special HTML characters in metadata strings */
+function escapeHtml(str) {
+  return str.replace(/&/g, "&amp;").replace(/"/g, "&quot;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+}
+
+/**
+ * Replace the generic <title>, <meta description>, OG and Twitter tags
+ * with page-specific values from SEO_METADATA.
+ */
+function injectMetadata(html, route) {
+  const meta = SEO_METADATA[route];
+  if (!meta) return html;
+
+  const { title, description } = meta;
+  const safeTitle = escapeHtml(title);
+  const safeDesc = escapeHtml(description);
+
+  // Use [\s\S]*? to match content attributes that span multiple lines
+  return html
+    // Replace <title>
+    .replace(/<title>[\s\S]*?<\/title>/, `<title>${safeTitle}</title>`)
+    // Replace meta description
+    .replace(
+      /<meta name="description" content="[\s\S]*?">/,
+      `<meta name="description" content="${safeDesc}">`
+    )
+    // Replace OG title & description
+    .replace(
+      /<meta property="og:title" content="[\s\S]*?">/,
+      `<meta property="og:title" content="${safeTitle}">`
+    )
+    .replace(
+      /<meta property="og:description" content="[\s\S]*?">/,
+      `<meta property="og:description" content="${safeDesc}">`
+    )
+    // Replace Twitter title & description
+    .replace(
+      /<meta name="twitter:title" content="[\s\S]*?">/,
+      `<meta name="twitter:title" content="${safeTitle}">`
+    )
+    .replace(
+      /<meta name="twitter:description" content="[\s\S]*?">/,
+      `<meta name="twitter:description" content="${safeDesc}">`
+    );
+}
 
 const ALL_ROUTES = [
   "/",
@@ -141,10 +188,11 @@ async function prerender() {
       const appHtml = render(route);
       const canonical = `https://2.enzoscleaning.com${route.endsWith("/") ? route : route + "/"}`;
 
-      // Inject rendered HTML into the root div and add canonical
-      const html = template
+      // Inject rendered HTML into the root div, add canonical, and set per-page metadata
+      let html = template
         .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`)
         .replace("</head>", `  <link rel="canonical" href="${canonical}" />\n  </head>`);
+      html = injectMetadata(html, route);
 
       // Write to appropriate directory
       const routePath = route.endsWith("/") ? route : route + "/";
