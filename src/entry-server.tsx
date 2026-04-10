@@ -89,6 +89,7 @@ import Shop from "./pages/Shop";
 import Trident from "./pages/Trident";
 import TridentUniversity from "./pages/TridentUniversity";
 import PreventativeMaintenance from "./pages/PreventativeMaintenance";
+import ClaudeTest from "./pages/ClaudeTest";
 
 export function render(url: string) {
   const queryClient = new QueryClient();
@@ -190,6 +191,7 @@ export function render(url: string) {
               React.createElement(Route, { path: "/shop-now/", element: React.createElement(Shop) }),
               React.createElement(Route, { path: "/about-us/", element: React.createElement(About) }),
               React.createElement(Route, { path: "/contact-us/", element: React.createElement(ContactUs) }),
+              React.createElement(Route, { path: "/claude-test/", element: React.createElement(ClaudeTest) }),
               React.createElement(Route, { path: "/hulabowl-ohiobrett/", element: React.createElement(ReferralLanding, { partner: "ohiobrett" }) }),
               React.createElement(Route, { path: "/hulabowl-ohiobrett/ohiobrettform", element: React.createElement(ReferralForm, { partner: "ohiobrett" }) }),
               React.createElement(Route, { path: "*", element: React.createElement(NotFound) }),
