@@ -470,7 +470,7 @@ export default function Trident() {
           {/* Product categories */}
           <div className="space-y-24">
             {categories.map((cat) => (
-              <CategorySection key={cat.id} {...cat} />
+              <CategorySection key={cat.id} {...cat} onProductView={(name, sku) => trackProduct(name, sku, cat.id)} />
             ))}
           </div>
         </div>
