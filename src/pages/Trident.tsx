@@ -4,6 +4,7 @@ import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import { Shield, Droplets, Sparkles, Layers, ChevronDown, ChevronUp, Star, CheckCircle2, ArrowRight, Wrench, GraduationCap, Truck } from "lucide-react";
+import { useTridentPageTracking, useTridentProductTracking, useTridentEventTracking, useTridentSectionTracking } from "@/hooks/useTridentTracking";
 
 /* ──────────────────────── PRODUCT DATA ──────────────────────── */
 
@@ -199,8 +200,15 @@ const tools = [
 
 /* ──────────────────────── COMPONENTS ──────────────────────── */
 
-function ProductCard({ product, index }: { product: typeof sealers[0] & { colors?: string[]; sizes?: string[] }; index: number }) {
+function ProductCard({ product, index, onView }: { product: typeof sealers[0] & { colors?: string[]; sizes?: string[] }; index: number; onView?: (name: string, sku: string) => void }) {
   const [expanded, setExpanded] = useState(false);
+
+  const handleExpand = () => {
+    if (!expanded && onView) {
+      onView(product.name, product.sku);
+    }
+    setExpanded(!expanded);
+  };
 
   return (
     <AnimatedSection delay={Math.min(index * 0.05, 0.3)} variant="fadeUp">
@@ -228,7 +236,7 @@ function ProductCard({ product, index }: { product: typeof sealers[0] & { colors
 
           {product.description.length > 120 && (
             <button
-              onClick={() => setExpanded(!expanded)}
+              onClick={handleExpand}
               className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
             >
               {expanded ? "Show less" : "Read more"}
@@ -288,6 +296,7 @@ function CategorySection({
   description,
   products,
   id,
+  onProductView,
 }: {
   icon: React.ElementType;
   title: string;
@@ -295,9 +304,10 @@ function CategorySection({
   description: string;
   products: any[];
   id: string;
+  onProductView?: (name: string, sku: string) => void;
 }) {
   return (
-    <section id={id} className="scroll-mt-24">
+    <section id={id} className="scroll-mt-24" data-track-section={id}>
       <AnimatedSection variant="blurIn">
         <div className="flex items-start gap-4 mb-3">
           <div className="rounded-xl bg-primary/10 p-3 shrink-0">
@@ -313,7 +323,7 @@ function CategorySection({
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p, i) => (
-          <ProductCard key={p.name} product={p} index={i} />
+          <ProductCard key={p.name} product={p} index={i} onView={onProductView} />
         ))}
       </div>
     </section>
@@ -368,6 +378,11 @@ const categories = [
 const navItems = categories.map((c) => ({ id: c.id, label: c.title, count: c.products.length }));
 
 export default function Trident() {
+  useTridentPageTracking();
+  useTridentSectionTracking();
+  const { trackEvent } = useTridentEventTracking();
+  const { trackProduct } = useTridentProductTracking();
+
   return (
     <>
       <PageHero
@@ -389,6 +404,7 @@ export default function Trident() {
               </div>
               <Link
                 to="/hardscaping/trident/university/"
+                onClick={() => trackEvent("clicked_university_button", { location: "top_banner" })}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-full hover:scale-105 transition-all whitespace-nowrap"
               >
                 Learn More & Register <ArrowRight className="h-4 w-4" />
@@ -455,7 +471,7 @@ export default function Trident() {
           {/* Product categories */}
           <div className="space-y-24">
             {categories.map((cat) => (
-              <CategorySection key={cat.id} {...cat} />
+              <CategorySection key={cat.id} {...cat} onProductView={(name, sku) => trackProduct(name, sku, cat.id)} />
             ))}
           </div>
         </div>

@@ -86,6 +86,8 @@ import Promotions from "./pages/Promotions";
 import Shop from "./pages/Shop";
 import Trident from "./pages/Trident";
 import TridentUniversity from "./pages/TridentUniversity";
+import TridentGate from "./components/trident/TridentGate";
+import TridentAdmin from "./pages/TridentAdmin";
 import PreventativeMaintenance from "./pages/PreventativeMaintenance";
 import ClaudeTest from "./pages/ClaudeTest";
 
@@ -145,8 +147,9 @@ const App = () => (
             <Route path="/detergents/construction-equipment-cleaning/" element={<ConstructionDetergents />} />
             <Route path="/detergents/restoration-detergents/" element={<RestorationDetergents />} />
             <Route path="/detergents/specialty-cleaning-products/" element={<SpecialtyCleaningProducts />} />
-            <Route path="/hardscaping/trident/" element={<Trident />} />
-            <Route path="/hardscaping/trident/university/" element={<TridentUniversity />} />
+            <Route path="/hardscaping/trident/" element={<TridentGate><Trident /></TridentGate>} />
+            <Route path="/hardscaping/trident/university/" element={<TridentGate><TridentUniversity /></TridentGate>} />
+            <Route path="/admin/trident/" element={<TridentAdmin />} />
             <Route path="/disinfecting/" element={<Disinfecting />} />
             <Route path="/disinfecting/our-disinfectants-sanitizers/" element={<DisinfectantsSanitizers />} />
             <Route path="/disinfecting/our-disinfectant-sprayers/" element={<DisinfectantSprayers />} />

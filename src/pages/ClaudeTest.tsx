@@ -70,7 +70,7 @@ export default function ClaudeTest() {
         </div>
       </section>
 
-      <CTASection />
+      <CTASection title="Get Started" description="Contact us today." />
     </>
   );
 }
