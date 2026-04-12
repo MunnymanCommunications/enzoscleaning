@@ -4,6 +4,7 @@ import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import { Shield, Droplets, Sparkles, Layers, ChevronDown, ChevronUp, Star, CheckCircle2, ArrowRight, Wrench, GraduationCap, Truck } from "lucide-react";
+import { useTridentPageTracking, useTridentProductTracking, useTridentEventTracking, useTridentSectionTracking } from "@/hooks/useTridentTracking";
 
 /* ──────────────────────── PRODUCT DATA ──────────────────────── */
 
@@ -368,6 +369,10 @@ const categories = [
 const navItems = categories.map((c) => ({ id: c.id, label: c.title, count: c.products.length }));
 
 export default function Trident() {
+  useTridentPageTracking();
+  useTridentSectionTracking();
+  const { trackEvent } = useTridentEventTracking();
+
   return (
     <>
       <PageHero
@@ -389,6 +394,7 @@ export default function Trident() {
               </div>
               <Link
                 to="/hardscaping/trident/university/"
+                onClick={() => trackEvent("clicked_university_button", { location: "top_banner" })}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-accent text-accent-foreground font-bold rounded-full hover:scale-105 transition-all whitespace-nowrap"
               >
                 Learn More & Register <ArrowRight className="h-4 w-4" />
