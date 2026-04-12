@@ -14,7 +14,144 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      trident_events: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          visitor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trident_events_visitor_id_fkey"
+            columns: ["visitor_id"]
+            isOneToOne: false
+            referencedRelation: "trident_visitors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      trident_page_views: {
+        Row: {
+          created_at: string
+          duration_seconds: number | null
+          entered_at: string
+          id: string
+          page_path: string
+          section_viewed: string | null
+          visitor_id: string
+        }
+        Insert: {
+          created_at?: string
+          duration_seconds?: number | null
+          entered_at?: string
+          id?: string
+          page_path: string
+          section_viewed?: string | null
+          visitor_id: string
+        }
+        Update: {
+          created_at?: string
+          duration_seconds?: number | null
+          entered_at?: string
+          id?: string
+          page_path?: string
+          section_viewed?: string | null
+          visitor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trident_page_views_visitor_id_fkey"
+            columns: ["visitor_id"]
+            isOneToOne: false
+            referencedRelation: "trident_visitors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      trident_product_views: {
+        Row: {
+          category: string | null
+          id: string
+          product_name: string
+          product_sku: string | null
+          viewed_at: string
+          visitor_id: string
+        }
+        Insert: {
+          category?: string | null
+          id?: string
+          product_name: string
+          product_sku?: string | null
+          viewed_at?: string
+          visitor_id: string
+        }
+        Update: {
+          category?: string | null
+          id?: string
+          product_name?: string
+          product_sku?: string | null
+          viewed_at?: string
+          visitor_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "trident_product_views_visitor_id_fkey"
+            columns: ["visitor_id"]
+            isOneToOne: false
+            referencedRelation: "trident_visitors"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      trident_visitors: {
+        Row: {
+          company_name: string
+          created_at: string
+          email: string
+          id: string
+          ip_address: string | null
+          last_visit_at: string
+          name: string
+          phone: string
+        }
+        Insert: {
+          company_name: string
+          created_at?: string
+          email: string
+          id?: string
+          ip_address?: string | null
+          last_visit_at?: string
+          name: string
+          phone: string
+        }
+        Update: {
+          company_name?: string
+          created_at?: string
+          email?: string
+          id?: string
+          ip_address?: string | null
+          last_visit_at?: string
+          name?: string
+          phone?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
