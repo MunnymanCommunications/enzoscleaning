@@ -17,11 +17,11 @@ export function useTridentPageTracking() {
     // Create page view record
     supabase
       .from("trident_page_views")
-      .insert({
+      .insert([{
         visitor_id: visitorId,
         page_path: location.pathname,
         entered_at: new Date().toISOString(),
-      })
+      }])
       .select("id")
       .single()
       .then(({ data }) => {
@@ -54,12 +54,12 @@ export function useTridentProductTracking() {
     const visitorId = getTridentVisitorId();
     if (!visitorId) return;
 
-    supabase.from("trident_product_views").insert({
+    supabase.from("trident_product_views").insert([{
       visitor_id: visitorId,
       product_name: productName,
       product_sku: productSku || null,
       category: category || null,
-    });
+    }]);
   }, []);
 
   return { trackProduct };
@@ -94,11 +94,11 @@ export function useTridentSectionTracking() {
             const sectionId = entry.target.getAttribute("data-track-section");
             if (sectionId && !trackedSections.current.has(sectionId)) {
               trackedSections.current.add(sectionId);
-              supabase.from("trident_events").insert({
+              supabase.from("trident_events").insert([{
                 visitor_id: visitorId,
                 event_type: "section_viewed",
-                event_data: { section: sectionId, page: window.location.pathname },
-              });
+                event_data: { section: sectionId, page: window.location.pathname } as any,
+              }]);
             }
           }
         });
