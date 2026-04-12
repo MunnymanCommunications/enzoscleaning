@@ -4,6 +4,7 @@ import { GraduationCap, Calendar, MapPin, Shield, CheckCircle2, ArrowRight, Phon
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import { useTridentPageTracking, useTridentEventTracking } from "@/hooks/useTridentTracking";
 
 const whoShouldAttend = [
   { icon: Wrench, title: "Mobile Pressure Washing Contractors", desc: "Learn proper product selection, application techniques and warranty requirements for hardscape cleaning and sealing." },
@@ -23,6 +24,9 @@ const trainingCovers = [
 ];
 
 export default function TridentUniversity() {
+  useTridentPageTracking();
+  const { trackEvent } = useTridentEventTracking();
+
   return (
     <>
       <PageHero
