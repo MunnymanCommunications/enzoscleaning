@@ -381,6 +381,7 @@ export default function Trident() {
   useTridentPageTracking();
   useTridentSectionTracking();
   const { trackEvent } = useTridentEventTracking();
+  const { trackProduct } = useTridentProductTracking();
 
   return (
     <>
