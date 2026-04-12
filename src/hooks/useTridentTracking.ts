@@ -70,11 +70,11 @@ export function useTridentEventTracking() {
     const visitorId = getTridentVisitorId();
     if (!visitorId) return;
 
-    supabase.from("trident_events").insert({
+    supabase.from("trident_events").insert([{
       visitor_id: visitorId,
       event_type: eventType,
-      event_data: eventData || {},
-    });
+      event_data: (eventData || {}) as any,
+    }]);
   }, []);
 
   return { trackEvent };
