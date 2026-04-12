@@ -296,6 +296,7 @@ function CategorySection({
   description,
   products,
   id,
+  onProductView,
 }: {
   icon: React.ElementType;
   title: string;
@@ -303,9 +304,10 @@ function CategorySection({
   description: string;
   products: any[];
   id: string;
+  onProductView?: (name: string, sku: string) => void;
 }) {
   return (
-    <section id={id} className="scroll-mt-24">
+    <section id={id} className="scroll-mt-24" data-track-section={id}>
       <AnimatedSection variant="blurIn">
         <div className="flex items-start gap-4 mb-3">
           <div className="rounded-xl bg-primary/10 p-3 shrink-0">
@@ -321,7 +323,7 @@ function CategorySection({
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p, i) => (
-          <ProductCard key={p.name} product={p} index={i} />
+          <ProductCard key={p.name} product={p} index={i} onView={onProductView} />
         ))}
       </div>
     </section>
