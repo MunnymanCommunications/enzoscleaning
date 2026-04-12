@@ -130,8 +130,6 @@ export default function TridentGate({ children }: TridentGateProps) {
           url: window.location.href,
         } as any,
       }]);
-        },
-      });
 
       localStorage.setItem(STORAGE_KEY, visitorId);
       setUnlocked(true);
