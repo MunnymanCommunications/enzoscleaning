@@ -39,7 +39,7 @@ export default function TridentGate({ children }: TridentGateProps) {
         });
 
       // Log return visit event
-      supabase.from("trident_events").insert({
+      supabase.from("trident_events").insert([{
         visitor_id: visitorId,
         event_type: "return_visit",
         event_data: {
@@ -47,8 +47,8 @@ export default function TridentGate({ children }: TridentGateProps) {
           referrer: document.referrer,
           screen_width: window.screen.width,
           screen_height: window.screen.height,
-        },
-      });
+        } as any,
+      }]);
     } else {
       setLoading(false);
     }
@@ -100,13 +100,13 @@ export default function TridentGate({ children }: TridentGateProps) {
       } else {
         const { data, error: insertError } = await supabase
           .from("trident_visitors")
-          .insert({
+          .insert([{
             name: form.name,
             company_name: form.company_name,
             email: form.email,
             phone: form.phone,
             ip_address,
-          })
+          }])
           .select("id")
           .single();
 
@@ -119,7 +119,7 @@ export default function TridentGate({ children }: TridentGateProps) {
       }
 
       // Log gate_unlock event
-      await supabase.from("trident_events").insert({
+      await supabase.from("trident_events").insert([{
         visitor_id: visitorId,
         event_type: "gate_unlock",
         event_data: {
@@ -128,6 +128,8 @@ export default function TridentGate({ children }: TridentGateProps) {
           screen_width: window.screen.width,
           screen_height: window.screen.height,
           url: window.location.href,
+        } as any,
+      }]);
         },
       });
 
