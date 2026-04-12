@@ -200,8 +200,15 @@ const tools = [
 
 /* ──────────────────────── COMPONENTS ──────────────────────── */
 
-function ProductCard({ product, index }: { product: typeof sealers[0] & { colors?: string[]; sizes?: string[] }; index: number }) {
+function ProductCard({ product, index, onView }: { product: typeof sealers[0] & { colors?: string[]; sizes?: string[] }; index: number; onView?: (name: string, sku: string) => void }) {
   const [expanded, setExpanded] = useState(false);
+
+  const handleExpand = () => {
+    if (!expanded && onView) {
+      onView(product.name, product.sku);
+    }
+    setExpanded(!expanded);
+  };
 
   return (
     <AnimatedSection delay={Math.min(index * 0.05, 0.3)} variant="fadeUp">
@@ -229,7 +236,7 @@ function ProductCard({ product, index }: { product: typeof sealers[0] & { colors
 
           {product.description.length > 120 && (
             <button
-              onClick={() => setExpanded(!expanded)}
+              onClick={handleExpand}
               className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-primary hover:underline"
             >
               {expanded ? "Show less" : "Read more"}
