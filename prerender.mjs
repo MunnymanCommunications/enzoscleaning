@@ -111,8 +111,8 @@ const ALL_ROUTES = [
   "/detergents/construction-equipment-cleaning/",
   "/detergents/restoration-detergents/",
   "/detergents/specialty-cleaning-products/",
-  "/hardscaping/trident/",
-  "/hardscaping/trident/university/",
+  // Trident routes are password-gated (TridentGate component); skipping prerender
+  // to avoid exposing gated content and prevent hydration mismatches.
   "/disinfecting/",
   "/disinfecting/our-disinfectants-sanitizers/",
   "/disinfecting/our-disinfectant-sprayers/",
