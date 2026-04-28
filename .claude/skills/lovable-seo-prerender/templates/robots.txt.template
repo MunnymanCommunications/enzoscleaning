@@ -75,4 +75,5 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://2.enzoscleaning.com/sitemap.xml
+# CUSTOMIZE: replace with the client's production sitemap URL
+Sitemap: https://example.com/sitemap.xml
