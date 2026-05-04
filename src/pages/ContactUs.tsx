@@ -1,14 +1,42 @@
+import { useState } from "react";
 import { Phone, MapPin, Clock } from "lucide-react";
 import { useSearchParams } from "react-router-dom";
 import PageHero from "@/components/shared/PageHero";
+import { submitLead } from "@/lib/leadSubmit";
+import { toast } from "@/hooks/use-toast";
 
 export default function ContactUs() {
   const [searchParams] = useSearchParams();
   const productContext = searchParams.get("product") || "";
   const categoryContext = searchParams.get("category") || "";
   const prefilledType = searchParams.get("type") || "Service";
+  const [submitting, setSubmitting] = useState(false);
 
   const contextLabel = productContext || categoryContext || "";
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    setSubmitting(true);
+    const { error } = await submitLead({
+      form_name: "Contact Us",
+      name: String(fd.get("name") || ""),
+      company: String(fd.get("company") || ""),
+      phone: String(fd.get("phone") || ""),
+      email: String(fd.get("email") || ""),
+      request_type: String(fd.get("request_type") || ""),
+      message: String(fd.get("message") || ""),
+      product_context: productContext,
+      category_context: categoryContext,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast({ title: "Submission failed", description: "Please try again or call us.", variant: "destructive" });
+    } else {
+      toast({ title: "Thanks!", description: "We'll be in touch shortly." });
+      (e.target as HTMLFormElement).reset();
+    }
+  };
 
   return (
     <>
