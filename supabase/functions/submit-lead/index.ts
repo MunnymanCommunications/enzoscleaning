@@ -80,12 +80,16 @@ Deno.serve(async (req) => {
 
     // 2) CRM webhook
     if (CRM_FORMS_WEBHOOK_URL && CRM_WEBHOOK_APIKEY) {
+      const now = new Date();
       const crmBody = {
         board_id: BOARD_ID,
         tenant_subdomain: TENANT_SUBDOMAIN,
         form_name: data.form_name,
         page: data.page_path || "",
+        page_path: data.page_path || "",
+        page_url: (data as any).page_url || "",
         page_name: data.page_name || "",
+        referrer: (data as any).referrer || "",
         name: data.name || "",
         company: data.company || "",
         email: data.email || "",
@@ -97,7 +101,9 @@ Deno.serve(async (req) => {
         referral_partner: data.referral_partner || "",
         ip_address: ip,
         user_agent: userAgent,
-        submitted_at: new Date().toISOString(),
+        submitted_at: now.toISOString(),
+        submitted_date: now.toISOString().slice(0, 10),
+        submitted_at_human: now.toUTCString(),
         ...(data.extra || {}),
       };
       const c = await fetch(CRM_FORMS_WEBHOOK_URL, {

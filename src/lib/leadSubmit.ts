@@ -19,7 +19,9 @@ export async function submitLead(payload: LeadPayload) {
     body: {
       ...payload,
       page_path: typeof window !== "undefined" ? window.location.pathname : "",
+      page_url: typeof window !== "undefined" ? window.location.href : "",
       page_name: typeof document !== "undefined" ? document.title : "",
+      referrer: typeof document !== "undefined" ? document.referrer : "",
     },
   });
 }
