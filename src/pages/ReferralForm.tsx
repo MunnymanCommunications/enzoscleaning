@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PageHero from "@/components/shared/PageHero";
+import { submitLead } from "@/lib/leadSubmit";
+import { toast } from "@/hooks/use-toast";
 
 interface ReferralFormProps {
   partner: string;
@@ -7,6 +9,29 @@ interface ReferralFormProps {
 
 export default function ReferralForm({ partner }: ReferralFormProps) {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const fd = new FormData(e.currentTarget);
+    setSubmitting(true);
+    const { error } = await submitLead({
+      form_name: `Referral - ${partner}`,
+      name: String(fd.get("name") || ""),
+      company: String(fd.get("company") || ""),
+      phone: String(fd.get("phone") || ""),
+      email: String(fd.get("email") || ""),
+      request_type: String(fd.get("interest") || ""),
+      message: String(fd.get("message") || ""),
+      referral_partner: partner,
+    });
+    setSubmitting(false);
+    if (error) {
+      toast({ title: "Submission failed", description: "Please try again or call us.", variant: "destructive" });
+    } else {
+      setSubmitted(true);
+    }
+  };
 
   return (
     <>
@@ -23,33 +48,26 @@ export default function ReferralForm({ partner }: ReferralFormProps) {
               <p className="mb-6 text-muted-foreground">
                 You were referred by partner: <strong className="text-foreground">{partner}</strong>. Fill out the form below and our team will reach out.
               </p>
-              <form
-                className="space-y-4"
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setSubmitted(true);
-                }}
-              >
-                <input type="hidden" name="referral_partner" value={partner} />
+              <form className="space-y-4" onSubmit={handleSubmit}>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Name <span className="text-destructive">*</span></label>
-                  <input type="text" required className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                  <input name="name" type="text" required className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Company</label>
-                  <input type="text" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                  <input name="company" type="text" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Phone Number <span className="text-destructive">*</span></label>
-                  <input type="tel" required className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                  <input name="phone" type="tel" required className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Email</label>
-                  <input type="email" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                  <input name="email" type="email" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">What are you interested in?</label>
-                  <select className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
+                  <select name="interest" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
                     <option>Pressure Washers</option>
                     <option>Detergents</option>
                     <option>Service & Repair</option>
@@ -59,10 +77,10 @@ export default function ReferralForm({ partner }: ReferralFormProps) {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Additional Info</label>
-                  <textarea rows={4} className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                  <textarea name="message" rows={4} className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
                 </div>
-                <button type="submit" className="rounded-md bg-primary px-8 py-3 font-bold text-primary-foreground hover:bg-secondary transition-colors">
-                  Submit
+                <button type="submit" disabled={submitting} className="rounded-md bg-primary px-8 py-3 font-bold text-primary-foreground hover:bg-secondary transition-colors disabled:opacity-60">
+                  {submitting ? "Submitting…" : "Submit"}
                 </button>
               </form>
             </>
