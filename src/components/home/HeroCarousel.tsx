@@ -238,14 +238,14 @@ export default function HeroCarousel() {
       <div ref={emblaRef} className="overflow-hidden h-full">
         <div className="flex h-full">
           {slides.map((slide, i) => (
-            <div key={i} className="relative flex-[0_0_100%] min-w-0 min-h-[600px] md:min-h-[700px]">
+            <div key={i} className="relative flex-[0_0_100%] min-w-0 min-h-[600px] md:min-h-[700px] overflow-hidden">
               {/* Background image with parallax feel */}
               <div
                 className="absolute inset-0 bg-cover bg-center scale-105 transition-transform duration-[2000ms]"
                 style={{ backgroundImage: `url(${slide.image})` }}
               />
               {/* Gradient overlay */}
-              <div className="absolute inset-0 bg-gradient-to-br from-secondary/90 via-secondary/70 to-primary/60" />
+              <div className="absolute inset-0 bg-gradient-to-br from-secondary/80 via-secondary/60 to-primary/50" />
               {/* Glass noise texture */}
               <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,_hsl(var(--accent)/0.08)_0%,_transparent_60%)]" />
 
