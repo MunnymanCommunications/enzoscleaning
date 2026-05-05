@@ -6,6 +6,7 @@ import CTASection from "@/components/shared/CTASection";
 import HeroCarousel from "@/components/home/HeroCarousel";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import ProductCard from "@/components/shared/ProductCard";
+import InteractiveSchematic from "@/components/shared/InteractiveSchematic";
 
 const serviceCards = [
   { title: "Free Consultations", description: "Let us visit your operation and provide insights and solutions to make your work easier.", image: "/uploads/2021/01/Enzos-Free-Consultations.jpg", link: "/services/free-consultations/" },
@@ -253,6 +254,67 @@ export default function Index() {
               <Link to="/services/scheduled-maintenance/" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 font-bold text-primary-foreground shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 glow-primary">
                 Request Your Plan <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Interactive Schematic */}
+      <section className="section-padding bg-background">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-4xl font-heading font-bold mb-2">Explore the Complete System</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">Hover over each component to learn how Enzo's Automatic Drive-Through Wash System protects your fleet from salt corrosion and keeps vehicles spotless.</p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
+            <InteractiveSchematic />
+          </AnimatedSection>
+          <AnimatedSection delay={0.2}>
+            <div className="mt-10 text-center">
+              <Link to="/cleaning-equipment/wash-bay-design/" className="group inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-primary to-accent px-8 py-4 font-bold text-primary-foreground shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300">
+                Explore Wash Bay Design <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      {/* Neutralizer Cross-Link */}
+      <section className="section-padding bg-muted/30">
+        <div className="container max-w-4xl">
+          <AnimatedSection>
+            <div className="grid md:grid-cols-2 gap-8 items-center">
+              <div className="rounded-2xl overflow-hidden shadow-xl">
+                <img
+                  src="/uploads/neutralizer-hero-wash.jpg"
+                  alt="The Neutralizer undercarriage wash system in a fleet wash bay"
+                  className="w-full h-full object-cover aspect-video"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <span className="inline-block px-3 py-1 rounded-full bg-accent/10 text-accent text-xs font-semibold mb-3">🛡️ Featured Product</span>
+                <h2 className="text-2xl font-heading font-bold mb-4">The Neutralizer — The Heart of Every Wash Bay</h2>
+                <p className="text-muted-foreground leading-relaxed mb-6">
+                  Every wash bay is better with The Neutralizer. Enzo's original undercarriage wash system chemically neutralizes salt and brine on contact — not just rinsing, but actually stopping corrosion before it starts.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Link
+                    to="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/"
+                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-full font-bold hover:scale-105 transition-all"
+                  >
+                    Explore The Neutralizer <ArrowRight className="h-4 w-4" />
+                  </Link>
+                  <Link
+                    to="/cleaning-equipment/wash-bay-design/"
+                    className="inline-flex items-center gap-2 px-6 py-3 border-2 border-primary text-primary rounded-full font-bold hover:bg-primary hover:text-primary-foreground transition-all"
+                  >
+                    Wash Bay Design <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </AnimatedSection>
         </div>
