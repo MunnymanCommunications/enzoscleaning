@@ -197,6 +197,14 @@ export default function Detergents() {
               </div>
             </AnimatedSection>
 
+            {s.image && (
+              <AnimatedSection>
+                <div className="mb-8 max-w-3xl mx-auto aspect-video rounded-xl overflow-hidden shadow-lg">
+                  <img src={s.image} alt={s.title} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              </AnimatedSection>
+            )}
+
             {s.videoEmbed && (
               <AnimatedSection>
                 <div className="aspect-video rounded-xl overflow-hidden shadow-lg max-w-3xl mx-auto mb-8">
