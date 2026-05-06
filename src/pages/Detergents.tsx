@@ -109,6 +109,7 @@ const sections: Section[] = [
     id: "sprayers",
     title: "Disinfectant Sprayers",
     link: "/disinfecting/our-disinfectant-sprayers/",
+    image: "/uploads/2020/09/download-1.jpg",
     intro:
       "Apply disinfectants and sanitizers quickly and efficiently with professional-grade sprayers — from electrostatic to backpack to handheld.",
     simpleProducts: [
