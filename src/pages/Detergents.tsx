@@ -10,6 +10,7 @@ type Section = {
   link: string;
   intro: string;
   bgImage?: string;
+  image?: string;
   products?: { name: string; bullets: string[]; specLink?: string }[];
   simpleProducts?: { name: string; desc: string }[];
   features?: { title: string; desc: string }[];
