@@ -178,8 +178,8 @@ export const SEO_METADATA = {
 
   // ── Detergents ────────────────────────────────────────────────
   "/detergents/": {
-    title: "Detergents & Cleaning Chemicals | Enzo's Cleaning Solutions",
-    description: "For everything you need clean, Enzo's offers a detergent cleaning solution to get the job done. Degreasers, truck wash, construction and specialty cleaning products.",
+    title: "Detergents & Disinfectants | Enzo's Cleaning Solutions",
+    description: "Industrial detergents, degreasers, hospital-grade disinfectants, sanitizers, sprayers and dry vapor systems — complete cleaning chemistry from Enzo's Cleaning Solutions.",
   },
   "/detergents/degreasers/": {
     title: "Degreasers | Enzo's Cleaning Solutions",
