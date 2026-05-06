@@ -34,17 +34,7 @@ const navItems = [
     path: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/",
   },
   {
-    label: "Disinfecting",
-    path: "/disinfecting/",
-    children: [
-      { label: "Disinfectants & Sanitizers", path: "/disinfecting/our-disinfectants-sanitizers/" },
-      { label: "Sprayers", path: "/disinfecting/our-disinfectant-sprayers/" },
-      { label: "Vapore Dry Vapor", path: "/disinfecting/vapore-dry-vapor-disinfecting/" },
-      { label: "Best Practices", path: "/disinfecting/disinfecting-best-practices/" },
-    ],
-  },
-  {
-    label: "Detergents",
+    label: "Detergents & Disinfectants",
     path: "/detergents/",
     children: [
       { label: "Transportation", path: "/detergents/transportation-truck-bus-wash/" },
@@ -52,6 +42,10 @@ const navItems = [
       { label: "Degreasers", path: "/detergents/degreasers/" },
       { label: "Specialty", path: "/detergents/specialty-cleaning-products/" },
       { label: "Restoration", path: "/detergents/restoration-detergents/" },
+      { label: "Disinfectants & Sanitizers", path: "/detergents/#disinfectants" },
+      { label: "Disinfectant Sprayers", path: "/detergents/#sprayers" },
+      { label: "Vapore Dry Vapor", path: "/detergents/#vapore" },
+      { label: "Disinfecting Best Practices", path: "/detergents/#best-practices" },
     ],
   },
   {
