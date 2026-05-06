@@ -95,6 +95,7 @@ const sections: Section[] = [
     id: "disinfectants",
     title: "Disinfectants & Sanitizers",
     link: "/disinfecting/our-disinfectants-sanitizers/",
+    image: "/uploads/2020/09/images.jpg",
     intro:
       "High-powered disinfectant and sanitizing solutions for use with pressure washers, sprayers, mist bottles and more.",
     simpleProducts: [
