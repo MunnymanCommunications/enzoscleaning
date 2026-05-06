@@ -10,6 +10,7 @@ type Section = {
   link: string;
   intro: string;
   bgImage?: string;
+  image?: string;
   products?: { name: string; bullets: string[]; specLink?: string }[];
   simpleProducts?: { name: string; desc: string }[];
   features?: { title: string; desc: string }[];
@@ -94,6 +95,7 @@ const sections: Section[] = [
     id: "disinfectants",
     title: "Disinfectants & Sanitizers",
     link: "/disinfecting/our-disinfectants-sanitizers/",
+    image: "/uploads/2020/09/images.jpg",
     intro:
       "High-powered disinfectant and sanitizing solutions for use with pressure washers, sprayers, mist bottles and more.",
     simpleProducts: [
@@ -107,6 +109,7 @@ const sections: Section[] = [
     id: "sprayers",
     title: "Disinfectant Sprayers",
     link: "/disinfecting/our-disinfectant-sprayers/",
+    image: "/uploads/2020/09/download-1.jpg",
     intro:
       "Apply disinfectants and sanitizers quickly and efficiently with professional-grade sprayers — from electrostatic to backpack to handheld.",
     simpleProducts: [
@@ -119,6 +122,7 @@ const sections: Section[] = [
     id: "vapore",
     title: "Vapore Dry Vapor Disinfecting",
     link: "/disinfecting/vapore-dry-vapor-disinfecting/",
+    image: "/uploads/2020/10/Preventive_sm.jpg",
     intro:
       "Vapore's commercial vapor cleaning equipment cleans, sanitizes and disinfects any surface using hot vapor (4–6% humidity) — no chemicals required.",
     features: [
@@ -192,6 +196,14 @@ export default function Detergents() {
                 </Link>
               </div>
             </AnimatedSection>
+
+            {s.image && (
+              <AnimatedSection>
+                <div className="mb-8 max-w-3xl mx-auto aspect-video rounded-xl overflow-hidden shadow-lg">
+                  <img src={s.image} alt={s.title} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              </AnimatedSection>
+            )}
 
             {s.videoEmbed && (
               <AnimatedSection>
