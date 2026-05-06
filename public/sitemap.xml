@@ -110,4 +110,7 @@
   <!-- About & Contact ✅ -->
   <url><loc>https://2.enzoscleaning.com/about-us/</loc><priority>0.8</priority><changefreq>monthly</changefreq></url>
   <url><loc>https://2.enzoscleaning.com/contact-us/</loc><priority>0.9</priority><changefreq>monthly</changefreq></url>
+
+  <!-- Auto-added by prerender.mjs -->
+  <url><loc>https://2.enzoscleaning.com/hardscaping/</loc><priority>0.7</priority><changefreq>monthly</changefreq></url>
 </urlset>

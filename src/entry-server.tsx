@@ -1,3 +1,5 @@
+// AUTO-GENERATED — do not edit by hand.
+// Source of truth: src/App.tsx  |  Generator: scripts/generate-entry-server.mjs
 import React from "react";
 import ReactDOMServer from "react-dom/server";
 import { StaticRouter } from "react-router-dom/server";
@@ -6,7 +8,6 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { Routes, Route } from "react-router-dom";
 import Layout from "@/components/layout/Layout";
 
-// Import all page components
 import Index from "./pages/Index";
 import Services from "./pages/Services";
 import FreeConsultations from "./pages/FreeConsultations";
@@ -25,7 +26,6 @@ import HotsyPressureWashers from "./pages/HotsyPressureWashers";
 import ReferralLanding from "./pages/ReferralLanding";
 import ReferralForm from "./pages/ReferralForm";
 import TheNeutralizer from "./pages/TheNeutralizer";
-import NotFound from "./pages/NotFound";
 import HotsyElectricPumpFuelOilHeat from "./pages/HotsyElectricPumpFuelOilHeat";
 import HotsyGasolinePumpFuelOilHeat from "./pages/HotsyGasolinePumpFuelOilHeat";
 import HotsyNaturalGasHotWater from "./pages/HotsyNaturalGasHotWater";
@@ -86,8 +86,7 @@ import EquipmentProducts from "./pages/EquipmentProducts";
 import FAQ from "./pages/FAQ";
 import Promotions from "./pages/Promotions";
 import Shop from "./pages/Shop";
-import Trident from "./pages/Trident";
-import TridentUniversity from "./pages/TridentUniversity";
+import Hardscaping from "./pages/Hardscaping";
 import PreventativeMaintenance from "./pages/PreventativeMaintenance";
 import ClaudeTest from "./pages/ClaudeTest";
 
@@ -155,8 +154,7 @@ export function render(url: string) {
               React.createElement(Route, { path: "/detergents/construction-equipment-cleaning/", element: React.createElement(ConstructionDetergents) }),
               React.createElement(Route, { path: "/detergents/restoration-detergents/", element: React.createElement(RestorationDetergents) }),
               React.createElement(Route, { path: "/detergents/specialty-cleaning-products/", element: React.createElement(SpecialtyCleaningProducts) }),
-              React.createElement(Route, { path: "/hardscaping/trident/", element: React.createElement(Trident) }),
-              React.createElement(Route, { path: "/hardscaping/trident/university/", element: React.createElement(TridentUniversity) }),
+              React.createElement(Route, { path: "/hardscaping/", element: React.createElement(Hardscaping) }),
               React.createElement(Route, { path: "/disinfecting/", element: React.createElement(Disinfecting) }),
               React.createElement(Route, { path: "/disinfecting/our-disinfectants-sanitizers/", element: React.createElement(DisinfectantsSanitizers) }),
               React.createElement(Route, { path: "/disinfecting/our-disinfectant-sprayers/", element: React.createElement(DisinfectantSprayers) }),
@@ -194,7 +192,6 @@ export function render(url: string) {
               React.createElement(Route, { path: "/claude-test/", element: React.createElement(ClaudeTest) }),
               React.createElement(Route, { path: "/hulabowl-ohiobrett/", element: React.createElement(ReferralLanding, { partner: "ohiobrett" }) }),
               React.createElement(Route, { path: "/hulabowl-ohiobrett/ohiobrettform", element: React.createElement(ReferralForm, { partner: "ohiobrett" }) }),
-              React.createElement(Route, { path: "*", element: React.createElement(NotFound) }),
             )
           )
         )
