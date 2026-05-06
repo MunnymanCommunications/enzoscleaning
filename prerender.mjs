@@ -111,8 +111,8 @@ const ALL_ROUTES = [
   "/detergents/construction-equipment-cleaning/",
   "/detergents/restoration-detergents/",
   "/detergents/specialty-cleaning-products/",
-  "/hardscaping/trident/",
-  "/hardscaping/trident/university/",
+  // Trident routes are password-gated (TridentGate component); skipping prerender
+  // to avoid exposing gated content and prevent hydration mismatches.
   "/disinfecting/",
   "/disinfecting/our-disinfectants-sanitizers/",
   "/disinfecting/our-disinfectant-sprayers/",
@@ -177,8 +177,11 @@ async function prerender() {
   // Load the SSR module
   const { render } = await import(path.join(SSR_DIR, "entry-server.js"));
 
-  // Read the client-built index.html as template
-  const template = fs.readFileSync(path.join(DIST_DIR, "index.html"), "utf-8");
+  // Read the client-built index.html as template.
+  // Strip any canonical links that may have been injected by a previous prerender
+  // run so this script is safe to re-run without doubling the canonical tags.
+  const template = fs.readFileSync(path.join(DIST_DIR, "index.html"), "utf-8")
+    .replace(/\s*<link rel="canonical"[^>]*\/>/g, "");
 
   let successCount = 0;
   let errorCount = 0;

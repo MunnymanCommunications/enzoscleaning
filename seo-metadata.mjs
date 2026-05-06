@@ -7,7 +7,7 @@
 export const SEO_METADATA = {
   "/": {
     title: "Enzo's Cleaning Solutions | Pressure Washers, Wash Bays & Industrial Cleaning Equipment",
-    description: "If You Have A Need We Have The Solution! Enzo's Cleaning Solutions provides fleet vehicle wash bays, salt neutralizers, hot & cold water pressure washers, detergents and cleaning equipment in Ohio & surrounding states.",
+    description: "Enzo's Cleaning Solutions — Ohio's source for fleet wash bays, Hotsy & Mi-T-M pressure washers, salt neutralizers, detergents and equipment service. Serving fleets, farms and facilities across Ohio, Michigan & PA.",
   },
 
   // ── Services ──────────────────────────────────────────────────
