@@ -122,6 +122,7 @@ const sections: Section[] = [
     id: "vapore",
     title: "Vapore Dry Vapor Disinfecting",
     link: "/disinfecting/vapore-dry-vapor-disinfecting/",
+    image: "/uploads/2020/10/Preventive_sm.jpg",
     intro:
       "Vapore's commercial vapor cleaning equipment cleans, sanitizes and disinfects any surface using hot vapor (4–6% humidity) — no chemicals required.",
     features: [
