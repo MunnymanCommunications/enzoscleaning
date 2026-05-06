@@ -203,6 +203,10 @@ export const SEO_METADATA = {
   },
 
   // ── Hardscaping / Trident ─────────────────────────────────────
+  "/hardscaping/": {
+    title: "Trident Hardscaping Products & T3 University Training | Enzo's Cleaning Solutions",
+    description: "Official Trident product supplier and authorized T3 University trainer in Ohio. Sealers, cleaners, polymeric sand, pressure washers and full work-trailer build-outs for hardscape contractors.",
+  },
   "/hardscaping/trident/": {
     title: "Trident Hardscape Products | Enzo's Cleaning Solutions",
     description: "Professional-grade sealers, cleaners, strippers, polymeric sand and application tools — trusted by contractors across Ohio. Available at Enzo's Cleaning Solutions.",

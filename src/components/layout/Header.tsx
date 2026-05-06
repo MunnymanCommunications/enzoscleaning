@@ -50,9 +50,11 @@ const navItems = [
   },
   {
     label: "Hardscaping",
-    path: "/hardscaping/trident/",
+    path: "/hardscaping/",
     children: [
-      { label: "Trident Products", path: "/hardscaping/trident/" },
+      { label: "Trident Overview & Training", path: "/hardscaping/" },
+      { label: "Trident Product Catalog", path: "/hardscaping/trident/" },
+      { label: "T3 University", path: "/hardscaping/trident/university/" },
     ],
   },
   { label: "Industries We Serve", path: "/industries-we-serve/" },
