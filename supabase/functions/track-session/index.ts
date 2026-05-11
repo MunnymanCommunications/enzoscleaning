@@ -11,7 +11,9 @@ Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
 
   try {
-    const body = await req.json();
+    const raw = await req.text();
+    let body: Record<string, unknown> = {};
+    try { body = raw ? JSON.parse(raw) : {}; } catch { body = { raw }; }
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || req.headers.get("cf-connecting-ip") || "";
     const userAgent = req.headers.get("user-agent") || "";
 
