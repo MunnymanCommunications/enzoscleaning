@@ -7,7 +7,7 @@ import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 const slides = [
   {
-    image: "/uploads/2020/09/header-bg.jpg",
+    image: "/uploads/hero/frustrated-pressure-washer.jpg",
     headline: "Are You Frustrated With Your Pressure Washer?",
     subtitle: "Sales, service & installation of wash bay equipment, pressure washers, and cleaning solutions across Ohio & Michigan.",
     ctaText: "Let's Talk",
@@ -91,7 +91,7 @@ const slides = [
     ctaLink: "/services/",
   },
   {
-    image: "/uploads/2021/04/Electric-Pump-Fuel-Oil-Heat-Pressure-Washer.jpg",
+    image: "/uploads/hero/hotsy-790ss.png",
     headline: "Hotsy Pressure Washers — #1 Name In Hot Water Cleaning",
     subtitle: "When the job demands hot water, Hotsy delivers. Industry-leading pressure washers for the toughest commercial applications.",
     ctaText: "View Hotsy Equipment",
