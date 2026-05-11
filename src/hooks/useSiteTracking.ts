@@ -99,8 +99,8 @@ export function useSiteTracking() {
       };
 
       const url = `https://${import.meta.env.VITE_SUPABASE_PROJECT_ID}.supabase.co/functions/v1/track-session`;
-      const blob = new Blob([JSON.stringify(payload)], { type: "application/json" });
-      // sendBeacon is more reliable on unload
+      // Use text/plain to avoid triggering a CORS preflight — sendBeacon cannot complete preflighted requests
+      const blob = new Blob([JSON.stringify(payload)], { type: "text/plain;charset=UTF-8" });
       const ok = navigator.sendBeacon?.(url, blob);
       if (!ok) {
         supabase.functions.invoke("track-session", { body: payload }).catch(() => {});
