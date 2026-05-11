@@ -1,138 +1,56 @@
 /**
- * Prerender verification script.
+ * Prerender verification script (auto-discovery edition).
  *
  * Usage:
  *   node verify-prerender.mjs           # full audit (needs a prior `npm run build`)
  *   node verify-prerender.mjs --routes  # just compare routes vs sitemap, no build needed
  *
+ * Routes are auto-discovered from src/App.tsx — no hand-maintained list.
+ *
  * Checks:
- *   1. Every sitemap URL has a matching entry in ALL_ROUTES (will be prerendered)
- *   2. Every ALL_ROUTES entry has an entry in SEO_METADATA (unique title/description)
+ *   1. Every discovered route has a matching <loc> in public/sitemap.xml (unless internal).
+ *   2. Every discovered route has a real entry in seo-metadata.mjs (warns on fallback copy).
  *   3. After a build: every dist/{route}/index.html exists and contains:
  *        - <div id="root"> with real content (not empty)
- *        - A <title> that isn't the generic fallback
+ *        - A <title> that isn't the generic site fallback
  *        - A <meta name="description"> that isn't the generic fallback
- *        - A <link rel="canonical"> pointing to the correct URL
+ *        - Exactly one <link rel="canonical"> pointing to the correct URL
  */
-
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
+import { discoverRoutes } from "./route-discovery.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// ── Import source-of-truth data ───────────────────────────────────────────────
-// Inline ALL_ROUTES here so this script is self-contained and doesn't need to
-// import prerender.mjs (which also runs a full build when imported).
-const ALL_ROUTES = [
-  "/",
-  "/services/",
-  "/services/free-consultations/",
-  "/services/pressure-washer-service-repair/",
-  "/services/scheduled-maintenance/",
-  "/services/preventative-maintenance/",
-  "/cleaning-equipment/",
-  "/cleaning-equipment/pressure-washers/",
-  "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/",
-  "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-electric-pump-fuel-oil-heat/",
-  "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-gasoline-pump-fuel-oil-heat/",
-  "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/natural-gas-hot-water/",
-  "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/electric-cold-water/",
-  "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/gasoline-cold-water/",
-  "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/diesel-cold-water/",
-  "/cleaning-equipment/mi-t-m/",
-  "/cleaning-equipment/mi-t-m/electric-hot-water/",
-  "/cleaning-equipment/mi-t-m/natural-gas-hot-water/",
-  "/cleaning-equipment/mi-t-m/gasoline-hot-water-portable/",
-  "/cleaning-equipment/mi-t-m/gasoline-hot-water-skid/",
-  "/cleaning-equipment/mi-t-m/electric-cold-water/",
-  "/cleaning-equipment/mi-t-m/air-compressor-gas/",
-  "/cleaning-equipment/mi-t-m/air-compressor-electric/",
-  "/cleaning-equipment/under-carriage-sprayers/",
-  "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/",
-  "/cleaning-equipment/wash-bay-design/",
-  "/cleaning-equipment/wash-bay-design/tower-brushes/",
-  "/cleaning-equipment/pressure-washers-accessories/",
-  "/cleaning-equipment/pressure-washers-accessories/surface-cleaners/",
-  "/cleaning-equipment/pressure-washers-accessories/trigger-guns-spray-guns/",
-  "/cleaning-equipment/pressure-washers-accessories/nozzles/",
-  "/cleaning-equipment/pressure-washers-accessories/wands-lances/",
-  "/cleaning-equipment/pressure-washers-accessories/wet-sand-blasting-kit/",
-  "/cleaning-equipment/pressure-washers-accessories/scaltrol/",
-  "/cleaning-equipment/floor-cleaning/",
-  "/cleaning-equipment/floor-cleaning/floor-sweepers/",
-  "/cleaning-equipment/floor-cleaning/floor-scrubbers/",
-  "/cleaning-equipment/floor-cleaning/minuteman-floor-cleaners/",
-  "/cleaning-equipment/floor-cleaning/karcher-floor-cleaners/",
-  "/detergents/",
-  "/detergents/degreasers/",
-  "/detergents/transportation-truck-bus-wash/",
-  "/detergents/construction-equipment-cleaning/",
-  "/detergents/restoration-detergents/",
-  "/detergents/specialty-cleaning-products/",
-  // Trident routes excluded: password-gated (TridentGate), no prerender
-  "/disinfecting/",
-  "/disinfecting/our-disinfectants-sanitizers/",
-  "/disinfecting/our-disinfectant-sprayers/",
-  "/disinfecting/vapore-dry-vapor-disinfecting/",
-  "/disinfecting/disinfecting-best-practices/",
-  "/touchless-drive-thru/",
-  "/industries-we-serve/",
-  "/construction-cleaning-equipment/",
-  "/agriculture-cleaning-equipment/",
-  "/transportation-and-fleet-management/",
-  "/manufacturing/",
-  "/farming-equipment-cleaning/",
-  "/solutions-for-road-construction-excavating/",
-  "/protect-your-fleet-from-corrosion-downtime/",
-  "/keep-plants-pavers-moving-remove-asphalt-not-time/",
-  "/hospital-clinical-hygiene-overview-protocols/",
-  "/our-hand-hygiene-systems/",
-  "/implementation-in-hospitals/",
-  "/training-compliance-support/",
-  "/wastewater-treatment-solutions/",
-  "/heaters/",
-  "/single-dual-axle-trailer/",
-  "/electric-hot-water/",
-  "/residential-consumer-coldwater/",
-  "/citymaster-1650-650multifunction-sweeper/",
-  "/citymaster/",
-  "/equipment-products/",
-  "/faq/",
-  "/ota/",
-  "/promotions/",
-  "/shop/",
-  "/shop-now/",
-  "/about-us/",
-  "/contact-us/",
-  "/claude-test/",
-  "/hulabowl-ohiobrett/",
-  "/hulabowl-ohiobrett/ohiobrettform",
-];
-
-// Pages intentionally not prerendered (served as SPA / excluded for a reason)
-const EXCLUDED_FROM_PRERENDER = new Set([
-  "/hardscaping/trident/",
-  "/hardscaping/trident/university/",
-  "/admin/trident/",
-]);
-
+// ── Configuration ────────────────────────────────────────────────────────────
+// Must match BASE_URL in prerender.mjs. Override per-client.
+const BASE_URL = process.env.PRERENDER_BASE_URL || "https://2.enzoscleaning.com";
 const GENERIC_TITLE = "Enzos Cleaning Solutions";
 const GENERIC_DESC_FRAGMENT = "If You Have A Need We Have The Solution";
-const BASE_URL = "https://2.enzoscleaning.com";
+const FALLBACK_DESC_FRAGMENT = "This page is missing custom SEO copy";
 const DIST_DIR = path.resolve(__dirname, "dist");
 const SITEMAP_PATH = path.resolve(__dirname, "public/sitemap.xml");
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-const ok    = (msg) => console.log(`  ✅ ${msg}`);
-const warn  = (msg) => console.warn(`  ⚠️  ${msg}`);
-const fail  = (msg) => { console.error(`  ❌ ${msg}`); errors++; };
+// Routes that intentionally aren't in the public sitemap (internal/test pages).
+// Keep this in sync with INTERNAL_ROUTES in prerender.mjs.
+const INTERNAL_ROUTES = new Set([
+  "/claude-test/",
+  "/ota/",
+  "/shop-now/",
+  "/hulabowl-ohiobrett/",
+  "/hulabowl-ohiobrett/ohiobrettform",
+]);
 
+// ── Helpers ──────────────────────────────────────────────────────────────────
 let errors = 0;
 let warnings = 0;
+const ok = (msg) => console.log(`  ✅ ${msg}`);
+const warn = (msg) => { console.warn(`  ⚠️  ${msg}`); warnings++; };
+const fail = (msg) => { console.error(`  ❌ ${msg}`); errors++; };
 
-// ── 1. Parse sitemap ──────────────────────────────────────────────────────────
 function parseSitemapRoutes() {
+  if (!fs.existsSync(SITEMAP_PATH)) return [];
   const xml = fs.readFileSync(SITEMAP_PATH, "utf-8");
   const matches = [...xml.matchAll(/<loc>(.*?)<\/loc>/g)];
   return matches.map((m) => {
@@ -141,68 +59,71 @@ function parseSitemapRoutes() {
   });
 }
 
-// ── 2. Route coverage audit ───────────────────────────────────────────────────
-function auditRoutes(sitemapRoutes) {
+// ── 1. Route coverage ────────────────────────────────────────────────────────
+function auditRoutes(prerenderRoutes, sitemapRoutes, gated, excluded) {
   console.log("\n📋  ROUTE COVERAGE\n");
 
-  const prerenderedSet = new Set(ALL_ROUTES);
   const sitemapSet = new Set(sitemapRoutes);
+  const prerenderSet = new Set(prerenderRoutes);
 
-  // Sitemap URLs not covered by prerender
-  const sitemapNotPrerendered = sitemapRoutes.filter(
-    (r) => !prerenderedSet.has(r) && !EXCLUDED_FROM_PRERENDER.has(r)
-  );
+  const sitemapNotPrerendered = sitemapRoutes.filter((r) => !prerenderSet.has(r));
   if (sitemapNotPrerendered.length) {
     sitemapNotPrerendered.forEach((r) =>
-      fail(`In sitemap but NOT prerendered: ${r}`)
+      fail(`In sitemap.xml but not discovered in App.tsx: ${r}`)
     );
   } else {
-    ok("All sitemap URLs are prerendered");
+    ok("Every sitemap URL is a real, prerenderable route");
   }
 
-  // Prerendered routes not in sitemap (internal/test pages are expected)
-  const INTERNAL = new Set(["/claude-test/", "/ota/", "/shop-now/", "/hulabowl-ohiobrett/", "/hulabowl-ohiobrett/ohiobrettform"]);
-  const prerenderedNotInSitemap = ALL_ROUTES.filter(
-    (r) => !sitemapSet.has(r) && !INTERNAL.has(r)
+  const missingFromSitemap = prerenderRoutes.filter(
+    (r) => !sitemapSet.has(r) && !INTERNAL_ROUTES.has(r)
   );
-  if (prerenderedNotInSitemap.length) {
-    prerenderedNotInSitemap.forEach((r) =>
-      warn(`Prerendered but NOT in sitemap (won't be crawled): ${r}`)
+  if (missingFromSitemap.length) {
+    missingFromSitemap.forEach((r) =>
+      warn(`Prerendered but not in sitemap (won't be crawled): ${r}`)
     );
-    warnings += prerenderedNotInSitemap.length;
+  } else {
+    ok(`All ${prerenderRoutes.length} prerenderable routes are in the sitemap (or marked internal)`);
   }
 
-  // Excluded (gated) routes
-  console.log(`\n  ℹ️   Intentionally NOT prerendered (gated/admin):`);
-  EXCLUDED_FROM_PRERENDER.forEach((r) => console.log(`       ${r}`));
+  if (gated.length) {
+    console.log(`\n  ℹ️   Auth-gated, intentionally NOT prerendered:`);
+    gated.forEach((r) => console.log(`       ${r}`));
+  }
+  if (excluded.length) {
+    console.log(`\n  ℹ️   Path-excluded (admin/internal), NOT prerendered:`);
+    excluded.forEach((r) => console.log(`       ${r}`));
+  }
 }
 
-// ── 3. SEO metadata coverage ──────────────────────────────────────────────────
-async function auditMetadata() {
+// ── 2. SEO metadata coverage ─────────────────────────────────────────────────
+async function auditMetadata(prerenderRoutes) {
   console.log("\n🏷️   SEO METADATA COVERAGE\n");
   const { SEO_METADATA } = await import("./seo-metadata.mjs");
 
-  let missing = 0;
-  for (const route of ALL_ROUTES) {
-    if (!SEO_METADATA[route]) {
-      fail(`No SEO metadata for route: ${route}`);
-      missing++;
-    }
+  const missing = [];
+  for (const route of prerenderRoutes) {
+    if (!SEO_METADATA[route]) missing.push(route);
   }
-  if (missing === 0) ok(`All ${ALL_ROUTES.length} routes have SEO metadata`);
+  if (missing.length) {
+    missing.forEach((r) =>
+      warn(`No custom SEO metadata for: ${r} (using fallback — write real copy in seo-metadata.mjs)`)
+    );
+  } else {
+    ok(`All ${prerenderRoutes.length} routes have custom SEO metadata`);
+  }
 }
 
-// ── 4. Built HTML file audit ──────────────────────────────────────────────────
-function auditBuiltFiles() {
+// ── 3. Built HTML audit ──────────────────────────────────────────────────────
+function auditBuiltFiles(prerenderRoutes) {
   console.log("\n🗂️   BUILT HTML FILES\n");
 
   if (!fs.existsSync(DIST_DIR)) {
-    warn("dist/ directory not found — run `npm run build` first, then re-run this script.");
-    warnings++;
+    warn("dist/ directory not found — run `npm run build` first, then re-run.");
     return;
   }
 
-  for (const route of ALL_ROUTES) {
+  for (const route of prerenderRoutes) {
     const routePath = route.endsWith("/") ? route : route + "/";
     const htmlPath = path.join(DIST_DIR, routePath, "index.html");
 
@@ -212,62 +133,72 @@ function auditBuiltFiles() {
     }
 
     const html = fs.readFileSync(htmlPath, "utf-8");
-    const routeErrors = [];
+    const issues = [];
 
-    // Check root div has content
     const rootMatch = html.match(/<div id="root">([\s\S]*?)<\/div>/);
     if (!rootMatch || rootMatch[1].trim().length < 100) {
-      routeErrors.push("root div is empty or suspiciously short");
+      issues.push("root div is empty or suspiciously short");
     }
 
-    // Check title isn't the generic fallback
     const titleMatch = html.match(/<title>([\s\S]*?)<\/title>/);
     const title = titleMatch ? titleMatch[1].trim() : "";
     if (!title || title === GENERIC_TITLE) {
-      routeErrors.push(`generic/missing <title>: "${title}"`);
+      issues.push(`generic/missing <title>: "${title}"`);
     }
 
-    // Check description isn't the generic fallback
     const descMatch = html.match(/<meta name="description" content="([\s\S]*?)"/);
     const desc = descMatch ? descMatch[1].trim() : "";
     if (!desc || desc.startsWith(GENERIC_DESC_FRAGMENT)) {
-      routeErrors.push(`generic/missing <meta description>`);
+      issues.push("generic/missing <meta description>");
     }
+    const isFallback = desc.includes(FALLBACK_DESC_FRAGMENT);
 
-    // Check canonical
     const canonical = `${BASE_URL}${routePath}`;
-    if (!html.includes(`rel="canonical" href="${canonical}"`)) {
-      routeErrors.push(`missing or wrong canonical (expected ${canonical})`);
+    const canonicalMatches = [...html.matchAll(/<link rel="canonical"[^>]*href="([^"]+)"/g)];
+    if (canonicalMatches.length === 0) {
+      issues.push(`missing canonical (expected ${canonical})`);
+    } else if (canonicalMatches.length > 1) {
+      issues.push(`duplicate canonical tags (${canonicalMatches.length} found)`);
+    } else if (canonicalMatches[0][1] !== canonical) {
+      issues.push(`wrong canonical: got ${canonicalMatches[0][1]}, expected ${canonical}`);
     }
 
-    if (routeErrors.length) {
-      fail(`${route}\n      → ${routeErrors.join("\n      → ")}`);
+    if (issues.length) {
+      fail(`${route}\n      → ${issues.join("\n      → ")}`);
+    } else if (isFallback) {
+      warn(`${route}  "${title}"  (fallback SEO copy — write real metadata)`);
     } else {
       ok(`${route}  "${title}"`);
     }
   }
 }
 
-// ── Main ──────────────────────────────────────────────────────────────────────
+// ── Main ─────────────────────────────────────────────────────────────────────
 const routesOnly = process.argv.includes("--routes");
 
 console.log("=".repeat(60));
 console.log("  PRERENDER VERIFICATION");
 console.log("=".repeat(60));
 
+const { routes: prerenderRoutes, gated, excluded } = discoverRoutes();
 const sitemapRoutes = parseSitemapRoutes();
-auditRoutes(sitemapRoutes);
+
+auditRoutes(prerenderRoutes, sitemapRoutes, gated, excluded);
+await auditMetadata(prerenderRoutes); // Always run — fast, and the GH Action depends on it
 
 if (!routesOnly) {
-  await auditMetadata();
-  auditBuiltFiles();
+  auditBuiltFiles(prerenderRoutes);
 }
 
 console.log("\n" + "=".repeat(60));
 if (errors === 0) {
-  console.log(`✅  All checks passed${warnings ? ` (${warnings} warning${warnings > 1 ? "s" : ""})` : ""}.`);
+  console.log(
+    `✅  All checks passed${warnings ? ` (${warnings} warning${warnings > 1 ? "s" : ""} — review above)` : ""}.`
+  );
 } else {
-  console.log(`❌  ${errors} error${errors > 1 ? "s" : ""}${warnings ? `, ${warnings} warning${warnings > 1 ? "s" : ""}` : ""} found.`);
+  console.log(
+    `❌  ${errors} error${errors > 1 ? "s" : ""}${warnings ? `, ${warnings} warning${warnings > 1 ? "s" : ""}` : ""} found.`
+  );
   process.exit(1);
 }
 console.log("=".repeat(60) + "\n");

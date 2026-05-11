@@ -34,17 +34,7 @@ const navItems = [
     path: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/",
   },
   {
-    label: "Disinfecting",
-    path: "/disinfecting/",
-    children: [
-      { label: "Disinfectants & Sanitizers", path: "/disinfecting/our-disinfectants-sanitizers/" },
-      { label: "Sprayers", path: "/disinfecting/our-disinfectant-sprayers/" },
-      { label: "Vapore Dry Vapor", path: "/disinfecting/vapore-dry-vapor-disinfecting/" },
-      { label: "Best Practices", path: "/disinfecting/disinfecting-best-practices/" },
-    ],
-  },
-  {
-    label: "Detergents",
+    label: "Detergents & Disinfectants",
     path: "/detergents/",
     children: [
       { label: "Transportation", path: "/detergents/transportation-truck-bus-wash/" },
@@ -52,13 +42,19 @@ const navItems = [
       { label: "Degreasers", path: "/detergents/degreasers/" },
       { label: "Specialty", path: "/detergents/specialty-cleaning-products/" },
       { label: "Restoration", path: "/detergents/restoration-detergents/" },
+      { label: "Disinfectants & Sanitizers", path: "/disinfecting/our-disinfectants-sanitizers/" },
+      { label: "Disinfectant Sprayers", path: "/disinfecting/our-disinfectant-sprayers/" },
+      { label: "Vapore Dry Vapor", path: "/disinfecting/vapore-dry-vapor-disinfecting/" },
+      { label: "Disinfecting Best Practices", path: "/disinfecting/disinfecting-best-practices/" },
     ],
   },
   {
     label: "Hardscaping",
-    path: "/hardscaping/trident/",
+    path: "/hardscaping/",
     children: [
-      { label: "Trident Products", path: "/hardscaping/trident/" },
+      { label: "Trident Overview & Training", path: "/hardscaping/" },
+      { label: "Trident Product Catalog", path: "/hardscaping/trident/" },
+      { label: "T3 University", path: "/hardscaping/trident/university/" },
     ],
   },
   { label: "Industries We Serve", path: "/industries-we-serve/" },

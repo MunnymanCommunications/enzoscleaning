@@ -85,6 +85,7 @@ import FAQ from "./pages/FAQ";
 import Promotions from "./pages/Promotions";
 import Shop from "./pages/Shop";
 import Trident from "./pages/Trident";
+import Hardscaping from "./pages/Hardscaping";
 import TridentUniversity from "./pages/TridentUniversity";
 import TridentGate from "./components/trident/TridentGate";
 import TridentAdmin from "./pages/TridentAdmin";
@@ -147,6 +148,7 @@ const App = () => (
             <Route path="/detergents/construction-equipment-cleaning/" element={<ConstructionDetergents />} />
             <Route path="/detergents/restoration-detergents/" element={<RestorationDetergents />} />
             <Route path="/detergents/specialty-cleaning-products/" element={<SpecialtyCleaningProducts />} />
+            <Route path="/hardscaping/" element={<Hardscaping />} />
             <Route path="/hardscaping/trident/" element={<TridentGate><Trident /></TridentGate>} />
             <Route path="/hardscaping/trident/university/" element={<TridentGate><TridentUniversity /></TridentGate>} />
             <Route path="/admin/trident/" element={<TridentAdmin />} />

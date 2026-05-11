@@ -7,7 +7,7 @@
 export const SEO_METADATA = {
   "/": {
     title: "Enzo's Cleaning Solutions | Pressure Washers, Wash Bays & Industrial Cleaning Equipment",
-    description: "If You Have A Need We Have The Solution! Enzo's Cleaning Solutions provides fleet vehicle wash bays, salt neutralizers, hot & cold water pressure washers, detergents and cleaning equipment in Ohio & surrounding states.",
+    description: "Enzo's Cleaning Solutions — Ohio's source for fleet wash bays, Hotsy & Mi-T-M pressure washers, salt neutralizers, detergents and equipment service. Serving fleets, farms and facilities across Ohio, Michigan & PA.",
   },
 
   // ── Services ──────────────────────────────────────────────────
@@ -178,8 +178,8 @@ export const SEO_METADATA = {
 
   // ── Detergents ────────────────────────────────────────────────
   "/detergents/": {
-    title: "Detergents & Cleaning Chemicals | Enzo's Cleaning Solutions",
-    description: "For everything you need clean, Enzo's offers a detergent cleaning solution to get the job done. Degreasers, truck wash, construction and specialty cleaning products.",
+    title: "Detergents & Disinfectants | Enzo's Cleaning Solutions",
+    description: "Industrial detergents, degreasers, hospital-grade disinfectants, sanitizers, sprayers and dry vapor systems — complete cleaning chemistry from Enzo's Cleaning Solutions.",
   },
   "/detergents/degreasers/": {
     title: "Degreasers | Enzo's Cleaning Solutions",
@@ -203,6 +203,10 @@ export const SEO_METADATA = {
   },
 
   // ── Hardscaping / Trident ─────────────────────────────────────
+  "/hardscaping/": {
+    title: "Trident Hardscaping Products & T3 University Training | Enzo's Cleaning Solutions",
+    description: "Official Trident product supplier and authorized T3 University trainer in Ohio. Sealers, cleaners, polymeric sand, pressure washers and full work-trailer build-outs for hardscape contractors.",
+  },
   "/hardscaping/trident/": {
     title: "Trident Hardscape Products | Enzo's Cleaning Solutions",
     description: "Professional-grade sealers, cleaners, strippers, polymeric sand and application tools — trusted by contractors across Ohio. Available at Enzo's Cleaning Solutions.",
