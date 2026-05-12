@@ -280,6 +280,29 @@ export default function WashBayDesign() {
         </div>
       </section>
 
+      {/* Drive-Over Salt Neutralizing System Photo */}
+      <section className="section-padding bg-muted">
+        <div className="container max-w-6xl">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-4xl font-heading font-bold mb-3">"The Neutralizer" Drive-Over Salt Neutralizing System</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">A closer look at how the drive-over spray pad, 4-station detergent manifold, and wireless remote integrate into a complete wash bay.</p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.15}>
+            <a href="/uploads/neutralizer/neutralizer-drive-over-system.jpg" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border border-border bg-card shadow-lg hover:shadow-2xl transition-all">
+              <img
+                src="/uploads/neutralizer/neutralizer-drive-over-system.jpg"
+                alt="The Neutralizer drive-over salt neutralizing wash bay system with dual spray bar pad, pressure washer wand on festoon, 4-station detergent selector manifold, high pressure manifold, and wireless remote control"
+                title="The Neutralizer Drive-Over Salt Neutralizing Wash Bay System"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </a>
+          </AnimatedSection>
+        </div>
+      </section>
+
       <CTASection title="Find the Right Wash Bay Solution" description="Get the cleaning power you need. Contact Enzo's today for help selecting the right wash bay equipment." />
     </>
   );
