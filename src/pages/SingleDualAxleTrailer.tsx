@@ -64,6 +64,42 @@ export default function SingleDualAxleTrailer() {
         </div>
       </section>
 
+      {/* Featured Trailer Builds */}
+      <section className="section-padding bg-background">
+        <div className="container max-w-6xl">
+          <AnimatedSection>
+            <div className="text-center mb-10">
+              <h2 className="text-3xl md:text-4xl font-heading font-bold mb-3">Featured Enzo's Trailer Builds</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">Real custom-built trailer rigs designed, assembled, and delivered by Enzo's.</p>
+            </div>
+          </AnimatedSection>
+          <div className="grid md:grid-cols-2 gap-6">
+            <AnimatedSection>
+              <a href="/uploads/trailers/single-axle-trailer-rig.png" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border border-border bg-card shadow-md hover:shadow-xl transition-all">
+                <img
+                  src="/uploads/trailers/single-axle-trailer-rig.png"
+                  alt="Enzo's custom single axle trailer-mounted hot water pressure washer rig with dual hose reels, water tank, and tow hitch"
+                  title="Enzo's Custom Single Axle Pressure Washer Trailer Rig"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </a>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <a href="/uploads/trailers/custom-built-trailers.jpg" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border border-border bg-card shadow-md hover:shadow-xl transition-all">
+                <img
+                  src="/uploads/trailers/custom-built-trailers.jpg"
+                  alt="Custom built dual axle pressure washer trailers from Enzo's with large water tanks, hot water diesel burners, and mobile fleet washing setup"
+                  title="Custom Built Dual Axle Pressure Washer Trailers by Enzo's"
+                  className="w-full h-auto object-cover"
+                  loading="lazy"
+                />
+              </a>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
       {/* Trailer Type Selector */}
       <section className="section-padding bg-muted">
         <div className="container">

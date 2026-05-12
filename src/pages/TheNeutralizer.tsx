@@ -538,6 +538,29 @@ export default function TheNeutralizer() {
         </div>
       </section>
 
+      {/* System Components Photo */}
+      <section className="section-padding bg-muted">
+        <div className="container max-w-6xl">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-4xl font-heading font-bold mb-3">"The Neutralizer" Drive-Over Salt Neutralizing System</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">A closer look at the drive-over spray pad, 4-station detergent selector manifold, and wireless remote control system.</p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.15}>
+            <a href="/uploads/neutralizer/neutralizer-drive-over-system.jpg" target="_blank" rel="noopener noreferrer" className="block rounded-2xl overflow-hidden border border-border bg-card shadow-lg hover:shadow-2xl transition-all">
+              <img
+                src="/uploads/neutralizer/neutralizer-drive-over-system.jpg"
+                alt="The Neutralizer drive-over salt neutralizing system showing the dual spray bar pad, pressure washer wand on festoon, 4-station detergent selector manifold, high pressure manifold, and wireless remote transmitter"
+                title="The Neutralizer Drive-Over Salt Neutralizing System Components"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </a>
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Final CTA */}
       <section className="relative py-24 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-r from-secondary via-primary to-accent" />
