@@ -199,6 +199,9 @@ export default function Header() {
             className="lg:hidden border-t border-border glass-strong overflow-hidden"
           >
             <div className="pb-4 max-h-[70vh] overflow-y-auto">
+              <div className="px-4 py-3 border-b border-border/40">
+                <SiteSearch variant="mobile" onNavigate={() => setMobileOpen(false)} />
+              </div>
               {navItems.map((item) => (
                 <div key={item.path}>
                   <div className="flex items-center">
