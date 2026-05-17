@@ -9,6 +9,16 @@ export default function ScheduledMaintenance() {
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
+            <div className="mb-10 overflow-hidden rounded-2xl border border-border shadow-sm">
+              <img
+                src="/uploads/service/scheduled-maintenance.jpg"
+                alt="Enzo's technician performing scheduled maintenance on a pressure washer"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
             <div className="prose prose-lg max-w-none">
               <p>Downtime is a killer of productivity. But what if you could reduce or even eliminate your downtime? You can – with preventative maintenance.</p>
               <p>Keeping up on the upkeep of your pressure washer helps to ensure that every time you pick up the wand and squeeze the trigger you're ready to go with proper pressure, the right temperature and the cleaning power you expect.</p>
