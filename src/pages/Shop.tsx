@@ -36,6 +36,7 @@ export default function Shop() {
           </div>
         </div>
       </section>
+      <PartnersMarquee />
       <CTASection title="Need Help Finding Something?" description="Contact Enzo's and our team will point you in the right direction." />
     </>
   );
