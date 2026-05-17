@@ -17,6 +17,14 @@ export default function SpecialtyCleaningProducts() {
       <PageHero title="Specialty Cleaning Products" subtitle="Special cleaning solutions for leather, fabric, wood, rubber and metals." />
       <section className="section-padding">
         <div className="container max-w-4xl">
+          <AnimatedSection className="mb-10 flex justify-center rounded-2xl border border-border bg-white p-8 shadow-sm">
+            <img
+              src="/uploads/enzos-cleaning-solutions-logo.jpg"
+              alt="Enzo's Cleaning Solutions logo — Ohio supplier of specialty detergents and cleaning products for leather, fabric, wood, rubber and metal surfaces"
+              loading="lazy"
+              className="max-h-48 w-auto object-contain"
+            />
+          </AnimatedSection>
           <AnimatedSection>
             <p className="text-lg text-muted-foreground text-center leading-relaxed">
               Not every surface can be cleaned the same way. Enzo's specialty cleaning products are formulated for specific materials and applications — from delicate leather interiors to heavy-duty metal polishing. Find the right specialty product for your needs.
