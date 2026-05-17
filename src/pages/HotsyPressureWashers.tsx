@@ -13,7 +13,8 @@ const hotsyCategories = [
   },
   {
     title: "Gasoline Pump, Fuel Oil Heat",
-    image: "/uploads/2021/04/Hotsy-Gasoline-Pump-Fuel-Oil-Heat.jpg",
+    image: "/uploads/hotsy/hotsy-gasoline-pump-fuel-oil-heat.jpg",
+    alt: "Hotsy gasoline pump, fuel oil heat hot water pressure washer — portable skid-mounted commercial unit available at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-gasoline-pump-fuel-oil-heat/",
     desc: "Gasoline engine provides portability while fuel oil heat delivers hot water power. Perfect for outdoor job sites with no electrical hookup.",
   },
@@ -63,7 +64,7 @@ export default function HotsyPressureWashers() {
               <AnimatedSection key={cat.title} delay={i * 0.08}>
                 <Link to={cat.link} className="group overflow-hidden rounded-xl bg-card border border-border shadow-sm hover:shadow-lg hover:border-primary/30 transition-all block h-full">
                   <div className="aspect-square overflow-hidden">
-                    <img src={cat.image} alt={cat.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                    <img src={cat.image} alt={(cat as any).alt ?? cat.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                   </div>
                   <div className="p-5">
                     <h3 className="font-heading font-bold text-lg">{cat.title}</h3>
