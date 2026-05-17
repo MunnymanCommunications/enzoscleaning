@@ -64,6 +64,14 @@ export default function PressureWasherAccessories() {
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
+            <div className="mb-10 overflow-hidden rounded-2xl border border-border shadow-lg">
+              <img
+                src="/uploads/accessories/pressure-washer-accessories.jpg"
+                alt="Assortment of commercial pressure washer accessories — trigger guns, brass fittings, quick connects, O-rings, pressure gauge, hoses and nozzles available at Enzo's Cleaning Systems in Ohio"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </div>
             <p className="text-lg text-muted-foreground leading-relaxed text-center">
               Getting the most effective clean from your pressure washer takes more than just the right machine — it requires the right accessories. From trigger guns and nozzles to surface cleaners and descaling filters, Enzo's stocks the parts you need. Need help choosing? Call us.
             </p>
