@@ -9,6 +9,14 @@ export default function Scaltrol() {
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
+            <div className="mb-10 flex justify-center rounded-2xl border border-border bg-white p-8 shadow-sm">
+              <img
+                src="/uploads/accessories/scaltrol-logo.jpg"
+                alt="Scaltrol logo — The Clear Choice in Water Treatment, descaling and scale-prevention filters for hot water pressure washers available at Enzo's Cleaning Systems in Ohio"
+                className="max-h-32 w-auto object-contain"
+                loading="lazy"
+              />
+            </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed">
               Hard water scale buildup is one of the biggest threats to your hot water pressure washer's heating coil. Scaltrol water treatment systems prevent mineral scale deposits before they form, extending the life of your equipment and reducing costly repairs. Essential protection for any hot water cleaning operation.
             </p>
