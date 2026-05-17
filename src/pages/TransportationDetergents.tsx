@@ -19,6 +19,14 @@ export default function TransportationDetergents() {
       <PageHero title="Transportation / Truck & Bus Wash" subtitle="Keep your fleet looking clean with powerful detergent solutions." bgImage="/uploads/2020/09/136c6030-0d5c-4f51-86ad-93842523d1c6.jpg" />
       <section className="section-padding">
         <div className="container">
+          <AnimatedSection className="mb-10 overflow-hidden rounded-2xl border border-border shadow-sm">
+            <img
+              src="/uploads/detergents/school-bus-pressure-wash.jpg"
+              alt="Technician pressure washing a yellow school bus with Enzo's transportation detergents to remove road grime and salt"
+              loading="lazy"
+              className="w-full h-auto object-cover"
+            />
+          </AnimatedSection>
           <AnimatedSection>
             <p className="mx-auto max-w-3xl text-center text-muted-foreground text-lg mb-12">
               Your fleet vehicles see many miles of dirt and grime day after day. Keep your trucks, buses and other fleet equipment looking clean with powerful detergent solutions designed to wash away the soils of the road.
