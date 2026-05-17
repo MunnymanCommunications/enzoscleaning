@@ -20,6 +20,16 @@ export default function Shop() {
       <section className="section-padding">
         <div className="container">
           <AnimatedSection>
+            <div className="mb-10 flex justify-center rounded-2xl border border-border bg-white p-8 shadow-sm">
+              <img
+                src="/uploads/enzos-logo-stem.jpg"
+                alt="Enzo's Cleaning Solutions logo — shop pressure washers, detergents, floor cleaning equipment and disinfectants in Ohio"
+                className="max-h-40 w-auto"
+                loading="lazy"
+              />
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
             <p className="text-lg text-muted-foreground text-center leading-relaxed max-w-3xl mx-auto mb-10">
               Explore Enzo's complete product lineup. From industrial pressure washers to specialized detergents, we have everything you need to keep your operation CLEAN.
             </p>
