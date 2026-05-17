@@ -18,6 +18,7 @@ const commonIssues = [
     title: "No Heat",
     desc: "Loss of heat is more frequent with diesel burners than natural gas or propane. Usually caused by safety control failures — thermostats, flow switches, or pressure switches. These are relatively inexpensive to diagnose and replace.",
     warning: "Running without proper heat means poor cleaning results and wasted detergent.",
+    image: "/uploads/service/honda-engine.jpg",
   },
   {
     icon: Wrench,
