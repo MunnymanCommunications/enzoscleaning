@@ -132,6 +132,7 @@ Deno.serve(async (req) => {
         board_id: WEBSITE_FORMS_BOARD_ID,
         tenant_subdomain: TENANT_SUBDOMAIN,
         form_name: "Trident Member Order Request",
+        stage_name: "Trident Order Requests",
         page: payload.page_path || "",
         page_path: payload.page_path || "",
         page_url: payload.page_url || "",
