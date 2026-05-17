@@ -3,7 +3,7 @@ const partners = [
   { name: "Kärcher", src: "/uploads/partners/karcher.png" },
   { name: "Minuteman", src: "/uploads/partners/minuteman.png" },
   { name: "Mi-T-M", src: "/uploads/partners/mi-t-m.png" },
-  { name: "Mosmatic", src: "/uploads/partners/mosmatic.png" },
+  
   { name: "Southeast VAL6", src: "/uploads/partners/southeast-val6.png" },
   { name: "Vital Oxide", src: "/uploads/partners/vital-oxide.jpg" },
   { name: "Awash Eco Wash Systems", src: "/uploads/partners/awash.jpg" },
