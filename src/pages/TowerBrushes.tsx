@@ -20,6 +20,16 @@ export default function TowerBrushes() {
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
+            <div className="mb-10 overflow-hidden rounded-2xl border border-border shadow-sm">
+              <img
+                src="/uploads/cleaning-equipment/awash-tower-brush.jpg"
+                alt="Awash green vertical tower brush installed in a fleet wash bay for cleaning trucks, buses and motorcoaches"
+                className="w-full h-auto"
+                loading="lazy"
+              />
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
             <p className="text-lg text-muted-foreground leading-relaxed text-center">
               Tower Wash systems from Awash are purpose built for cleaning your fleet vehicles in a wash bay. Delivering full height to clean buses, tractor trailers and motorcoaches with a single pass, you can remove dirt and grime with ease — five minutes or less per vehicle in some cases.
             </p>
