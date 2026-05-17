@@ -87,7 +87,7 @@ import Shop from "./pages/Shop";
 import Trident from "./pages/Trident";
 import Hardscaping from "./pages/Hardscaping";
 import TridentUniversity from "./pages/TridentUniversity";
-import TridentGate from "./components/trident/TridentGate";
+import TridentAuthGate from "./components/trident/TridentAuthGate";
 import TridentAuthGate from "./components/trident/TridentAuthGate";
 import TridentCartButton from "./components/trident/TridentCartButton";
 import { TridentAuthProvider } from "./contexts/TridentAuthContext";
