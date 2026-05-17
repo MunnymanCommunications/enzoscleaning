@@ -46,7 +46,8 @@ Deno.serve(async (req) => {
     }
 
     const email = data.email.trim().toLowerCase();
-    const redirectTo = data.redirect_to || "https://enzoscleaning.com/hardscaping/trident/";
+    // Always send users to the production domain from the email button
+    const redirectTo = "https://2.enzoscleaning.com/hardscaping/trident/";
 
     const admin = createClient(
       Deno.env.get("SUPABASE_URL")!,
