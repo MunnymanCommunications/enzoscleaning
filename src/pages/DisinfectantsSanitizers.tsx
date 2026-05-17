@@ -11,6 +11,14 @@ export default function DisinfectantsSanitizers() {
       />
       <section className="section-padding">
         <div className="container max-w-4xl">
+          <AnimatedSection className="mb-10 flex justify-center rounded-2xl border border-border bg-white p-8 shadow-sm">
+            <img
+              src="/uploads/disinfectants/vital-oxide.jpg"
+              alt="Vital Oxide EPA-registered hospital-grade disinfectant and sanitizer bottle available at Enzo's Cleaning Systems in Ohio"
+              loading="lazy"
+              className="max-h-96 w-auto object-contain"
+            />
+          </AnimatedSection>
           <AnimatedSection>
             <p className="text-lg text-muted-foreground leading-relaxed text-center">
               Get rid of dirt, grime and bacteria with high-powered disinfectant and sanitizing solutions from Enzo's. We offer a number of different products for use with pressure washers, sprayers, mist bottles and more. Contact our team today and let us help you find the best option for your needs.
