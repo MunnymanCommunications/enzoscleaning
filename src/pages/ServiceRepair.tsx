@@ -32,6 +32,7 @@ const commonIssues = [
     title: "Hard Water Buildup",
     desc: "In Ohio, hard water scale is a constant problem. Left unchecked, mineral deposits accumulate in heating coils, unloaders, and internal passages — reducing pressure, temperature, and overall performance.",
     warning: "Regular descaling is far cheaper than replacing a clogged heating coil.",
+    image: "/uploads/service/hard-water-service.jpg",
   },
 ];
 
