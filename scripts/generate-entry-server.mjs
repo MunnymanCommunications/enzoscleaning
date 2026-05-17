@@ -22,7 +22,7 @@ const ROOT = path.resolve(__dirname, "..");
 const APP_FILE = path.resolve(ROOT, "src/App.tsx");
 const ENTRY_FILE = path.resolve(ROOT, "src/entry-server.tsx");
 
-const GATE_WRAPPERS = new Set(["TridentGate", "RequireAuth"]);
+const GATE_WRAPPERS = new Set(["TridentGate", "RequireAuth", "TridentAuthProvider", "TridentAuthGate", "TridentCartProvider"]);
 
 /** Extract page component imports: `import X from "./pages/..."` → Map<name, path> */
 function parsePageImports(src) {
