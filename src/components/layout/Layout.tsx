@@ -2,6 +2,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import Header from "./Header";
 import Footer from "./Footer";
 import PartnersMarquee from "@/components/shared/PartnersMarquee";
+import CouponPopup from "@/components/shared/CouponPopup";
 import { useSiteTracking } from "@/hooks/useSiteTracking";
 
 export default function Layout() {
@@ -16,6 +17,7 @@ export default function Layout() {
       </main>
       {!hidePartners && <PartnersMarquee />}
       <Footer />
+      <CouponPopup />
     </div>
   );
 }
