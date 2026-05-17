@@ -17,6 +17,14 @@ export default function DisinfectingBestPractices() {
       <PageHero title="Disinfecting Best Practices" subtitle="Guidelines and recommendations for effective disinfection." />
       <section className="section-padding">
         <div className="container max-w-4xl">
+          <AnimatedSection className="mb-10 flex justify-center rounded-2xl border border-border bg-white p-8 shadow-sm">
+            <img
+              src="/uploads/enzos-cleaning-solutions-logo.jpg"
+              alt="Enzo's Cleaning Solutions logo — trusted Ohio provider of disinfecting equipment, sanitizers and best-practice guidance for commercial facilities"
+              loading="lazy"
+              className="max-h-48 w-auto object-contain"
+            />
+          </AnimatedSection>
           <AnimatedSection>
             <p className="text-lg text-muted-foreground text-center leading-relaxed">
               Effective disinfection requires more than just spraying a surface. Following proper protocols ensures you're actually eliminating harmful pathogens and keeping your facility safe. Here are the best practices recommended by Enzo's cleaning experts.
