@@ -5,6 +5,7 @@ import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import { Shield, Droplets, Sparkles, Layers, ChevronDown, ChevronUp, Star, CheckCircle2, ArrowRight, Wrench, GraduationCap, Truck } from "lucide-react";
 import { useTridentPageTracking, useTridentProductTracking, useTridentEventTracking, useTridentSectionTracking } from "@/hooks/useTridentTracking";
+import AddToRequestButton from "@/components/trident/AddToRequestButton";
 
 /* ──────────────────────── PRODUCT DATA ──────────────────────── */
 
