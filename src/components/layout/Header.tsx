@@ -112,11 +112,12 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop: contact CTA */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Desktop: search + contact CTA */}
+          <div className="hidden lg:flex items-center gap-3 flex-1 justify-end max-w-md ml-auto">
+            <SiteSearch />
             <Link
               to="/contact-us/"
-              className="rounded-full bg-gradient-to-r from-primary to-accent px-5 py-2 text-sm font-bold text-primary-foreground hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 active:scale-[0.97]"
+              className="rounded-full bg-gradient-to-r from-primary to-accent px-5 py-2 text-sm font-bold text-primary-foreground hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 active:scale-[0.97] flex-shrink-0"
             >
               Contact Us <Mail className="h-4 w-4" />
             </Link>
