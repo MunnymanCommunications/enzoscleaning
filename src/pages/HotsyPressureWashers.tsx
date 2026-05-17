@@ -13,7 +13,7 @@ const hotsyCategories = [
   },
   {
     title: "Gasoline Pump, Fuel Oil Heat",
-    image: "/uploads/2021/04/Hotsy-Gasoline-Pump-Fuel-Oil-Heat.jpg",
+    image: "/uploads/hotsy/hotsy-gasoline-pump-fuel-oil-heat.jpg",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-gasoline-pump-fuel-oil-heat/",
     desc: "Gasoline engine provides portability while fuel oil heat delivers hot water power. Perfect for outdoor job sites with no electrical hookup.",
   },
