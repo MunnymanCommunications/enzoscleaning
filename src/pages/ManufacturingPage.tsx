@@ -6,6 +6,18 @@ export default function Manufacturing() {
   return (
     <>
       <PageHero title="Manufacturing" subtitle="Keep production lines working safely and efficiently." />
+      <section className="pt-12">
+        <div className="container max-w-5xl">
+          <AnimatedSection>
+            <img
+              src="/uploads/school-bus-fleet-manufacturing.jpg"
+              alt="Fleet of yellow school buses lined up at a manufacturing facility, cleaned and maintained with Enzo's Cleaning Solutions industrial pressure washers and detergents"
+              className="w-full h-auto rounded-2xl border border-border shadow-sm"
+              loading="lazy"
+            />
+          </AnimatedSection>
+        </div>
+      </section>
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
