@@ -40,7 +40,8 @@ const hotsyCategories = [
   },
   {
     title: "Diesel Hot Water",
-    image: "/uploads/2021/04/Diesel-Hot-Water-Pressure-Washer.jpg",
+    image: "/uploads/hotsy/hotsy-diesel-hot-water.jpg",
+    alt: "Hotsy diesel hot water pressure washer — heavy-duty skid-mounted industrial unit for the toughest commercial cleaning jobs at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/diesel-cold-water/",
     desc: "Diesel-powered pump and heat for the toughest commercial and industrial cleaning jobs — built for heavy daily use.",
   },
