@@ -26,7 +26,8 @@ const hotsyCategories = [
   },
   {
     title: "Electric Cold Water",
-    image: "/uploads/2021/04/Electric-Cold-Water-Power-Washer.jpg",
+    image: "/uploads/hotsy/hotsy-electric-cold-water.jpg",
+    alt: "Hotsy electric cold water pressure washer — quiet, fume-free stainless steel wall-mount unit for indoor commercial cleaning at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/electric-cold-water/",
     desc: "Quiet, fume-free cold water cleaning for indoor facilities, food processing plants, and light-duty commercial applications.",
   },
