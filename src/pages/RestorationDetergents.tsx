@@ -15,6 +15,14 @@ export default function RestorationDetergents() {
       <PageHero title="Restoration Detergents" subtitle="Rejuvenate worn surfaces like brick, glass and concrete." />
       <section className="section-padding">
         <div className="container max-w-4xl">
+          <AnimatedSection className="mb-10 flex justify-center rounded-2xl border border-border bg-white p-8 shadow-sm">
+            <img
+              src="/uploads/enzos-cleaning-solutions-logo.jpg"
+              alt="Enzo's Cleaning Solutions logo — Ohio supplier of restoration detergents for brick, concrete, glass and masonry surfaces"
+              loading="lazy"
+              className="max-h-48 w-auto object-contain"
+            />
+          </AnimatedSection>
           <AnimatedSection>
             <p className="text-lg text-muted-foreground text-center leading-relaxed">
               Enzo's restoration detergents are specifically formulated to rejuvenate and restore the appearance of building surfaces. Whether you're cleaning brick facades, removing efflorescence from concrete, or restoring glass clarity, our chemistries deliver professional results.
