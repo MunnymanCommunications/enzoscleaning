@@ -9,6 +9,14 @@ export default function WetSandBlastingKit() {
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
+            <div className="mb-10 overflow-hidden rounded-2xl border border-border shadow-lg bg-muted">
+              <img
+                src="/uploads/accessories/wet-sand-blasting-kit.jpg"
+                alt="Wet sandblasting kit attachment for pressure washers — lance, hose, abrasive pickup tube and clamps for dustless surface prep at Enzo's Cleaning Systems in Ohio"
+                className="w-full h-auto object-contain"
+                loading="lazy"
+              />
+            </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed">
               Take your pressure washer to the next level with a wet sandblasting kit. Combine the power of high-pressure water with abrasive media for the ultimate surface prep tool. Remove paint, rust, scale, and stubborn coatings with dustless sandblasting — safer and cleaner than dry methods.
             </p>
