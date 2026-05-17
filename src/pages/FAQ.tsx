@@ -15,11 +15,23 @@ const faqs = [
 ];
 
 export default function FAQ() {
+  const { pathname } = useLocation();
+  const isOta = pathname.startsWith("/ota");
   return (
     <>
       <PageHero title="Frequently Asked Questions" subtitle="Answers to common questions about our products and services." />
       <section className="section-padding">
         <div className="container max-w-3xl">
+          {isOta && (
+            <AnimatedSection className="mb-10 flex justify-center rounded-2xl border border-border bg-white p-8 shadow-sm">
+              <img
+                src="/uploads/enzos-logo-stem-tagline.jpg"
+                alt="Enzo's Cleaning Solutions logo with tagline 'If You Have A Need We Have The Solution' — Ohio pressure washer, detergent and wash bay supplier"
+                className="h-auto w-full max-w-xl object-contain"
+                loading="lazy"
+              />
+            </AnimatedSection>
+          )}
           <div className="space-y-4">
             {faqs.map((faq, i) => (
               <AnimatedSection key={i} delay={i * 0.06}>
