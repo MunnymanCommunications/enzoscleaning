@@ -6,6 +6,18 @@ export default function AgricultureCleaningEquipment() {
   return (
     <>
       <PageHero title="Agriculture Cleaning Equipment" subtitle="Protect your machinery from corrosive fertilizers and the elements." />
+      <section className="pt-12">
+        <div className="container max-w-5xl">
+          <AnimatedSection>
+            <img
+              src="/uploads/hotsy-carlson-service-truck-agriculture.jpg"
+              alt="Hotsy Carlson 24/7 service truck on-site at an agricultural facility next to a green McCloskey screening plant — pressure washer parts, rentals and detergents for farms"
+              className="w-full h-auto rounded-2xl border border-border shadow-sm"
+              loading="lazy"
+            />
+          </AnimatedSection>
+        </div>
+      </section>
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
