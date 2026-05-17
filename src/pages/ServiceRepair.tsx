@@ -11,6 +11,7 @@ const commonIssues = [
     title: "Loss of Pressure",
     desc: "Pressure loss is one of the most common issues we see. Often caused by scale buildup in the unloader or heating coil — especially in Ohio's hard water. Unloaders are inexpensive wear items that can often be restored without a full pump rebuild.",
     warning: "Don't ignore gradual pressure loss — it gets worse over time and can lead to pump damage.",
+    image: "/uploads/service/landa-pump-repair.jpg",
   },
   {
     icon: AlertTriangle,
@@ -94,9 +95,19 @@ export default function ServiceRepair() {
               <AnimatedSection key={issue.title} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -4 }}
-                  className="p-6 rounded-2xl bg-card border border-border shadow-sm hover:shadow-lg transition-all h-full"
+                  className="rounded-2xl bg-card border border-border shadow-sm hover:shadow-lg transition-all h-full overflow-hidden"
                 >
-                  <div className="flex items-start gap-4">
+                  {issue.image && (
+                    <div className="aspect-[16/9] overflow-hidden bg-muted">
+                      <img
+                        src={issue.image}
+                        alt={`${issue.title} — pressure washer repair`}
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                  )}
+                  <div className="p-6 flex items-start gap-4">
                     <div className="p-3 rounded-xl bg-primary/10 flex-shrink-0">
                       <issue.icon className="h-7 w-7 text-primary" />
                     </div>
