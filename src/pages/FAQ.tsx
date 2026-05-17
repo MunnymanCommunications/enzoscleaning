@@ -20,6 +20,16 @@ export default function FAQ() {
   return (
     <>
       <PageHero title="Frequently Asked Questions" subtitle="Answers to common questions about our products and services." />
+      <section className="pt-16">
+        <div className="container max-w-3xl flex justify-center">
+          <img
+            src="/uploads/enzos-cleaning-solutions-logo-faq.jpg"
+            alt="Enzo's Cleaning Solutions logo with tagline 'If You Have A Need We Have The Solution' — FAQ about industrial pressure washers, detergents and wash bay equipment in Sandusky, Ohio"
+            className="h-auto w-full max-w-xl object-contain"
+            loading="lazy"
+          />
+        </div>
+      </section>
       <section className="section-padding">
         <div className="container max-w-3xl">
           {isOta && (
