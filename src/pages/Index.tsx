@@ -17,7 +17,7 @@ const serviceCards = [
 const productCards = [
   { title: "Hotsy Equipment", image: "/uploads/2020/10/Electric-Pump-Fuel-Oil-Heat-2.jpg", link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/" },
   { title: "Mi-T-M Equipment", image: "/uploads/2020/10/natural-gas-hot-water-2-1.jpg", link: "/cleaning-equipment/mi-t-m/" },
-  { title: "Detergents & Disinfectants", image: "/uploads/2020/09/vog.jpg", link: "/detergents/" },
+  { title: "Detergents & Disinfectants", image: "/uploads/vital-oxide-disinfectant.jpg", alt: "Vital Oxide EPA-registered hospital-grade disinfectant and sanitizer — food-safe, no-PPE cleaner for bacteria, viruses and mold, available from Enzo's Cleaning Solutions in Ohio", link: "/detergents/" },
   { title: "The Neutralizer", image: "/uploads/2020/10/neutralizer.jpg", link: "/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" },
 ];
 

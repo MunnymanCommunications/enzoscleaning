@@ -6,11 +6,12 @@ interface ProductCardProps {
   title: string;
   description?: string;
   image?: string;
+  alt?: string;
   link: string;
   index?: number;
 }
 
-export default function ProductCard({ title, description, image, link, index = 0 }: ProductCardProps) {
+export default function ProductCard({ title, description, image, alt, link, index = 0 }: ProductCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 30, filter: "blur(6px)" }}
@@ -29,7 +30,7 @@ export default function ProductCard({ title, description, image, link, index = 0
           <div className="aspect-[4/3] overflow-hidden">
             <img
               src={image}
-              alt={title}
+              alt={alt || title}
               className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
               loading="lazy"
             />
