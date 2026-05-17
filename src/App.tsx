@@ -149,8 +149,8 @@ const App = () => (
             <Route path="/detergents/restoration-detergents/" element={<RestorationDetergents />} />
             <Route path="/detergents/specialty-cleaning-products/" element={<SpecialtyCleaningProducts />} />
             <Route path="/hardscaping/" element={<Hardscaping />} />
-            <Route path="/hardscaping/trident/" element={<TridentGate><Trident /></TridentGate>} />
-            <Route path="/hardscaping/trident/university/" element={<TridentGate><TridentUniversity /></TridentGate>} />
+            <Route path="/hardscaping/trident/" element={<TridentAuthProvider><TridentAuthGate><TridentCartProvider><Trident /><TridentCartButton /></TridentCartProvider></TridentAuthGate></TridentAuthProvider>} />
+            <Route path="/hardscaping/trident/university/" element={<TridentAuthProvider><TridentAuthGate><TridentCartProvider><TridentUniversity /><TridentCartButton /></TridentCartProvider></TridentAuthGate></TridentAuthProvider>} />
             <Route path="/admin/trident/" element={<TridentAdmin />} />
             <Route path="/disinfecting/" element={<Disinfecting />} />
             <Route path="/disinfecting/our-disinfectants-sanitizers/" element={<DisinfectantsSanitizers />} />
