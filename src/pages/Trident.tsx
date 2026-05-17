@@ -5,6 +5,7 @@ import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
 import { Shield, Droplets, Sparkles, Layers, ChevronDown, ChevronUp, Star, CheckCircle2, ArrowRight, Wrench, GraduationCap, Truck } from "lucide-react";
 import { useTridentPageTracking, useTridentProductTracking, useTridentEventTracking, useTridentSectionTracking } from "@/hooks/useTridentTracking";
+import AddToRequestButton from "@/components/trident/AddToRequestButton";
 
 /* ──────────────────────── PRODUCT DATA ──────────────────────── */
 
@@ -275,13 +276,14 @@ function ProductCard({ product, index, onView }: { product: typeof sealers[0] & 
             </div>
           )}
 
-          <div className="mt-5 pt-4 border-t border-border">
+          <div className="mt-5 pt-4 border-t border-border flex flex-wrap items-center justify-between gap-3">
             <Link
               to="/contact-us/"
               className="inline-flex items-center gap-2 text-sm font-semibold text-primary hover:underline"
             >
               Get Contractor Pricing <ArrowRight className="h-4 w-4" />
             </Link>
+            <AddToRequestButton productName={product.name} productSku={product.sku} />
           </div>
         </div>
       </div>
