@@ -63,7 +63,7 @@ Deno.serve(async (req) => {
 
     const results: Record<string, unknown> = {};
 
-    // 1) Resend email
+    // 1) Resend email to Nick (lead notification)
     if (RESEND_API_KEY) {
       const r = await fetch("https://api.resend.com/emails", {
         method: "POST",
@@ -74,6 +74,42 @@ Deno.serve(async (req) => {
         body: JSON.stringify({ from: FROM_EMAIL, to: [TO_EMAIL], subject, html, reply_to: data.email }),
       });
       results.email = { status: r.status, body: await r.text() };
+
+      // 1b) Coupon email to submitter (BCC nick)
+      const extra = (data.extra || {}) as Record<string, unknown>;
+      if (extra.send_coupon_email && data.email) {
+        const couponCode = String(extra.coupon_code || "10%ENZOS");
+        const couponHtml = `
+          <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;background:#ffffff">
+            <h1 style="color:#1a4d2e;text-align:center;margin:0 0 12px">Earn 10% Off!</h1>
+            <p style="color:#444;text-align:center;font-size:16px;margin:0 0 20px">Thanks${data.name ? `, ${data.name}` : ""}! Here's your exclusive coupon code from Enzo's Cleaning Solutions.</p>
+            <div style="border:2px dashed #1a4d2e;border-radius:14px;padding:22px;text-align:center;background:#f4faf6;margin:0 0 24px">
+              <div style="font-size:14px;color:#666;letter-spacing:1px;text-transform:uppercase">Your Code</div>
+              <div style="font-size:32px;font-weight:bold;color:#1a4d2e;letter-spacing:3px;margin-top:6px">${couponCode}</div>
+            </div>
+            <p style="color:#444;text-align:center;margin:0 0 18px">Mention this code when you call Tim to redeem your discount:</p>
+            <p style="text-align:center;margin:0 0 24px">
+              <a href="tel:4195020007" style="display:inline-block;background:linear-gradient(135deg,#1a4d2e,#2d7a4a);color:#ffffff;text-decoration:none;font-weight:bold;padding:14px 28px;border-radius:12px;font-size:16px">📞 Call Tim: 419-502-0007</a>
+            </p>
+            <p style="color:#999;font-size:12px;text-align:center;margin-top:32px">Enzo's Cleaning Solutions · Sandusky, OH</p>
+          </div>
+        `;
+        const cr = await fetch("https://api.resend.com/emails", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${RESEND_API_KEY}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            from: FROM_EMAIL,
+            to: [data.email],
+            bcc: [TO_EMAIL],
+            subject: "Your 10% Off Coupon from Enzo's Cleaning Solutions",
+            html: couponHtml,
+          }),
+        });
+        results.coupon_email = { status: cr.status, body: await cr.text() };
+      }
     } else {
       results.email = { skipped: "no RESEND_API_KEY" };
     }
