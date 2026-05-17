@@ -42,6 +42,15 @@ export default function ContactUs() {
     <>
       <PageHero title="Get in Touch" />
 
+      <div className="container pt-12 flex justify-center">
+        <img
+          src="/uploads/enzos-cleaning-solutions-logo.jpg"
+          alt="Enzo's Cleaning Solutions logo - If You Have A Need We Have The Solution - industrial pressure washers, detergents, and cleaning equipment in Sandusky, Ohio"
+          className="max-w-md w-full h-auto"
+          loading="lazy"
+        />
+      </div>
+
       <section className="py-16">
         <div className="container">
           <div className="grid gap-12 lg:grid-cols-2">
