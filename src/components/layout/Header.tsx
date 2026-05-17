@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Phone, Mail, Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import enzosLogo from "@/assets/enzos-logo.png";
+import SiteSearch from "@/components/shared/SiteSearch";
 
 const navItems = [
   {
