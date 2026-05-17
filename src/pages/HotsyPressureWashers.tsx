@@ -64,7 +64,7 @@ export default function HotsyPressureWashers() {
               <AnimatedSection key={cat.title} delay={i * 0.08}>
                 <Link to={cat.link} className="group overflow-hidden rounded-xl bg-card border border-border shadow-sm hover:shadow-lg hover:border-primary/30 transition-all block h-full">
                   <div className="aspect-square overflow-hidden">
-                    <img src={cat.image} alt={cat.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+                    <img src={cat.image} alt={(cat as any).alt ?? cat.title} className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300" loading="lazy" />
                   </div>
                   <div className="p-5">
                     <h3 className="font-heading font-bold text-lg">{cat.title}</h3>
