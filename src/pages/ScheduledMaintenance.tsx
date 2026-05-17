@@ -12,7 +12,7 @@ export default function ScheduledMaintenance() {
             <div className="mb-10 overflow-hidden rounded-2xl border border-border shadow-sm">
               <img
                 src="/uploads/service/scheduled-maintenance.jpg"
-                alt="Enzo's technician performing scheduled maintenance on a pressure washer"
+                alt="Enzo's Cleaning Systems technician performing scheduled preventative maintenance and 25-point inspection on a Hotsy hot water pressure washer in Ohio"
                 className="w-full h-auto object-cover"
                 loading="lazy"
               />
