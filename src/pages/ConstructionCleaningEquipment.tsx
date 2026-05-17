@@ -24,6 +24,18 @@ export default function ConstructionCleaningEquipment() {
   return (
     <>
       <PageHero title="Construction Cleaning Equipment" subtitle="Keep your equipment CLEAN and operating at peak efficiency." />
+      <section className="pt-12">
+        <div className="container max-w-5xl">
+          <AnimatedSection>
+            <img
+              src="/uploads/construction-cleaning-caterpillar-grader.jpg"
+              alt="Operator using an Enzo's Cleaning Solutions hot water pressure washer to clean a Caterpillar motor grader in a construction equipment wash bay"
+              className="w-full h-auto rounded-2xl border border-border shadow-sm"
+              loading="lazy"
+            />
+          </AnimatedSection>
+        </div>
+      </section>
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
