@@ -18,6 +18,14 @@ export default function ConstructionDetergents() {
       <PageHero title="Construction Equipment Cleaning" subtitle="Keep your construction equipment clean and running at peak efficiency." bgImage="/uploads/2020/09/DSC_0184.jpg" />
       <section className="section-padding">
         <div className="container">
+          <AnimatedSection className="mb-10 overflow-hidden rounded-2xl border border-border shadow-sm">
+            <img
+              src="/uploads/detergents/caterpillar-construction-equipment-wash.jpg"
+              alt="Worker pressure washing a Caterpillar motor grader to remove caked-on mud and grime using Enzo's construction equipment detergents"
+              loading="lazy"
+              className="w-full h-auto object-cover"
+            />
+          </AnimatedSection>
           <AnimatedSection>
             <p className="mx-auto max-w-3xl text-center text-muted-foreground text-lg mb-12">
               Construction is dirty work. Your machinery gets covered in tar, asphalt, grease and grime. This built-up dirt can lead to rust, mechanical problems and other issues, making cleaning incredibly important.
