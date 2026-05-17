@@ -37,6 +37,33 @@ export default function FloorCleaning() {
 
       <section className="pb-16">
         <div className="container">
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto mb-12">
+            <AnimatedSection>
+              <div className="rounded-2xl overflow-hidden border border-border shadow-lg bg-muted h-full">
+                <img
+                  src="/uploads/karcher-floor-scrubber-repair.jpg"
+                  alt="Kärcher commercial floor scrubber being serviced by a factory-trained technician at Enzo's Cleaning Systems in Ohio"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.1}>
+              <div className="rounded-2xl overflow-hidden border border-border shadow-lg bg-white flex items-center justify-center p-10 h-full">
+                <img
+                  src="/uploads/2020/11/minuteman-logoLarge.png"
+                  alt="Minuteman International logo — commercial floor sweepers and scrubbers available at Enzo's Cleaning Systems in Ohio"
+                  className="max-h-32 w-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
+            </AnimatedSection>
+          </div>
+        </div>
+      </section>
+
+      <section className="pb-16">
+        <div className="container">
           <div className="grid sm:grid-cols-2 gap-8 max-w-2xl mx-auto">
             {brands.map((b, i) => (
               <AnimatedSection key={b.title} delay={i * 0.1}>
