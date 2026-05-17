@@ -145,7 +145,7 @@ export default function SiteSearch({ variant = "desktop", onNavigate }: SiteSear
       </div>
 
       {open && query.trim().length > 0 && (
-        <div className="absolute left-0 right-0 top-full mt-2 z-50 rounded-xl glass-strong shadow-2xl border border-border overflow-hidden max-h-[70vh] overflow-y-auto">
+        <div className="absolute left-0 right-0 top-full mt-2 z-50 rounded-xl bg-white shadow-2xl border border-border overflow-hidden max-h-[70vh] overflow-y-auto">
           {results.length === 0 ? (
             <div className="px-4 py-6 text-sm text-muted-foreground text-center">
               {terms.length === 0
