@@ -9,6 +9,14 @@ export default function Nozzles() {
       <section className="section-padding">
         <div className="container max-w-4xl">
           <AnimatedSection>
+            <div className="mb-10 overflow-hidden rounded-2xl border border-border shadow-lg">
+              <img
+                src="/uploads/accessories/quick-change-pressure-washer-nozzles.jpg"
+                alt="Assortment of color-coded quick-change pressure washer nozzles — red, yellow, green and white spray tips for commercial hot and cold water pressure washers at Enzo's Cleaning Systems in Ohio"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+              />
+            </div>
             <p className="text-lg text-muted-foreground text-center leading-relaxed">
               Using the correct nozzle is critical to getting the most out of your pressure washer. The wrong nozzle can damage surfaces, reduce cleaning effectiveness, or even harm your machine. Enzo's carries a wide selection of quick-change nozzles for hot-water and cold-water pressure washers.
             </p>
