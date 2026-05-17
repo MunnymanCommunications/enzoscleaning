@@ -24,7 +24,7 @@ Deno.serve(async (req) => {
     }
 
     const cleanEmail = email.trim().toLowerCase();
-    const redirectTo = redirect_to || "https://enzoscleaning.com/hardscaping/trident/";
+    const redirectTo = "https://2.enzoscleaning.com/hardscaping/trident/";
 
     const admin = createClient(
       Deno.env.get("SUPABASE_URL")!,
