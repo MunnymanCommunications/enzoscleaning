@@ -3,6 +3,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Phone, Mail, Menu, X, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import enzosLogo from "@/assets/enzos-logo.png";
+import SiteSearch from "@/components/shared/SiteSearch";
 
 const navItems = [
   {
@@ -111,11 +112,12 @@ export default function Header() {
             />
           </Link>
 
-          {/* Desktop: contact CTA */}
-          <div className="hidden lg:flex items-center gap-3">
+          {/* Desktop: search + contact CTA */}
+          <div className="hidden lg:flex items-center gap-3 flex-1 justify-end max-w-md ml-auto">
+            <SiteSearch />
             <Link
               to="/contact-us/"
-              className="rounded-full bg-gradient-to-r from-primary to-accent px-5 py-2 text-sm font-bold text-primary-foreground hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 active:scale-[0.97]"
+              className="rounded-full bg-gradient-to-r from-primary to-accent px-5 py-2 text-sm font-bold text-primary-foreground hover:shadow-lg hover:scale-105 transition-all duration-300 flex items-center gap-2 active:scale-[0.97] flex-shrink-0"
             >
               Contact Us <Mail className="h-4 w-4" />
             </Link>
@@ -197,6 +199,9 @@ export default function Header() {
             className="lg:hidden border-t border-border glass-strong overflow-hidden"
           >
             <div className="pb-4 max-h-[70vh] overflow-y-auto">
+              <div className="px-4 py-3 border-b border-border/40">
+                <SiteSearch variant="mobile" onNavigate={() => setMobileOpen(false)} />
+              </div>
               {navItems.map((item) => (
                 <div key={item.path}>
                   <div className="flex items-center">
