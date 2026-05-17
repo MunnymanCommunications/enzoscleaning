@@ -1,3 +1,4 @@
+import { useLocation } from "react-router-dom";
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
