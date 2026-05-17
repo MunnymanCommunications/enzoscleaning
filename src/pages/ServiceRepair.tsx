@@ -25,6 +25,7 @@ const commonIssues = [
     title: "Diesel Fuel Pump Issues",
     desc: "Diesel burners need periodic tune-ups. The fuel nozzle wears, affecting the spray pattern and causing soot buildup. If you run out of fuel while operating, the diesel pump can spin dry and seize. Always turn the burner off before running dry.",
     warning: "A seized fuel pump is a much more expensive repair than a routine tune-up.",
+    image: "/uploads/service/hotsy-burner-issue.jpg",
   },
   {
     icon: Droplets,
