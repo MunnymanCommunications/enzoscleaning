@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import PartnersMarquee from "@/components/shared/PartnersMarquee";
 
 const categories = [
   { title: "Pressure Washers", link: "/cleaning-equipment/pressure-washers/", desc: "Hot and cold water models from Hotsy and Mi-T-M." },
@@ -35,6 +36,7 @@ export default function Shop() {
           </div>
         </div>
       </section>
+      <PartnersMarquee />
       <CTASection title="Need Help Finding Something?" description="Contact Enzo's and our team will point you in the right direction." />
     </>
   );
