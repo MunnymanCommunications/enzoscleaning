@@ -4,6 +4,7 @@ import { Shield, Clock, Wrench, Truck, Phone, ArrowRight, CheckCircle } from "lu
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import InteractiveSchematic from "@/components/shared/InteractiveSchematic";
 
 const pillars = [
   { icon: Shield, title: "PROTECT", desc: "Shield your fleet from corrosive road salts, brine and environmental damage with automatic undercarriage and body washing." },
@@ -97,6 +98,26 @@ export default function TouchlessDriveThru() {
           </div>
         </div>
       </section>
+
+      {/* Interactive Schematic */}
+      <section className="section-padding bg-background">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center max-w-3xl mx-auto mb-8">
+              <span className="inline-block px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-3">Interactive Diagram</span>
+              <h2 className="text-2xl md:text-3xl font-heading font-bold mb-3">Explore a Customized Drive-Through System</h2>
+              <p className="text-muted-foreground">
+                Tap the blue dots to see how each component works together — from the D-Salt tank to the spot-free RO rinse. This is an example of a fully touchless drive-through configuration. <strong className="text-foreground">Brushes can be added</strong> if your fleet benefits from a high-touch finish, and every system is customized to your bay and vehicles.
+              </p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection delay={0.1}>
+            <InteractiveSchematic />
+          </AnimatedSection>
+        </div>
+      </section>
+
+
 
       {/* Neutralizer Cross-Link */}
       <section className="section-padding bg-muted">
