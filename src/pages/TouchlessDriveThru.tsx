@@ -4,6 +4,7 @@ import { Shield, Clock, Wrench, Truck, Phone, ArrowRight, CheckCircle } from "lu
 import PageHero from "@/components/shared/PageHero";
 import CTASection from "@/components/shared/CTASection";
 import AnimatedSection from "@/components/shared/AnimatedSection";
+import InteractiveSchematic from "@/components/shared/InteractiveSchematic";
 
 const pillars = [
   { icon: Shield, title: "PROTECT", desc: "Shield your fleet from corrosive road salts, brine and environmental damage with automatic undercarriage and body washing." },
