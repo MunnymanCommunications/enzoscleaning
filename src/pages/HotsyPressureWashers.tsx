@@ -20,7 +20,8 @@ const hotsyCategories = [
   },
   {
     title: "Natural Gas Hot Water",
-    image: "/uploads/2021/04/Natural-Gas-Hot-Water.jpg",
+    image: "/uploads/hotsy/hotsy-natural-gas-hot-water.jpg",
+    alt: "Hotsy natural gas hot water pressure washer — vertical coil stationary unit at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/natural-gas-hot-water/",
     desc: "Lower operating costs with natural gas heating. Great for permanent installations in wash bays and facilities with a gas line.",
   },
