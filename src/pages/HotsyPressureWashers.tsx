@@ -13,7 +13,7 @@ const hotsyCategories = [
   },
   {
     title: "Gasoline Pump, Fuel Oil Heat",
-    image: "/uploads/hotsy/hotsy-gasoline-pump-fuel-oil-heat.jpg",
+    image: "/uploads/hotsy/hotsy-gasoline-pump-fuel-oil-heat.jpg?v=2",
     alt: "Hotsy gasoline pump, fuel oil heat hot water pressure washer — portable skid-mounted commercial unit available at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-gasoline-pump-fuel-oil-heat/",
     desc: "Gasoline engine provides portability while fuel oil heat delivers hot water power. Perfect for outdoor job sites with no electrical hookup.",
@@ -27,7 +27,7 @@ const hotsyCategories = [
   },
   {
     title: "Electric Cold Water",
-    image: "/uploads/hotsy/hotsy-electric-cold-water.jpg",
+    image: "/uploads/hotsy/hotsy-electric-cold-water.jpg?v=2",
     alt: "Hotsy electric cold water pressure washer — quiet, fume-free stainless steel wall-mount unit for indoor commercial cleaning at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/electric-cold-water/",
     desc: "Quiet, fume-free cold water cleaning for indoor facilities, food processing plants, and light-duty commercial applications.",
@@ -41,7 +41,7 @@ const hotsyCategories = [
   },
   {
     title: "Diesel Hot Water",
-    image: "/uploads/hotsy/hotsy-diesel-hot-water.jpg",
+    image: "/uploads/hotsy/hotsy-diesel-hot-water.jpg?v=2",
     alt: "Hotsy diesel hot water pressure washer — heavy-duty skid-mounted industrial unit for the toughest commercial cleaning jobs at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/diesel-cold-water/",
     desc: "Diesel-powered pump and heat for the toughest commercial and industrial cleaning jobs — built for heavy daily use.",
