@@ -21,6 +21,14 @@ const models = [
     dimensions: { length: "Varies", width: "Varies", height: "Varies", weight: "Contact" },
     description: "Reliable stationary, electric-powered cold water pressure washers featuring a Hotsy belt-driven triplex pump backed by an industry-leading 7-year warranty. Perfect for light-to-medium commercial cleaning operations.",
   },
+  {
+    model: "ET Series",
+    partNumber: "Compact Hand-Carry Electric Cold Water",
+    discharge: "Portable electric • Direct-drive pump",
+    image: "/uploads/hotsy/hotsy-et-electric.jpg",
+    dimensions: { length: "Varies", width: "Varies", height: "Varies", weight: "Contact" },
+    description: "Compact, hand-carry electric cold water pressure washer designed for light commercial and indoor cleaning tasks. Plug-and-play operation with a sturdy roll cage, included spray gun, wand, hose, and remote pump switch — perfect for shops, kitchens, and facility maintenance crews.",
+  },
 ];
 
 const reasons = [
