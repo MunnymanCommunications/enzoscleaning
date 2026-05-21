@@ -111,6 +111,11 @@ const sections: Section[] = [
     title: "Disinfectant Sprayers",
     link: "/disinfecting/our-disinfectant-sprayers/",
     image: "/uploads/2020/09/download-1.jpg",
+    extraImages: [
+      { src: "/uploads/sprayers/ap100-50m.jpg", alt: "AP 100/50M Touchless All Purpose Cleaner" },
+      { src: "/uploads/sprayers/cordless-electrostatic-backpack.jpg", alt: "Cordless Electrostatic Backpack Disinfectant Sprayer" },
+      { src: "/uploads/sprayers/cbp-sprayer.jpg", alt: "Victory Cordless Backpack Electrostatic Sprayer" },
+    ],
     intro:
       "Apply disinfectants and sanitizers quickly and efficiently with professional-grade sprayers — from electrostatic to backpack to handheld.",
     simpleProducts: [
