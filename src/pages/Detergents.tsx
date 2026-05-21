@@ -205,8 +205,20 @@ export default function Detergents() {
 
             {s.image && (
               <AnimatedSection>
-                <div className="mb-8 max-w-3xl mx-auto aspect-video rounded-xl overflow-hidden shadow-lg">
+                <div className={`mb-8 mx-auto aspect-video rounded-xl overflow-hidden shadow-lg ${s.extraImages ? "max-w-xs" : "max-w-3xl"}`}>
                   <img src={s.image} alt={s.title} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              </AnimatedSection>
+            )}
+
+            {s.extraImages && (
+              <AnimatedSection>
+                <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+                  {s.extraImages.map((img) => (
+                    <div key={img.src} className="aspect-square rounded-xl overflow-hidden shadow-md bg-white">
+                      <img src={img.src} alt={img.alt} className="w-full h-full object-contain" loading="lazy" />
+                    </div>
+                  ))}
                 </div>
               </AnimatedSection>
             )}
