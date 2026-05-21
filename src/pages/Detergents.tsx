@@ -11,6 +11,7 @@ type Section = {
   intro: string;
   bgImage?: string;
   image?: string;
+  extraImages?: { src: string; alt: string }[];
   products?: { name: string; bullets: string[]; specLink?: string }[];
   simpleProducts?: { name: string; desc: string }[];
   features?: { title: string; desc: string }[];
@@ -110,6 +111,11 @@ const sections: Section[] = [
     title: "Disinfectant Sprayers",
     link: "/disinfecting/our-disinfectant-sprayers/",
     image: "/uploads/2020/09/download-1.jpg",
+    extraImages: [
+      { src: "/uploads/sprayers/ap100-50m.jpg", alt: "AP 100/50M Touchless All Purpose Cleaner" },
+      { src: "/uploads/sprayers/cordless-electrostatic-backpack.jpg", alt: "Cordless Electrostatic Backpack Disinfectant Sprayer" },
+      { src: "/uploads/sprayers/cbp-sprayer.jpg", alt: "Victory Cordless Backpack Electrostatic Sprayer" },
+    ],
     intro:
       "Apply disinfectants and sanitizers quickly and efficiently with professional-grade sprayers — from electrostatic to backpack to handheld.",
     simpleProducts: [
@@ -199,8 +205,20 @@ export default function Detergents() {
 
             {s.image && (
               <AnimatedSection>
-                <div className="mb-8 max-w-3xl mx-auto aspect-video rounded-xl overflow-hidden shadow-lg">
+                <div className={`mb-8 mx-auto aspect-video rounded-xl overflow-hidden shadow-lg ${s.extraImages ? "max-w-xs" : "max-w-3xl"}`}>
                   <img src={s.image} alt={s.title} className="w-full h-full object-cover" loading="lazy" />
+                </div>
+              </AnimatedSection>
+            )}
+
+            {s.extraImages && (
+              <AnimatedSection>
+                <div className="mb-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
+                  {s.extraImages.map((img) => (
+                    <div key={img.src} className="aspect-square rounded-xl overflow-hidden shadow-md bg-white">
+                      <img src={img.src} alt={img.alt} className="w-full h-full object-contain" loading="lazy" />
+                    </div>
+                  ))}
                 </div>
               </AnimatedSection>
             )}
