@@ -33,8 +33,8 @@ const hotsyCategories = [
   },
   {
     title: "Gasoline Cold Water",
-    image: "/uploads/hotsy/hotsy-gasoline-cold-water.jpg",
-    alt: "Hotsy gasoline cold water pressure washer — portable Honda-powered commercial unit for outdoor and remote job sites at Enzo's Cleaning Systems in Ohio",
+    image: "/uploads/hotsy/hotsy-bx-w-reel.jpg",
+    alt: "Hotsy BX Series gasoline cold water pressure washer with hose reel — Honda-powered portable commercial unit at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/gasoline-cold-water/",
     desc: "Portable cold water power for outdoor and remote applications where electricity isn't available.",
   },
