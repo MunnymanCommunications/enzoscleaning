@@ -11,6 +11,7 @@ type Section = {
   intro: string;
   bgImage?: string;
   image?: string;
+  extraImages?: { src: string; alt: string }[];
   products?: { name: string; bullets: string[]; specLink?: string }[];
   simpleProducts?: { name: string; desc: string }[];
   features?: { title: string; desc: string }[];
