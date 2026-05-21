@@ -22,6 +22,14 @@ const models = [
     description: "Hot water, high pressure, gas engine powered washer. Manually operated with appropriate safety controls. ETL/UL/CGA/CSA certified to UL1776 industry safety standard. Built in ISO-9001; 2008 registered factory. Compact diesel-powered performance for on-the-go cleaning.",
     specSheet: "/uploads/2024/09/871SS-Diesel-Spec-Sheet-1.pdf",
   },
+  {
+    model: "HSS Series",
+    partNumber: "Skid-Mounted Diesel Hot Water",
+    discharge: "Heavy-duty skid platform • Industrial diesel performance",
+    image: "/uploads/hotsy/hotsy-diesel-hot-water.jpg",
+    dimensions: { length: "Varies", width: "Varies", height: "Varies", weight: "Contact" },
+    description: "Heavy-duty skid-mounted diesel hot water pressure washer built for the most demanding industrial cleaning operations. Roll-cage frame protects pump, burner, and electrical components on the job site. Ideal for oilfield service, heavy equipment cleaning, and any application where reliability under tough conditions is non-negotiable.",
+  },
 ];
 
 export default function HotsyDieselHotWater() {
