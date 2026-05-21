@@ -13,7 +13,7 @@ const hotsyCategories = [
   },
   {
     title: "Gasoline Pump, Fuel Oil Heat",
-    image: "/uploads/hotsy/hotsy-gasoline-pump-fuel-oil-heat.jpg",
+    image: "/uploads/hotsy/hotsy-gasoline-pump-fuel-oil-heat.jpg?v=2",
     alt: "Hotsy gasoline pump, fuel oil heat hot water pressure washer — portable skid-mounted commercial unit available at Enzo's Cleaning Systems in Ohio",
     link: "/cleaning-equipment/pressure-washers/hotsy-pressure-washers/hotsy-gasoline-pump-fuel-oil-heat/",
     desc: "Gasoline engine provides portability while fuel oil heat delivers hot water power. Perfect for outdoor job sites with no electrical hookup.",
