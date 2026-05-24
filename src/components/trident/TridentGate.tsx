@@ -28,27 +28,26 @@ export default function TridentGate({ children }: TridentGateProps) {
   useEffect(() => {
     const visitorId = localStorage.getItem(STORAGE_KEY);
     if (visitorId) {
-      // Returning visitor — update last_visit_at
-      supabase
-        .from("trident_visitors")
-        .update({ last_visit_at: new Date().toISOString() })
-        .eq("id", visitorId)
-        .then(() => {
-          setUnlocked(true);
-          setLoading(false);
-        });
+      supabase.functions.invoke("trident-track", {
+        body: { action: "touch_visitor", visitor_id: visitorId },
+      }).finally(() => {
+        setUnlocked(true);
+        setLoading(false);
+      });
 
-      // Log return visit event
-      supabase.from("trident_events").insert([{
-        visitor_id: visitorId,
-        event_type: "return_visit",
-        event_data: {
-          user_agent: navigator.userAgent,
-          referrer: document.referrer,
-          screen_width: window.screen.width,
-          screen_height: window.screen.height,
-        } as any,
-      }]);
+      supabase.functions.invoke("trident-track", {
+        body: {
+          action: "event",
+          visitor_id: visitorId,
+          event_type: "return_visit",
+          event_data: {
+            user_agent: navigator.userAgent,
+            referrer: document.referrer,
+            screen_width: window.screen.width,
+            screen_height: window.screen.height,
+          },
+        },
+      });
     } else {
       setLoading(false);
     }
@@ -66,70 +65,37 @@ export default function TridentGate({ children }: TridentGateProps) {
     setSubmitting(true);
 
     try {
-      // Get IP address
-      let ip_address = null;
-      try {
-        const ipRes = await fetch("https://api.ipify.org?format=json");
-        const ipData = await ipRes.json();
-        ip_address = ipData.ip;
-      } catch {
-        // IP fetch failed, continue without it
+      const { data, error: fnError } = await supabase.functions.invoke("trident-track", {
+        body: {
+          action: "upsert_visitor",
+          name: form.name,
+          company_name: form.company_name,
+          email: form.email,
+          phone: form.phone,
+        },
+      });
+
+      const visitorId = (data as { visitor_id?: string } | null)?.visitor_id;
+      if (fnError || !visitorId) {
+        setError("Something went wrong. Please try again.");
+        setSubmitting(false);
+        return;
       }
 
-      // Check if visitor already exists by email
-      const { data: existing } = await supabase
-        .from("trident_visitors")
-        .select("id")
-        .eq("email", form.email)
-        .maybeSingle();
-
-      let visitorId: string;
-
-      if (existing) {
-        visitorId = existing.id;
-        await supabase
-          .from("trident_visitors")
-          .update({
-            last_visit_at: new Date().toISOString(),
-            name: form.name,
-            company_name: form.company_name,
-            phone: form.phone,
-            ip_address: ip_address || undefined,
-          })
-          .eq("id", visitorId);
-      } else {
-        const { data, error: insertError } = await supabase
-          .from("trident_visitors")
-          .insert([{
-            name: form.name,
-            company_name: form.company_name,
-            email: form.email,
-            phone: form.phone,
-            ip_address,
-          }])
-          .select("id")
-          .single();
-
-        if (insertError || !data) {
-          setError("Something went wrong. Please try again.");
-          setSubmitting(false);
-          return;
-        }
-        visitorId = data.id;
-      }
-
-      // Log gate_unlock event
-      await supabase.from("trident_events").insert([{
-        visitor_id: visitorId,
-        event_type: "gate_unlock",
-        event_data: {
-          user_agent: navigator.userAgent,
-          referrer: document.referrer,
-          screen_width: window.screen.width,
-          screen_height: window.screen.height,
-          url: window.location.href,
-        } as any,
-      }]);
+      await supabase.functions.invoke("trident-track", {
+        body: {
+          action: "event",
+          visitor_id: visitorId,
+          event_type: "gate_unlock",
+          event_data: {
+            user_agent: navigator.userAgent,
+            referrer: document.referrer,
+            screen_width: window.screen.width,
+            screen_height: window.screen.height,
+            url: window.location.href,
+          },
+        },
+      });
 
       localStorage.setItem(STORAGE_KEY, visitorId);
       setUnlocked(true);
