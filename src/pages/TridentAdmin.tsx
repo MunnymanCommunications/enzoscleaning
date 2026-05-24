@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Users, Eye, Package, Activity, Clock, ArrowLeft, RefreshCw } from "lucide-react";
 
-const ADMIN_PASSWORD = "ENZOSADMIN2025";
+// Admin access requires a signed-in Supabase user with the 'admin' role.
 
 interface Visitor {
   id: string;
@@ -61,6 +61,8 @@ function formatDuration(seconds: number | null) {
 
 export default function TridentAdmin() {
   const [authenticated, setAuthenticated] = useState(false);
+  const [checkingSession, setCheckingSession] = useState(true);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -71,14 +73,63 @@ export default function TridentAdmin() {
   const [events, setEvents] = useState<TridentEvent[]>([]);
   const [selectedVisitor, setSelectedVisitor] = useState<string | null>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const verifyAdminAccess = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return false;
+    const { data } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .eq("role", "admin")
+      .maybeSingle();
+    return !!data;
+  };
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        const ok = await verifyAdminAccess();
+        setAuthenticated(ok);
+        if (!ok) {
+          setError("Your account does not have admin access.");
+          await supabase.auth.signOut();
+        }
+      } else {
+        setAuthenticated(false);
+      }
+      setCheckingSession(false);
+    });
+
+    verifyAdminAccess().then((ok) => {
+      setAuthenticated(ok);
+      setCheckingSession(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setAuthenticated(true);
-      setError("");
-    } else {
-      setError("Incorrect admin password");
+    setError("");
+    setLoading(true);
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+    if (signInError) {
+      setError(signInError.message);
+      return;
     }
+    const ok = await verifyAdminAccess();
+    if (!ok) {
+      await supabase.auth.signOut();
+      setError("Your account does not have admin access.");
+      return;
+    }
+    setAuthenticated(true);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setAuthenticated(false);
   };
 
   const fetchData = async () => {
@@ -117,6 +168,14 @@ export default function TridentAdmin() {
     ? visitors.find((v) => v.id === selectedVisitor)?.name || "Unknown"
     : null;
 
+  if (checkingSession) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      </div>
+    );
+  }
+
   if (!authenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
@@ -124,18 +183,36 @@ export default function TridentAdmin() {
           <h1 className="text-2xl font-bold text-center mb-6">Trident Admin Portal</h1>
           <form onSubmit={handleLogin} className="space-y-4 bg-white p-6 rounded-xl shadow-md">
             <div className="space-y-2">
-              <Label htmlFor="admin-pass">Admin Password</Label>
+              <Label htmlFor="admin-email">Email</Label>
+              <Input
+                id="admin-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@enzoscleaning.com"
+                required
+                autoComplete="email"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="admin-pass">Password</Label>
               <Input
                 id="admin-pass"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter admin password"
+                placeholder="••••••••"
                 required
+                autoComplete="current-password"
               />
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full">Login</Button>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Signing in..." : "Sign in"}
+            </Button>
+            <p className="text-xs text-muted-foreground text-center">
+              Admin role required. Contact your developer to provision access.
+            </p>
           </form>
         </div>
       </div>
@@ -161,10 +238,13 @@ export default function TridentAdmin() {
               )}
             </p>
           </div>
-          <Button variant="outline" onClick={fetchData} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
-            Refresh
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={fetchData} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
+              Refresh
+            </Button>
+            <Button variant="ghost" onClick={handleSignOut}>Sign out</Button>
+          </div>
         </div>
 
         {/* Summary Cards */}
