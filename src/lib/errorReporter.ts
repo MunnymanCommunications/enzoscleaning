@@ -75,6 +75,8 @@ export async function reportClientError(opts: ReportClientErrorOptions): Promise
     if (/Minified React error #(418|419|421|422|423|425)/.test(message)) return;
     // Also suppress known benign browser/extension noise
     if (/ResizeObserver loop|Non-Error promise rejection captured/i.test(message)) return;
+    // Microsoft Outlook SafeLink / email-preview crawler noise — not a real app error
+    if (/Object Not Found Matching Id:\d+, MethodName:\w+, ParamCount:\d+/i.test(message)) return;
 
     const fp = fingerprint(name, message, stack);
     if (!shouldReport(fp)) return;
