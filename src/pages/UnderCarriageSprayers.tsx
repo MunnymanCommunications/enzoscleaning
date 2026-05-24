@@ -25,7 +25,7 @@ export default function UnderCarriageSprayers() {
             </AnimatedSection>
             <AnimatedSection delay={0.2}>
               <Link to="/cleaning-equipment/under-carriage-sprayers/the-neutralizer/" className="group block bg-card rounded-xl border border-border overflow-hidden hover:shadow-lg transition-shadow">
-                <img src="/uploads/2020/11/80.617_HURp-520-7889-US.jpg" alt="Push Under Carriage Deluxe 2" className="w-full aspect-square object-contain p-4" loading="lazy" />
+                <img src="/uploads/sprayers/hurricane-push-undercarriage-deluxe-2.png" alt="Hurricane Push Under Carriage Deluxe 2 — single-operator stainless steel rotary undercarriage pressure washer with pneumatic wheels for fleet salt and corrosion removal at Enzo's Cleaning Systems in Ohio" className="w-full aspect-square object-contain p-4" loading="lazy" />
                 <div className="p-4 text-center">
                   <h3 className="font-heading font-bold">Push Under Carriage Deluxe 2</h3>
                   <p className="text-sm text-primary mt-1">Learn More →</p>
