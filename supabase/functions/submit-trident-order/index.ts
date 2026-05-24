@@ -213,7 +213,7 @@ Deno.serve(async (req) => {
         const r = await fetchWithTimeout("https://api.resend.com/emails", {
           method: "POST",
           headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ from: FROM_EMAIL, to: [TO_EMAIL], subject, html, reply_to: member.email }),
+          body: JSON.stringify({ from: FROM_EMAIL, to: [TO_EMAIL], cc: CC_EMAILS, subject, html, reply_to: REPLY_TO_EMAIL }),
         });
         const body = await r.text();
         if (!r.ok) log.error("email", "order_email_failed", { status: r.status, body: body.slice(0, 500), order_id: order.id });
