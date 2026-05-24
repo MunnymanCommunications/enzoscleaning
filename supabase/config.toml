@@ -2,3 +2,6 @@ project_id = "fwtiewosgknvmjjdvmpd"
 
 [functions.report-error]
 verify_jwt = false
+
+[functions.trident-track]
+verify_jwt = false
