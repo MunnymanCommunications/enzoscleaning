@@ -17,7 +17,7 @@ export default function UnderCarriageSprayers() {
           <div className="mt-10 grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
             <AnimatedSection delay={0.1}>
               <div className="bg-card rounded-xl border border-border overflow-hidden">
-                <img src="/uploads/2020/11/80.618_HURpz-520-002.jpg" alt="Push Under Carriage Deluxe 1" className="w-full aspect-square object-contain p-4" loading="lazy" />
+                <img src="/uploads/sprayers/hurricane-push-undercarriage-deluxe-1.png" alt="Hurricane Push Under Carriage Deluxe 1 — stainless steel rotary undercarriage pressure washer with dual trigger guns and pneumatic wheels for fleet vehicle cleaning at Enzo's Cleaning Systems in Ohio" className="w-full aspect-square object-contain p-4" loading="lazy" />
                 <div className="p-4 text-center">
                   <h3 className="font-heading font-bold">Push Under Carriage Deluxe 1</h3>
                 </div>
