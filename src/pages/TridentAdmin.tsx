@@ -168,6 +168,14 @@ export default function TridentAdmin() {
     ? visitors.find((v) => v.id === selectedVisitor)?.name || "Unknown"
     : null;
 
+  if (checkingSession) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-slate-50">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
+      </div>
+    );
+  }
+
   if (!authenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
@@ -175,18 +183,36 @@ export default function TridentAdmin() {
           <h1 className="text-2xl font-bold text-center mb-6">Trident Admin Portal</h1>
           <form onSubmit={handleLogin} className="space-y-4 bg-white p-6 rounded-xl shadow-md">
             <div className="space-y-2">
-              <Label htmlFor="admin-pass">Admin Password</Label>
+              <Label htmlFor="admin-email">Email</Label>
+              <Input
+                id="admin-email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@enzoscleaning.com"
+                required
+                autoComplete="email"
+              />
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="admin-pass">Password</Label>
               <Input
                 id="admin-pass"
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter admin password"
+                placeholder="••••••••"
                 required
+                autoComplete="current-password"
               />
             </div>
             {error && <p className="text-red-500 text-sm">{error}</p>}
-            <Button type="submit" className="w-full">Login</Button>
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Signing in..." : "Sign in"}
+            </Button>
+            <p className="text-xs text-muted-foreground text-center">
+              Admin role required. Contact your developer to provision access.
+            </p>
           </form>
         </div>
       </div>
@@ -212,10 +238,13 @@ export default function TridentAdmin() {
               )}
             </p>
           </div>
-          <Button variant="outline" onClick={fetchData} disabled={loading}>
-            <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
-            Refresh
-          </Button>
+          <div className="flex gap-2">
+            <Button variant="outline" onClick={fetchData} disabled={loading}>
+              <RefreshCw className={`h-4 w-4 mr-2 ${loading ? "animate-spin" : ""}`} />
+              Refresh
+            </Button>
+            <Button variant="ghost" onClick={handleSignOut}>Sign out</Button>
+          </div>
         </div>
 
         {/* Summary Cards */}
