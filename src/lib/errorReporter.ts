@@ -1,6 +1,9 @@
 // Frontend error reporter — sends errors to the report-error edge function.
 // Includes throttling, sanitization, and silent fallback so logging
 // failures never crash the app.
+// NOTE: Reporting is currently paused.
+
+const REPORTING_ENABLED = false;
 
 const ENDPOINT = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/report-error`;
 const ANON_KEY = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY as string;
@@ -111,7 +114,7 @@ function isSuppressed(message: string, stack: string): boolean {
 
 export async function reportClientError(opts: ReportClientErrorOptions): Promise<void> {
   try {
-    if (typeof window === "undefined") return;
+    if (!REPORTING_ENABLED || typeof window === "undefined") return;
     const env = detectEnvironment();
     if (env === "development") return;
 
