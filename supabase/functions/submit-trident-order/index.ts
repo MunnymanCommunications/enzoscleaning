@@ -1,6 +1,7 @@
 // Submits a Trident member's order/estimate request: stores it, pushes to "Website Forms" CRM board, and emails Nick.
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { createLogger, errMeta } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",

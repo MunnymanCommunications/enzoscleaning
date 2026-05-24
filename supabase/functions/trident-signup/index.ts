@@ -1,6 +1,7 @@
 // Trident member signup: creates auth user, profile row, sends branded magic link via Resend, and pushes to CRM "Trident Members" board.
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { createLogger, errMeta } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
