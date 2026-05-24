@@ -105,6 +105,9 @@ const SUPPRESSED_PATTERNS: RegExp[] = [
   /window\.webkit\.messageHandlers/i,
   /Can't find variable: gmo/i,
   /vid_mate_check is not defined/i,
+
+  // Supabase Auth LockManager lock acquisition failures (internal race condition, not user-facing)
+  /Acquiring an exclusive Navigator LockManager lock "lock:sb-.*-auth-token"/i,
 ];
 
 function isSuppressed(message: string, stack: string): boolean {
