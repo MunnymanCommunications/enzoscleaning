@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Users, Eye, Package, Activity, Clock, ArrowLeft, RefreshCw } from "lucide-react";
 
-const ADMIN_PASSWORD = "ENZOSADMIN2025";
+// Admin access requires a signed-in Supabase user with the 'admin' role.
 
 interface Visitor {
   id: string;
@@ -61,6 +61,8 @@ function formatDuration(seconds: number | null) {
 
 export default function TridentAdmin() {
   const [authenticated, setAuthenticated] = useState(false);
+  const [checkingSession, setCheckingSession] = useState(true);
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -71,14 +73,63 @@ export default function TridentAdmin() {
   const [events, setEvents] = useState<TridentEvent[]>([]);
   const [selectedVisitor, setSelectedVisitor] = useState<string | null>(null);
 
-  const handleLogin = (e: React.FormEvent) => {
+  const verifyAdminAccess = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return false;
+    const { data } = await supabase
+      .from("user_roles")
+      .select("role")
+      .eq("user_id", user.id)
+      .eq("role", "admin")
+      .maybeSingle();
+    return !!data;
+  };
+
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        const ok = await verifyAdminAccess();
+        setAuthenticated(ok);
+        if (!ok) {
+          setError("Your account does not have admin access.");
+          await supabase.auth.signOut();
+        }
+      } else {
+        setAuthenticated(false);
+      }
+      setCheckingSession(false);
+    });
+
+    verifyAdminAccess().then((ok) => {
+      setAuthenticated(ok);
+      setCheckingSession(false);
+    });
+
+    return () => subscription.unsubscribe();
+  }, []);
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === ADMIN_PASSWORD) {
-      setAuthenticated(true);
-      setError("");
-    } else {
-      setError("Incorrect admin password");
+    setError("");
+    setLoading(true);
+    const { error: signInError } = await supabase.auth.signInWithPassword({ email, password });
+    setLoading(false);
+    if (signInError) {
+      setError(signInError.message);
+      return;
     }
+    const ok = await verifyAdminAccess();
+    if (!ok) {
+      await supabase.auth.signOut();
+      setError("Your account does not have admin access.");
+      return;
+    }
+    setAuthenticated(true);
+  };
+
+  const handleSignOut = async () => {
+    await supabase.auth.signOut();
+    setAuthenticated(false);
   };
 
   const fetchData = async () => {
