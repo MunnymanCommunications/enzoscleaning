@@ -1,5 +1,6 @@
 // Submit lead: emails via Resend + posts to CRM webhook
 import { createLogger, errMeta, maskEmail, maskPhone } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
