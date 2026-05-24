@@ -205,6 +205,7 @@ Deno.serve(async (req) => {
     return json({ ok: true, request_id: log.requestId }, 200, log.requestId);
   } catch (err) {
     log.error("unexpected", "unhandled_exception", errMeta(err));
+    await reportError({ fn: "trident-signup", error: err, request: req, requestId: log.requestId });
     return json({ error: "Internal error" }, 500, log.requestId);
   }
 });

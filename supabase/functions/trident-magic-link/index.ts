@@ -110,6 +110,7 @@ Deno.serve(async (req) => {
     }
   } catch (err) {
     log.error("unexpected", "unhandled_exception", errMeta(err));
+    await reportError({ fn: "trident-magic-link", error: err, request: req, requestId: log.requestId });
     return json({ error: "Internal error" }, 500, log.requestId);
   }
 });

@@ -60,6 +60,7 @@ Deno.serve(async (req) => {
     }
   } catch (err) {
     log.error("unexpected", "unhandled_exception", errMeta(err));
+    await reportError({ fn: "track-session", error: err, request: req, requestId: log.requestId });
     return new Response(JSON.stringify({ ok: false, error: "Internal error", request_id: log.requestId }), {
       status: 500, headers: { ...corsHeaders, "Content-Type": "application/json", "x-request-id": log.requestId },
     });
