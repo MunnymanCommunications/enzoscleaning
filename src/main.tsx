@@ -1,6 +1,10 @@
 import { createRoot, hydrateRoot } from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import { installGlobalErrorHandlers } from "./lib/errorReporter";
+import { ErrorBoundary } from "./components/ErrorBoundary";
+
+installGlobalErrorHandlers();
 
 const root = document.getElementById("root")!;
 
