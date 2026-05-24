@@ -1,6 +1,7 @@
 // Returns whether an email matches an existing Trident member.
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { createLogger, errMeta } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -51,6 +52,7 @@ Deno.serve(async (req) => {
     return json({ exists: !!data, request_id: log.requestId }, 200, log.requestId);
   } catch (err) {
     log.error("unexpected", "unhandled_exception", errMeta(err));
+    await reportError({ fn: "check-trident-member", error: err, request: req, requestId: log.requestId });
     return json({ error: "Internal error" }, 500, log.requestId);
   }
 });

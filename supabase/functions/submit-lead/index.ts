@@ -1,5 +1,6 @@
 // Submit lead: emails via Resend + posts to CRM webhook
 import { createLogger, errMeta, maskEmail, maskPhone } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -245,6 +246,7 @@ Deno.serve(async (req) => {
     });
   } catch (err) {
     log.error("unexpected", "unhandled_exception", { ...errMeta(err), duration_ms: Date.now() - started });
+    await reportError({ fn: "submit-lead", error: err, request: req, requestId: log.requestId });
     return new Response(JSON.stringify({ ok: false, error: "Internal error", request_id: log.requestId }), {
       status: 500,
       headers: { ...corsHeaders, "Content-Type": "application/json", "x-request-id": log.requestId },

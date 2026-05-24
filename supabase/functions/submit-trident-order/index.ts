@@ -1,6 +1,7 @@
 // Submits a Trident member's order/estimate request: stores it, pushes to "Website Forms" CRM board, and emails Nick.
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { createLogger, errMeta } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -228,6 +229,7 @@ Deno.serve(async (req) => {
     return json({ ok: true, order_id: order.id, crm_status: crmStatus, request_id: log.requestId }, 200, log.requestId);
   } catch (err) {
     log.error("unexpected", "unhandled_exception", errMeta(err));
+    await reportError({ fn: "submit-trident-order", error: err, request: req, requestId: log.requestId });
     return json({ error: "Internal error" }, 500, log.requestId);
   }
 });

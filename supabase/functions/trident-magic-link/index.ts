@@ -1,6 +1,7 @@
 // Send a branded magic link to an existing Trident member via Resend.
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { createLogger, errMeta } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -109,6 +110,7 @@ Deno.serve(async (req) => {
     }
   } catch (err) {
     log.error("unexpected", "unhandled_exception", errMeta(err));
+    await reportError({ fn: "trident-magic-link", error: err, request: req, requestId: log.requestId });
     return json({ error: "Internal error" }, 500, log.requestId);
   }
 });

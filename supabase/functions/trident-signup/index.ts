@@ -1,6 +1,7 @@
 // Trident member signup: creates auth user, profile row, sends branded magic link via Resend, and pushes to CRM "Trident Members" board.
 import { createClient } from "npm:@supabase/supabase-js@2";
 import { createLogger, errMeta } from "../_shared/logger.ts";
+import { reportError } from "../_shared/errorAlert.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -204,6 +205,7 @@ Deno.serve(async (req) => {
     return json({ ok: true, request_id: log.requestId }, 200, log.requestId);
   } catch (err) {
     log.error("unexpected", "unhandled_exception", errMeta(err));
+    await reportError({ fn: "trident-signup", error: err, request: req, requestId: log.requestId });
     return json({ error: "Internal error" }, 500, log.requestId);
   }
 });
