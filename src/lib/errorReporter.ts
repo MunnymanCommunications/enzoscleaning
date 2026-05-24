@@ -59,6 +59,8 @@ export interface ReportClientErrorOptions {
 }
 
 export async function reportClientError(opts: ReportClientErrorOptions): Promise<void> {
+  // Error reporting paused — return immediately without sending alerts.
+  return;
   try {
     if (typeof window === "undefined") return;
     const env = detectEnvironment();
