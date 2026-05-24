@@ -114,7 +114,7 @@ function isSuppressed(message: string, stack: string): boolean {
 
 export async function reportClientError(opts: ReportClientErrorOptions): Promise<void> {
   try {
-    if (typeof window === "undefined") return;
+    if (!REPORTING_ENABLED || typeof window === "undefined") return;
     const env = detectEnvironment();
     if (env === "development") return;
 
