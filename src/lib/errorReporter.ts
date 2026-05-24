@@ -58,57 +58,9 @@ export interface ReportClientErrorOptions {
   meta?: Record<string, unknown>;
 }
 
-export async function reportClientError(opts: ReportClientErrorOptions): Promise<void> {
-  // Error reporting paused — return immediately without sending alerts.
+export async function reportClientError(_opts: ReportClientErrorOptions): Promise<void> {
+  // Error reporting is paused. No-op.
   return;
-  try {
-    if (typeof window === "undefined") return;
-    const env = detectEnvironment();
-    if (env === "development") return; // skip dev noise
-
-    const err = opts.error;
-    const name = err instanceof Error ? err.name : "Error";
-    const message = err instanceof Error ? err.message : String(err ?? "Unknown error");
-    const stack = err instanceof Error ? (err.stack || "") : "";
-
-    // Suppress React hydration errors (#418, #419, #421, #422, #423, #425).
-    // React 18 automatically recovers by re-rendering on the client, so these
-    // are not user-facing failures and would otherwise spam the alert inbox.
-    if (/Minified React error #(418|419|421|422|423|425)/.test(message)) return;
-    // Also suppress known benign browser/extension noise
-    if (/ResizeObserver loop|Non-Error promise rejection captured/i.test(message)) return;
-    // Microsoft Outlook SafeLink / email-preview crawler noise — not a real app error
-    if (/Object Not Found Matching Id:\d+, MethodName:\w+, ParamCount:\d+/i.test(message)) return;
-
-    const fp = fingerprint(name, message, stack);
-    if (!shouldReport(fp)) return;
-
-    const body = {
-      source: opts.source,
-      name,
-      message,
-      stack,
-      url: window.location.href,
-      userAgent: navigator.userAgent,
-      device: `${navigator.platform || ""} ${window.innerWidth}x${window.innerHeight}`,
-      environment: env,
-      meta: sanitize({ project: PROJECT_NAME, referrer: document.referrer, ...(opts.meta || {}) }) as Record<string, unknown>,
-    };
-
-    // Fire-and-forget. Keepalive lets it survive page unload.
-    await fetch(ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        apikey: ANON_KEY,
-        Authorization: `Bearer ${ANON_KEY}`,
-      },
-      body: JSON.stringify(body),
-      keepalive: true,
-    }).catch(() => { /* silent */ });
-  } catch {
-    // Never throw
-  }
 }
 
 let installed = false;
