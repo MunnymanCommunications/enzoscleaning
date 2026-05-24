@@ -21,7 +21,7 @@ const root = document.getElementById("root")!;
 // Reverting to createRoot().render() everywhere would blank the page on load,
 // break hydration, and undo all SEO work.
 if (root.innerHTML.trim().length > 0) {
-  hydrateRoot(root, <App />);
+  hydrateRoot(root, <ErrorBoundary><App /></ErrorBoundary>);
 } else {
-  createRoot(root).render(<App />);
+  createRoot(root).render(<ErrorBoundary><App /></ErrorBoundary>);
 }
