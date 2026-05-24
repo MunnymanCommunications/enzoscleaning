@@ -102,7 +102,7 @@ export function render(url: string) {
         null,
         React.createElement(
           StaticRouter,
-          { location: url },
+          { location: url, future: { v7_startTransition: true, v7_relativeSplatPath: true } },
           React.createElement(
             Routes,
             null,

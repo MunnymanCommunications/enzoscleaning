@@ -68,6 +68,14 @@ export async function reportClientError(opts: ReportClientErrorOptions): Promise
     const name = err instanceof Error ? err.name : "Error";
     const message = err instanceof Error ? err.message : String(err ?? "Unknown error");
     const stack = err instanceof Error ? (err.stack || "") : "";
+
+    // Suppress React hydration errors (#418, #419, #421, #422, #423, #425).
+    // React 18 automatically recovers by re-rendering on the client, so these
+    // are not user-facing failures and would otherwise spam the alert inbox.
+    if (/Minified React error #(418|419|421|422|423|425)/.test(message)) return;
+    // Also suppress known benign browser/extension noise
+    if (/ResizeObserver loop|Non-Error promise rejection captured/i.test(message)) return;
+
     const fp = fingerprint(name, message, stack);
     if (!shouldReport(fp)) return;
 
