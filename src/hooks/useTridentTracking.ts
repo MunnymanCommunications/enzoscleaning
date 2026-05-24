@@ -3,6 +3,17 @@ import { useLocation } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { getTridentVisitorId } from "@/components/trident/TridentGate";
 
+async function track(action: string, payload: Record<string, unknown>) {
+  try {
+    const { data } = await supabase.functions.invoke("trident-track", {
+      body: { action, ...payload },
+    });
+    return data as Record<string, unknown> | null;
+  } catch {
+    return null;
+  }
+}
+
 export function useTridentPageTracking() {
   const location = useLocation();
   const pageViewIdRef = useRef<string | null>(null);
@@ -13,35 +24,20 @@ export function useTridentPageTracking() {
     if (!visitorId) return;
 
     enteredAtRef.current = Date.now();
+    pageViewIdRef.current = null;
 
-    // Create page view record
-    supabase
-      .from("trident_page_views")
-      .insert([{
-        visitor_id: visitorId,
-        page_path: location.pathname,
-        entered_at: new Date().toISOString(),
-      }])
-      .select("id")
-      .single()
-      .then(({ data }) => {
-        if (data) pageViewIdRef.current = data.id;
-      });
+    track("page_view_start", { visitor_id: visitorId, page_path: location.pathname }).then((res) => {
+      if (res && typeof res.page_view_id === "string") pageViewIdRef.current = res.page_view_id;
+    });
 
-    // Update duration on leave
     const updateDuration = () => {
       if (pageViewIdRef.current) {
         const duration = Math.round((Date.now() - enteredAtRef.current) / 1000);
-        supabase
-          .from("trident_page_views")
-          .update({ duration_seconds: duration })
-          .eq("id", pageViewIdRef.current)
-          .then(() => {});
+        track("page_view_duration", { page_view_id: pageViewIdRef.current, duration_seconds: duration });
       }
     };
 
     window.addEventListener("beforeunload", updateDuration);
-
     return () => {
       updateDuration();
       window.removeEventListener("beforeunload", updateDuration);
@@ -53,15 +49,13 @@ export function useTridentProductTracking() {
   const trackProduct = useCallback((productName: string, productSku?: string, category?: string) => {
     const visitorId = getTridentVisitorId();
     if (!visitorId) return;
-
-    supabase.from("trident_product_views").insert([{
+    track("product_view", {
       visitor_id: visitorId,
       product_name: productName,
       product_sku: productSku || null,
       category: category || null,
-    }]);
+    });
   }, []);
-
   return { trackProduct };
 }
 
@@ -69,14 +63,8 @@ export function useTridentEventTracking() {
   const trackEvent = useCallback((eventType: string, eventData?: Record<string, unknown>) => {
     const visitorId = getTridentVisitorId();
     if (!visitorId) return;
-
-    supabase.from("trident_events").insert([{
-      visitor_id: visitorId,
-      event_type: eventType,
-      event_data: (eventData || {}) as any,
-    }]);
+    track("event", { visitor_id: visitorId, event_type: eventType, event_data: eventData || {} });
   }, []);
-
   return { trackEvent };
 }
 
@@ -94,11 +82,11 @@ export function useTridentSectionTracking() {
             const sectionId = entry.target.getAttribute("data-track-section");
             if (sectionId && !trackedSections.current.has(sectionId)) {
               trackedSections.current.add(sectionId);
-              supabase.from("trident_events").insert([{
+              track("event", {
                 visitor_id: visitorId,
                 event_type: "section_viewed",
-                event_data: { section: sectionId, page: window.location.pathname } as any,
-              }]);
+                event_data: { section: sectionId, page: window.location.pathname },
+              });
             }
           }
         });
@@ -106,11 +94,7 @@ export function useTridentSectionTracking() {
       { threshold: 0.3 }
     );
 
-    // Observe all trackable sections
-    document.querySelectorAll("[data-track-section]").forEach((el) => {
-      observer.observe(el);
-    });
-
+    document.querySelectorAll("[data-track-section]").forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 }
