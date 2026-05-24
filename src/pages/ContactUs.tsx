@@ -16,25 +16,32 @@ export default function ContactUs() {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const fd = new FormData(e.currentTarget);
+    const formEl = e.currentTarget;
+    const fd = new FormData(formEl);
+    const phone = String(fd.get("phone") || "").trim();
+    const email = String(fd.get("email") || "").trim();
+    if (!phone) {
+      toast({ title: "Phone required", description: "Please enter your phone number.", variant: "destructive" });
+      return;
+    }
     setSubmitting(true);
-    const { error } = await submitLead({
+    const result = await submitLead({
       form_name: "Contact Us",
       name: String(fd.get("name") || ""),
       company: String(fd.get("company") || ""),
-      phone: String(fd.get("phone") || ""),
-      email: String(fd.get("email") || ""),
+      phone,
+      email,
       request_type: String(fd.get("request_type") || ""),
       message: String(fd.get("message") || ""),
       product_context: productContext,
       category_context: categoryContext,
     });
     setSubmitting(false);
-    if (error) {
-      toast({ title: "Submission failed", description: "Please try again or call us.", variant: "destructive" });
+    if (!result.ok) {
+      toast({ title: "Submission failed", description: result.error || "Please try again or call us.", variant: "destructive" });
     } else {
       toast({ title: "Thanks!", description: "We'll be in touch shortly." });
-      (e.target as HTMLFormElement).reset();
+      formEl.reset();
     }
   };
 

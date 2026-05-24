@@ -15,7 +15,7 @@ export default function ReferralForm({ partner }: ReferralFormProps) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     setSubmitting(true);
-    const { error } = await submitLead({
+    const result = await submitLead({
       form_name: `Referral - ${partner}`,
       name: String(fd.get("name") || ""),
       company: String(fd.get("company") || ""),
@@ -26,8 +26,8 @@ export default function ReferralForm({ partner }: ReferralFormProps) {
       referral_partner: partner,
     });
     setSubmitting(false);
-    if (error) {
-      toast({ title: "Submission failed", description: "Please try again or call us.", variant: "destructive" });
+    if (!result.ok) {
+      toast({ title: "Submission failed", description: result.error || "Please try again or call us.", variant: "destructive" });
     } else {
       setSubmitted(true);
     }

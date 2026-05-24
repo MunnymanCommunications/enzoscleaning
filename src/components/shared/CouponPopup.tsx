@@ -37,7 +37,7 @@ export default function CouponPopup() {
     }
     setSubmitting(true);
     try {
-      await submitLead({
+      const result = await submitLead({
         form_name: "10% Off Coupon Popup",
         name: form.name,
         email: form.email,
@@ -46,9 +46,14 @@ export default function CouponPopup() {
         message: `Requested 10% off coupon code: ${COUPON_CODE}`,
         extra: { coupon_code: COUPON_CODE, send_coupon_email: true },
       });
+      if (!result.ok) {
+        toast({ title: "Something went wrong", description: result.error || "Please try again.", variant: "destructive" });
+        return;
+      }
       sessionStorage.setItem(SESSION_KEY, "1");
       setSubmitted(true);
     } catch (err) {
+      console.error("[CouponPopup] submit failed", err);
       toast({ title: "Something went wrong", description: "Please try again.", variant: "destructive" });
     } finally {
       setSubmitting(false);
