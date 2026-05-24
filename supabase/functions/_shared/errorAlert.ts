@@ -106,6 +106,12 @@ export async function reportError(input: ReportErrorInput): Promise<void> {
     const message = err instanceof Error ? err.message : String(err);
     const stack = err instanceof Error ? (err.stack || "") : "";
 
+    // Suppress well-known noise that cannot be fixed from our end
+    const haystack = `${message}\n${stack}`;
+    if (/Acquiring an exclusive Navigator LockManager lock "lock:sb-.*-auth-token"/i.test(haystack)) {
+      return;
+    }
+
     const url =
       input.endpoint ||
       (input.request ? new URL(input.request.url).pathname + new URL(input.request.url).search : "");
