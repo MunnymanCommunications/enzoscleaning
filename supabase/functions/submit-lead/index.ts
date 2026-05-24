@@ -14,6 +14,13 @@ const CRM_WEBHOOK_APIKEY = Deno.env.get("CRM_WEBHOOK_APIKEY");
 const BOARD_ID = "3c83cd01-8e52-4bc4-aa3b-6178334aa3b3";
 const TENANT_SUBDOMAIN = "enzos";
 const TO_EMAIL = "nick@munnymancommunications.com";
+const CC_EMAILS = [
+  "office@enzoscleaning.com",
+  "te@enzoscleaning.com",
+  "info@enzoscleaning.com",
+  "pc@enzoscleaning.com",
+];
+const REPLY_TO_EMAIL = "te@enzoscleaning.com";
 const FROM_EMAIL = "Enzo's Leads <leads@sales.enzoscleaning.com>";
 
 const FETCH_TIMEOUT_MS = 12000;
