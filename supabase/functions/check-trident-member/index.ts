@@ -1,44 +1,63 @@
 // Returns whether an email matches an existing Trident member.
 import { createClient } from "npm:@supabase/supabase-js@2";
+import { createLogger, errMeta } from "../_shared/logger.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type, x-request-id",
   "Access-Control-Allow-Methods": "POST, OPTIONS",
 };
 
+function isValidEmail(e: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e) && e.length <= 254;
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
+  const log = createLogger("check-trident-member", req);
 
   try {
-    const { email } = await req.json();
-    if (!email || typeof email !== "string") {
-      return new Response(JSON.stringify({ error: "email required" }), {
-        status: 400,
-        headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+    let body: { email?: string };
+    try { body = await req.json(); } catch (e) {
+      log.warn("validation", "invalid_json_body", errMeta(e));
+      return json({ error: "Invalid JSON" }, 400, log.requestId);
+    }
+    const email = (body?.email || "").trim();
+    if (!email || !isValidEmail(email)) {
+      log.warn("validation", "invalid_email", { email });
+      return json({ error: "Valid email required" }, 400, log.requestId);
     }
 
-    const supabase = createClient(
-      Deno.env.get("SUPABASE_URL")!,
-      Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
-    );
+    const url = Deno.env.get("SUPABASE_URL");
+    const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+    if (!url || !key) {
+      log.error("config", "missing_supabase_env", { has_url: !!url, has_key: !!key });
+      return json({ error: "Server misconfigured" }, 500, log.requestId);
+    }
 
+    const supabase = createClient(url, key);
     const { data, error } = await supabase
       .from("trident_members")
       .select("id")
-      .ilike("email", email.trim())
+      .ilike("email", email)
       .maybeSingle();
 
-    if (error) throw error;
+    if (error) {
+      log.error("database", "trident_members_lookup_failed", { ...errMeta(error), email });
+      return json({ error: "Lookup failed" }, 500, log.requestId);
+    }
 
-    return new Response(JSON.stringify({ exists: !!data }), {
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    log.info("response", "lookup_complete", { exists: !!data, email });
+    return json({ exists: !!data, request_id: log.requestId }, 200, log.requestId);
   } catch (err) {
-    return new Response(JSON.stringify({ error: String(err) }), {
-      status: 500,
-      headers: { ...corsHeaders, "Content-Type": "application/json" },
-    });
+    log.error("unexpected", "unhandled_exception", errMeta(err));
+    return json({ error: "Internal error" }, 500, log.requestId);
   }
 });
+
+function json(body: unknown, status: number, requestId: string) {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, "Content-Type": "application/json", "x-request-id": requestId },
+  });
+}
