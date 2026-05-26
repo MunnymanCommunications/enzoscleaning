@@ -40,7 +40,7 @@ Deno.serve(async (req) => {
       return json({ error: "Valid email required" }, 400, log.requestId);
     }
 
-    const redirectTo = "https://2.enzoscleaning.com/hardscaping/trident/";
+    const redirectTo = "https://enzoscleaning.com/hardscaping/trident/";
 
     const url = Deno.env.get("SUPABASE_URL");
     const key = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");

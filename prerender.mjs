@@ -32,7 +32,7 @@ const SITEMAP_PATH = path.resolve(__dirname, "public/sitemap.xml");
 
 // ── Configuration ────────────────────────────────────────────────────────────
 // Production canonical base URL. Override per-client when copying to a new repo.
-export const BASE_URL = process.env.PRERENDER_BASE_URL || "https://2.enzoscleaning.com";
+export const BASE_URL = process.env.PRERENDER_BASE_URL || "https://enzoscleaning.com";
 
 // Internal routes (won't appear in sitemap.xml even if discovered).
 // Customize per client. Pages here are still prerendered, just kept out of the sitemap.

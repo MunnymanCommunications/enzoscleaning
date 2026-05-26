@@ -25,7 +25,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // ── Configuration ────────────────────────────────────────────────────────────
 // Must match BASE_URL in prerender.mjs. Override per-client.
-const BASE_URL = process.env.PRERENDER_BASE_URL || "https://2.enzoscleaning.com";
+const BASE_URL = process.env.PRERENDER_BASE_URL || "https://enzoscleaning.com";
 const GENERIC_TITLE = "Enzos Cleaning Solutions";
 const GENERIC_DESC_FRAGMENT = "If You Have A Need We Have The Solution";
 const FALLBACK_DESC_FRAGMENT = "This page is missing custom SEO copy";

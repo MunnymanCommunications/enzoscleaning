@@ -75,4 +75,4 @@ Allow: /
 User-agent: *
 Allow: /
 
-Sitemap: https://2.enzoscleaning.com/sitemap.xml
+Sitemap: https://enzoscleaning.com/sitemap.xml
