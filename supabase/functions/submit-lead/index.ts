@@ -194,7 +194,7 @@ Deno.serve(async (req) => {
     }
 
     // 2) CRM webhook
-    if (CRM_FORMS_WEBHOOK_URL && CRM_WEBHOOK_APIKEY) {
+    if (!emailInvalid && CRM_FORMS_WEBHOOK_URL && CRM_WEBHOOK_APIKEY) {
       const now = new Date();
       const crmBody = {
         board_id: BOARD_ID,
