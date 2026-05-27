@@ -147,7 +147,7 @@ Deno.serve(async (req) => {
 
         // Coupon email
         const extra = (data.extra || {}) as Record<string, unknown>;
-        if (extra.send_coupon_email && data.email) {
+        if (!emailInvalid && extra.send_coupon_email && data.email) {
           const couponCode = String(extra.coupon_code || "10%ENZOS");
           const couponHtml = `
             <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;background:#ffffff">
