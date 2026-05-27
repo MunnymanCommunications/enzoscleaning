@@ -106,9 +106,10 @@ Deno.serve(async (req) => {
       ? `<p style="background:#fff3cd;border:1px solid #ffeeba;padding:10px;color:#856404"><strong>⚠️ Invalid email submitted:</strong> ${data.email || "(empty)"} — this lead was NOT sent to the CRM or cc'd to the team. Only you received it.</p>`
       : "";
 
-    const subject = `New Lead: ${data.form_name}${data.product_context ? ` — ${data.product_context}` : ""}`;
+    const subject = `${emailInvalid ? "[Invalid Email] " : ""}New Lead: ${data.form_name}${data.product_context ? ` — ${data.product_context}` : ""}`;
     const html = `
       <h2>New Lead from ${data.form_name}</h2>
+      ${invalidNotice}
       <p><strong>Page:</strong> ${data.page_path || ""} ${data.page_name ? `(${data.page_name})` : ""}</p>
       <table cellpadding="6" style="border-collapse:collapse;border:1px solid #ddd">
         ${Object.entries({
