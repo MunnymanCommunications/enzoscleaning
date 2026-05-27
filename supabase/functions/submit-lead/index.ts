@@ -85,11 +85,9 @@ Deno.serve(async (req) => {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (data.email && !isValidEmail(String(data.email))) {
-      log.warn("validation", "invalid_email", { email: data.email });
-      return new Response(JSON.stringify({ ok: false, error: "Invalid email" }), {
-        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+    const emailInvalid = !!data.email && !isValidEmail(String(data.email));
+    if (emailInvalid) {
+      log.warn("validation", "invalid_email_admin_notify_only", { email: data.email });
     }
 
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || req.headers.get("cf-connecting-ip") || "";
@@ -104,9 +102,14 @@ Deno.serve(async (req) => {
       product_context: data.product_context,
     });
 
-    const subject = `New Lead: ${data.form_name}${data.product_context ? ` — ${data.product_context}` : ""}`;
+    const invalidNotice = emailInvalid
+      ? `<p style="background:#fff3cd;border:1px solid #ffeeba;padding:10px;color:#856404"><strong>⚠️ Invalid email submitted:</strong> ${data.email || "(empty)"} — this lead was NOT sent to the CRM or cc'd to the team. Only you received it.</p>`
+      : "";
+
+    const subject = `${emailInvalid ? "[Invalid Email] " : ""}New Lead: ${data.form_name}${data.product_context ? ` — ${data.product_context}` : ""}`;
     const html = `
       <h2>New Lead from ${data.form_name}</h2>
+      ${invalidNotice}
       <p><strong>Page:</strong> ${data.page_path || ""} ${data.page_name ? `(${data.page_name})` : ""}</p>
       <table cellpadding="6" style="border-collapse:collapse;border:1px solid #ddd">
         ${Object.entries({
@@ -135,7 +138,7 @@ Deno.serve(async (req) => {
         const r = await fetchWithTimeout("https://api.resend.com/emails", {
           method: "POST",
           headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ from: FROM_EMAIL, to: [TO_EMAIL], cc: CC_EMAILS, subject, html, reply_to: REPLY_TO_EMAIL }),
+          body: JSON.stringify({ from: FROM_EMAIL, to: [TO_EMAIL], ...(emailInvalid ? {} : { cc: CC_EMAILS }), subject, html, reply_to: REPLY_TO_EMAIL }),
         });
         const body = await r.text();
         results.email = { status: r.status };
@@ -144,7 +147,7 @@ Deno.serve(async (req) => {
 
         // Coupon email
         const extra = (data.extra || {}) as Record<string, unknown>;
-        if (extra.send_coupon_email && data.email) {
+        if (!emailInvalid && extra.send_coupon_email && data.email) {
           const couponCode = String(extra.coupon_code || "10%ENZOS");
           const couponHtml = `
             <div style="font-family:Arial,sans-serif;max-width:560px;margin:0 auto;padding:24px;background:#ffffff">
@@ -191,7 +194,7 @@ Deno.serve(async (req) => {
     }
 
     // 2) CRM webhook
-    if (CRM_FORMS_WEBHOOK_URL && CRM_WEBHOOK_APIKEY) {
+    if (!emailInvalid && CRM_FORMS_WEBHOOK_URL && CRM_WEBHOOK_APIKEY) {
       const now = new Date();
       const crmBody = {
         board_id: BOARD_ID,
@@ -232,6 +235,9 @@ Deno.serve(async (req) => {
         log.error("crm", "crm_webhook_exception", { ...errMeta(e), form_name: data.form_name });
         results.crm = { error: "exception" };
       }
+    } else if (emailInvalid) {
+      log.info("crm", "crm_skipped_invalid_email");
+      results.crm = { skipped: "invalid_email" };
     } else {
       log.warn("config", "crm_webhook_not_configured", {
         has_url: !!CRM_FORMS_WEBHOOK_URL,
