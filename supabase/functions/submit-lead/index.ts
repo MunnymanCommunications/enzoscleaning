@@ -85,11 +85,9 @@ Deno.serve(async (req) => {
         status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
       });
     }
-    if (data.email && !isValidEmail(String(data.email))) {
-      log.warn("validation", "invalid_email", { email: data.email });
-      return new Response(JSON.stringify({ ok: false, error: "Invalid email" }), {
-        status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" },
-      });
+    const emailInvalid = !!data.email && !isValidEmail(String(data.email));
+    if (emailInvalid) {
+      log.warn("validation", "invalid_email_admin_notify_only", { email: data.email });
     }
 
     const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || req.headers.get("cf-connecting-ip") || "";
