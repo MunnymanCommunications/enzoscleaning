@@ -235,6 +235,9 @@ Deno.serve(async (req) => {
         log.error("crm", "crm_webhook_exception", { ...errMeta(e), form_name: data.form_name });
         results.crm = { error: "exception" };
       }
+    } else if (emailInvalid) {
+      log.info("crm", "crm_skipped_invalid_email");
+      results.crm = { skipped: "invalid_email" };
     } else {
       log.warn("config", "crm_webhook_not_configured", {
         has_url: !!CRM_FORMS_WEBHOOK_URL,
