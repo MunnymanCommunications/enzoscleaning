@@ -12,6 +12,13 @@ export default function CouponPopup() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [emailError, setEmailError] = useState("");
+
+  const checkEmail = (value: string) => {
+    const c = validateEmail(value);
+    setEmailError(c.valid ? "" : c.message);
+    return c.valid;
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
