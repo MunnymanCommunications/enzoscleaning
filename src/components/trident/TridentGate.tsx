@@ -59,6 +59,13 @@ export default function TridentGate({ children }: TridentGateProps) {
     e.preventDefault();
     setError("");
 
+    const emailCheck = validateEmail(form.email);
+    if (!emailCheck.valid) {
+      setEmailError(emailCheck.message);
+      setError(emailCheck.message);
+      return;
+    }
+
     if (form.password.toUpperCase() !== GATE_PASSWORD) {
       setError("Incorrect password. Please try again.");
       return;
