@@ -1,4 +1,5 @@
 import { supabase } from "@/integrations/supabase/client";
+import { validateEmail } from "./validateEmail";
 
 export interface LeadPayload {
   form_name: string;
