@@ -18,6 +18,7 @@ export default function TridentGate({ children }: TridentGateProps) {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [form, setForm] = useState({
     name: "",
     company_name: "",
