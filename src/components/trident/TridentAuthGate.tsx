@@ -15,6 +15,7 @@ export default function TridentAuthGate({ children }: Props) {
   const { loading, session, member, trackEvent, signOut, refresh } = useTridentAuth();
   const [tab, setTab] = useState<"signin" | "signup">("signin");
   const [signinEmail, setSigninEmail] = useState("");
+  const [signinEmailError, setSigninEmailError] = useState("");
   const [signinMsg, setSigninMsg] = useState<{ type: "ok" | "err" | "info"; text: string } | null>(null);
   const [signinLoading, setSigninLoading] = useState(false);
 
@@ -22,6 +23,7 @@ export default function TridentAuthGate({ children }: Props) {
     email: "", name: "", company_name: "", phone: "",
     title: "", address_line1: "", city: "", state: "", postal_code: "", notes: "",
   });
+  const [signupEmailError, setSignupEmailError] = useState("");
   const [signupMsg, setSignupMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [signupLoading, setSignupLoading] = useState(false);
 
