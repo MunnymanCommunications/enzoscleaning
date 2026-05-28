@@ -4,6 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import PageHero from "@/components/shared/PageHero";
 import { submitLead } from "@/lib/leadSubmit";
 import { toast } from "@/hooks/use-toast";
+import { validateEmail } from "@/lib/validateEmail";
 
 export default function ContactUs() {
   const [searchParams] = useSearchParams();
@@ -11,17 +12,30 @@ export default function ContactUs() {
   const categoryContext = searchParams.get("category") || "";
   const prefilledType = searchParams.get("type") || "Service";
   const [submitting, setSubmitting] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const contextLabel = productContext || categoryContext || "";
+
+  const checkEmail = (value: string) => {
+    if (!value.trim()) { setEmailError(""); return true; }
+    const c = validateEmail(value);
+    setEmailError(c.valid ? "" : c.message);
+    return c.valid;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formEl = e.currentTarget;
     const fd = new FormData(formEl);
     const phone = String(fd.get("phone") || "").trim();
-    const email = String(fd.get("email") || "").trim();
+    const emailValue = email.trim();
     if (!phone) {
       toast({ title: "Phone required", description: "Please enter your phone number.", variant: "destructive" });
+      return;
+    }
+    if (emailValue && !checkEmail(emailValue)) {
+      toast({ title: "Invalid email", description: "Please double-check the spelling of your email address.", variant: "destructive" });
       return;
     }
     setSubmitting(true);
@@ -30,7 +44,7 @@ export default function ContactUs() {
       name: String(fd.get("name") || ""),
       company: String(fd.get("company") || ""),
       phone,
-      email,
+      email: emailValue,
       request_type: String(fd.get("request_type") || ""),
       message: String(fd.get("message") || ""),
       product_context: productContext,
@@ -42,6 +56,8 @@ export default function ContactUs() {
     } else {
       toast({ title: "Thanks!", description: "We'll be in touch shortly." });
       formEl.reset();
+      setEmail("");
+      setEmailError("");
     }
   };
 
