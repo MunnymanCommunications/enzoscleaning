@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Shield, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { validateEmail } from "@/lib/validateEmail";
 
 const GATE_PASSWORD = "ENZOS";
 const STORAGE_KEY = "trident_visitor_id";
