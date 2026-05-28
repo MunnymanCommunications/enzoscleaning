@@ -2,6 +2,7 @@ import { useState } from "react";
 import PageHero from "@/components/shared/PageHero";
 import { submitLead } from "@/lib/leadSubmit";
 import { toast } from "@/hooks/use-toast";
+import { validateEmail } from "@/lib/validateEmail";
 
 interface ReferralFormProps {
   partner: string;
@@ -10,17 +11,31 @@ interface ReferralFormProps {
 export default function ReferralForm({ partner }: ReferralFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+
+  const checkEmail = (value: string) => {
+    if (!value.trim()) { setEmailError(""); return true; }
+    const c = validateEmail(value);
+    setEmailError(c.valid ? "" : c.message);
+    return c.valid;
+  };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
+    const emailValue = email.trim();
+    if (emailValue && !checkEmail(emailValue)) {
+      toast({ title: "Invalid email", description: "Please double-check the spelling of your email address.", variant: "destructive" });
+      return;
+    }
     setSubmitting(true);
     const result = await submitLead({
       form_name: `Referral - ${partner}`,
       name: String(fd.get("name") || ""),
       company: String(fd.get("company") || ""),
       phone: String(fd.get("phone") || ""),
-      email: String(fd.get("email") || ""),
+      email: emailValue,
       request_type: String(fd.get("interest") || ""),
       message: String(fd.get("message") || ""),
       referral_partner: partner,
