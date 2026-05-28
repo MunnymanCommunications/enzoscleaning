@@ -177,7 +177,17 @@ export default function TridentAuthGate({ children }: Props) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <FieldDark label="Full Name *" id="su-name" value={signup.name} onChange={(v) => setSignup({ ...signup, name: v })} required />
                   <FieldDark label="Company *" id="su-company" value={signup.company_name} onChange={(v) => setSignup({ ...signup, company_name: v })} required />
-                  <FieldDark label="Email *" id="su-email" type="email" value={signup.email} onChange={(v) => setSignup({ ...signup, email: v })} required />
+                  <FieldDark
+                    label="Email *" id="su-email" type="email" required
+                    value={signup.email}
+                    onChange={(v) => { setSignup({ ...signup, email: v }); if (signupEmailError) setSignupEmailError(""); }}
+                    onBlur={(v) => {
+                      if (!v.trim()) { setSignupEmailError(""); return; }
+                      const c = validateEmail(v);
+                      setSignupEmailError(c.valid ? "" : c.message);
+                    }}
+                    error={signupEmailError}
+                  />
                   <FieldDark label="Phone *" id="su-phone" type="tel" value={signup.phone} onChange={(v) => setSignup({ ...signup, phone: v })} required />
                   <FieldDark label="Title / Role" id="su-title" value={signup.title} onChange={(v) => setSignup({ ...signup, title: v })} />
                   <FieldDark label="Street Address" id="su-addr" value={signup.address_line1} onChange={(v) => setSignup({ ...signup, address_line1: v })} />
