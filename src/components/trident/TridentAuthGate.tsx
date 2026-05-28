@@ -214,17 +214,22 @@ export default function TridentAuthGate({ children }: Props) {
   );
 }
 
-function FieldDark({ label, id, value, onChange, type = "text", required = false }: {
+function FieldDark({ label, id, value, onChange, type = "text", required = false, onBlur, error }: {
   label: string; id: string; value: string; onChange: (v: string) => void; type?: string; required?: boolean;
+  onBlur?: (v: string) => void; error?: string;
 }) {
   return (
     <div className="space-y-2">
       <Label htmlFor={id} className="text-white">{label}</Label>
       <Input
         id={id} type={type} required={required}
-        value={value} onChange={(e) => onChange(e.target.value)}
-        className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onBlur={onBlur ? (e) => onBlur(e.target.value) : undefined}
+        aria-invalid={!!error}
+        className={`bg-white/10 text-white placeholder:text-slate-500 ${error ? "border-destructive" : "border-white/20"}`}
       />
+      {error && <p className="text-xs text-red-300">{error}</p>}
     </div>
   );
 }
