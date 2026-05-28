@@ -140,9 +140,16 @@ export default function TridentAuthGate({ children }: Props) {
                     id="si-email" type="email" required
                     placeholder="you@company.com"
                     value={signinEmail}
-                    onChange={(e) => setSigninEmail(e.target.value)}
-                    className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
+                    onChange={(e) => { setSigninEmail(e.target.value); if (signinEmailError) setSigninEmailError(""); }}
+                    onBlur={(e) => {
+                      if (!e.target.value.trim()) { setSigninEmailError(""); return; }
+                      const c = validateEmail(e.target.value);
+                      setSigninEmailError(c.valid ? "" : c.message);
+                    }}
+                    aria-invalid={!!signinEmailError}
+                    className={`bg-white/10 text-white placeholder:text-slate-500 ${signinEmailError ? "border-destructive" : "border-white/20"}`}
                   />
+                  {signinEmailError && <p className="text-xs text-red-300">{signinEmailError}</p>}
                 </div>
                 {signinMsg && (
                   <div className={`text-sm rounded-lg p-3 ${
