@@ -34,9 +34,8 @@ export default function CouponPopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
-    if (!emailOk) {
-      toast({ title: "Invalid email", description: "Please enter a valid email address.", variant: "destructive" });
+    if (!checkEmail(form.email)) {
+      toast({ title: "Invalid email", description: "Please double-check the spelling of your email address.", variant: "destructive" });
       return;
     }
     if (!form.phone.trim()) {
