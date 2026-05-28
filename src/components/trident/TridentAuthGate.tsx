@@ -92,6 +92,12 @@ export default function TridentAuthGate({ children }: Props) {
       setSignupMsg({ type: "err", text: "Name, company, email and phone are required." });
       return;
     }
+    const c = validateEmail(signup.email);
+    if (!c.valid) {
+      setSignupEmailError(c.message);
+      setSignupMsg({ type: "err", text: c.message });
+      return;
+    }
     setSignupLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("trident-signup", {
