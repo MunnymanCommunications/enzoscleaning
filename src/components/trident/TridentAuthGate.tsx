@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, Mail, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTridentAuth } from "@/contexts/TridentAuthContext";
+import { validateEmail } from "@/lib/validateEmail";
 
 interface Props { children: React.ReactNode }
 
