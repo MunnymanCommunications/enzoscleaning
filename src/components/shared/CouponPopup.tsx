@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { X, Phone } from "lucide-react";
 import { submitLead } from "@/lib/leadSubmit";
 import { toast } from "@/hooks/use-toast";
+import { validateEmail } from "@/lib/validateEmail";
 
 const SESSION_KEY = "enzos_coupon_popup_seen";
 const COUPON_CODE = "10%ENZOS";
@@ -11,6 +12,13 @@ export default function CouponPopup() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [form, setForm] = useState({ name: "", email: "", phone: "" });
+  const [emailError, setEmailError] = useState("");
+
+  const checkEmail = (value: string) => {
+    const c = validateEmail(value);
+    setEmailError(c.valid ? "" : c.message);
+    return c.valid;
+  };
 
   useEffect(() => {
     if (typeof window === "undefined") return;
@@ -26,9 +34,8 @@ export default function CouponPopup() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email.trim());
-    if (!emailOk) {
-      toast({ title: "Invalid email", description: "Please enter a valid email address.", variant: "destructive" });
+    if (!checkEmail(form.email)) {
+      toast({ title: "Invalid email", description: "Please double-check the spelling of your email address.", variant: "destructive" });
       return;
     }
     if (!form.phone.trim()) {
@@ -90,14 +97,19 @@ export default function CouponPopup() {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
               />
-              <input
-                type="email"
-                required
-                placeholder="Your Email Address"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
-              />
+              <div>
+                <input
+                  type="email"
+                  required
+                  placeholder="Your Email Address"
+                  value={form.email}
+                  onChange={(e) => { setForm({ ...form, email: e.target.value }); if (emailError) setEmailError(""); }}
+                  onBlur={(e) => { if (e.target.value.trim()) checkEmail(e.target.value); }}
+                  aria-invalid={!!emailError}
+                  className={`w-full rounded-xl border bg-white/50 backdrop-blur px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 ${emailError ? "border-destructive" : "border-white/60"}`}
+                />
+                {emailError && <p className="mt-1 text-xs text-destructive px-1">{emailError}</p>}
+              </div>
               <input
                 type="tel"
                 required

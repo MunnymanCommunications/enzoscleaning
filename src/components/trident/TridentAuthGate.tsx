@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Shield, Mail, LogOut } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTridentAuth } from "@/contexts/TridentAuthContext";
+import { validateEmail } from "@/lib/validateEmail";
 
 interface Props { children: React.ReactNode }
 
@@ -14,6 +15,7 @@ export default function TridentAuthGate({ children }: Props) {
   const { loading, session, member, trackEvent, signOut, refresh } = useTridentAuth();
   const [tab, setTab] = useState<"signin" | "signup">("signin");
   const [signinEmail, setSigninEmail] = useState("");
+  const [signinEmailError, setSigninEmailError] = useState("");
   const [signinMsg, setSigninMsg] = useState<{ type: "ok" | "err" | "info"; text: string } | null>(null);
   const [signinLoading, setSigninLoading] = useState(false);
 
@@ -21,6 +23,7 @@ export default function TridentAuthGate({ children }: Props) {
     email: "", name: "", company_name: "", phone: "",
     title: "", address_line1: "", city: "", state: "", postal_code: "", notes: "",
   });
+  const [signupEmailError, setSignupEmailError] = useState("");
   const [signupMsg, setSignupMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [signupLoading, setSignupLoading] = useState(false);
 
@@ -53,11 +56,15 @@ export default function TridentAuthGate({ children }: Props) {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setSigninMsg(null);
+    const email = signinEmail.trim().toLowerCase();
+    const c = validateEmail(email);
+    if (!c.valid) {
+      setSigninEmailError(c.message);
+      setSigninMsg({ type: "err", text: c.message });
+      return;
+    }
     setSigninLoading(true);
     try {
-      const email = signinEmail.trim().toLowerCase();
-      if (!email) { setSigninMsg({ type: "err", text: "Please enter your email." }); return; }
-
       const { data, error } = await supabase.functions.invoke("trident-magic-link", {
         body: { email, redirect_to: window.location.origin + "/hardscaping/trident/" },
       });
@@ -83,6 +90,12 @@ export default function TridentAuthGate({ children }: Props) {
     setSignupMsg(null);
     if (!signup.email || !signup.name || !signup.company_name || !signup.phone) {
       setSignupMsg({ type: "err", text: "Name, company, email and phone are required." });
+      return;
+    }
+    const c = validateEmail(signup.email);
+    if (!c.valid) {
+      setSignupEmailError(c.message);
+      setSignupMsg({ type: "err", text: c.message });
       return;
     }
     setSignupLoading(true);
@@ -127,9 +140,16 @@ export default function TridentAuthGate({ children }: Props) {
                     id="si-email" type="email" required
                     placeholder="you@company.com"
                     value={signinEmail}
-                    onChange={(e) => setSigninEmail(e.target.value)}
-                    className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
+                    onChange={(e) => { setSigninEmail(e.target.value); if (signinEmailError) setSigninEmailError(""); }}
+                    onBlur={(e) => {
+                      if (!e.target.value.trim()) { setSigninEmailError(""); return; }
+                      const c = validateEmail(e.target.value);
+                      setSigninEmailError(c.valid ? "" : c.message);
+                    }}
+                    aria-invalid={!!signinEmailError}
+                    className={`bg-white/10 text-white placeholder:text-slate-500 ${signinEmailError ? "border-destructive" : "border-white/20"}`}
                   />
+                  {signinEmailError && <p className="text-xs text-red-300">{signinEmailError}</p>}
                 </div>
                 {signinMsg && (
                   <div className={`text-sm rounded-lg p-3 ${
@@ -157,7 +177,17 @@ export default function TridentAuthGate({ children }: Props) {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   <FieldDark label="Full Name *" id="su-name" value={signup.name} onChange={(v) => setSignup({ ...signup, name: v })} required />
                   <FieldDark label="Company *" id="su-company" value={signup.company_name} onChange={(v) => setSignup({ ...signup, company_name: v })} required />
-                  <FieldDark label="Email *" id="su-email" type="email" value={signup.email} onChange={(v) => setSignup({ ...signup, email: v })} required />
+                  <FieldDark
+                    label="Email *" id="su-email" type="email" required
+                    value={signup.email}
+                    onChange={(v) => { setSignup({ ...signup, email: v }); if (signupEmailError) setSignupEmailError(""); }}
+                    onBlur={(v) => {
+                      if (!v.trim()) { setSignupEmailError(""); return; }
+                      const c = validateEmail(v);
+                      setSignupEmailError(c.valid ? "" : c.message);
+                    }}
+                    error={signupEmailError}
+                  />
                   <FieldDark label="Phone *" id="su-phone" type="tel" value={signup.phone} onChange={(v) => setSignup({ ...signup, phone: v })} required />
                   <FieldDark label="Title / Role" id="su-title" value={signup.title} onChange={(v) => setSignup({ ...signup, title: v })} />
                   <FieldDark label="Street Address" id="su-addr" value={signup.address_line1} onChange={(v) => setSignup({ ...signup, address_line1: v })} />
@@ -194,17 +224,22 @@ export default function TridentAuthGate({ children }: Props) {
   );
 }
 
-function FieldDark({ label, id, value, onChange, type = "text", required = false }: {
+function FieldDark({ label, id, value, onChange, type = "text", required = false, onBlur, error }: {
   label: string; id: string; value: string; onChange: (v: string) => void; type?: string; required?: boolean;
+  onBlur?: (v: string) => void; error?: string;
 }) {
   return (
     <div className="space-y-2">
       <Label htmlFor={id} className="text-white">{label}</Label>
       <Input
         id={id} type={type} required={required}
-        value={value} onChange={(e) => onChange(e.target.value)}
-        className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        onBlur={onBlur ? (e) => onBlur(e.target.value) : undefined}
+        aria-invalid={!!error}
+        className={`bg-white/10 text-white placeholder:text-slate-500 ${error ? "border-destructive" : "border-white/20"}`}
       />
+      {error && <p className="text-xs text-red-300">{error}</p>}
     </div>
   );
 }

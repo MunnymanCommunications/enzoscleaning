@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Shield, Lock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { validateEmail } from "@/lib/validateEmail";
 
 const GATE_PASSWORD = "ENZOS";
 const STORAGE_KEY = "trident_visitor_id";
@@ -17,6 +18,7 @@ export default function TridentGate({ children }: TridentGateProps) {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [emailError, setEmailError] = useState("");
   const [form, setForm] = useState({
     name: "",
     company_name: "",
@@ -56,6 +58,13 @@ export default function TridentGate({ children }: TridentGateProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+
+    const emailCheck = validateEmail(form.email);
+    if (!emailCheck.valid) {
+      setEmailError(emailCheck.message);
+      setError(emailCheck.message);
+      return;
+    }
 
     if (form.password.toUpperCase() !== GATE_PASSWORD) {
       setError("Incorrect password. Please try again.");
@@ -164,9 +173,16 @@ export default function TridentGate({ children }: TridentGateProps) {
               required
               placeholder="john@company.com"
               value={form.email}
-              onChange={(e) => setForm({ ...form, email: e.target.value })}
-              className="bg-white/10 border-white/20 text-white placeholder:text-slate-500"
+              onChange={(e) => { setForm({ ...form, email: e.target.value }); if (emailError) setEmailError(""); }}
+              onBlur={(e) => {
+                if (!e.target.value.trim()) { setEmailError(""); return; }
+                const c = validateEmail(e.target.value);
+                setEmailError(c.valid ? "" : c.message);
+              }}
+              aria-invalid={!!emailError}
+              className={`bg-white/10 text-white placeholder:text-slate-500 ${emailError ? "border-destructive" : "border-white/20"}`}
             />
+            {emailError && <p className="text-xs text-red-300">{emailError}</p>}
           </div>
 
           <div className="space-y-2">
