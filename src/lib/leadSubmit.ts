@@ -21,7 +21,7 @@ export interface LeadResult {
   request_id?: string;
 }
 
-const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const EMAIL_RE = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 /**
  * Submit a lead. Returns `{ ok, error?, request_id? }`.
@@ -30,10 +30,10 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 export async function submitLead(payload: LeadPayload): Promise<LeadResult> {
   // Light client-side validation — catches obvious garbage before the round-trip.
   if (!payload?.form_name) return { ok: false, error: "Missing form name" };
-  if (payload.email && !EMAIL_RE.test(payload.email.trim())) {
-    return { ok: false, error: "Please enter a valid email address." };
+  if (payload.email) {
+    const check = validateEmail(payload.email);
+    if (!check.valid) return { ok: false, error: check.message };
   }
-  if (payload.email && payload.email.length > 254) return { ok: false, error: "Email is too long." };
   if (payload.phone && payload.phone.replace(/\D/g, "").length < 7) {
     return { ok: false, error: "Please enter a valid phone number." };
   }
