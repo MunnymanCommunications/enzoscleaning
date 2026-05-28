@@ -97,14 +97,19 @@ export default function CouponPopup() {
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 className="w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
               />
-              <input
-                type="email"
-                required
-                placeholder="Your Email Address"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full rounded-xl border border-white/60 bg-white/50 backdrop-blur px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40"
-              />
+              <div>
+                <input
+                  type="email"
+                  required
+                  placeholder="Your Email Address"
+                  value={form.email}
+                  onChange={(e) => { setForm({ ...form, email: e.target.value }); if (emailError) setEmailError(""); }}
+                  onBlur={(e) => { if (e.target.value.trim()) checkEmail(e.target.value); }}
+                  aria-invalid={!!emailError}
+                  className={`w-full rounded-xl border bg-white/50 backdrop-blur px-4 py-3 text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/40 ${emailError ? "border-destructive" : "border-white/60"}`}
+                />
+                {emailError && <p className="mt-1 text-xs text-destructive px-1">{emailError}</p>}
+              </div>
               <input
                 type="tel"
                 required
