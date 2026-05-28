@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { X, Phone } from "lucide-react";
 import { submitLead } from "@/lib/leadSubmit";
 import { toast } from "@/hooks/use-toast";
+import { validateEmail } from "@/lib/validateEmail";
 
 const SESSION_KEY = "enzos_coupon_popup_seen";
 const COUPON_CODE = "10%ENZOS";
