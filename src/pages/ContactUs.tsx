@@ -137,7 +137,16 @@ export default function ContactUs() {
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Email</label>
-                  <input name="email" type="email" className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" />
+                  <input
+                    name="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); if (emailError) setEmailError(""); }}
+                    onBlur={(e) => checkEmail(e.target.value)}
+                    aria-invalid={!!emailError}
+                    className={`w-full rounded-md border bg-background px-3 py-2 text-sm ${emailError ? "border-destructive" : "border-input"}`}
+                  />
+                  {emailError && <p className="mt-1 text-xs text-destructive">{emailError}</p>}
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-1">Request Type</label>
