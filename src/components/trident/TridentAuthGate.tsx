@@ -56,11 +56,15 @@ export default function TridentAuthGate({ children }: Props) {
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
     setSigninMsg(null);
+    const email = signinEmail.trim().toLowerCase();
+    const c = validateEmail(email);
+    if (!c.valid) {
+      setSigninEmailError(c.message);
+      setSigninMsg({ type: "err", text: c.message });
+      return;
+    }
     setSigninLoading(true);
     try {
-      const email = signinEmail.trim().toLowerCase();
-      if (!email) { setSigninMsg({ type: "err", text: "Please enter your email." }); return; }
-
       const { data, error } = await supabase.functions.invoke("trident-magic-link", {
         body: { email, redirect_to: window.location.origin + "/hardscaping/trident/" },
       });
