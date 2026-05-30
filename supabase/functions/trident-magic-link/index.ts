@@ -69,7 +69,18 @@ Deno.serve(async (req) => {
       type: "magiclink", email, options: { redirectTo },
     });
 
-    const magicLink = linkData?.properties?.action_link;
+    let magicLink = linkData?.properties?.action_link;
+    // Supabase Auth may override redirect_to with its configured site URL;
+    // force it to the production domain.
+    if (magicLink) {
+      try {
+        const u = new URL(magicLink);
+        u.searchParams.set("redirect_to", redirectTo);
+        magicLink = u.toString();
+      } catch {
+        /* leave original if parsing fails */
+      }
+    }
     if (linkErr || !magicLink) {
       log.error("auth", "magic_link_generation_failed", { ...errMeta(linkErr), email });
       return json({ error: "Failed to generate link" }, 500, log.requestId);
