@@ -34,14 +34,20 @@ export function TridentAuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [member, setMember] = useState<TridentMember | null>(null);
   const [loading, setLoading] = useState(true);
+  const [memberLoading, setMemberLoading] = useState(false);
 
   const loadMember = useCallback(async (userId: string) => {
-    const { data } = await supabase
-      .from("trident_members")
-      .select("*")
-      .eq("user_id", userId)
-      .maybeSingle();
-    setMember((data as TridentMember) || null);
+    setMemberLoading(true);
+    try {
+      const { data } = await supabase
+        .from("trident_members")
+        .select("*")
+        .eq("user_id", userId)
+        .maybeSingle();
+      setMember((data as TridentMember) || null);
+    } finally {
+      setMemberLoading(false);
+    }
   }, []);
 
   useEffect(() => {
@@ -49,9 +55,13 @@ export function TridentAuthProvider({ children }: { children: ReactNode }) {
     const { data: sub } = supabase.auth.onAuthStateChange((_event, sess) => {
       setSession(sess);
       if (sess?.user) {
+        // Mark loading immediately so the gate doesn't flash the orphan screen
+        // between session arriving and the member row resolving.
+        setMemberLoading(true);
         setTimeout(() => { loadMember(sess.user.id); }, 0);
       } else {
         setMember(null);
+        setMemberLoading(false);
       }
     });
 
