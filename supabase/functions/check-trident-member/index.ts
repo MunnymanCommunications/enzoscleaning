@@ -88,7 +88,15 @@ Deno.serve(async (req) => {
             log.error("database", "current_member_relink_failed", { ...errMeta(repairErr), user_id: user.id, email: user.email });
             return json({ error: "Profile relink failed" }, 500, log.requestId);
           }
-          await supabase.from("user_roles").upsert({ user_id: user.id, role: "trident_member" }, { onConflict: "user_id,role" });
+          const { data: existingRole } = await supabase
+            .from("user_roles")
+            .select("id")
+            .eq("user_id", user.id)
+            .eq("role", "trident_member")
+            .maybeSingle();
+          if (!existingRole) {
+            await supabase.from("user_roles").insert({ user_id: user.id, role: "trident_member" });
+          }
           log.info("database", "current_member_relinked_by_email", { user_id: user.id, email: user.email });
           return json({ exists: true, member: repairedMember, request_id: log.requestId }, 200, log.requestId);
         }
