@@ -53,17 +53,20 @@ export default function TridentAuthGate({ children }: Props) {
     if (!token_hash || !type) return;
     (async () => {
       setVerifyingMagicLink(true);
-      const { error } = await supabase.auth.verifyOtp({
-        token_hash,
-        type: type as "magiclink" | "email" | "recovery" | "invite" | "signup",
-      });
-      // Strip auth params from URL regardless of outcome
-      const url = new URL(window.location.href);
-      url.searchParams.delete("token_hash");
-      url.searchParams.delete("type");
-      window.history.replaceState({}, "", url.toString());
-      if (!error) await refresh();
-      setVerifyingMagicLink(false);
+      try {
+        const { error } = await supabase.auth.verifyOtp({
+          token_hash,
+          type: type as "magiclink" | "email" | "recovery" | "invite" | "signup",
+        });
+        if (!error) await refresh();
+      } finally {
+        // Strip auth params from URL regardless of outcome
+        const url = new URL(window.location.href);
+        url.searchParams.delete("token_hash");
+        url.searchParams.delete("type");
+        window.history.replaceState({}, "", url.toString());
+        setVerifyingMagicLink(false);
+      }
     })();
   }, [refresh]);
 
@@ -80,6 +83,18 @@ export default function TridentAuthGate({ children }: Props) {
   }
 
   if (session && member) return <>{children}</>;
+
+  if (signupLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background px-4">
+        <div className="max-w-md text-center space-y-4">
+          <Loader2 className="mx-auto h-10 w-10 animate-spin text-primary" />
+          <h1 className="text-2xl font-semibold text-foreground">Your account is being created in our system</h1>
+          <p className="text-muted-foreground">Please keep this page open while we prepare your Trident profile and sign-in link.</p>
+        </div>
+      </div>
+    );
+  }
 
   if (session && !member) {
     // Authenticated but profile missing — orphan account; force sign-out.

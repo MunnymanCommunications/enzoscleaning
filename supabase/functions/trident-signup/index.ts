@@ -135,12 +135,14 @@ Deno.serve(async (req) => {
       email, email_confirm: true,
       user_metadata: { name: data.name, company_name: data.company_name },
     });
-    if (createErr || !created?.user) {
+    const existingAuthUser = createErr ? await findAuthUserByEmail(admin, email, log) : null;
+    if ((createErr && !existingAuthUser) || (!createErr && !created?.user)) {
       log.error("auth", "create_user_failed", { ...errMeta(createErr), email });
       return json({ error: createErr?.message || "Failed to create account" }, 500, log.requestId);
     }
-    const userId = created.user.id;
-    log.info("auth", "user_created", { user_id: userId, email });
+    const userId = (created?.user || existingAuthUser)!.id;
+    const createdNewAuthUser = !!created?.user;
+    log.info("auth", createdNewAuthUser ? "user_created" : "existing_auth_user_linked", { user_id: userId, email });
 
     // 3) Insert member profile
     const { error: profErr } = await admin.from("trident_members").insert({
@@ -155,8 +157,10 @@ Deno.serve(async (req) => {
     });
     if (profErr) {
       log.error("database", "member_profile_insert_failed", { ...errMeta(profErr), user_id: userId, email });
-      const { error: rollbackErr } = await admin.auth.admin.deleteUser(userId);
-      if (rollbackErr) log.error("auth", "user_rollback_failed", { ...errMeta(rollbackErr), user_id: userId });
+      if (createdNewAuthUser) {
+        const { error: rollbackErr } = await admin.auth.admin.deleteUser(userId);
+        if (rollbackErr) log.error("auth", "user_rollback_failed", { ...errMeta(rollbackErr), user_id: userId });
+      }
       return json({ error: profErr.message }, 500, log.requestId);
     }
 
@@ -261,4 +265,19 @@ function escapeHtml(s: string): string {
 }
 function row(label: string, value: string): string {
   return `<tr><td style="padding:8px 10px;border:1px solid #e2e8f0;font-weight:700;background:#f8fafc">${escapeHtml(label)}</td><td style="padding:8px 10px;border:1px solid #e2e8f0">${escapeHtml(value || "—")}</td></tr>`;
+}
+
+async function findAuthUserByEmail(admin: ReturnType<typeof createClient>, email: string, log: ReturnType<typeof createLogger>) {
+  for (let page = 1; page <= 10; page += 1) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 1000 });
+    if (error) {
+      log.error("auth", "list_users_failed", { ...errMeta(error), email, page });
+      return null;
+    }
+    const user = data.users.find((u) => u.email?.toLowerCase() === email);
+    if (user) return user;
+    if (data.users.length < 1000) return null;
+  }
+  log.warn("auth", "existing_auth_user_lookup_exhausted", { email });
+  return null;
 }
