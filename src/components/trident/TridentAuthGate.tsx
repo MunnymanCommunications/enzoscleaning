@@ -28,6 +28,7 @@ export default function TridentAuthGate({ children }: Props) {
   const [signupEmailChecking, setSignupEmailChecking] = useState(false);
   const [signupMsg, setSignupMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [signupLoading, setSignupLoading] = useState(false);
+  const [verifyingMagicLink, setVerifyingMagicLink] = useState(false);
 
   async function verifyMx(email: string): Promise<string> {
     try {
@@ -51,6 +52,7 @@ export default function TridentAuthGate({ children }: Props) {
     const type = params.get("type");
     if (!token_hash || !type) return;
     (async () => {
+      setVerifyingMagicLink(true);
       const { error } = await supabase.auth.verifyOtp({
         token_hash,
         type: type as "magiclink" | "email" | "recovery" | "invite" | "signup",
@@ -61,6 +63,7 @@ export default function TridentAuthGate({ children }: Props) {
       url.searchParams.delete("type");
       window.history.replaceState({}, "", url.toString());
       if (!error) await refresh();
+      setVerifyingMagicLink(false);
     })();
   }, [refresh]);
 
@@ -68,7 +71,7 @@ export default function TridentAuthGate({ children }: Props) {
     if (session && member) trackEvent("trident_session_active");
   }, [session, member, trackEvent]);
 
-  if (loading || (session && memberLoading)) {
+  if (loading || verifyingMagicLink || (session && memberLoading)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />

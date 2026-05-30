@@ -44,6 +44,39 @@ async function fetchWithTimeout(url: string, init: RequestInit, ms = FETCH_TIMEO
   try { return await fetch(url, { ...init, signal: ctrl.signal }); } finally { clearTimeout(t); }
 }
 
+async function sendAdminSignupCopy(data: SignupPayload, email: string, log: ReturnType<typeof createLogger>) {
+  if (!RESEND_API_KEY) return;
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;padding:24px;background:#ffffff;color:#0f172a">
+      <h2 style="margin:0 0 16px">New Trident signup</h2>
+      <p>A client created a Trident account.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        ${row("Name", data.name)}
+        ${row("Company", data.company_name)}
+        ${row("Email", email)}
+        ${row("Phone", data.phone)}
+        ${row("Title", data.title || "")}
+        ${row("Address", [data.address_line1, data.address_line2].filter(Boolean).join(", "))}
+        ${row("City", data.city || "")}
+        ${row("State", data.state || "")}
+        ${row("Postal code", data.postal_code || "")}
+        ${row("Country", data.country || "")}
+        ${row("Notes", data.notes || "")}
+        ${row("Signed up at", new Date().toLocaleString("en-US", { timeZone: "America/New_York" }))}
+      </table>
+    </div>`;
+  try {
+    const r = await fetchWithTimeout("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from: FROM_EMAIL, to: [ADMIN_EMAIL], subject: `New Trident signup: ${data.name}`, html, reply_to: email }),
+    });
+    if (!r.ok) log.error("email", "admin_signup_copy_failed", { status: r.status, body: (await r.text()).slice(0, 500), email });
+  } catch (e) {
+    log.error("email", "admin_signup_copy_exception", { ...errMeta(e), email });
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   const log = createLogger("trident-signup", req);
@@ -175,6 +208,8 @@ Deno.serve(async (req) => {
       log.warn("config", "resend_api_key_missing");
     }
 
+    await sendAdminSignupCopy(data, email, log);
+
     // 6) CRM push
     if (CRM_FORMS_WEBHOOK_URL && CRM_WEBHOOK_APIKEY && CRM_TRIDENT_MEMBERS_BOARD_ID) {
       const now = new Date();
@@ -223,4 +258,7 @@ function json(body: unknown, status: number, requestId: string) {
 }
 function escapeHtml(s: string): string {
   return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" } as Record<string, string>)[c]);
+}
+function row(label: string, value: string): string {
+  return `<tr><td style="padding:8px 10px;border:1px solid #e2e8f0;font-weight:700;background:#f8fafc">${escapeHtml(label)}</td><td style="padding:8px 10px;border:1px solid #e2e8f0">${escapeHtml(value || "—")}</td></tr>`;
 }
