@@ -110,6 +110,7 @@ export function TridentAuthProvider({ children }: { children: ReactNode }) {
       refresh,
       signOut,
       trackEvent,
+      memberLoading,
     }}>
       {children}
     </Ctx.Provider>
