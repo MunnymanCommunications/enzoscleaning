@@ -47,9 +47,23 @@ export function TridentAuthProvider({ children }: { children: ReactNode }) {
           .eq("user_id", userId)
           .maybeSingle();
 
-        if (data || error || attempt === 3) {
+        if (data) {
           setMember((data as TridentMember) || null);
-          break;
+          return;
+        }
+
+        const { data: fallback } = await supabase.functions.invoke("check-trident-member", {
+          body: { current: true },
+        });
+
+        if (fallback?.member) {
+          setMember(fallback.member as TridentMember);
+          return;
+        }
+
+        if (error || attempt === 3) {
+          setMember(null);
+          return;
         }
 
         await new Promise((resolve) => setTimeout(resolve, 350));
