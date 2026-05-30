@@ -108,6 +108,12 @@ const SUPPRESSED_PATTERNS: RegExp[] = [
 
   // Supabase Auth LockManager lock acquisition failures (internal race condition, not user-facing)
   /Acquiring an exclusive Navigator LockManager lock "lock:sb-.*-auth-token"/i,
+
+  // Expected business-logic responses from edge functions (not crashes).
+  // These are returned as non-2xx by design and handled in the UI.
+  /Edge function returned 409/i,
+  /Edge function returned 4\d\d/i, // any 4xx client-side validation response
+  /An account with that email already exists/i,
 ];
 
 function isSuppressed(message: string, stack: string): boolean {
