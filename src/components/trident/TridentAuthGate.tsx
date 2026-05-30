@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Shield, Mail, LogOut } from "lucide-react";
+import { Shield, Mail, LogOut, AlertCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTridentAuth } from "@/contexts/TridentAuthContext";
 import { validateEmail } from "@/lib/validateEmail";
@@ -79,6 +79,14 @@ export default function TridentAuthGate({ children }: Props) {
       setSigninMsg({ type: "err", text: c.message });
       return;
     }
+    setSigninEmailChecking(true);
+    const mxErr = await verifyMx(email);
+    setSigninEmailChecking(false);
+    if (mxErr) {
+      setSigninEmailError(mxErr);
+      setSigninMsg({ type: "err", text: mxErr });
+      return;
+    }
     setSigninLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("trident-magic-link", {
@@ -112,6 +120,14 @@ export default function TridentAuthGate({ children }: Props) {
     if (!c.valid) {
       setSignupEmailError(c.message);
       setSignupMsg({ type: "err", text: c.message });
+      return;
+    }
+    setSignupEmailChecking(true);
+    const mxErr = await verifyMx(signup.email);
+    setSignupEmailChecking(false);
+    if (mxErr) {
+      setSignupEmailError(mxErr);
+      setSignupMsg({ type: "err", text: mxErr });
       return;
     }
     setSignupLoading(true);
