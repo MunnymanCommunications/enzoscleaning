@@ -1,0 +1,7 @@
+DELETE FROM public.trident_member_events WHERE user_id IN ('b61b8e9b-9886-4bb2-ba9c-f085e3c33094','5dfa2c0a-3ccb-4fda-bf55-48cc3409c6a1','641fe3bb-6162-44b8-8694-cc34c0684f4e');
+DELETE FROM public.trident_order_request_items WHERE order_id IN (SELECT id FROM public.trident_order_requests WHERE user_id IN ('b61b8e9b-9886-4bb2-ba9c-f085e3c33094','5dfa2c0a-3ccb-4fda-bf55-48cc3409c6a1','641fe3bb-6162-44b8-8694-cc34c0684f4e'));
+DELETE FROM public.trident_order_requests WHERE user_id IN ('b61b8e9b-9886-4bb2-ba9c-f085e3c33094','5dfa2c0a-3ccb-4fda-bf55-48cc3409c6a1','641fe3bb-6162-44b8-8694-cc34c0684f4e');
+DELETE FROM public.user_roles WHERE user_id IN ('b61b8e9b-9886-4bb2-ba9c-f085e3c33094','5dfa2c0a-3ccb-4fda-bf55-48cc3409c6a1','641fe3bb-6162-44b8-8694-cc34c0684f4e');
+DELETE FROM public.trident_members WHERE user_id IN ('b61b8e9b-9886-4bb2-ba9c-f085e3c33094','5dfa2c0a-3ccb-4fda-bf55-48cc3409c6a1','641fe3bb-6162-44b8-8694-cc34c0684f4e');
+DELETE FROM auth.identities WHERE user_id IN ('b61b8e9b-9886-4bb2-ba9c-f085e3c33094','5dfa2c0a-3ccb-4fda-bf55-48cc3409c6a1','641fe3bb-6162-44b8-8694-cc34c0684f4e');
+DELETE FROM auth.users WHERE id IN ('b61b8e9b-9886-4bb2-ba9c-f085e3c33094','5dfa2c0a-3ccb-4fda-bf55-48cc3409c6a1','641fe3bb-6162-44b8-8694-cc34c0684f4e');
