@@ -53,17 +53,20 @@ export default function TridentAuthGate({ children }: Props) {
     if (!token_hash || !type) return;
     (async () => {
       setVerifyingMagicLink(true);
-      const { error } = await supabase.auth.verifyOtp({
-        token_hash,
-        type: type as "magiclink" | "email" | "recovery" | "invite" | "signup",
-      });
-      // Strip auth params from URL regardless of outcome
-      const url = new URL(window.location.href);
-      url.searchParams.delete("token_hash");
-      url.searchParams.delete("type");
-      window.history.replaceState({}, "", url.toString());
-      if (!error) await refresh();
-      setVerifyingMagicLink(false);
+      try {
+        const { error } = await supabase.auth.verifyOtp({
+          token_hash,
+          type: type as "magiclink" | "email" | "recovery" | "invite" | "signup",
+        });
+        if (!error) await refresh();
+      } finally {
+        // Strip auth params from URL regardless of outcome
+        const url = new URL(window.location.href);
+        url.searchParams.delete("token_hash");
+        url.searchParams.delete("type");
+        window.history.replaceState({}, "", url.toString());
+        setVerifyingMagicLink(false);
+      }
     })();
   }, [refresh]);
 
