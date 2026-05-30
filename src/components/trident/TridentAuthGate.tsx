@@ -225,12 +225,18 @@ export default function TridentAuthGate({ children }: Props) {
                     label="Email *" id="su-email" type="email" required
                     value={signup.email}
                     onChange={(v) => { setSignup({ ...signup, email: v }); if (signupEmailError) setSignupEmailError(""); }}
-                    onBlur={(v) => {
-                      if (!v.trim()) { setSignupEmailError(""); return; }
-                      const c = validateEmail(v);
-                      setSignupEmailError(c.valid ? "" : c.message);
+                    onBlur={async (v) => {
+                      const t = v.trim();
+                      if (!t) { setSignupEmailError(""); return; }
+                      const c = validateEmail(t);
+                      if (!c.valid) { setSignupEmailError(c.message); return; }
+                      setSignupEmailChecking(true);
+                      const mxErr = await verifyMx(t);
+                      setSignupEmailChecking(false);
+                      setSignupEmailError(mxErr);
                     }}
                     error={signupEmailError}
+                    checking={signupEmailChecking}
                   />
                   <FieldDark label="Phone *" id="su-phone" type="tel" value={signup.phone} onChange={(v) => setSignup({ ...signup, phone: v })} required />
                   <FieldDark label="Title / Role" id="su-title" value={signup.title} onChange={(v) => setSignup({ ...signup, title: v })} />
@@ -253,8 +259,8 @@ export default function TridentAuthGate({ children }: Props) {
                     {signupMsg.text}
                   </div>
                 )}
-                <Button type="submit" disabled={signupLoading} className="w-full">
-                  {signupLoading ? "Creating account..." : "Create Account & Send Link"}
+                <Button type="submit" disabled={signupLoading || signupEmailChecking || !!signupEmailError} className="w-full">
+                  {signupLoading ? "Creating account..." : signupEmailChecking ? "Checking email..." : "Create Account & Send Link"}
                 </Button>
                 <p className="text-xs text-slate-500 text-center">
                   We'll create your member profile and email you a secure sign-in link.
@@ -268,21 +274,28 @@ export default function TridentAuthGate({ children }: Props) {
   );
 }
 
-function FieldDark({ label, id, value, onChange, type = "text", required = false, onBlur, error }: {
+function FieldDark({ label, id, value, onChange, type = "text", required = false, onBlur, error, checking }: {
   label: string; id: string; value: string; onChange: (v: string) => void; type?: string; required?: boolean;
-  onBlur?: (v: string) => void; error?: string;
+  onBlur?: (v: string) => void | Promise<void>; error?: string; checking?: boolean;
 }) {
   return (
     <div className="space-y-2">
       <Label htmlFor={id} className="text-white">{label}</Label>
-      <Input
-        id={id} type={type} required={required}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onBlur={onBlur ? (e) => onBlur(e.target.value) : undefined}
-        aria-invalid={!!error}
-        className={`bg-white/10 text-white placeholder:text-slate-500 ${error ? "border-destructive" : "border-white/20"}`}
-      />
+      <div className="relative">
+        <Input
+          id={id} type={type} required={required}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur ? (e) => { void onBlur(e.target.value); } : undefined}
+          aria-invalid={!!error}
+          className={`bg-white/10 text-white placeholder:text-slate-500 ${onBlur ? "pr-10" : ""} ${error ? "border-destructive" : "border-white/20"}`}
+        />
+        {checking ? (
+          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 animate-spin" />
+        ) : error ? (
+          <AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-destructive" aria-label="Invalid" />
+        ) : null}
+      </div>
       {error && <p className="text-xs text-red-300">{error}</p>}
     </div>
   );
