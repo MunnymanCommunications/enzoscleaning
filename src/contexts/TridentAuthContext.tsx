@@ -26,6 +26,7 @@ interface TridentAuthContextValue {
   refresh: () => Promise<void>;
   signOut: () => Promise<void>;
   trackEvent: (event_type: string, event_data?: Record<string, unknown>) => void;
+  memberLoading: boolean;
 }
 
 const Ctx = createContext<TridentAuthContextValue | undefined>(undefined);
