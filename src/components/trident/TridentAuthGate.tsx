@@ -168,19 +168,31 @@ export default function TridentAuthGate({ children }: Props) {
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="si-email" className="text-white">Email Address</Label>
-                  <Input
-                    id="si-email" type="email" required
-                    placeholder="you@company.com"
-                    value={signinEmail}
-                    onChange={(e) => { setSigninEmail(e.target.value); if (signinEmailError) setSigninEmailError(""); }}
-                    onBlur={(e) => {
-                      if (!e.target.value.trim()) { setSigninEmailError(""); return; }
-                      const c = validateEmail(e.target.value);
-                      setSigninEmailError(c.valid ? "" : c.message);
-                    }}
-                    aria-invalid={!!signinEmailError}
-                    className={`bg-white/10 text-white placeholder:text-slate-500 ${signinEmailError ? "border-destructive" : "border-white/20"}`}
-                  />
+                  <div className="relative">
+                    <Input
+                      id="si-email" type="email" required
+                      placeholder="you@company.com"
+                      value={signinEmail}
+                      onChange={(e) => { setSigninEmail(e.target.value); if (signinEmailError) setSigninEmailError(""); }}
+                      onBlur={async (e) => {
+                        const v = e.target.value.trim();
+                        if (!v) { setSigninEmailError(""); return; }
+                        const c = validateEmail(v);
+                        if (!c.valid) { setSigninEmailError(c.message); return; }
+                        setSigninEmailChecking(true);
+                        const mxErr = await verifyMx(v);
+                        setSigninEmailChecking(false);
+                        setSigninEmailError(mxErr);
+                      }}
+                      aria-invalid={!!signinEmailError}
+                      className={`bg-white/10 text-white placeholder:text-slate-500 pr-10 ${signinEmailError ? "border-destructive" : "border-white/20"}`}
+                    />
+                    {signinEmailChecking ? (
+                      <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 animate-spin" />
+                    ) : signinEmailError ? (
+                      <AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-destructive" aria-label="Invalid email" />
+                    ) : null}
+                  </div>
                   {signinEmailError && <p className="text-xs text-red-300">{signinEmailError}</p>}
                 </div>
                 {signinMsg && (
@@ -197,9 +209,9 @@ export default function TridentAuthGate({ children }: Props) {
                     )}
                   </div>
                 )}
-                <Button type="submit" disabled={signinLoading} className="w-full">
+                <Button type="submit" disabled={signinLoading || signinEmailChecking || !!signinEmailError} className="w-full">
                   <Mail className="h-4 w-4 mr-2" />
-                  {signinLoading ? "Sending link..." : "Send Sign-In Link"}
+                  {signinLoading ? "Sending link..." : signinEmailChecking ? "Checking email..." : "Send Sign-In Link"}
                 </Button>
               </form>
             </TabsContent>
