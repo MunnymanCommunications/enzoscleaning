@@ -259,3 +259,6 @@ function json(body: unknown, status: number, requestId: string) {
 function escapeHtml(s: string): string {
   return s.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" } as Record<string, string>)[c]);
 }
+function row(label: string, value: string): string {
+  return `<tr><td style="padding:8px 10px;border:1px solid #e2e8f0;font-weight:700;background:#f8fafc">${escapeHtml(label)}</td><td style="padding:8px 10px;border:1px solid #e2e8f0">${escapeHtml(value || "—")}</td></tr>`;
+}
