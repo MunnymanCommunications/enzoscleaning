@@ -16,6 +16,7 @@ export default function TridentAuthGate({ children }: Props) {
   const [tab, setTab] = useState<"signin" | "signup">("signin");
   const [signinEmail, setSigninEmail] = useState("");
   const [signinEmailError, setSigninEmailError] = useState("");
+  const [signinEmailChecking, setSigninEmailChecking] = useState(false);
   const [signinMsg, setSigninMsg] = useState<{ type: "ok" | "err" | "info"; text: string } | null>(null);
   const [signinLoading, setSigninLoading] = useState(false);
 
@@ -24,8 +25,23 @@ export default function TridentAuthGate({ children }: Props) {
     title: "", address_line1: "", city: "", state: "", postal_code: "", notes: "",
   });
   const [signupEmailError, setSignupEmailError] = useState("");
+  const [signupEmailChecking, setSignupEmailChecking] = useState(false);
   const [signupMsg, setSignupMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [signupLoading, setSignupLoading] = useState(false);
+
+  async function verifyMx(email: string): Promise<string> {
+    try {
+      const { data } = await supabase.functions.invoke("verify-email-mx", { body: { email } });
+      if (data && data.valid === false) {
+        return data.reason === "no_mx"
+          ? "This email domain can't receive mail — double-check spelling."
+          : "Please enter a valid email address.";
+      }
+    } catch {
+      // network failure — don't block
+    }
+    return "";
+  }
 
   useEffect(() => {
     if (session && member) trackEvent("trident_session_active");
