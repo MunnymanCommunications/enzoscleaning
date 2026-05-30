@@ -5,3 +5,6 @@ verify_jwt = false
 
 [functions.trident-track]
 verify_jwt = false
+
+[functions.verify-email-mx]
+verify_jwt = false

@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Shield, Mail, LogOut } from "lucide-react";
+import { Shield, Mail, LogOut, AlertCircle, Loader2 } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useTridentAuth } from "@/contexts/TridentAuthContext";
 import { validateEmail } from "@/lib/validateEmail";
@@ -16,6 +16,7 @@ export default function TridentAuthGate({ children }: Props) {
   const [tab, setTab] = useState<"signin" | "signup">("signin");
   const [signinEmail, setSigninEmail] = useState("");
   const [signinEmailError, setSigninEmailError] = useState("");
+  const [signinEmailChecking, setSigninEmailChecking] = useState(false);
   const [signinMsg, setSigninMsg] = useState<{ type: "ok" | "err" | "info"; text: string } | null>(null);
   const [signinLoading, setSigninLoading] = useState(false);
 
@@ -24,8 +25,23 @@ export default function TridentAuthGate({ children }: Props) {
     title: "", address_line1: "", city: "", state: "", postal_code: "", notes: "",
   });
   const [signupEmailError, setSignupEmailError] = useState("");
+  const [signupEmailChecking, setSignupEmailChecking] = useState(false);
   const [signupMsg, setSignupMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [signupLoading, setSignupLoading] = useState(false);
+
+  async function verifyMx(email: string): Promise<string> {
+    try {
+      const { data } = await supabase.functions.invoke("verify-email-mx", { body: { email } });
+      if (data && data.valid === false) {
+        return data.reason === "no_mx"
+          ? "This email domain can't receive mail — double-check spelling."
+          : "Please enter a valid email address.";
+      }
+    } catch {
+      // network failure — don't block
+    }
+    return "";
+  }
 
   useEffect(() => {
     if (session && member) trackEvent("trident_session_active");
@@ -63,6 +79,14 @@ export default function TridentAuthGate({ children }: Props) {
       setSigninMsg({ type: "err", text: c.message });
       return;
     }
+    setSigninEmailChecking(true);
+    const mxErr = await verifyMx(email);
+    setSigninEmailChecking(false);
+    if (mxErr) {
+      setSigninEmailError(mxErr);
+      setSigninMsg({ type: "err", text: mxErr });
+      return;
+    }
     setSigninLoading(true);
     try {
       const { data, error } = await supabase.functions.invoke("trident-magic-link", {
@@ -96,6 +120,14 @@ export default function TridentAuthGate({ children }: Props) {
     if (!c.valid) {
       setSignupEmailError(c.message);
       setSignupMsg({ type: "err", text: c.message });
+      return;
+    }
+    setSignupEmailChecking(true);
+    const mxErr = await verifyMx(signup.email);
+    setSignupEmailChecking(false);
+    if (mxErr) {
+      setSignupEmailError(mxErr);
+      setSignupMsg({ type: "err", text: mxErr });
       return;
     }
     setSignupLoading(true);
@@ -136,19 +168,31 @@ export default function TridentAuthGate({ children }: Props) {
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="si-email" className="text-white">Email Address</Label>
-                  <Input
-                    id="si-email" type="email" required
-                    placeholder="you@company.com"
-                    value={signinEmail}
-                    onChange={(e) => { setSigninEmail(e.target.value); if (signinEmailError) setSigninEmailError(""); }}
-                    onBlur={(e) => {
-                      if (!e.target.value.trim()) { setSigninEmailError(""); return; }
-                      const c = validateEmail(e.target.value);
-                      setSigninEmailError(c.valid ? "" : c.message);
-                    }}
-                    aria-invalid={!!signinEmailError}
-                    className={`bg-white/10 text-white placeholder:text-slate-500 ${signinEmailError ? "border-destructive" : "border-white/20"}`}
-                  />
+                  <div className="relative">
+                    <Input
+                      id="si-email" type="email" required
+                      placeholder="you@company.com"
+                      value={signinEmail}
+                      onChange={(e) => { setSigninEmail(e.target.value); if (signinEmailError) setSigninEmailError(""); }}
+                      onBlur={async (e) => {
+                        const v = e.target.value.trim();
+                        if (!v) { setSigninEmailError(""); return; }
+                        const c = validateEmail(v);
+                        if (!c.valid) { setSigninEmailError(c.message); return; }
+                        setSigninEmailChecking(true);
+                        const mxErr = await verifyMx(v);
+                        setSigninEmailChecking(false);
+                        setSigninEmailError(mxErr);
+                      }}
+                      aria-invalid={!!signinEmailError}
+                      className={`bg-white/10 text-white placeholder:text-slate-500 pr-10 ${signinEmailError ? "border-destructive" : "border-white/20"}`}
+                    />
+                    {signinEmailChecking ? (
+                      <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 animate-spin" />
+                    ) : signinEmailError ? (
+                      <AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-destructive" aria-label="Invalid email" />
+                    ) : null}
+                  </div>
                   {signinEmailError && <p className="text-xs text-red-300">{signinEmailError}</p>}
                 </div>
                 {signinMsg && (
@@ -165,9 +209,9 @@ export default function TridentAuthGate({ children }: Props) {
                     )}
                   </div>
                 )}
-                <Button type="submit" disabled={signinLoading} className="w-full">
+                <Button type="submit" disabled={signinLoading || signinEmailChecking || !!signinEmailError} className="w-full">
                   <Mail className="h-4 w-4 mr-2" />
-                  {signinLoading ? "Sending link..." : "Send Sign-In Link"}
+                  {signinLoading ? "Sending link..." : signinEmailChecking ? "Checking email..." : "Send Sign-In Link"}
                 </Button>
               </form>
             </TabsContent>
@@ -181,12 +225,18 @@ export default function TridentAuthGate({ children }: Props) {
                     label="Email *" id="su-email" type="email" required
                     value={signup.email}
                     onChange={(v) => { setSignup({ ...signup, email: v }); if (signupEmailError) setSignupEmailError(""); }}
-                    onBlur={(v) => {
-                      if (!v.trim()) { setSignupEmailError(""); return; }
-                      const c = validateEmail(v);
-                      setSignupEmailError(c.valid ? "" : c.message);
+                    onBlur={async (v) => {
+                      const t = v.trim();
+                      if (!t) { setSignupEmailError(""); return; }
+                      const c = validateEmail(t);
+                      if (!c.valid) { setSignupEmailError(c.message); return; }
+                      setSignupEmailChecking(true);
+                      const mxErr = await verifyMx(t);
+                      setSignupEmailChecking(false);
+                      setSignupEmailError(mxErr);
                     }}
                     error={signupEmailError}
+                    checking={signupEmailChecking}
                   />
                   <FieldDark label="Phone *" id="su-phone" type="tel" value={signup.phone} onChange={(v) => setSignup({ ...signup, phone: v })} required />
                   <FieldDark label="Title / Role" id="su-title" value={signup.title} onChange={(v) => setSignup({ ...signup, title: v })} />
@@ -209,8 +259,8 @@ export default function TridentAuthGate({ children }: Props) {
                     {signupMsg.text}
                   </div>
                 )}
-                <Button type="submit" disabled={signupLoading} className="w-full">
-                  {signupLoading ? "Creating account..." : "Create Account & Send Link"}
+                <Button type="submit" disabled={signupLoading || signupEmailChecking || !!signupEmailError} className="w-full">
+                  {signupLoading ? "Creating account..." : signupEmailChecking ? "Checking email..." : "Create Account & Send Link"}
                 </Button>
                 <p className="text-xs text-slate-500 text-center">
                   We'll create your member profile and email you a secure sign-in link.
@@ -224,21 +274,28 @@ export default function TridentAuthGate({ children }: Props) {
   );
 }
 
-function FieldDark({ label, id, value, onChange, type = "text", required = false, onBlur, error }: {
+function FieldDark({ label, id, value, onChange, type = "text", required = false, onBlur, error, checking }: {
   label: string; id: string; value: string; onChange: (v: string) => void; type?: string; required?: boolean;
-  onBlur?: (v: string) => void; error?: string;
+  onBlur?: (v: string) => void | Promise<void>; error?: string; checking?: boolean;
 }) {
   return (
     <div className="space-y-2">
       <Label htmlFor={id} className="text-white">{label}</Label>
-      <Input
-        id={id} type={type} required={required}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        onBlur={onBlur ? (e) => onBlur(e.target.value) : undefined}
-        aria-invalid={!!error}
-        className={`bg-white/10 text-white placeholder:text-slate-500 ${error ? "border-destructive" : "border-white/20"}`}
-      />
+      <div className="relative">
+        <Input
+          id={id} type={type} required={required}
+          value={value}
+          onChange={(e) => onChange(e.target.value)}
+          onBlur={onBlur ? (e) => { void onBlur(e.target.value); } : undefined}
+          aria-invalid={!!error}
+          className={`bg-white/10 text-white placeholder:text-slate-500 ${onBlur ? "pr-10" : ""} ${error ? "border-destructive" : "border-white/20"}`}
+        />
+        {checking ? (
+          <Loader2 className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 animate-spin" />
+        ) : error ? (
+          <AlertCircle className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 text-destructive" aria-label="Invalid" />
+        ) : null}
+      </div>
       {error && <p className="text-xs text-red-300">{error}</p>}
     </div>
   );
