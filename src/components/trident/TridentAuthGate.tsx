@@ -43,6 +43,27 @@ export default function TridentAuthGate({ children }: Props) {
     return "";
   }
 
+  // Handle magic-link token_hash arriving via our own redirect URL
+  // (we bypass Supabase's /verify endpoint to keep the production domain).
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const token_hash = params.get("token_hash");
+    const type = params.get("type");
+    if (!token_hash || !type) return;
+    (async () => {
+      const { error } = await supabase.auth.verifyOtp({
+        token_hash,
+        type: type as "magiclink" | "email" | "recovery" | "invite" | "signup",
+      });
+      // Strip auth params from URL regardless of outcome
+      const url = new URL(window.location.href);
+      url.searchParams.delete("token_hash");
+      url.searchParams.delete("type");
+      window.history.replaceState({}, "", url.toString());
+      if (!error) await refresh();
+    })();
+  }, [refresh]);
+
   useEffect(() => {
     if (session && member) trackEvent("trident_session_active");
   }, [session, member, trackEvent]);
