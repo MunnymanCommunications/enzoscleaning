@@ -135,12 +135,14 @@ Deno.serve(async (req) => {
       email, email_confirm: true,
       user_metadata: { name: data.name, company_name: data.company_name },
     });
-    if (createErr || !created?.user) {
+    const existingAuthUser = createErr ? await findAuthUserByEmail(admin, email, log) : null;
+    if ((createErr && !existingAuthUser) || (!createErr && !created?.user)) {
       log.error("auth", "create_user_failed", { ...errMeta(createErr), email });
       return json({ error: createErr?.message || "Failed to create account" }, 500, log.requestId);
     }
-    const userId = created.user.id;
-    log.info("auth", "user_created", { user_id: userId, email });
+    const userId = (created?.user || existingAuthUser)!.id;
+    const createdNewAuthUser = !!created?.user;
+    log.info("auth", createdNewAuthUser ? "user_created" : "existing_auth_user_linked", { user_id: userId, email });
 
     // 3) Insert member profile
     const { error: profErr } = await admin.from("trident_members").insert({
@@ -155,8 +157,10 @@ Deno.serve(async (req) => {
     });
     if (profErr) {
       log.error("database", "member_profile_insert_failed", { ...errMeta(profErr), user_id: userId, email });
-      const { error: rollbackErr } = await admin.auth.admin.deleteUser(userId);
-      if (rollbackErr) log.error("auth", "user_rollback_failed", { ...errMeta(rollbackErr), user_id: userId });
+      if (createdNewAuthUser) {
+        const { error: rollbackErr } = await admin.auth.admin.deleteUser(userId);
+        if (rollbackErr) log.error("auth", "user_rollback_failed", { ...errMeta(rollbackErr), user_id: userId });
+      }
       return json({ error: profErr.message }, 500, log.requestId);
     }
 
