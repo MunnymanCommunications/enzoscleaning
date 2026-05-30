@@ -23,6 +23,33 @@ async function fetchWithTimeout(url: string, init: RequestInit, ms = FETCH_TIMEO
   try { return await fetch(url, { ...init, signal: ctrl.signal }); } finally { clearTimeout(t); }
 }
 
+async function sendAdminSignInCopy(email: string, member: { name?: string | null; company_name?: string | null; phone?: string | null; title?: string | null }, log: ReturnType<typeof createLogger>) {
+  if (!RESEND_API_KEY) return;
+  const html = `
+    <div style="font-family:Arial,sans-serif;max-width:620px;margin:auto;padding:24px;background:#ffffff;color:#0f172a">
+      <h2 style="margin:0 0 16px">Trident sign-in link requested</h2>
+      <p>A client requested a Trident sign-in link.</p>
+      <table style="width:100%;border-collapse:collapse;font-size:14px">
+        ${row("Name", member.name || "")}
+        ${row("Company", member.company_name || "")}
+        ${row("Email", email)}
+        ${row("Phone", member.phone || "")}
+        ${row("Title", member.title || "")}
+        ${row("Requested at", new Date().toLocaleString("en-US", { timeZone: "America/New_York" }))}
+      </table>
+    </div>`;
+  try {
+    const r = await fetchWithTimeout("https://api.resend.com/emails", {
+      method: "POST",
+      headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+      body: JSON.stringify({ from: FROM_EMAIL, to: [ADMIN_EMAIL], subject: `Trident sign-in: ${member.name || email}`, html, reply_to: email }),
+    });
+    if (!r.ok) log.error("email", "admin_signin_copy_failed", { status: r.status, body: (await r.text()).slice(0, 500), email });
+  } catch (e) {
+    log.error("email", "admin_signin_copy_exception", { ...errMeta(e), email });
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === "OPTIONS") return new Response(null, { headers: corsHeaders });
   const log = createLogger("trident-magic-link", req);
@@ -52,7 +79,7 @@ Deno.serve(async (req) => {
 
     const { data: member, error: memberErr } = await admin
       .from("trident_members")
-      .select("id, name")
+      .select("id, name, company_name, phone, title")
       .ilike("email", email)
       .maybeSingle();
 
@@ -109,6 +136,7 @@ Deno.serve(async (req) => {
         return json({ error: "Failed to send email" }, 502, log.requestId);
       }
       log.info("email", "magic_link_sent", { status: r.status, email });
+      await sendAdminSignInCopy(email, member, log);
       return json({ ok: true, request_id: log.requestId }, 200, log.requestId);
     } catch (e) {
       log.error("email", "resend_magic_link_exception", { ...errMeta(e), email });
