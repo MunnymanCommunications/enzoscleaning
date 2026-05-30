@@ -12,7 +12,7 @@ import { validateEmail } from "@/lib/validateEmail";
 interface Props { children: React.ReactNode }
 
 export default function TridentAuthGate({ children }: Props) {
-  const { loading, session, member, trackEvent, signOut, refresh } = useTridentAuth();
+  const { loading, session, member, memberLoading, trackEvent, signOut, refresh } = useTridentAuth();
   const [tab, setTab] = useState<"signin" | "signup">("signin");
   const [signinEmail, setSigninEmail] = useState("");
   const [signinEmailError, setSigninEmailError] = useState("");
