@@ -40,12 +40,20 @@ export function TridentAuthProvider({ children }: { children: ReactNode }) {
   const loadMember = useCallback(async (userId: string) => {
     setMemberLoading(true);
     try {
-      const { data } = await supabase
-        .from("trident_members")
-        .select("*")
-        .eq("user_id", userId)
-        .maybeSingle();
-      setMember((data as TridentMember) || null);
+      for (let attempt = 0; attempt < 4; attempt += 1) {
+        const { data, error } = await supabase
+          .from("trident_members")
+          .select("*")
+          .eq("user_id", userId)
+          .maybeSingle();
+
+        if (data || error || attempt === 3) {
+          setMember((data as TridentMember) || null);
+          break;
+        }
+
+        await new Promise((resolve) => setTimeout(resolve, 350));
+      }
     } finally {
       setMemberLoading(false);
     }
@@ -59,6 +67,7 @@ export function TridentAuthProvider({ children }: { children: ReactNode }) {
         // Mark loading immediately so the gate doesn't flash the orphan screen
         // between session arriving and the member row resolving.
         setMemberLoading(true);
+        setMember(null);
         setTimeout(() => { loadMember(sess.user.id); }, 0);
       } else {
         setMember(null);
@@ -79,8 +88,14 @@ export function TridentAuthProvider({ children }: { children: ReactNode }) {
   }, [loadMember]);
 
   const refresh = useCallback(async () => {
-    if (session?.user) await loadMember(session.user.id);
-  }, [session, loadMember]);
+    const { data: { session: latestSession } } = await supabase.auth.getSession();
+    setSession(latestSession);
+    if (latestSession?.user) {
+      await loadMember(latestSession.user.id);
+    } else {
+      setMember(null);
+    }
+  }, [loadMember]);
 
   const signOut = useCallback(async () => {
     await supabase.auth.signOut();
