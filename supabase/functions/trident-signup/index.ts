@@ -266,3 +266,18 @@ function escapeHtml(s: string): string {
 function row(label: string, value: string): string {
   return `<tr><td style="padding:8px 10px;border:1px solid #e2e8f0;font-weight:700;background:#f8fafc">${escapeHtml(label)}</td><td style="padding:8px 10px;border:1px solid #e2e8f0">${escapeHtml(value || "—")}</td></tr>`;
 }
+
+async function findAuthUserByEmail(admin: ReturnType<typeof createClient>, email: string, log: ReturnType<typeof createLogger>) {
+  for (let page = 1; page <= 10; page += 1) {
+    const { data, error } = await admin.auth.admin.listUsers({ page, perPage: 1000 });
+    if (error) {
+      log.error("auth", "list_users_failed", { ...errMeta(error), email, page });
+      return null;
+    }
+    const user = data.users.find((u) => u.email?.toLowerCase() === email);
+    if (user) return user;
+    if (data.users.length < 1000) return null;
+  }
+  log.warn("auth", "existing_auth_user_lookup_exhausted", { email });
+  return null;
+}
