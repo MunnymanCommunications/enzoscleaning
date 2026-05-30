@@ -68,7 +68,7 @@ export default function TridentAuthGate({ children }: Props) {
     if (session && member) trackEvent("trident_session_active");
   }, [session, member, trackEvent]);
 
-  if (loading) {
+  if (loading || (session && memberLoading)) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background">
         <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
