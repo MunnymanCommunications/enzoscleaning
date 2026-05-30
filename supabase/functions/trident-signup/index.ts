@@ -135,18 +135,13 @@ Deno.serve(async (req) => {
     const { data: linkData, error: linkErr } = await admin.auth.admin.generateLink({
       type: "magiclink", email, options: { redirectTo },
     });
-    let magicLink: string | undefined = linkData?.properties?.action_link;
-    // Supabase Auth may override redirect_to with its configured site URL;
-    // force it to the production domain.
-    if (magicLink) {
-      try {
-        const u = new URL(magicLink);
-        u.searchParams.set("redirect_to", redirectTo);
-        magicLink = u.toString();
-      } catch {
-        /* leave original if parsing fails */
-      }
-    }
+    // Bypass Supabase's /verify endpoint (which falls back to the configured
+    // Site URL when redirect_to isn't in the allow-list) by building our own
+    // link with the hashed_token; the Trident page calls verifyOtp directly.
+    const hashedToken: string | undefined = linkData?.properties?.hashed_token;
+    const magicLink: string | undefined = hashedToken
+      ? `${redirectTo}?token_hash=${encodeURIComponent(hashedToken)}&type=magiclink`
+      : linkData?.properties?.action_link;
     if (linkErr || !magicLink) {
       log.error("auth", "magic_link_generation_failed", { ...errMeta(linkErr), email, user_id: userId });
       return json({ ok: true, warning: "Account created but magic link failed", request_id: log.requestId }, 200, log.requestId);
