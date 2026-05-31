@@ -82,6 +82,21 @@ export default function WashBayDesign() {
         </div>
       </section>
 
+      {/* Interactive Schematic */}
+      <section className="section-padding bg-background">
+        <div className="container">
+          <AnimatedSection>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl md:text-4xl font-heading font-bold mb-2">Explore the Complete System</h2>
+              <p className="text-muted-foreground max-w-2xl mx-auto">Hover over each component to learn how Enzo's Automatic Drive-Through Wash System protects your fleet from salt corrosion and keeps vehicles spotless.</p>
+            </div>
+          </AnimatedSection>
+          <AnimatedSection>
+            <InteractiveSchematic />
+          </AnimatedSection>
+        </div>
+      </section>
+
       {/* Equipment & Features List */}
       <section className="section-padding bg-muted">
         <div className="container">
@@ -107,6 +122,52 @@ export default function WashBayDesign() {
                 </div>
               </AnimatedSection>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Systems in Action Videos */}
+      <section className="py-12 bg-muted/30">
+        <div className="container">
+          <AnimatedSection>
+            <h2 className="text-center text-2xl font-bold font-heading mb-2">See Our Systems in Action</h2>
+            <p className="text-center text-muted-foreground mb-8 max-w-2xl mx-auto">Watch how Enzo's undercarriage wash and salt neutralization systems protect your fleet from costly corrosion damage.</p>
+          </AnimatedSection>
+          <div className="grid gap-8 md:grid-cols-2 max-w-5xl mx-auto">
+            <AnimatedSection delay={0.1}>
+              <div className="rounded-2xl overflow-hidden shadow-lg mx-auto max-w-sm">
+                <video
+                  src="/uploads/videos/apply-salt-neutralizer.mov"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full aspect-[9/16] object-cover"
+                  title="Salt neutralizer application on fleet vehicle undercarriage"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-lg font-bold font-heading">Salt Neutralizer Application</h3>
+                <p className="mt-1 text-sm text-muted-foreground max-w-xs mx-auto">Our D-Salt neutralizing solution bonds to metal surfaces, stopping corrosion before it starts.</p>
+              </div>
+            </AnimatedSection>
+            <AnimatedSection delay={0.2}>
+              <div className="rounded-2xl overflow-hidden shadow-lg mx-auto max-w-sm">
+                <video
+                  src="/uploads/videos/rinse-wash.mov"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  className="w-full aspect-[9/16] object-cover"
+                  title="Wash bay rinse system cleaning fleet vehicle"
+                />
+              </div>
+              <div className="mt-4 text-center">
+                <h3 className="text-lg font-bold font-heading">Custom Wash Bay Rinse System</h3>
+                <p className="mt-1 text-sm text-muted-foreground max-w-xs mx-auto">Fully automated rinse cycles designed for your facility — maximize uptime and keep your fleet spotless.</p>
+              </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
@@ -179,21 +240,6 @@ export default function WashBayDesign() {
               </div>
             </AnimatedSection>
           </div>
-        </div>
-      </section>
-
-      {/* Interactive Schematic */}
-      <section className="section-padding bg-background">
-        <div className="container">
-          <AnimatedSection>
-            <div className="text-center mb-8">
-              <h2 className="text-2xl md:text-4xl font-heading font-bold mb-2">Explore the Complete System</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">Hover over each component to learn how Enzo's Automatic Drive-Through Wash System protects your fleet from salt corrosion and keeps vehicles spotless.</p>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection>
-            <InteractiveSchematic />
-          </AnimatedSection>
         </div>
       </section>
 
