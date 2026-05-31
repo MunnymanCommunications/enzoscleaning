@@ -10,65 +10,68 @@ interface SchematicHotspot {
   y: string; // percentage
 }
 
-// Positions are expressed as a percentage of the schematic IMAGE (not the
-// padded container) so each dot stays locked next to its label across every
-// device. Each dot is placed immediately to the left of the text it explains.
+// x/y are percentages of the schematic image itself (not the padded wrapper),
+// so positions are identical across every device.
+// Each dot center is placed so its right edge clears the first word by ~10 px.
+// Reference: "Neutralizer Undercarriage Wash Spray Bar" entry dot at 27 %, 87 %
+// — the user confirmed that position looks correct.
 const hotspots: SchematicHotspot[] = [
   {
     id: "d-salt-tank",
     label: "250-Gallon D-Salt Tank",
     description: "Stores D-Salt neutralizing detergent that chemically neutralizes road salt and brine on contact — not just washing, but stopping corrosion at the source.",
-    x: "4%",
-    y: "45%",
+    x: "2%",
+    y: "43%",
   },
   {
     id: "fleet-wash",
     label: "Fleet Wash (Alkaline) System",
     description: "Alkaline cleaning system that removes heavy road grime, grease, and dirt from vehicle exteriors before the rinse cycle.",
-    x: "24%",
+    x: "22%",
     y: "24%",
   },
   {
     id: "detergent-tank",
     label: "Detergent Tank",
     description: "Central detergent distribution tank feeding the soap arch. Automatically mixes and delivers cleaning solution at the optimal concentration.",
-    x: "32%",
+    x: "30%",
     y: "29%",
   },
   {
     id: "water-holding-tank",
     label: "250–750 Gallon Water Holding Tank",
     description: "High-capacity water reservoir ensures consistent water pressure and flow even during peak wash demand — no interruptions mid-wash.",
-    x: "34%",
+    x: "32%",
     y: "17%",
   },
   {
+    // y aligned to the first word "Soap", not the spec line below it
     id: "soap-arch",
     label: "Soap Arch — 10 Nozzles",
     description: "65° spray pattern at 40 GPM @ 30 PSI. Delivers uniform soap coverage across the full width and height of any vehicle passing through.",
-    x: "46%",
-    y: "78%",
+    x: "44%",
+    y: "71%",
   },
   {
     id: "wash-arch",
     label: "Wash Arch — 43 Nozzles",
     description: "25° spray pattern at 120 GPM @ 60 PSI. High-pressure wash arch blasts away dirt and contaminants with precision coverage.",
-    x: "63%",
-    y: "66%",
+    x: "61%",
+    y: "65%",
   },
   {
     id: "ro-system",
     label: "Reverse Osmosis Rinse System",
     description: "Advanced water purification delivers a spot-free final rinse — no water spots, no mineral deposits, just a clean, professional finish every time.",
-    x: "59%",
-    y: "9%",
+    x: "57%",
+    y: "8%",
   },
   {
     id: "rinse-arch",
     label: "Rinse Arch — 23 Nozzles",
     description: "40° spray at 70 GPM @ 22 PSI. Final rinse arch using RO-purified water for a streak-free, spot-free finish.",
-    x: "75%",
-    y: "11%",
+    x: "73%",
+    y: "10%",
   },
   {
     id: "undercarriage-bar-entry",
@@ -81,7 +84,7 @@ const hotspots: SchematicHotspot[] = [
     id: "undercarriage-bar-exit",
     label: "Neutralizer Undercarriage Wash Spray Bar (Exit)",
     description: "Second 8-nozzle spray bar at the exit ensures complete undercarriage coverage — nothing gets missed, even on the longest vehicles.",
-    x: "79%",
+    x: "77%",
     y: "59%",
   },
 ];
