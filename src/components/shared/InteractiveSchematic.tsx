@@ -1,13 +1,21 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
+
+/* =========================================================================
+ * TEMP EDIT MODE — remove this block (and the editor UI below) once the dot
+ * positions are finalized. Flip EDIT_MODE to false to preview the live look
+ * without removing the code.
+ * ========================================================================= */
+const EDIT_MODE = true;
+/* ========================================================================= */
 
 interface SchematicHotspot {
   id: string;
   label: string;
   description: string;
-  x: string; // percentage
-  y: string; // percentage
+  x: string; // percentage of the image width
+  y: string; // percentage of the image height
 }
 
 // x/y are percentages of the schematic image itself (not the padded wrapper),
@@ -93,12 +101,57 @@ export default function InteractiveSchematic() {
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
+  /* ---- TEMP EDIT MODE state (remove with the editor) ---- */
+  const imageWrapRef = useRef<HTMLDivElement>(null);
+  const [positions, setPositions] = useState<Record<string, { x: string; y: string }>>(
+    () => Object.fromEntries(hotspots.map((h) => [h.id, { x: h.x, y: h.y }]))
+  );
+  const [draggingId, setDraggingId] = useState<string | null>(null);
+  const [savedOutput, setSavedOutput] = useState<string>("");
+  /* ------------------------------------------------------- */
+
   useEffect(() => {
     const check = () => setIsMobile(window.innerWidth < 768);
     check();
     window.addEventListener("resize", check);
     return () => window.removeEventListener("resize", check);
   }, []);
+
+  /* ---- TEMP EDIT MODE: drag handling (percentage of the image) ---- */
+  useEffect(() => {
+    if (!EDIT_MODE || !draggingId) return;
+    const handleMove = (e: PointerEvent) => {
+      const rect = imageWrapRef.current?.getBoundingClientRect();
+      if (!rect) return;
+      const xPct = Math.min(100, Math.max(0, ((e.clientX - rect.left) / rect.width) * 100));
+      const yPct = Math.min(100, Math.max(0, ((e.clientY - rect.top) / rect.height) * 100));
+      setPositions((prev) => ({
+        ...prev,
+        [draggingId]: { x: `${xPct.toFixed(1)}%`, y: `${yPct.toFixed(1)}%` },
+      }));
+    };
+    const handleUp = () => setDraggingId(null);
+    window.addEventListener("pointermove", handleMove);
+    window.addEventListener("pointerup", handleUp);
+    return () => {
+      window.removeEventListener("pointermove", handleMove);
+      window.removeEventListener("pointerup", handleUp);
+    };
+  }, [draggingId]);
+
+  const handleSavePositions = () => {
+    const data = hotspots.map((h) => ({
+      id: h.id,
+      x: positions[h.id].x,
+      y: positions[h.id].y,
+    }));
+    setSavedOutput(JSON.stringify(data, null, 2));
+  };
+
+  const handleCopyPositions = () => {
+    if (savedOutput) navigator.clipboard?.writeText(savedOutput);
+  };
+  /* ---------------------------------------------------------------- */
 
   const activeSpot = hotspots.find((s) => s.id === activeHotspot) ?? null;
 
@@ -108,20 +161,22 @@ export default function InteractiveSchematic() {
       <div className="relative rounded-2xl bg-white p-4 md:p-8 shadow-xl border border-border">
         {/* Inner wrapper hugs the image exactly so dot percentages map to the
             image — not the padding — keeping positions identical on every device. */}
-        <div className="relative">
+        <div className="relative" ref={imageWrapRef}>
         <img
           src="/uploads/wash-bay-schematic.png"
           alt="Enzo's Automatic Drive-Through Wash System schematic showing D-Salt tank, soap arch, wash arch, reverse osmosis rinse system, and Neutralizer undercarriage spray bars"
-          className="w-full h-auto rounded-xl"
+          className="w-full h-auto rounded-xl select-none"
           loading="lazy"
           width={1300}
           height={850}
+          draggable={false}
         />
 
         {/* Hotspot dots */}
         {hotspots.map((spot) => {
-          const xNum = parseFloat(spot.x);
-          const yNum = parseFloat(spot.y);
+          const pos = positions[spot.id];
+          const xNum = parseFloat(pos.x);
+          const yNum = parseFloat(pos.y);
           const isOpen = activeHotspot === spot.id;
 
           // Flip card to the left only for right-edge hotspots to prevent overflow.
@@ -134,49 +189,75 @@ export default function InteractiveSchematic() {
             <div
               key={spot.id}
               className="absolute z-10"
-              style={{ left: spot.x, top: spot.y }}
+              style={{ left: pos.x, top: pos.y }}
             >
-              <button
-                className="group relative -translate-x-1/2 -translate-y-1/2 block"
-                onMouseEnter={() => { if (!isMobile) setActiveHotspot(spot.id); }}
-                onMouseLeave={() => { if (!isMobile) setActiveHotspot(null); }}
-                onClick={() => setActiveHotspot(isOpen ? null : spot.id)}
-                aria-label={`Learn about ${spot.label}`}
-              >
-                <motion.div className="relative" whileHover={{ scale: 1.3 }}>
-                  <span
-                    className="absolute inset-0 rounded-full bg-primary/30 animate-ping"
-                    style={{ animationDuration: "2s" }}
-                  />
-                  <span className="relative block w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary border-2 border-white shadow-lg cursor-pointer" />
-                </motion.div>
-              </button>
-
-              {/* Desktop tooltip — positioned relative to dot, never shown on mobile */}
-              {!isMobile && (
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, scale: 0.9 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      exit={{ opacity: 0, scale: 0.9 }}
-                      transition={{ duration: 0.15 }}
-                      role="tooltip"
-                      className="absolute z-20 w-64 lg:w-72 p-3 md:p-4 rounded-xl bg-card border border-primary/30 shadow-2xl pointer-events-none"
-                      style={{
-                        ...(cardLeft ? { left: "14px" } : { right: "14px" }),
-                        ...(cardBelow ? { top: "-6px" } : { bottom: "-6px" }),
-                      }}
-                    >
-                      <h4 className="font-heading font-bold text-primary text-sm md:text-base mb-1 leading-tight">
-                        {spot.label}
-                      </h4>
-                      <p className="text-xs md:text-sm text-muted-foreground leading-snug">
-                        {spot.description}
-                      </p>
+              {EDIT_MODE ? (
+                /* ---- TEMP EDIT MODE: draggable dot with label ---- */
+                <div className="relative -translate-x-1/2 -translate-y-1/2">
+                  <div
+                    onPointerDown={(e) => {
+                      e.preventDefault();
+                      setDraggingId(spot.id);
+                    }}
+                    className="relative block cursor-move"
+                    style={{ touchAction: "none" }}
+                    title={`Drag: ${spot.label}`}
+                  >
+                    <span
+                      className={`relative block w-5 h-5 rounded-full border-2 border-white shadow-lg ${
+                        draggingId === spot.id ? "bg-accent ring-4 ring-accent/40" : "bg-primary"
+                      }`}
+                    />
+                  </div>
+                  <span className="absolute left-4 top-1/2 -translate-y-1/2 whitespace-nowrap rounded bg-black/75 px-1.5 py-0.5 text-[10px] font-medium text-white pointer-events-none">
+                    {spot.label}
+                  </span>
+                </div>
+              ) : (
+                <>
+                  <button
+                    className="group relative -translate-x-1/2 -translate-y-1/2 block"
+                    onMouseEnter={() => { if (!isMobile) setActiveHotspot(spot.id); }}
+                    onMouseLeave={() => { if (!isMobile) setActiveHotspot(null); }}
+                    onClick={() => setActiveHotspot(isOpen ? null : spot.id)}
+                    aria-label={`Learn about ${spot.label}`}
+                  >
+                    <motion.div className="relative" whileHover={{ scale: 1.3 }}>
+                      <span
+                        className="absolute inset-0 rounded-full bg-primary/30 animate-ping"
+                        style={{ animationDuration: "2s" }}
+                      />
+                      <span className="relative block w-4 h-4 md:w-5 md:h-5 rounded-full bg-primary border-2 border-white shadow-lg cursor-pointer" />
                     </motion.div>
+                  </button>
+
+                  {/* Desktop tooltip — positioned relative to dot, never shown on mobile */}
+                  {!isMobile && (
+                    <AnimatePresence>
+                      {isOpen && (
+                        <motion.div
+                          initial={{ opacity: 0, scale: 0.9 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          exit={{ opacity: 0, scale: 0.9 }}
+                          transition={{ duration: 0.15 }}
+                          role="tooltip"
+                          className="absolute z-20 w-64 lg:w-72 p-3 md:p-4 rounded-xl bg-card border border-primary/30 shadow-2xl pointer-events-none"
+                          style={{
+                            ...(cardLeft ? { left: "14px" } : { right: "14px" }),
+                            ...(cardBelow ? { top: "-6px" } : { bottom: "-6px" }),
+                          }}
+                        >
+                          <h4 className="font-heading font-bold text-primary text-sm md:text-base mb-1 leading-tight">
+                            {spot.label}
+                          </h4>
+                          <p className="text-xs md:text-sm text-muted-foreground leading-snug">
+                            {spot.description}
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   )}
-                </AnimatePresence>
+                </>
               )}
             </div>
           );
@@ -185,47 +266,92 @@ export default function InteractiveSchematic() {
       </div>
 
       {/* Mobile modal — fixed centered overlay with X button */}
-      <AnimatePresence>
-        {isMobile && activeSpot && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 z-50 flex items-center justify-center p-6"
-            style={{ backgroundColor: "rgba(0,0,0,0.55)" }}
-            onClick={() => setActiveHotspot(null)}
-          >
+      {!EDIT_MODE && (
+        <AnimatePresence>
+          {isMobile && activeSpot && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.92, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 16 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
               transition={{ duration: 0.2 }}
-              className="relative w-full max-w-sm rounded-2xl bg-card border border-primary/30 shadow-2xl p-5"
-              onClick={(e) => e.stopPropagation()}
+              className="fixed inset-0 z-50 flex items-center justify-center p-6"
+              style={{ backgroundColor: "rgba(0,0,0,0.55)" }}
+              onClick={() => setActiveHotspot(null)}
             >
-              <button
-                className="absolute top-3 right-3 p-1.5 rounded-full bg-muted hover:bg-muted/70 transition-colors"
-                onClick={() => setActiveHotspot(null)}
-                aria-label="Close"
+              <motion.div
+                initial={{ opacity: 0, scale: 0.92, y: 16 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.92, y: 16 }}
+                transition={{ duration: 0.2 }}
+                className="relative w-full max-w-sm rounded-2xl bg-card border border-primary/30 shadow-2xl p-5"
+                onClick={(e) => e.stopPropagation()}
               >
-                <X className="w-4 h-4 text-muted-foreground" />
-              </button>
-              <h4 className="font-heading font-bold text-primary text-base mb-2 leading-tight pr-8">
-                {activeSpot.label}
-              </h4>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                {activeSpot.description}
-              </p>
+                <button
+                  className="absolute top-3 right-3 p-1.5 rounded-full bg-muted hover:bg-muted/70 transition-colors"
+                  onClick={() => setActiveHotspot(null)}
+                  aria-label="Close"
+                >
+                  <X className="w-4 h-4 text-muted-foreground" />
+                </button>
+                <h4 className="font-heading font-bold text-primary text-base mb-2 leading-tight pr-8">
+                  {activeSpot.label}
+                </h4>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {activeSpot.description}
+                </p>
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      )}
 
-      {!activeHotspot && (
+      {!EDIT_MODE && !activeHotspot && (
         <p className="text-center text-xs text-muted-foreground mt-3 animate-pulse">
           Hover or tap the blue dots to explore each system component
         </p>
+      )}
+
+      {/* =====================================================================
+       * TEMP EDIT MODE UI — drag the dots onto the image, press Save, then copy
+       * the generated text and paste it back. Remove this whole block (plus the
+       * EDIT_MODE flag and edit-only state/handlers above) once finalized.
+       * ===================================================================== */}
+      {EDIT_MODE && (
+        <div className="mt-4 rounded-xl border border-dashed border-primary/50 bg-muted/40 p-4">
+          <p className="text-sm font-semibold text-foreground">
+            🛠️ Dot placement editor (temporary)
+          </p>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Drag any blue dot to position it on the image (works on touch and mouse).
+            Positions are stored as a percentage of the image, so they stay identical on
+            every screen size. When everything looks right, press <strong>Save</strong>,
+            copy the text below, and paste it back to finalize.
+          </p>
+          <div className="mt-3 flex flex-wrap gap-2">
+            <button
+              onClick={handleSavePositions}
+              className="rounded-full bg-primary px-5 py-2 text-sm font-bold text-primary-foreground shadow hover:scale-105 transition-transform"
+            >
+              Save
+            </button>
+            {savedOutput && (
+              <button
+                onClick={handleCopyPositions}
+                className="rounded-full border border-primary px-5 py-2 text-sm font-bold text-primary hover:bg-primary/10 transition-colors"
+              >
+                Copy to clipboard
+              </button>
+            )}
+          </div>
+          {savedOutput && (
+            <textarea
+              readOnly
+              value={savedOutput}
+              onFocus={(e) => e.currentTarget.select()}
+              className="mt-3 h-56 w-full rounded-lg border border-border bg-background p-3 font-mono text-xs text-foreground"
+            />
+          )}
+        </div>
       )}
     </div>
   );
