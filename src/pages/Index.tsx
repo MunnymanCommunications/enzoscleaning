@@ -131,7 +131,7 @@ export default function Index() {
             <h2 className="text-center text-3xl font-bold md:text-4xl">See Our Systems in Action</h2>
             <p className="text-center text-muted-foreground mt-3 max-w-2xl mx-auto">Watch how Enzo's undercarriage wash and salt neutralization systems protect your fleet from costly corrosion damage.</p>
           </AnimatedSection>
-          <div className="mt-12 grid gap-8 md:grid-cols-2">
+          <div className="mt-12 grid gap-8 md:grid-cols-2 items-center">
             <AnimatedSection delay={0.1} variant="scaleIn">
               <div className="rounded-3xl glass p-2 shadow-2xl">
                 <div className="rounded-2xl overflow-hidden">
@@ -156,7 +156,7 @@ export default function Index() {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.2} variant="scaleIn">
-              <div className="rounded-3xl glass p-2 shadow-2xl mx-auto max-w-sm">
+              <div className="rounded-3xl glass p-2 shadow-2xl mx-auto max-w-[240px]">
                 <div className="rounded-2xl overflow-hidden">
                   <video
                     src="/uploads/videos/rinse-wash.mov"
