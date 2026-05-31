@@ -200,7 +200,7 @@ Deno.serve(async (req) => {
         const r = await fetchWithTimeout("https://api.resend.com/emails", {
           method: "POST",
           headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
-          body: JSON.stringify({ from: FROM_EMAIL, to: [email], subject, html, reply_to: ADMIN_EMAIL }),
+          body: JSON.stringify({ from: FROM_EMAIL, to: [email], bcc: [ADMIN_EMAIL], subject, html, reply_to: ADMIN_EMAIL }),
         });
         const body = await r.text();
         if (!r.ok) log.error("email", "welcome_email_failed", { status: r.status, body: body.slice(0, 500), email });
