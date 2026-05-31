@@ -28,7 +28,12 @@ export default function TridentAuthGate({ children }: Props) {
   const [signupEmailChecking, setSignupEmailChecking] = useState(false);
   const [signupMsg, setSignupMsg] = useState<{ type: "ok" | "err"; text: string } | null>(null);
   const [signupLoading, setSignupLoading] = useState(false);
+  const [signupSuccess, setSignupSuccess] = useState(false);
   const [verifyingMagicLink, setVerifyingMagicLink] = useState(false);
+
+  useEffect(() => {
+    if (signupLoading || signupSuccess) window.scrollTo({ top: 0, behavior: "auto" });
+  }, [signupLoading, signupSuccess]);
 
   async function verifyMx(email: string): Promise<string> {
     try {
