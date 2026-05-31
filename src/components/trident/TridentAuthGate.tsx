@@ -197,7 +197,7 @@ export default function TridentAuthGate({ children }: Props) {
         setSignupMsg({ type: "err", text: data?.error || error?.message || "Signup failed. Please try again." });
         return;
       }
-      setSignupMsg({ type: "ok", text: "Account created! Check your email for a sign-in link." });
+      setSignupSuccess(true);
       await refresh();
     } finally {
       setSignupLoading(false);
