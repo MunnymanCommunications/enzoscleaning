@@ -91,11 +91,25 @@ export default function TridentAuthGate({ children }: Props) {
 
   if (signupLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      <div className="fixed inset-0 z-50 flex items-start justify-center bg-background px-4 pt-24 overflow-y-auto">
         <div className="max-w-md text-center space-y-4">
           <Loader2 className="mx-auto h-10 w-10 animate-spin text-primary" />
           <h1 className="text-2xl font-semibold text-foreground">Your account is being created in our system</h1>
           <p className="text-muted-foreground">Please keep this page open while we prepare your Trident profile and sign-in link.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (signupSuccess) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-background px-4">
+        <div className="max-w-md text-center space-y-4">
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20">
+            <Mail className="h-8 w-8 text-primary" />
+          </div>
+          <h1 className="text-2xl font-semibold text-foreground">Check your email for a link to sign in.</h1>
+          <p className="text-muted-foreground">We've sent a secure sign-in link to your inbox. You can close this tab.</p>
         </div>
       </div>
     );
