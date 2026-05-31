@@ -135,15 +135,16 @@ export default function Index() {
             <AnimatedSection delay={0.1} variant="scaleIn">
               <div className="rounded-3xl glass p-2 shadow-2xl">
                 <div className="rounded-2xl overflow-hidden">
-                  <video
-                    src="/uploads/videos/apply-salt-neutralizer.mov"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full aspect-video object-cover"
-                    title="Salt neutralizer application on fleet vehicle undercarriage"
-                  />
+                  <div className="aspect-video">
+                    <iframe
+                      src="https://www.youtube.com/embed/ejZBvIK-Bm8"
+                      title="Salt neutralizer application on fleet vehicle undercarriage"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                      className="h-full w-full"
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
               </div>
               <div className="mt-6 text-center">
@@ -155,7 +156,7 @@ export default function Index() {
               </div>
             </AnimatedSection>
             <AnimatedSection delay={0.2} variant="scaleIn">
-              <div className="rounded-3xl glass p-2 shadow-2xl">
+              <div className="rounded-3xl glass p-2 shadow-2xl mx-auto max-w-sm">
                 <div className="rounded-2xl overflow-hidden">
                   <video
                     src="/uploads/videos/rinse-wash.mov"
@@ -163,7 +164,7 @@ export default function Index() {
                     muted
                     loop
                     playsInline
-                    className="w-full aspect-video object-cover"
+                    className="w-full aspect-[9/16] object-cover"
                     title="Wash bay rinse system cleaning fleet vehicle"
                   />
                 </div>
