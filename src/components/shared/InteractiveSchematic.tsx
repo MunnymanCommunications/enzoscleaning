@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 
 interface SchematicHotspot {
   id: string;
@@ -84,29 +85,41 @@ const hotspots: SchematicHotspot[] = [
 
 export default function InteractiveSchematic() {
   const [activeHotspot, setActiveHotspot] = useState<string | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
+  const activeSpot = hotspots.find((s) => s.id === activeHotspot) ?? null;
 
   return (
     <div className="relative w-full">
-      {/* Schematic Image */}
-      <div className="relative rounded-2xl overflow-hidden bg-white p-4 md:p-8 shadow-xl border border-border">
+      {/* Schematic container — no overflow-hidden so desktop cards aren't clipped */}
+      <div className="relative rounded-2xl bg-white p-4 md:p-8 shadow-xl border border-border">
         <img
           src="/uploads/wash-bay-schematic.png"
           alt="Enzo's Automatic Drive-Through Wash System schematic showing D-Salt tank, soap arch, wash arch, reverse osmosis rinse system, and Neutralizer undercarriage spray bars"
-          className="w-full h-auto"
+          className="w-full h-auto rounded-xl"
           loading="lazy"
           width={1300}
           height={850}
         />
 
-        {/* Hotspots */}
+        {/* Hotspot dots */}
         {hotspots.map((spot) => {
           const xNum = parseFloat(spot.x);
           const yNum = parseFloat(spot.y);
           const isOpen = activeHotspot === spot.id;
-          // Position tooltip horizontally: flip to the left side if hotspot is on the right half
-          const horizontalSide = xNum > 55 ? "right" : "left";
-          // Position vertically: flip above if hotspot is in lower half
-          const verticalSide = yNum > 60 ? "above" : "below";
+
+          // Flip card to the left only for right-edge hotspots to prevent overflow.
+          // Default: card opens to the RIGHT → dot sits to the left of the card text.
+          const cardLeft = xNum <= 62;
+          // Flip card above when the hotspot is near the bottom of the diagram.
+          const cardBelow = yNum <= 65;
 
           return (
             <div
@@ -116,8 +129,8 @@ export default function InteractiveSchematic() {
             >
               <button
                 className="group relative -translate-x-1/2 -translate-y-1/2 block"
-                onMouseEnter={() => setActiveHotspot(spot.id)}
-                onMouseLeave={() => setActiveHotspot(null)}
+                onMouseEnter={() => { if (!isMobile) setActiveHotspot(spot.id); }}
+                onMouseLeave={() => { if (!isMobile) setActiveHotspot(null); }}
                 onClick={() => setActiveHotspot(isOpen ? null : spot.id)}
                 aria-label={`Learn about ${spot.label}`}
               >
@@ -130,36 +143,75 @@ export default function InteractiveSchematic() {
                 </motion.div>
               </button>
 
-              {/* Pop-up tooltip near the dot */}
-              <AnimatePresence>
-                {isOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.15 }}
-                    role="tooltip"
-                    className="absolute z-20 w-56 sm:w-64 md:w-72 p-3 md:p-4 rounded-xl bg-card border border-primary/30 shadow-2xl pointer-events-none"
-                    style={{
-                      [horizontalSide]: "12px",
-                      [verticalSide === "below" ? "top" : "bottom"]: "16px",
-                    } as React.CSSProperties}
-                  >
-                    <h4 className="font-heading font-bold text-primary text-sm md:text-base mb-1 leading-tight">
-                      {spot.label}
-                    </h4>
-                    <p className="text-xs md:text-sm text-muted-foreground leading-snug">
-                      {spot.description}
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              {/* Desktop tooltip — positioned relative to dot, never shown on mobile */}
+              {!isMobile && (
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.15 }}
+                      role="tooltip"
+                      className="absolute z-20 w-64 lg:w-72 p-3 md:p-4 rounded-xl bg-card border border-primary/30 shadow-2xl pointer-events-none"
+                      style={{
+                        ...(cardLeft ? { left: "14px" } : { right: "14px" }),
+                        ...(cardBelow ? { top: "-6px" } : { bottom: "-6px" }),
+                      }}
+                    >
+                      <h4 className="font-heading font-bold text-primary text-sm md:text-base mb-1 leading-tight">
+                        {spot.label}
+                      </h4>
+                      <p className="text-xs md:text-sm text-muted-foreground leading-snug">
+                        {spot.description}
+                      </p>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              )}
             </div>
           );
         })}
       </div>
 
-      {/* Instruction hint */}
+      {/* Mobile modal — fixed centered overlay with X button */}
+      <AnimatePresence>
+        {isMobile && activeSpot && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-6"
+            style={{ backgroundColor: "rgba(0,0,0,0.55)" }}
+            onClick={() => setActiveHotspot(null)}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.92, y: 16 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 16 }}
+              transition={{ duration: 0.2 }}
+              className="relative w-full max-w-sm rounded-2xl bg-card border border-primary/30 shadow-2xl p-5"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                className="absolute top-3 right-3 p-1.5 rounded-full bg-muted hover:bg-muted/70 transition-colors"
+                onClick={() => setActiveHotspot(null)}
+                aria-label="Close"
+              >
+                <X className="w-4 h-4 text-muted-foreground" />
+              </button>
+              <h4 className="font-heading font-bold text-primary text-base mb-2 leading-tight pr-8">
+                {activeSpot.label}
+              </h4>
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                {activeSpot.description}
+              </p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       {!activeHotspot && (
         <p className="text-center text-xs text-muted-foreground mt-3 animate-pulse">
           Hover or tap the blue dots to explore each system component
