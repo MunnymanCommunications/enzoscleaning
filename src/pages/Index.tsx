@@ -137,7 +137,7 @@ export default function Index() {
                 <div className="rounded-2xl overflow-hidden">
                   <div className="aspect-video">
                     <iframe
-                      src="https://www.youtube.com/embed/ejZBvIK-Bm8"
+                      src="https://www.youtube.com/embed/ejZBvIK-Bm8?autoplay=1&mute=1"
                       title="Salt neutralizer application on fleet vehicle undercarriage"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -181,32 +181,6 @@ export default function Index() {
         </div>
       </section>
 
-      {/* Video with glass frame */}
-      <section className="relative section-padding overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-muted to-background" />
-        <div className="relative container max-w-5xl">
-          <AnimatedSection variant="scaleIn">
-            <div className="rounded-3xl glass p-2 shadow-2xl">
-              <div className="rounded-2xl overflow-hidden">
-                <div className="aspect-video">
-                  <iframe src="https://www.youtube.com/embed/ejZBvIK-Bm8" title="Enzo's Cleaning Solutions | Wash Bay Demo" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen className="h-full w-full" loading="lazy" />
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-          <AnimatedSection delay={0.2} variant="fadeUp">
-            <div className="mt-10 text-center">
-              <h3 className="text-2xl font-bold">Custom Wash Bay Solutions</h3>
-              <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-                Enzo's has helped design and install wash bay solutions for clients from Maine to Alabama – and everywhere in between. Our uniquely designed under carriage cleaning system, The Neutralizer, helps make maintaining your fleet easy.
-              </p>
-              <Link to="/cleaning-equipment/wash-bay-design/" className="group mt-6 inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all">
-                Explore Wash Bay Design <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
       {/* Second Video */}
       <section className="relative section-padding overflow-hidden">
